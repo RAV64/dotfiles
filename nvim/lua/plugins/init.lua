@@ -2,6 +2,8 @@
 require('plugins.lsp')
 --TREESITTER
 require('plugins.treesitter.treesitter')
+--COMPLETION
+require('plugins.completion')
 --NAVIGATION
 require('plugins.nav.CHADtree')
 require('plugins.nav.telescope')

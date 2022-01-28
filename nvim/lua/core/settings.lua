@@ -19,6 +19,7 @@ local function load_settings()
     backspace      = "start,eol,indent";
     cmdheight      = 1;
     cmdwinheight   = 5;
+    cursorline     = true;
     display        = "lastline";
     diffopt        = "filler,iwhite,internal,algorithm:patience";
     encoding       = "utf-8";
@@ -27,18 +28,20 @@ local function load_settings()
     foldnestmax    = 1;
     foldmethod     = "expr";
     foldexpr       = "nvim_treesitter#foldexpr()";
+    hidden         = true;
     ignorecase     = true;
     laststatus     = 2;
     list           = true;
     listchars      = "tab:»·,nbsp:+,trail:·,extends:→,precedes:←";
     number         = true;
     relativenumber = true;
+    numberwidth    = 2;
     ruler          = false;
     smartcase      = true;
     smarttab       = true;
-    scrolloff      = 8;
-    sidescrolloff  = 8;
-    syntax         = true;
+    scrolloff      = 18;
+    sidescrolloff  = 18;
+    syntax         = false;
     shada          = "!,'300,<50,@100,s10,h";
     showcmd        = false;
     showbreak      = "↳  ";
@@ -92,3 +95,28 @@ local function load_settings()
 end
 
 load_settings()
+
+local disabled_built_ins = {
+   "2html_plugin",
+   "getscript",
+   "getscriptPlugin",
+   "gzip",
+   "logipat",
+   "netrw",
+   "netrwPlugin",
+   "netrwSettings",
+   "netrwFileHandlers",
+   "matchit",
+   "tar",
+   "tarPlugin",
+   "rrhelper",
+   "spellfile_plugin",
+   "vimball",
+   "vimballPlugin",
+   "zip",
+   "zipPlugin",
+}
+
+for _, plugin in pairs(disabled_built_ins) do
+   vim.g["loaded_" .. plugin] = 1
+end

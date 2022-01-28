@@ -12,21 +12,35 @@ return require("packer").startup(function(use)
 		run = ":TSUpdate",
 	})
 	use({
-		 "nvim-telescope/telescope.nvim" ,
+		"nvim-telescope/telescope.nvim",
 		requires = {
 			{ "nvim-lua/popup.nvim" },
 			{ "nvim-lua/plenary.nvim" },
 			{ "nvim-telescope/telescope-file-browser.nvim" },
 			{ "nvim-telescope/telescope-fzy-native.nvim" },
 		},
-		
 	})
 	use({
 		{ "neovim/nvim-lspconfig" },
 		{ "williamboman/nvim-lsp-installer" },
 		{ "jose-elias-alvarez/null-ls.nvim" },
+		{ "ray-x/lsp_signature.nvim" },
 	})
-	use({"sudormrfbin/cheatsheet.nvim"})
+
+	use({
+		"hrsh7th/nvim-cmp",
+		requires = {
+			"rafamadriz/friendly-snippets",
+			"L3MON4D3/LuaSnip",
+			"saadparwaiz1/cmp_luasnip",
+			"hrsh7th/cmp-nvim-lua",
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+		},
+	})
+
+	use({ "sudormrfbin/cheatsheet.nvim" })
 	use({ "nvim-telescope/telescope.nvim" })
 	use("karb94/neoscroll.nvim")
 	use("ms-jpq/chadtree")
