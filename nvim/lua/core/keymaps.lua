@@ -27,7 +27,7 @@ local def_map = {
     ["i|<C-o>"]      = map_cmd('<Esc>o'):with_noremap(),
     --window
     ["n|<space>"]    = map_cmd('<C-w>w'),
-    ["n|Q"]          = map_cr('bd'):with_noremap(),
+    ["n|Q"]          = map_cu('Bdelete'):with_noremap(),
     ["n|wq"]         = map_cmd('<C-w>q'),
     ["n|ww"]         = map_cmd('<C-w>s'),
     ["n|wW"]         = map_cmd('<C-w>v'),
@@ -41,11 +41,12 @@ local def_map = {
     ["n|te"]         = map_cu('tabedit'):with_noremap(),
     ["n|<C-t>"]      = map_cu('TagbarToggle'):with_noremap(),
     --telescope
-    ["n|;"]          = map_cu('Telescope live_grep'):with_noremap(),
+    ["n|;L"]          = map_cu('Telescope live_grep'):with_noremap(),
+    ["n|;C"]          = map_cu('Cheatsheet'):with_noremap(),
     --neoscroll
     --keybinds in plugins/neoscroll.lua flder
     --nerdtree
-    ["n|."]          = map_cu('CHADopen'):with_noremap(),
+    ["n|;T"]          = map_cu('CHADopen'):with_noremap(),
     --terminal
     ["t|<Esc>"]      = map_cmd('<C-\\><C-n>'),
     ["n|<up>"]       = map_cu('res +1'),
