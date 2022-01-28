@@ -14,5 +14,4 @@ Under construction zsh setup.
 
 ## Other great material
 - https://thevaluable.dev/vim-search-find-replace/ 
-- https://www.youtube.com/chrisatmachine
-
+- https://www.youtube.com/chrisatmachinstage
