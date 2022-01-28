@@ -42,6 +42,7 @@ local def_map = {
     ["n|<C-t>"]      = map_cu('TagbarToggle'):with_noremap(),
     --telescope
     ["n|;L"]          = map_cu('Telescope live_grep'):with_noremap(),
+    ["n|;F"]          = map_cu('Telescope file_browser'):with_noremap(),
     ["n|;C"]          = map_cu('Cheatsheet'):with_noremap(),
     --neoscroll
     --keybinds in plugins/neoscroll.lua flder
