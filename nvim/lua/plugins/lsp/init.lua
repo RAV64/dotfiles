@@ -4,11 +4,8 @@ if not status then
 	return
 end
 
-require("plugins.lsp.null-ls")
-require("plugins.lsp.handlers").setup()
-
-local status, lsp_installer = pcall(require, "nvim-lsp-installer")
-if not status then
+local ins_status, lsp_installer = pcall(require, "nvim-lsp-installer")
+if not ins_status then
 	print("ERROR: nvim-lsp-installer")
 	return
 end
@@ -30,3 +27,6 @@ lsp_installer.on_server_ready(function(server)
 	end
 	server:setup(opts)
 end)
+
+require("plugins.lsp.handlers").setup()
+require("plugins.lsp.null-ls")
