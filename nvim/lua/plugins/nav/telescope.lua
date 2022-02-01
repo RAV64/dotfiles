@@ -1,10 +1,10 @@
-local status, actions = pcall(require, "telescope.actions")
+local status, telescope = pcall(require, "telescope")
 if not status then
 	print("ERROR: telescope.actions")
 	return
 end
 
-require("telescope").setup({
+telescope.setup({
 	pickers = {
 		find_files = {
 			hidden = true,
@@ -68,20 +68,7 @@ require("telescope").setup({
 			hidden = true,
 		},
 	},
-	mappings = {
-		i = {
-			["<Tab>"] = actions.move_selection_next,
-			["<S-Tab>"] = actions.move_selection_previous,
-		},
-		n = {
-			["<Tab>"] = actions.move_selection_next,
-			["<S-Tab>"] = actions.move_selection_previous,
-		},
-		c = {
-			["<Tab>"] = actions.move_selection_next,
-			["<S-Tab>"] = actions.move_selection_previous,
-		},
-	},
 })
+
 require("telescope").load_extension("fzy_native")
 require("telescope").load_extension("file_browser")

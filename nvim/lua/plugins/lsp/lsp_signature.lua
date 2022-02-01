@@ -3,7 +3,7 @@ if present then
 	local default = {
 		bind = true,
 		doc_lines = 0,
-		floating_window = true,
+		floating_window = false,
 		fix_pos = true,
 		hint_enable = true,
 		hint_prefix = " ",

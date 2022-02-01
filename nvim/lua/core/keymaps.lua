@@ -5,21 +5,20 @@ local map_cmd = bind.map_cmd
 
 local def_map = {
     --LSP
-    ["n|,D"]         = map_cr('lua vim.lsp.buf.declaration()'):with_noremap(),
-    ["n|,d"]         = map_cr('lua vim.lsp.buf.definition()'):with_noremap(),
-    ["n|,a"]         = map_cr('lua vim.lsp.buf.code_action()'):with_noremap(),
-    ["n|,l"]         = map_cr('lua vim.lsp.buf.code_lens()'):with_noremap(),
-    ["n|,r"]         = map_cr('lua vim.lsp.buf.rename()'):with_noremap(),
-    ["n|,i"]         = map_cr('lua vim.lsp.buf.implementation()'):with_noremap(),
-    ["n|,f"]         = map_cr('lua vim.lsp.buf.formatting()'):with_noremap(),
-    ["n|,h"]         = map_cr('lua vim.lsp.buf.hover()'):with_noremap(),
-    ["n|,t"]         = map_cr('lua vim.lsp.buf.type_definition()'):with_noremap(),
-    ["n|,e"]         = map_cr('lua vim.diagnostic.get()'):with_noremap(),
-    ["n|,n"]         = map_cr('lua vim.lsp.diagnostic.goto_next()'):with_noremap(),
-    ["n|,m"]         = map_cr('lua vim.lsp.diagnostic.goto_prev()'):with_noremap(),
+    ["n|gD"]         = map_cr('lua vim.lsp.buf.declaration()'):with_noremap(),
+    ["n|gd"]         = map_cr('lua vim.lsp.buf.definition()'):with_noremap(),
+    ["n|ga"]         = map_cr('lua vim.lsp.buf.code_action()'):with_noremap(),
+    ["n|gr"]         = map_cr('lua vim.lsp.buf.rename()'):with_noremap(),
+    ["n|gi"]         = map_cr('lua vim.lsp.buf.implementation()'):with_noremap(),
+    ["n|gf"]         = map_cr('lua vim.lsp.buf.formatting()'):with_noremap(),
+    ["n|gh"]         = map_cr('lua vim.lsp.buf.hover()'):with_noremap(),
+    ["n|gt"]         = map_cr('lua vim.lsp.buf.type_definition()'):with_noremap(),
+    ["n|ge"]         = map_cr('lua vim.diagnostic.get()'):with_noremap(),
+    ["n|gn"]         = map_cr('lua vim.diagnostic.goto_next()'):with_noremap(),
+    ["n|gm"]         = map_cr('lua vim.diagnostic.goto_prev()'):with_noremap(),
     --INSERT
-    ["i|<C-s>"]      = map_cmd('<Esc>:w<CR>'),
-    ["i|<C-q>"]      = map_cmd('<Esc>:wq<CR>'),
+    ["i|<S-Tab>"]    = map_cmd('<Esc>Ea'),
+    ["i|jj"]         = map_cmd('<Esc>'),
     ["i|<C-l>"]      = map_cmd('<Right>'):with_noremap(),
     ["i|<C-h>"]      = map_cmd('<Left>'):with_noremap(),
     ["i|<C-j>"]      = map_cmd('<Up>'):with_noremap(),
@@ -35,17 +34,18 @@ local def_map = {
     ["n|wj"]         = map_cmd('<C-w>j'),
     ["n|wk"]         = map_cmd('<C-w>k'),
     ["n|wl"]         = map_cmd('<C-w>l'),
+    ["i|<C-f>"]      = map_cmd('<Esc><leader><leader>s'),
     --tabs
-    ["n|<Tab>"]      = map_cu('bNext'):with_noremap(),
-    ["n|<S-Tab>"]    = map_cu('bprevious'):with_noremap(),
+    ["n|<Tab>"]      = map_cmd('w'):with_noremap(),
+    ["n|<S-Tab>"]    = map_cu('bNext'):with_noremap(),
     ["n|te"]         = map_cu('tabedit'):with_noremap(),
     ["n|<C-t>"]      = map_cu('TagbarToggle'):with_noremap(),
     --telescope
-    ["n|;L"]          = map_cu('Telescope live_grep'):with_noremap(),
-    ["n|;F"]          = map_cu('Telescope file_browser'):with_noremap(),
-    ["n|;C"]          = map_cu('Cheatsheet'):with_noremap(),
-    --neoscroll
-    --keybinds in plugins/neoscroll.lua flder
+    ["n|fl"]          = map_cu('Telescope live_grep'):with_noremap(),
+    ["n|fs"]          = map_cu('Telescope grep_string'):with_noremap(),
+    ["n|ff"]          = map_cu('Telescope find_files'):with_noremap(),
+    ["n|fF"]          = map_cu('Telescope file_browser'):with_noremap(),
+    ["n|fc"]          = map_cu('Cheatsheet'):with_noremap(),
     --nerdtree
     ["n|;T"]          = map_cu('CHADopen'):with_noremap(),
     --terminal
