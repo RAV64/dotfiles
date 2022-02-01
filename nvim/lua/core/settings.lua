@@ -17,7 +17,7 @@ local function load_settings()
     backup         = false;
     backupskip     = "/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*,*/shm/*,/private/var/*,.vault.vim";
     backspace      = "start,eol,indent";
-    cmdheight      = 1;
+    cmdheight      = 2;
     cmdwinheight   = 5;
     cursorline     = true;
     display        = "lastline";
@@ -76,7 +76,6 @@ local function load_settings()
   }
 
   vim.g.clipboard = {
-    name = "macOS-clipboard",
     copy = {
       ["+"] = "pbcopy",
       ["*"] = "pbcopy",

@@ -26,7 +26,6 @@ return require("packer").startup(function(use)
 		{ "jose-elias-alvarez/null-ls.nvim" },
 		{ "ray-x/lsp_signature.nvim" },
 	})
-
 	use({
 		"hrsh7th/nvim-cmp",
 		requires = {
@@ -39,19 +38,17 @@ return require("packer").startup(function(use)
 			"hrsh7th/cmp-path",
 		},
 	})
-
-	use({ "sudormrfbin/cheatsheet.nvim" })
-	use({ "nvim-telescope/telescope.nvim" })
-	use("karb94/neoscroll.nvim")
+	use({ "ellisonleao/glow.nvim", run = ":GlowInstall" })
+	use("sudormrfbin/cheatsheet.nvim")
 	use("ms-jpq/chadtree")
 	use("folke/tokyonight.nvim")
 	use("windwp/nvim-autopairs")
 	use("github/copilot.vim")
-	use({ "ellisonleao/glow.nvim", run = ":GlowInstall" })
 	use("blackCauldron7/surround.nvim")
-	use("preservim/tagbar")
-	use({ "lewis6991/gitsigns.nvim" })
-	use("lukas-reineke/indent-blankline.nvim")
+	use("lewis6991/gitsigns.nvim")
 	use("tpope/vim-fugitive")
 	use("famiu/bufdelete.nvim")
+	use("rust-lang/rust.vim")
+	use("ggandor/lightspeed.nvim")
+  use("max397574/better-escape.nvim")
 end)
