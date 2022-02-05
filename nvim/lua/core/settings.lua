@@ -17,8 +17,9 @@ local function load_settings()
     backup         = false;
     backupskip     = "/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*,*/shm/*,/private/var/*,.vault.vim";
     backspace      = "start,eol,indent";
-    cmdheight      = 2;
+    cmdheight      = 1;
     cmdwinheight   = 5;
+    clipboard      = "unnamedplus",
     cursorline     = true;
     display        = "lastline";
     diffopt        = "filler,iwhite,internal,algorithm:patience";
@@ -32,12 +33,13 @@ local function load_settings()
     ignorecase     = true;
     laststatus     = 2;
     list           = true;
-    listchars      = "tab:»·,nbsp:+,trail:·,extends:→,precedes:←";
+    listchars      = "tab:| ,nbsp:+,trail:·,extends:→,precedes:←";
     number         = true;
     relativenumber = true;
     numberwidth    = 2;
     ruler          = false;
     smartcase      = true;
+    smartindent    = true;
     smarttab       = true;
     scrolloff      = 18;
     sidescrolloff  = 18;
@@ -60,7 +62,6 @@ local function load_settings()
     textwidth      = 80;
     expandtab      = true;
     autoindent     = true;
-    smartindent    = true;
     tabstop        = 2;
     shiftwidth     = 2;
     softtabstop    = -1;
@@ -73,18 +74,6 @@ local function load_settings()
     signcolumn     = "yes";
     conceallevel   = 2;
     concealcursor  = "niv";
-  }
-
-  vim.g.clipboard = {
-    copy = {
-      ["+"] = "pbcopy",
-      ["*"] = "pbcopy",
-    },
-    paste = {
-      ["+"] = "pbpaste",
-      ["*"] = "pbpaste",
-    },
-    cache_enabled = 0
   }
 
   vim.g.python3_host_prog = '/opt/homebrew/opt/python@3.10/bin/python3'

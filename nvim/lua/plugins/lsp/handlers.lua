@@ -35,9 +35,9 @@ M.setup = function()
 	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 		border = "rounded",
 	})
-
 	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-		border = "rounded",})
+		border = "rounded",
+	})
 end
 
 local function lsp_highlight_document(client)
@@ -66,7 +66,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not status_ok then
-  return
+	return
 end
 
 M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)

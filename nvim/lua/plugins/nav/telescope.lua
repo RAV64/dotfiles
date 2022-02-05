@@ -11,6 +11,27 @@ telescope.setup({
 		},
 	},
 	defaults = {
+		border = true,
+		borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+		color_devicons = true,
+		dynamic_preview_title = true,
+		file_sorter = require("telescope.sorters").get_fuzzy_file,
+		file_previewer = require("telescope.previewers").vim_buffer_cat.new,
+		generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
+		grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
+		initial_mode = "insert",
+		layout_strategy = "horizontal",
+		prompt_prefix = "🔭 ",
+		prompt_position = "top",
+		path_display = { "truncate" },
+		qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
+		results_width = 1,
+		selection_strategy = "reset",
+		selection_caret = " ",
+		set_env = { ["COLORTERM"] = "truecolor" },
+		sorting_strategy = "ascending",
+		use_less = true,
+		winblend = 0,
 		vimgrep_arguments = {
 			"rg",
 			"--color=never",
@@ -19,6 +40,15 @@ telescope.setup({
 			"--line-number",
 			"--column",
 			"--smart-case",
+		},
+		extensions = {
+			fzy_native = {
+				override_generic_sorter = false,
+				override_file_sorter = true,
+			},
+			file_browser = {
+				hidden = true,
+			},
 		},
 		file_ignore_patterns = {
 			"node_modules",
@@ -30,45 +60,23 @@ telescope.setup({
 			"pytorch",
 			"*.gpg",
 		},
-		prompt_prefix = "🔭 ",
-		prompt_position = "top",
-		selection_caret = " ",
-		sorting_strategy = "ascending",
-		color_devicons = true,
-		dynamic_preview_title = true,
-		background = true,
 		layout_config = {
-			prompt_position = "bottom",
 			horizontal = {
-				width_padding = 0.04,
-				height_padding = 0.1,
-				preview_width = 0.6,
+				prompt_position = "top",
+				preview_width = 0.55,
+				results_width = 0.8,
 			},
 			vertical = {
-				width_padding = 0.05,
-				height_padding = 1,
-				preview_height = 0.5,
+				mirror = false,
 			},
-		},
-		selection_strategy = "reset",
-		results_width = 0.9,
-		borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-		file_sorter = require("telescope.sorters").get_fuzzy_file,
-		generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
-		file_previewer = require("telescope.previewers").vim_buffer_cat.new,
-		grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
-		qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
-	},
-	extensions = {
-		fzy_native = {
-			override_generic_sorter = false,
-			override_file_sorter = true,
-		},
-		file_browser = {
-			hidden = true,
+			width = 0.95,
+			height = 0.95,
+			preview_cutoff = 120,
 		},
 	},
 })
 
-require("telescope").load_extension("fzy_native")
-require("telescope").load_extension("file_browser")
+telescope.load_extension("fzy_native")
+telescope.load_extension("file_browser")
+
+print("FUCK")
