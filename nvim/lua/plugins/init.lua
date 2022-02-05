@@ -13,6 +13,6 @@ require("plugins.misc.gitsigns")
 require("plugins.misc.surround")
 --USER INTERFACE
 require("plugins.ui.bufferline")
-require("plugins.ui.lualine")
 require("plugins.ui.tokyonight")
 require("plugins.ui.cursormode")
+require("plugins.ui.lualine")

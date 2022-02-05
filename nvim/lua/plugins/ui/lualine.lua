@@ -65,7 +65,7 @@ local config = {
 		lualine_c = {},
 		lualine_x = {},
 	},
-  extensions = {"chadtree"}
+	extensions = { "chadtree" },
 }
 
 -- Inserts a component in lualine_c at left section
@@ -109,7 +109,6 @@ ins_left({
 	color = "LualineMode",
 })
 
-
 ins_left({
 	"filename",
 	cond = conditions.buffer_not_empty,
@@ -142,7 +141,7 @@ ins_left({
 		end
 		return msg
 	end,
-	icon = " LSP:",
+	icon = " ",
 	color = "LualineMode",
 })
 

@@ -1,12 +1,6 @@
 return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
-	use({
-		{ "nvim-lualine/lualine.nvim" },
-		{ "akinsho/bufferline.nvim" },
-		requires = {
-			{ "kyazdani42/nvim-web-devicons", opt = true },
-		},
-	})
+	use({ "lewis6991/impatient.nvim" })
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
@@ -24,8 +18,10 @@ return require("packer").startup(function(use)
 		{ "neovim/nvim-lspconfig" },
 		{ "williamboman/nvim-lsp-installer" },
 		{ "jose-elias-alvarez/null-ls.nvim" },
-		{ "ray-x/lsp_signature.nvim" },
 	})
+
+	use({ "tami5/lspsaga.nvim" })
+
 	use({
 		"hrsh7th/nvim-cmp",
 		requires = {
@@ -38,17 +34,22 @@ return require("packer").startup(function(use)
 			"hrsh7th/cmp-path",
 		},
 	})
+
+	use("kyazdani42/nvim-web-devicons")
+	use({ "nvim-lualine/lualine.nvim" })
+	use({ "akinsho/bufferline.nvim" })
 	use({ "ellisonleao/glow.nvim", run = ":GlowInstall" })
 	use("sudormrfbin/cheatsheet.nvim")
 	use("ms-jpq/chadtree")
 	use("folke/tokyonight.nvim")
 	use("windwp/nvim-autopairs")
-	use("github/copilot.vim")
+	--use("github/copilot.vim")
 	use("blackCauldron7/surround.nvim")
 	use("lewis6991/gitsigns.nvim")
 	use("tpope/vim-fugitive")
 	use("famiu/bufdelete.nvim")
 	use("rust-lang/rust.vim")
 	use("ggandor/lightspeed.nvim")
-  use("max397574/better-escape.nvim")
+	use("max397574/better-escape.nvim")
+	use({ "p00f/nvim-ts-rainbow" })
 end)
