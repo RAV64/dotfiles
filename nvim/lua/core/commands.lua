@@ -1,0 +1,7 @@
+vim.api.nvim_command("au VimEnter * CHADopen --nofocus")
+vim.api.nvim_command("au ModeChanged * lua Pain()")
+vim.api.nvim_command("hi TelescopeNormal NONE")
+vim.api.nvim_command("hi TelescopeBorder NONE")
+vim.api.nvim_command("hi LineNr guifg=#ffffff")
+vim.api.nvim_command("hi CursorLine guifg=NONE guibg=#47535d")
+vim.api.nvim_command("hi LspFloatWinNormal guibg=None")
