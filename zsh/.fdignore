@@ -1,4 +1,11 @@
 node_modules
+AndroidStudioProjects
+.BurpSuite
+libraries
+plugins
+.idea
+build
+.platformio
 .metadata
 .npm
 .node-gyp
@@ -7,7 +14,7 @@ node_modules
 .redhat
 .git
 Library
-.cache
+*cache
 Movies
 pytorch
 .gradle
@@ -16,4 +23,4 @@ flutter
 .m2
 .vscode
 .vscode-insiders
-
+Frameworks

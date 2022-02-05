@@ -21,16 +21,6 @@ export PATH="/opt/homebrew/opt/python@3.10/bin:$PATH"
 export PATH="/opt/homebrew/opt/python@3.10/Frameworks/Python.framework/Versions/3.10/bin:$PATH"
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 
-alias lghub="/Applications/lghub.app/Contents/Frameworks/lghub_updater.app/Contents/MacOS/lghub_updater"
-alias ll="exa -l -g --icons"
-alias la="ll -a"
-alias lt="ll --tree --level=2"
-alias lta="lt -a"
-alias ..="cd .."
-alias v="nvim"
-alias vi="nvim"  
-alias vim="nvim" 
-
 bindkey -s '^f' 'cd $(fd --type directory --ignore-file $HOME/.dotfiles/zsh/.fdignore --base-directory $HOME/ -a -H | fzf)^M'
 
 plugins=(git
@@ -47,3 +37,13 @@ source $ZSH/oh-my-zsh.sh
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+alias lghub="/Applications/lghub.app/Contents/Frameworks/lghub_updater.app/Contents/MacOS/lghub_updater"
+alias ll="exa -l -g --icons"
+alias la="ll -a"
+alias lt="ll --tree --level=2"
+alias lta="lt -a"
+alias ..="cd .."
+alias v="nvim"
+alias vi="nvim"  
+export PATH="/opt/homebrew/sbin:$PATH"
