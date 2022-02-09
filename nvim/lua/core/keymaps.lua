@@ -18,6 +18,13 @@ local def_map = {
     ["n|gn"]         = map_cr('Lspsaga diagnostic_jump_next'):with_noremap(),
     ["n|gm"]         = map_cr('Lspsaga diagnostic_jump_prev'):with_noremap(),
     ["n|<C-t>"]      = map_cr('Lspsaga toggle_floaterm'):with_noremap(),
+    --DAP
+    ["n|<left>"]     = map_cr('lua require("dap").toggle_breakpoint()'):with_noremap(),
+    ["n|ä"]      = map_cr('lua require("dap").continue()'):with_noremap(),
+    ["n|<down>"]     = map_cr('lua require("dap").step_into()'):with_noremap(),
+    ["n|<up>"]       = map_cr('lua require("dap").step_out()'):with_noremap(),
+    ["n|<right>"]    = map_cr('lua require("dap").step_over()'):with_noremap(),
+    ["n|,t"]         = map_cr('lua require("dapui").toggle()'):with_noremap(),
     --INSERT
     ["i|<S-Tab>"]    = map_cmd('<Esc>Ea'),
     ["i|jj"]         = map_cmd('<Esc>'),
@@ -52,10 +59,10 @@ local def_map = {
     ["n|;T"]          = map_cu('CHADopen'):with_noremap(),
     --terminal
     ["t|<Esc>"]      = map_cmd('<C-\\><C-n>'),
-    ["n|<up>"]       = map_cu('res +1'),
-    ["n|<down>"]     = map_cu('res -1'),
-    ["n|<right>"]    = map_cu('vertical resize +1'),
-    ["n|<left>"]     = map_cu('vertical resize -1'),
+    ["n|<S-up>"]     = map_cu('res +1'),
+    ["n|<S-down>"]   = map_cu('res -1'),
+    ["n|<S-right>"]  = map_cu('vertical resize +1'),
+    ["n|<S-left>"]   = map_cu('vertical resize -1'),
 }
 
 bind.nvim_load_mapping(def_map)
