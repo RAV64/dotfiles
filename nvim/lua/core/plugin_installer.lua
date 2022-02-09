@@ -34,16 +34,24 @@ return require("packer").startup(function(use)
 			"hrsh7th/cmp-path",
 		},
 	})
+	use({
+		"mfussenegger/nvim-dap",
+		config = "require('plugins.dap.test').post()",
+		requires = {
+			{ "rcarriga/nvim-dap-ui" },
+			{ "theHamsta/nvim-dap-virtual-text" },
+		},
+	})
 
+	use({ "ellisonleao/glow.nvim", run = ":GlowInstall" })
 	use("kyazdani42/nvim-web-devicons")
+	use({ "simrat39/rust-tools.nvim" })
 	use({ "nvim-lualine/lualine.nvim" })
 	use({ "akinsho/bufferline.nvim" })
-	use({ "ellisonleao/glow.nvim", run = ":GlowInstall" })
 	use("sudormrfbin/cheatsheet.nvim")
 	use("ms-jpq/chadtree")
 	use("folke/tokyonight.nvim")
 	use("windwp/nvim-autopairs")
-	--use("github/copilot.vim")
 	use("blackCauldron7/surround.nvim")
 	use("lewis6991/gitsigns.nvim")
 	use("tpope/vim-fugitive")
@@ -52,4 +60,5 @@ return require("packer").startup(function(use)
 	use("ggandor/lightspeed.nvim")
 	use("max397574/better-escape.nvim")
 	use({ "p00f/nvim-ts-rainbow" })
+	--use("github/copilot.vim")
 end)
