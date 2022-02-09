@@ -4,7 +4,6 @@ if not status then
 	return
 end
 
-
 local ins_status, lsp_installer = pcall(require, "nvim-lsp-installer")
 if not ins_status then
 	print("ERROR: nvim-lsp-installer")
@@ -32,4 +31,4 @@ end)
 require("plugins.lsp.handlers").setup()
 require("plugins.lsp.null-ls")
 require("plugins.lsp.lspsaga")
-
+--require("plugins.lsp.settings.rust-tools")
