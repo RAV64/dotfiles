@@ -47,27 +47,21 @@ local default = {
 				TypeParameter = "",
 			}
 			vim_item.kind = string.format("%s", icons[vim_item.kind])
-			vim_item.menu = ({
-				nvim_lsp = "[LSP]",
-				nvim_lua = "[LUA]",
-				buffer = "[BUF]",
-				path = "[PATH]",
-				luasnip = "[SNIP]",
-			})[entry.source.name]
+			vim_item.menu = ({})[entry.source.name]
 
 			return vim_item
 		end,
 	},
 	mapping = {
-		["<C-d>"] = cmp.mapping.scroll_docs(-4),
-		["<C-f>"] = cmp.mapping.scroll_docs(4),
+		["<C-j>"] = cmp.mapping.scroll_docs(-4),
+		["<C-k>"] = cmp.mapping.scroll_docs(4),
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.close(),
-		["<Tab>"] = cmp.mapping.confirm({
+		["<CR>"] = cmp.mapping.confirm({
 			behavior = cmp.ConfirmBehavior.Replace,
 			select = true,
 		}),
-		["<C-n>"] = function(fallback)
+		["<Tab>"] = function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
 			elseif luasnip.expand_or_jumpable() then
@@ -76,7 +70,7 @@ local default = {
 				fallback()
 			end
 		end,
-		["<C-m>"] = function(fallback)
+		["<S-Tab>"] = function(fallback)
 			if cmp.visible() then
 				cmp.select_prev_item()
 			elseif luasnip.jumpable(-1) then
@@ -93,17 +87,13 @@ local default = {
 		{ name = "nvim_lua" },
 		{ name = "path" },
 	},
-	documentation = {
-		border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-	},
 	confirm_opts = {
 		behavior = cmp.ConfirmBehavior.Replace,
 		select = false,
 	},
-  experimental = {
-    native_menu = false,
-    ghost_text = true,
-  },
+	experimental = {
+		ghost_text = true,
+	},
 }
 
 cmp.setup(default)

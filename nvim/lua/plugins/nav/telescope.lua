@@ -41,19 +41,12 @@ telescope.setup({
 			"--column",
 			"--smart-case",
 		},
-		extensions = {
-			fzy_native = {
-				override_generic_sorter = false,
-				override_file_sorter = true,
-			},
-			file_browser = {
-				hidden = true,
-			},
-		},
 		file_ignore_patterns = {
 			"node_modules",
 			"venv",
 			"packer_compiled.lua",
+			"package-lock.json",
+			".git",
 			".cache",
 			".gradle",
 			"flutter",
@@ -74,7 +67,17 @@ telescope.setup({
 			preview_cutoff = 120,
 		},
 	},
+	extensions = {
+		file_browser = {
+			hidden = true,
+		},
+		["ui-select"] = {
+			require("telescope.themes").get_dropdown({
+			}),
+		},
+	},
 })
 
-telescope.load_extension("fzy_native")
+telescope.load_extension("fzf")
 telescope.load_extension("file_browser")
+telescope.load_extension("ui-select")

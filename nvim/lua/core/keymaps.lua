@@ -1,68 +1,103 @@
-local bind = require('keymap.bind')
-local map_cr = bind.map_cr
-local map_cu = bind.map_cu
-local map_cmd = bind.map_cmd
+local function bind(op, outer_opts)
+	outer_opts = outer_opts or { noremap = true }
+	return function(lhs, rhs, opts)
+		opts = vim.tbl_extend("force", outer_opts, opts or {})
+		vim.keymap.set(op, lhs, rhs, opts)
+	end
+end
 
-local def_map = {
-    --LSP
-    ["n|gD"]         = map_cr('Lspsaga lsp_finder'):with_noremap(),
-    ["n|gd"]         = map_cr('lua vim.lsp.buf.definition()'):with_noremap(),
-    ["n|ga"]         = map_cr('Lspsaga code_action'):with_noremap(),
-    ["n|gs"]         = map_cr('Lspsaga signature'):with_noremap(),
-    ["n|gr"]         = map_cr('Lspsaga rename'):with_noremap(),
-    ["n|gi"]         = map_cr('lua vim.lsp.buf.implementation()'):with_noremap(),
-    ["n|gf"]         = map_cr('lua vim.lsp.buf.formatting()'):with_noremap(),
-    ["n|gh"]         = map_cr('Lspsaga hover_doc'):with_noremap(),
-    ["n|gt"]         = map_cr('lua vim.lsp.buf.type_definition()'):with_noremap(),
-    ["n|ge"]         = map_cr('Lspsaga show_line_diagnostics'):with_noremap(),
-    ["n|gn"]         = map_cr('Lspsaga diagnostic_jump_next'):with_noremap(),
-    ["n|gm"]         = map_cr('Lspsaga diagnostic_jump_prev'):with_noremap(),
-    ["n|<C-t>"]      = map_cr('Lspsaga toggle_floaterm'):with_noremap(),
-    --DAP
-    ["n|<left>"]     = map_cr('lua require("dap").toggle_breakpoint()'):with_noremap(),
-    ["n|ä"]      = map_cr('lua require("dap").continue()'):with_noremap(),
-    ["n|<down>"]     = map_cr('lua require("dap").step_into()'):with_noremap(),
-    ["n|<up>"]       = map_cr('lua require("dap").step_out()'):with_noremap(),
-    ["n|<right>"]    = map_cr('lua require("dap").step_over()'):with_noremap(),
-    ["n|,t"]         = map_cr('lua require("dapui").toggle()'):with_noremap(),
-    --INSERT
-    ["i|<S-Tab>"]    = map_cmd('<Esc>Ea'),
-    ["i|jj"]         = map_cmd('<Esc>'),
-    ["i|jk"]         = map_cmd('<Esc>'),
-    ["i|<C-l>"]      = map_cmd('<Right>'):with_noremap(),
-    ["i|<C-h>"]      = map_cmd('<Left>'):with_noremap(),
-    ["i|<C-j>"]      = map_cmd('<Up>'):with_noremap(),
-    ["i|<C-k>"]      = map_cmd('<Down>'):with_noremap(),
-    ["i|<C-o>"]      = map_cmd('<Esc>o'):with_noremap(),
-    --window<Plug>(cmp.u.k.recursive: )
-    ["n|<space>"]    = map_cmd('<C-w>w'),
-    ["n|Q"]          = map_cu('Bdelete'):with_noremap(),
-    ["n|wq"]         = map_cmd('<C-w>q'),
-    ["n|ww"]         = map_cmd('<C-w>s'),
-    ["n|wW"]         = map_cmd('<C-w>v'),
-    ["n|wh"]         = map_cmd('<C-w>h'),
-    ["n|wj"]         = map_cmd('<C-w>j'),
-    ["n|wk"]         = map_cmd('<C-w>k'),
-    ["n|wl"]         = map_cmd('<C-w>l'),
-    ["i|<C-f>"]      = map_cmd('<Esc><leader><leader>s'),
-    --tabs
-    ["n|<Tab>"]      = map_cmd('w'),
-    ["n|<S-Tab>"]    = map_cu('bNext'):with_noremap(),
-    ["n|te"]         = map_cu('tabedit'):with_noremap(),
-    --telescope
-    ["n|fl"]          = map_cu('Telescope live_grep'):with_noremap(),
-    ["n|fs"]          = map_cu('Telescope grep_string'):with_noremap(),
-    ["n|ff"]          = map_cu('Telescope find_files'):with_noremap(),
-    ["n|fF"]          = map_cu('Telescope file_browser'):with_noremap(),
-    ["n|fc"]          = map_cu('Cheatsheet'):with_noremap(),
-    --nerdtree
-    ["n|;T"]          = map_cu('CHADopen'):with_noremap(),
-    --terminal
-    ["t|<Esc>"]      = map_cmd('<C-\\><C-n>'),
-    ["n|<S-up>"]     = map_cu('res +1'),
-    ["n|<S-down>"]   = map_cu('res -1'),
-    ["n|<S-right>"]  = map_cu('vertical resize +1'),
-    ["n|<S-left>"]   = map_cu('vertical resize -1'),
-}
+-- local nmap = bind("n", {noremap = false})
+-- local xnoremap = bind("x")
+local nnoremap = bind("n")
+local vnoremap = bind("v")
+local inoremap = bind("i")
+local tnoremap = bind("t")
 
-bind.nvim_load_mapping(def_map)
+--LSP
+nnoremap("gd", function()
+	vim.lsp.buf.definition()
+end)
+nnoremap("gf", function()
+	vim.lsp.buf.format()
+end)
+nnoremap("gi", function()
+	vim.lsp.buf.implementation()
+end)
+nnoremap("gt", function()
+	vim.lsp.buf.type_definition()
+end)
+nnoremap("ga", function()
+	vim.lsp.buf.code_action()
+end)
+nnoremap("K", function()
+	vim.lsp.buf.hover()
+end)
+nnoremap("gr", function()
+	require("lspsaga.rename").rename()
+end)
+nnoremap("gD", function()
+	require("lspsaga.provider").lsp_finder()
+end)
+nnoremap("gj", function()
+    vim.diagnostic.goto_next()
+end)
+nnoremap("gk", function()
+    vim.diagnostic.goto_prev()
+end)
+nnoremap("ge", function()
+	require("lspsaga.diagnostic").show_line_diagnostics()
+end)
+inoremap("<C-h>", function()
+	vim.lsp.buf.signature_help()
+end)
+
+--misc
+inoremap("jj", "<Esc>")
+inoremap("jk", "<Esc>")
+inoremap("<S-Tab>", "<Esc>Ea")
+inoremap("<S-CR>", "<Esc>o")
+
+nnoremap("å", function()
+	require("nvim-tree").toggle()
+end)
+
+nnoremap("L", "$")
+nnoremap("H", "0")
+vnoremap("L", "$")
+vnoremap("H", "0")
+
+nnoremap("<leader>bq", function()
+	require("bufdelete").bufdelete(0, true)
+end)
+nnoremap("<leader>bj", ":bnext<CR>")
+nnoremap("<leader>bk", ":bprev<CR>")
+
+nnoremap("<leader>ww", ":vsplit<CR>")
+nnoremap("<leader>ws", ":split<CR>")
+nnoremap("<leader>wq", ":q<CR>")
+nnoremap("<leader>h", "<C-w>h")
+nnoremap("<leader>j", "<C-w>j")
+nnoremap("<leader>k", "<C-w>k")
+nnoremap("<leader>l", "<C-w>l")
+
+tnoremap("<Esc>", "<C-\\><C-n>")
+
+--Telescope
+nnoremap("fs", function()
+	require("telescope.builtin").grep_string()
+end)
+nnoremap("ff", function()
+	require("telescope.builtin").find_files()
+end)
+
+nnoremap("fl", function()
+	require("telescope.builtin").live_grep()
+end)
+
+nnoremap("fw", function()
+	require("telescope.builtin").current_buffer_fuzzy_find()
+end)
+
+nnoremap("fF", function()
+	require("telescope").extensions.file_browser.file_browser()
+end)

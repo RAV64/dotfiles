@@ -57,12 +57,14 @@ end
 
 M.on_attach = function(client)
 	if client.name == "tsserver" then
-		client.resolved_capabilities.document_formatting = false
+    return
+		--client.resolved_capabilities.document_formatting = false
 	end
-	lsp_highlight_document(client)
+	--lsp_highlight_document(client)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not status_ok then

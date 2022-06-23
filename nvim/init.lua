@@ -1,7 +1,7 @@
---local present, impatient = pcall(require, "impatient")
-
---if present then
-	--impatient.enable_profile()
---end
+local status, _ = pcall(require, "impatient")
+if not status then
+	print("ERROR: impatient")
+	return
+end
 
 require("core")
