@@ -1,0 +1,1 @@
+return { settings = {}, cmd = { "jdtls" } }

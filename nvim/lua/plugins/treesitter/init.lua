@@ -1,9 +1,15 @@
-require("nvim-treesitter.configs").setup({
-	ensure_installed = "maintained",
+local status, tsc = pcall(require, "nvim-treesitter.configs")
+if not status then
+	print("ERROR lualine")
+	return
+end
+
+tsc.setup({
+	ensure_installed = "all",
+	ignore_install = { "phpdoc" },
 	highlight = {
 		enable = true,
 		use_languagetree = true,
-		additional_vim_regex_highlighting = true,
 	},
 	autopairs = {
 		enable = true,
@@ -17,3 +23,4 @@ require("nvim-treesitter.configs").setup({
 		max_file_lines = nil,
 	},
 })
+require("nvim-ts-autotag").setup()

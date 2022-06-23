@@ -1,42 +1,36 @@
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 COMPLETION_WAITING_DOTS="true"
-
 ZSH_DISABLE_COMPFIX=true
 export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+export YABAI_CERT=yabai-cert
 export PUPPETEER_EXECUTABLE_PATH=`which chromium`
 export SECRETS_PINENTRY=ask
 export BETTER_EXCEPTIONS=1
-export NVM_DIR="$HOME/.nvm"
 export JAVA_HOME=$(/usr/libexec/java_home)
-
+export JDTLS_HOME="/opt/homebrew/bin/jdtls"
+export LDFLAGS="-L/opt/homebrew/opt/python@3.10/lib"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/python@3.10/lib/pkgconfig"
+export FZF_DEFAULT_OPTS='--color=bg+:#302D41,bg:#1E1E2E,spinner:#F8BD96,hl:#F28FAD --color=fg:#D9E0EE,header:#F28FAD,info:#DDB6F2,pointer:#F8BD96 --color=marker:#F8BD96,fg+:#F2CDCD,prompt:#DDB6F2,hl+:#F28FAD'
+export NVM_LAZY=1
 export PATH="bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export PATH="/Applications/Little Snitch.app/Contents/Components:/Library/Apple/usr/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/code/flutter/bin:$PATH"
+export PATH="$HOME/flutter/bin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/opt/python@3.10/bin:$PATH"
-export PATH="/opt/homebrew/opt/python@3.10/Frameworks/Python.framework/Versions/3.10/bin:$PATH"
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+export PATH="/opt/homebrew/sbin:$PATH"
+export PATH"=$PATH:$HOME.spicetify"
 
 bindkey -s '^f' 'cd $(fd --type directory --ignore-file $HOME/.dotfiles/zsh/.fdignore --base-directory $HOME/ -a -H | fzf)^M'
 
 plugins=(git
+nvm
 zsh-syntax-highlighting
-fzf-tab
+rust
 )
 
 export ZSH="$HOME/.dotfiles/zsh/.oh-my-zsh"
-ZSH_THEME="powerlevel10k/powerlevel10k"
 source $ZSH/oh-my-zsh.sh
-
-[[ ! -f $HOME/.dotfiles/zsh/.themes/.p10k.zsh ]] || source ~/.dotfiles/zsh/.themes/.p10k.zsh
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 alias lghub="/Applications/lghub.app/Contents/Frameworks/lghub_updater.app/Contents/MacOS/lghub_updater"
 alias ll="exa -l -g --icons"
@@ -46,4 +40,12 @@ alias lta="lt -a"
 alias ..="cd .."
 alias v="nvim"
 alias vi="nvim"  
-export PATH="/opt/homebrew/sbin:$PATH"
+alias python="python3"
+alias :q="exit"
+alias zshconf="v $HOME/.dotfiles/zsh/.zshrc"
+alias nvimconf="v $HOME/.dotfiles/nvim/"
+alias restart="brew services restart"
+alias start="brew services start"
+alias stop="brew services stop"
+
+eval "$(starship init zsh)"

@@ -15,5 +15,7 @@ if present1 and present2 then
 	})
 end
 
-local cmp = require("cmp")
-cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+local x, cmp = pcall(require, "cmp")
+if x then
+	cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+end

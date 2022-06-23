@@ -5,6 +5,7 @@ libraries
 plugins
 .idea
 build
+venv
 .platformio
 .metadata
 .npm
