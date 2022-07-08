@@ -54,6 +54,7 @@ local function load_settings()
 		viewoptions = "folds,cursor,curdir,slash,unix",
 		wildignorecase = true,
 		wildignore = ".git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**,**/bower_modules/**",
+        winbar = "%f"
 	}
 
 	local bw_local = {

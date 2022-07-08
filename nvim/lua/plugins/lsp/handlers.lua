@@ -55,11 +55,12 @@ local function lsp_highlight_document(client)
 	end
 end
 
-M.on_attach = function(client)
-	if client.name == "tsserver" then
-    return
-		--client.resolved_capabilities.document_formatting = false
-	end
+
+M.on_attach = function()
+	-- if client.name == "tsserver" then
+	--     return
+	-- 	client.resolved_capabilities.document_formatting = false
+	-- end
 	--lsp_highlight_document(client)
 end
 
