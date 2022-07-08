@@ -48,6 +48,17 @@ return require("packer").startup(function(use)
 		},
 	})
 
+	use({
+		"SmiteshP/nvim-navic",
+		requires = "neovim/nvim-lspconfig",
+	})
+
+	use({
+		"stevearc/aerial.nvim",
+		config = function()
+			require("aerial").setup()
+		end,
+	})
 	use("nvim-lua/lsp_extensions.nvim")
 	use({ "akinsho/bufferline.nvim", tag = "*", requires = "kyazdani42/nvim-web-devicons" })
 	use({ "ellisonleao/glow.nvim", run = ":GlowInstall" })

@@ -13,7 +13,10 @@ for _, lsp in pairs(servers) do
 	opts = vim.tbl_deep_extend("force", server_opts, opts)
 
 	require("lspconfig")[lsp].setup({
-		on_attach = require("plugins.lsp.handlers").on_attach,
+		on_attach = function(client, bufnr)
+            require("aerial").on_attach(client, bufnr)
+			require("nvim-navic").attach(client, bufnr)
+		end,
 		capabilities = require("plugins.lsp.handlers").capabilities,
 		settings = require("plugins.lsp.settings." .. lsp).settings,
 	})

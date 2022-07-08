@@ -44,8 +44,12 @@ alias python="python3"
 alias :q="exit"
 alias zshconf="v $HOME/.dotfiles/zsh/.zshrc"
 alias nvimconf="v $HOME/.dotfiles/nvim/"
+
 alias restart="brew services restart"
 alias start="brew services start"
 alias stop="brew services stop"
+alias bu="brew upgrade"
+alias bi="brew info "
+alias bl="brew list"
 
 eval "$(starship init zsh)"
