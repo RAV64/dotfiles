@@ -1,7 +1,8 @@
-local status, _ = pcall(require, "impatient")
-if not status then
-	print("ERROR: impatient")
-	return
-end
+-- local status, _ = pcall(require, "impatient")
+-- if not status then
+-- 	print("ERROR: impatient")
+-- 	return
+-- end
 
+require("impatient")
 require("core")

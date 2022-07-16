@@ -11,15 +11,15 @@ export LDFLAGS="-L/opt/homebrew/opt/python@3.10/lib"
 export PKG_CONFIG_PATH="/opt/homebrew/opt/python@3.10/lib/pkgconfig"
 export FZF_DEFAULT_OPTS='--color=bg+:#302D41,bg:#1E1E2E,spinner:#F8BD96,hl:#F28FAD --color=fg:#D9E0EE,header:#F28FAD,info:#DDB6F2,pointer:#F8BD96 --color=marker:#F8BD96,fg+:#F2CDCD,prompt:#DDB6F2,hl+:#F28FAD'
 export NVM_LAZY=1
+
 export PATH="bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-export PATH="/Applications/Little Snitch.app/Contents/Components:/Library/Apple/usr/bin:$PATH"
+export PATH="/Library/Apple/usr/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/flutter/bin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/opt/python@3.10/bin:$PATH"
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 export PATH="/opt/homebrew/sbin:$PATH"
-export PATH"=$PATH:$HOME.spicetify"
 
 bindkey -s '^f' 'cd $(fd --type directory --ignore-file $HOME/.dotfiles/zsh/.fdignore --base-directory $HOME/ -a -H | fzf)^M'
 
@@ -39,7 +39,7 @@ alias lt="ll --tree --level=2"
 alias lta="lt -a"
 alias ..="cd .."
 alias v="nvim"
-alias vi="nvim"  
+alias vi="nvim"
 alias python="python3"
 alias :q="exit"
 alias zshconf="v $HOME/.dotfiles/zsh/.zshrc"
