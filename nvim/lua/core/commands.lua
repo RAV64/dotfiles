@@ -25,3 +25,9 @@ autocmd("TextYankPost", {
 		})
 	end,
 })
+
+autocmd({"BufWritePre"}, {
+    group = rav_group,
+    pattern = "*",
+    command = "%s/\\s\\+$//e",
+})

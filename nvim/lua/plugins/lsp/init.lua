@@ -6,7 +6,7 @@ end
 
 require("plugins.lsp.handlers").setup()
 
-local servers = { "pyright", "sumneko_lua", "tsserver" }
+local servers = { "pyright", "sumneko_lua", "tsserver", "jsonls" }
 for _, lsp in pairs(servers) do
 	local opts = {}
 	local server_opts = require("plugins.lsp.settings." .. lsp)

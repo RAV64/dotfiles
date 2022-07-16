@@ -54,7 +54,7 @@ local function load_settings()
 		viewoptions = "folds,cursor,curdir,slash,unix",
 		wildignorecase = true,
 		wildignore = ".git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**,**/bower_modules/**",
-        winbar = "%f"
+		winbar = "%f",
 	}
 
 	local bw_local = {
@@ -64,11 +64,11 @@ local function load_settings()
 		synmaxcol = 2500,
 		formatoptions = "1jcroql",
 		textwidth = 80,
-		expandtab = true,
 		autoindent = true,
-		tabstop = 4,
-		shiftwidth = 4,
-		softtabstop = 4,
+		tabstop = 2,
+		shiftwidth = 2,
+		softtabstop = -1,
+		expandtab = true,
 		breakindentopt = "shift:2,min:20",
 		nowrap = true,
 		linebreak = true,
@@ -76,8 +76,8 @@ local function load_settings()
 		colorcolumn = "80",
 		foldenable = false,
 		signcolumn = "yes",
-		conceallevel = 2,
-		concealcursor = "niv",
+		-- conceallevel = 2,
+		-- concealcursor = "niv",
 		hlsearch = false,
 		incsearch = true,
 	}

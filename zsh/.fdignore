@@ -25,3 +25,5 @@ flutter
 .vscode
 .vscode-insiders
 Frameworks
+.zsh_sessions
+.dotnet

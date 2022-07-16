@@ -59,7 +59,16 @@ return require("packer").startup(function(use)
 			require("aerial").setup()
 		end,
 	})
+	use({
+		"ggandor/leap.nvim",
+		config = function()
+			require("leap").set_default_keymaps()
+		end,
+	})
+
+	use("nathom/filetype.nvim")
 	use("nvim-lua/lsp_extensions.nvim")
+	use("b0o/schemastore.nvim")
 	use({ "akinsho/bufferline.nvim", tag = "*", requires = "kyazdani42/nvim-web-devicons" })
 	use({ "ellisonleao/glow.nvim", run = ":GlowInstall" })
 	use({ "catppuccin/nvim", as = "catppuccin" })
@@ -72,7 +81,6 @@ return require("packer").startup(function(use)
 	use("famiu/bufdelete.nvim")
 	use("nvim-lualine/lualine.nvim")
 	use("windwp/nvim-autopairs")
-	use("ggandor/lightspeed.nvim")
 	use("max397574/better-escape.nvim")
 	use("lewis6991/gitsigns.nvim")
 	use("tpope/vim-fugitive")
