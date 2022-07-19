@@ -6,14 +6,15 @@ end
 
 cp.setup({
 	styles = {
-		comments = "NONE",
-    conditionals = "NONE",
+		comments = { "italic" },
+		conditionals = { "italic" },
 	},
 	integrations = {
 		indent_blankline = {
-			colored_indent_levels = true,
+			colored_indent_levels = { true },
 		},
-		lsp_saga = true,
+		lsp_saga = { true },
 	},
 })
+
 vim.cmd([[colorscheme catppuccin]])
