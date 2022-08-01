@@ -1,6 +1,6 @@
 local status, gitsigns = pcall(require, 'gitsigns')
 if not status then
-  print('ERROR: bufdelete')
+  print('ERROR: gitsigns')
   return
 end
 

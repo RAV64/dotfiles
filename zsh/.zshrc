@@ -52,4 +52,5 @@ alias bu="brew upgrade"
 alias bi="brew info "
 alias bl="brew list"
 
+eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"

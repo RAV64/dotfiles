@@ -5,6 +5,10 @@ if not status then
 end
 
 cp.setup({
+	compile = {
+		enabled = true,
+		path = vim.fn.stdpath("cache") .. "/catppuccin",
+	},
 	styles = {
 		comments = { "italic" },
 		conditionals = { "italic" },
@@ -13,8 +17,12 @@ cp.setup({
 		indent_blankline = {
 			colored_indent_levels = { true },
 		},
-		lsp_saga = { true },
+		lsp_saga = true,
+		dashboard = false,
+		telekasten = false,
+		symbols_outline = false,
 	},
 })
 
+vim.g.catppuccin_flavour = "mocha"
 vim.cmd([[colorscheme catppuccin]])

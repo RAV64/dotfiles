@@ -33,7 +33,7 @@ return require("packer").startup(function(use)
 		{ "jose-elias-alvarez/null-ls.nvim" },
 	})
 
-	use({ "tami5/lspsaga.nvim" })
+	use({ "glepnir/lspsaga.nvim" })
 
 	use({
 		"hrsh7th/nvim-cmp",
@@ -49,29 +49,21 @@ return require("packer").startup(function(use)
 	})
 
 	use({
-		"SmiteshP/nvim-navic",
-		requires = "neovim/nvim-lspconfig",
-	})
-
-	use({
-		"stevearc/aerial.nvim",
-		config = function()
-			require("aerial").setup()
-		end,
-	})
-	use({
 		"ggandor/leap.nvim",
 		config = function()
 			require("leap").set_default_keymaps()
 		end,
 	})
-
+	use({
+		"catppuccin/nvim",
+		as = "catppuccin",
+		run = ":CatppuccinCompile",
+	})
 	use("nathom/filetype.nvim")
 	use("nvim-lua/lsp_extensions.nvim")
 	use("b0o/schemastore.nvim")
 	use({ "akinsho/bufferline.nvim", tag = "*", requires = "kyazdani42/nvim-web-devicons" })
 	use({ "ellisonleao/glow.nvim", run = ":GlowInstall" })
-	use({ "catppuccin/nvim", as = "catppuccin" })
 	use({ "windwp/nvim-ts-autotag" })
 	use("mfussenegger/nvim-jdtls")
 	use("terrortylor/nvim-comment")
