@@ -3,7 +3,6 @@ if not status then
 	print("ERROR lualine")
 	return
 end
-local navic = require("nvim-navic")
 
 lualine.setup({
 	options = {
@@ -18,7 +17,7 @@ lualine.setup({
 	sections = {
 		lualine_a = { "mode" },
 		lualine_b = { "branch", "diff", "diagnostics" },
-		lualine_c = { navic.get_location },
+		lualine_c = { "path" },
 		lualine_x = { "encoding", "fileformat", "filetype" },
 		lualine_y = { "progress" },
 		lualine_z = { "location" },

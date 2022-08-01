@@ -26,10 +26,10 @@ local function load_settings()
 		diffopt = "filler,iwhite,internal,algorithm:patience",
 		encoding = "utf-8",
 		fileencodings = "utf-8,sjis,euc-jp,latin",
-		--foldminlines   = 3;
-		--foldnestmax    = 1;
-		--foldmethod     = "expr";
-		--foldexpr       = "nvim_treesitter#foldexpr()";
+		-- foldminlines = 3,
+		-- foldnestmax = 1,
+		-- foldexpr = "nvim_treesitter#foldexpr()",
+		-- foldmethod = "expr",
 		hidden = true,
 		mouse = "a",
 		ignorecase = true,
@@ -53,13 +53,11 @@ local function load_settings()
 		termguicolors = true,
 		viewoptions = "folds,cursor,curdir,slash,unix",
 		wildignorecase = true,
-		wildignore = ".git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**,**/bower_modules/**",
-		winbar = "%f",
+		wildignore = ".git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,**/node_modules/**,**/bower_modules/**",
 	}
 
 	local bw_local = {
-		--mapleader      = ' ';
-		--maplocalleader = ' ';
+    foldenable = false,
 		undofile = true,
 		synmaxcol = 2500,
 		formatoptions = "1jcroql",
@@ -74,10 +72,7 @@ local function load_settings()
 		linebreak = true,
 		number = true,
 		colorcolumn = "80",
-		foldenable = false,
 		signcolumn = "yes",
-		-- conceallevel = 2,
-		-- concealcursor = "niv",
 		hlsearch = false,
 		incsearch = true,
 	}
