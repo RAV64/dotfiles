@@ -10,14 +10,16 @@ cp.setup({
 		path = vim.fn.stdpath("cache") .. "/catppuccin",
 	},
 	styles = {
-		comments = { "italic" },
-		conditionals = { "italic" },
+		comments = {},
+		conditionals = {},
 	},
 	integrations = {
 		indent_blankline = {
 			colored_indent_levels = { true },
 		},
+    bufferline = true,
 		lsp_saga = true,
+		leap = true,
 		dashboard = false,
 		telekasten = false,
 		symbols_outline = false,

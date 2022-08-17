@@ -14,26 +14,17 @@ end
 return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
 	use("lewis6991/impatient.nvim")
-	use({
-		"nvim-treesitter/nvim-treesitter",
-		run = ":TSUpdate",
-	})
+	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+
 	use({
 		"nvim-telescope/telescope.nvim",
 		requires = {
-			{ "nvim-lua/popup.nvim" },
 			{ "nvim-lua/plenary.nvim" },
 			{ "nvim-telescope/telescope-file-browser.nvim" },
 			{ "nvim-telescope/telescope-ui-select.nvim" },
+			{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
 		},
 	})
-	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
-	use({
-		{ "neovim/nvim-lspconfig" },
-		{ "jose-elias-alvarez/null-ls.nvim" },
-	})
-
-	use({ "glepnir/lspsaga.nvim" })
 
 	use({
 		"hrsh7th/nvim-cmp",
@@ -48,35 +39,28 @@ return require("packer").startup(function(use)
 		},
 	})
 
-	use({
-		"ggandor/leap.nvim",
-		config = function()
-			require("leap").set_default_keymaps()
-		end,
-	})
-	use({
-		"catppuccin/nvim",
-		as = "catppuccin",
-		run = ":CatppuccinCompile",
-	})
-	use("nathom/filetype.nvim")
-	use("nvim-lua/lsp_extensions.nvim")
+	use("neovim/nvim-lspconfig")
+	use("jose-elias-alvarez/null-ls.nvim")
+	use("glepnir/lspsaga.nvim")
+
+	use({ "catppuccin/nvim", as = "catppuccin", run = ":CatppuccinCompile" })
+	use({ "kyazdani42/nvim-tree.lua", requires = { "kyazdani42/nvim-web-devicons" }, tag = "nightly" })
+	use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" })
+	use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } })
+
+	use("windwp/nvim-ts-autotag")
+	use("windwp/nvim-autopairs")
 	use("b0o/schemastore.nvim")
-	use({ "akinsho/bufferline.nvim", tag = "*", requires = "kyazdani42/nvim-web-devicons" })
-	use({ "ellisonleao/glow.nvim", run = ":GlowInstall" })
-	use({ "windwp/nvim-ts-autotag" })
 	use("mfussenegger/nvim-jdtls")
 	use("terrortylor/nvim-comment")
-	use("kyazdani42/nvim-tree.lua")
 	use("lukas-reineke/indent-blankline.nvim")
+	use("lewis6991/gitsigns.nvim")
+	use("simrat39/rust-tools.nvim")
+
 	use("kyazdani42/nvim-web-devicons")
 	use("famiu/bufdelete.nvim")
-	use("nvim-lualine/lualine.nvim")
-	use("windwp/nvim-autopairs")
 	use("max397574/better-escape.nvim")
-	use("lewis6991/gitsigns.nvim")
-	use("tpope/vim-fugitive")
-	use({ "simrat39/rust-tools.nvim" })
-	use({ "folke/tokyonight.nvim" })
-	use({ "mvllow/modes.nvim" })
+	use("nathom/filetype.nvim")
+	use("mvllow/modes.nvim")
+	use("ggandor/leap.nvim")
 end)

@@ -1,5 +1,4 @@
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
-print("huh")
 local config = {
 	-- The command that starts the language server
 	-- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
@@ -38,7 +37,7 @@ local config = {
 		-- 💀
 		-- See `data directory configuration` section in the README
 		"-data",
-		"/Users/miki/jdtls_logs/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t"),
+		"~/jdtls_logs/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t"),
 	},
 
 	-- 💀

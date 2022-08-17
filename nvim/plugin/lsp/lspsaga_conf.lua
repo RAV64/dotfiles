@@ -4,7 +4,7 @@ if not status then
 	return
 end
 
-local kind = require('lspsaga.lspkind')
+local kind = require("lspsaga.lspkind")
 kind[1][2] = " "
 kind[2][2] = " "
 kind[5][2] = "ﴯ "
@@ -22,12 +22,18 @@ kind[22][2] = " "
 
 lspsaga.init_lsp_saga({
 	symbol_in_winbar = { in_custom = true, enable = true, separator = " > " },
+	max_preview_lines = 20,
 	finder_action_keys = {
+		open = "<CR>",
+		vsplit = "s",
+		split = "w",
+		tabe = "t",
+		quit = { "q", "<Esc>" },
 		scroll_down = "<C-j>",
 		scroll_up = "<C-k>",
 	},
 	show_outline = {
-    virt_text = '┃',
+		virt_text = "┃",
 		win_position = "right",
 		auto_refresh = true,
 		jump_key = "<CR>",
@@ -92,4 +98,3 @@ vim.api.nvim_create_autocmd("User", {
 		config_winbar()
 	end,
 })
-
