@@ -4,5 +4,5 @@ if not status then
 	return
 end
 
-impatient.enable_profile()
+-- impatient.enable_profile() --:LuaCacheProfile
 require("rav64")
