@@ -1,3 +1,8 @@
+local remap = require("rav64.keymaps")
+local nnoremap = remap.nnoremap
+local inoremap = remap.inoremap
+local tnoremap = remap.tnoremap
+
 local function set_settings(options, bw_options)
 	for name, value in pairs(options) do
 		vim.o[name] = value
@@ -57,7 +62,7 @@ local function load_settings()
 	}
 
 	local bw_local = {
-    foldenable = false,
+		foldenable = false,
 		undofile = true,
 		synmaxcol = 2500,
 		formatoptions = "1jcroql",
@@ -112,3 +117,43 @@ local disabled_built_ins = {
 for _, plugin in pairs(disabled_built_ins) do
 	vim.g["loaded_" .. plugin] = 1
 end
+
+inoremap("jj", "<Esc>")
+inoremap("jk", "<Esc>")
+inoremap("<S-Tab>", "<Esc>Ea")
+inoremap("<S-CR>", "<Esc>o")
+
+nnoremap("Å", ":LSoutlineToggle<CR>")
+
+nnoremap("<Tab>", ":bnext<CR>")
+nnoremap("<S-Tab>", ":bprev<CR>")
+
+nnoremap("<leader>ww", ":vsplit<CR>")
+nnoremap("<leader>ws", ":split<CR>")
+nnoremap("<leader>wq", ":q<CR>")
+nnoremap("<leader>h", "<C-w>h")
+nnoremap("<leader>j", "<C-w>j")
+nnoremap("<leader>k", "<C-w>k")
+nnoremap("<leader>l", "<C-w>l")
+
+tnoremap("<Esc>", "<C-\\><C-n>")
+
+--Telescope
+nnoremap("<leader>fs", function()
+	require("telescope.builtin").grep_string()
+end)
+nnoremap("<leader>ff", function()
+	require("telescope.builtin").find_files()
+end)
+
+nnoremap("<leader>fl", function()
+	require("telescope.builtin").live_grep()
+end)
+
+nnoremap("<leader>fw", function()
+	require("telescope.builtin").current_buffer_fuzzy_find()
+end)
+
+nnoremap("<leader>fF", function()
+	require("telescope").extensions.file_browser.file_browser()
+end)

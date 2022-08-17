@@ -13,9 +13,15 @@ if present1 and present2 then
 		map_bs = true,
 		map_c_h = true,
 	})
+else
+	print("Error: autopairs")
+	return
 end
 
 local x, cmp = pcall(require, "cmp")
 if x then
 	cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+else
+	print("Error: cmp in autopairs")
+	return
 end
