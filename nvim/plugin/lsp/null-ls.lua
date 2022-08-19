@@ -13,7 +13,7 @@ null_ls.setup({
 		formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
 		formatting.black.with({ extra_args = { "--fast" } }),
 		formatting.stylua,
-		diagnostics.flake8.with({ extra_args = { "--ignore=E501" } }),
+		diagnostics.flake8.with({ extra_args = { "--ignore=E501,W503" } }),
 		diagnostics.eslint_d,
 		null_ls.builtins.code_actions.gitsigns,
 	},

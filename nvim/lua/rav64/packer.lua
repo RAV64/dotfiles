@@ -15,6 +15,7 @@ return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
 	use("lewis6991/impatient.nvim")
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+	use("nvim-treesitter/nvim-treesitter-textobjects")
 
 	use({
 		"nvim-telescope/telescope.nvim",
@@ -41,9 +42,12 @@ return require("packer").startup(function(use)
 
 	use("neovim/nvim-lspconfig")
 	use("jose-elias-alvarez/null-ls.nvim")
-	use("glepnir/lspsaga.nvim")
+	use({
+		"SmiteshP/nvim-navic",
+		requires = "neovim/nvim-lspconfig",
+	})
 
-	use({ "catppuccin/nvim", as = "catppuccin", run = ":CatppuccinCompile" })
+	use({ "~/git/catppuccin.nvim", as = "catppuccin", run = ":CatppuccinCompile" })
 	use({ "kyazdani42/nvim-tree.lua", requires = { "kyazdani42/nvim-web-devicons" }, tag = "nightly" })
 	use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" })
 	use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } })
@@ -63,4 +67,6 @@ return require("packer").startup(function(use)
 	use("nathom/filetype.nvim")
 	use("mvllow/modes.nvim")
 	use("ggandor/leap.nvim")
+	use("kylechui/nvim-surround")
+  use("stevearc/aerial.nvim")
 end)

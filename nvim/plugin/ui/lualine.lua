@@ -4,6 +4,11 @@ if not status then
 	return
 end
 
+local navic_status, navic = pcall(require, "nvim-navic")
+if not navic_status then
+	print("ERROR: navic in lualine")
+end
+
 lualine.setup({
 	options = {
 		icons_enabled = true,
@@ -17,7 +22,7 @@ lualine.setup({
 	sections = {
 		lualine_a = { "mode" },
 		lualine_b = { "branch", "diff", "diagnostics" },
-		lualine_c = {},
+		lualine_c = { { navic.get_location, cond = navic.is_available } },
 		lualine_x = {
 			function()
 				local msg = "No Active Lsp"
