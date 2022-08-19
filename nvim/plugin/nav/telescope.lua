@@ -72,8 +72,7 @@ telescope.setup({
 			hidden = true,
 		},
 		["ui-select"] = {
-			require("telescope.themes").get_dropdown({
-			}),
+			require("telescope.themes").get_dropdown({}),
 		},
 	},
 })
@@ -81,3 +80,28 @@ telescope.setup({
 telescope.load_extension("fzf")
 telescope.load_extension("file_browser")
 telescope.load_extension("ui-select")
+
+local nnoremap = require("rav64.keymaps").nnoremap
+
+nnoremap("<leader>fs", function()
+	require("telescope.builtin").grep_string()
+end)
+nnoremap("<leader>ff", function()
+	require("telescope.builtin").find_files()
+end)
+
+nnoremap("<leader>fl", function()
+	require("telescope.builtin").live_grep()
+end)
+
+nnoremap("<leader>fw", function()
+	require("telescope.builtin").current_buffer_fuzzy_find()
+end)
+
+nnoremap("<leader>fF", function()
+	require("telescope").extensions.file_browser.file_browser()
+end)
+
+nnoremap("<leader>fh", function()
+  require('telescope.builtin').help_tags()
+end)

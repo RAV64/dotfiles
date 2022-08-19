@@ -22,7 +22,7 @@ local function load_settings()
 		backup = false,
 		backupskip = "/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*,*/shm/*,/private/var/*,.vault.vim",
 		backspace = "start,eol,indent",
-		cmdheight = 1,
+		cmdheight = 0,
 		cmdwinheight = 5,
 		clipboard = "unnamedplus",
 		completeopt = "menuone,noselect",
@@ -31,10 +31,6 @@ local function load_settings()
 		diffopt = "filler,iwhite,internal,algorithm:patience",
 		encoding = "utf-8",
 		fileencodings = "utf-8,sjis,euc-jp,latin",
-		-- foldminlines = 3,
-		-- foldnestmax = 1,
-		-- foldexpr = "nvim_treesitter#foldexpr()",
-		-- foldmethod = "expr",
 		hidden = true,
 		mouse = "a",
 		ignorecase = true,
@@ -44,6 +40,7 @@ local function load_settings()
 		relativenumber = true,
 		numberwidth = 2,
 		ruler = true,
+		autoindent = true,
 		smartcase = true,
 		smartindent = true,
 		smarttab = true,
@@ -62,12 +59,14 @@ local function load_settings()
 	}
 
 	local bw_local = {
-		foldenable = false,
+		foldmethod = "expr",
+		foldexpr = "nvim_treesitter#foldexpr()",
+		foldenable = true,
+		foldlevelstart = 99,
 		undofile = true,
 		synmaxcol = 2500,
 		formatoptions = "1jcroql",
 		textwidth = 80,
-		autoindent = true,
 		tabstop = 2,
 		shiftwidth = 2,
 		softtabstop = -1,
@@ -123,11 +122,6 @@ inoremap("jk", "<Esc>")
 inoremap("<S-Tab>", "<Esc>Ea")
 inoremap("<S-CR>", "<Esc>o")
 
-nnoremap("Å", ":LSoutlineToggle<CR>")
-
-nnoremap("<Tab>", ":bnext<CR>")
-nnoremap("<S-Tab>", ":bprev<CR>")
-
 nnoremap("<leader>ww", ":vsplit<CR>")
 nnoremap("<leader>ws", ":split<CR>")
 nnoremap("<leader>wq", ":q<CR>")
@@ -137,23 +131,3 @@ nnoremap("<leader>k", "<C-w>k")
 nnoremap("<leader>l", "<C-w>l")
 
 tnoremap("<Esc>", "<C-\\><C-n>")
-
---Telescope
-nnoremap("<leader>fs", function()
-	require("telescope.builtin").grep_string()
-end)
-nnoremap("<leader>ff", function()
-	require("telescope.builtin").find_files()
-end)
-
-nnoremap("<leader>fl", function()
-	require("telescope.builtin").live_grep()
-end)
-
-nnoremap("<leader>fw", function()
-	require("telescope.builtin").current_buffer_fuzzy_find()
-end)
-
-nnoremap("<leader>fF", function()
-	require("telescope").extensions.file_browser.file_browser()
-end)

@@ -4,7 +4,22 @@ if not status then
 	return
 end
 
-nvimtree.setup({})
+nvimtree.setup({
+	open_on_setup = true,
+	diagnostics = {
+		enable = true,
+		show_on_dirs = true,
+	},
+	view = {
+		hide_root_folder = true,
+		preserve_window_proportions = true,
+	},
+	renderer = {
+		indent_markers = {
+			enable = true,
+		},
+	},
+})
 
 local nnoremap = require("rav64.keymaps").nnoremap
 
