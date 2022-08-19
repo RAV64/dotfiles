@@ -1,17 +1,3 @@
 # My .files :)
-100% written in lua  nvim setup.
 
-Under construction zsh setup.
-
-![screenshot](images/ss01.png)
-
-## Great resources I used
-- Docs of all the plugins used (if they had a proper one…)
-- https://neovim.io/doc/user/
-- https://github.com/NvChad/NvChad
-- https://github.com/arnvald/viml-to-lua
-- https://github.com/whatsthatsmell/dots
-
-## Other great material
-- https://thevaluable.dev/vim-search-find-replace/ 
-- https://www.youtube.com/chrisatmachinstage
+<img width="1680" alt="image" src="https://user-images.githubusercontent.com/73443709/185663308-1e561471-cbac-453d-90f4-7bab87b692ab.png">
