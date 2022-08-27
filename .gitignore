@@ -1,4 +1,4 @@
 .oh-my-zsh
-./nvim/plugin/packer_compiled.lua
-./karabiner/assets/
-./karabiner/automatic_backups/
+nvim/plugin/packer_compiled
+karabiner/assets
+karabiner/automatic_backups
