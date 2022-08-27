@@ -1,8 +1,8 @@
 local status, _ = pcall(require, "impatient")
 if not status then
 	print("ERROR: impatient")
-	return
+else
+	-- impatient.enable_profile() --:LuaCacheProfile
 end
 
--- impatient.enable_profile() --:LuaCacheProfile
 require("rav64")

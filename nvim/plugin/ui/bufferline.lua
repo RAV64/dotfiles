@@ -8,7 +8,7 @@ require("bufferline.constants").padding = ""
 
 bufferline.setup({
 	options = {
-		indicator_icon = "",
+		indicator = { icon = "" },
 		modified_icon = "●",
 		max_name_length = 30,
 		max_prefix_length = 6,
