@@ -12,11 +12,17 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 return require("packer").startup(function(use)
+  -- Packer and performance
 	use("wbthomason/packer.nvim")
 	use("lewis6991/impatient.nvim")
-	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
-	use("nvim-treesitter/nvim-treesitter-textobjects")
+	use("nathom/filetype.nvim")
 
+  -- Treesitter
+	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+	use({"nvim-treesitter/nvim-treesitter-textobjects"})
+	use({ "p00f/nvim-ts-rainbow" })
+
+  -- Telescope
 	use({
 		"nvim-telescope/telescope.nvim",
 		requires = {
@@ -27,6 +33,7 @@ return require("packer").startup(function(use)
 		},
 	})
 
+  -- Completions
 	use({
 		"hrsh7th/nvim-cmp",
 		requires = {
@@ -40,6 +47,7 @@ return require("packer").startup(function(use)
 		},
 	})
 
+  -- Lsp
 	use("neovim/nvim-lspconfig")
 	use("jose-elias-alvarez/null-ls.nvim")
 	use({
@@ -64,9 +72,8 @@ return require("packer").startup(function(use)
 	use("kyazdani42/nvim-web-devicons")
 	use("famiu/bufdelete.nvim")
 	use("max397574/better-escape.nvim")
-	use("nathom/filetype.nvim")
 	use("mvllow/modes.nvim")
 	use("ggandor/leap.nvim")
 	use("kylechui/nvim-surround")
-  use("stevearc/aerial.nvim")
+	use("stevearc/aerial.nvim")
 end)
