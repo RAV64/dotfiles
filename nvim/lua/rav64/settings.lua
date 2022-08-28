@@ -119,6 +119,7 @@ end
 
 inoremap("jj", "<Esc>")
 inoremap("jk", "<Esc>")
+inoremap("kk", "<Esc>")
 inoremap("<S-Tab>", "<Esc>Ea")
 inoremap("<S-CR>", "<Esc>o")
 

@@ -29,7 +29,7 @@ yabai -m config left_padding                 06
 yabai -m config right_padding                06
 yabai -m config window_gap                   06
 yabai -m config native-fullscreen            on
-yabai -m config external_bar main:26:0
+# yabai -m config external_bar main:26:0
 
 # rules
 yabai -m rule --add app="^System Preferences$" layer=above layer=above manage=off
