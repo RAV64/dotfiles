@@ -34,7 +34,7 @@ cp.setup({
 		BufferLineFill = { bg = "#181825" },
 		ColorColumn = { bg = "#313244" },
 		BufferLineBufferSelected = { fg = "#b4befe" },
-		NvimTreeNormal = { bg = "None" },
+		-- NvimTreeNormal = { bg = "None" },
 		-- BufferLineBufferSelected = { style = { "bold" } },
 		-- BufferLineNumbersSelected = { style = {}, fg = "#a6e3a1" },
 		--

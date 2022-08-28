@@ -1,6 +1,6 @@
 local status, tsc = pcall(require, "nvim-treesitter.configs")
 if not status then
-	print("ERROR treesitter")
+	print("ERROR: treesitter")
 	return
 end
 
