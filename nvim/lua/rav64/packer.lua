@@ -12,17 +12,17 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 return require("packer").startup(function(use)
-  -- Packer and performance
+	-- Packer and performance
 	use("wbthomason/packer.nvim")
 	use("lewis6991/impatient.nvim")
 	use("nathom/filetype.nvim")
 
-  -- Treesitter
+	-- Treesitter
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
-	use({"nvim-treesitter/nvim-treesitter-textobjects"})
+	use({ "nvim-treesitter/nvim-treesitter-textobjects" })
 	use({ "p00f/nvim-ts-rainbow" })
 
-  -- Telescope
+	-- Telescope
 	use({
 		"nvim-telescope/telescope.nvim",
 		requires = {
@@ -33,7 +33,7 @@ return require("packer").startup(function(use)
 		},
 	})
 
-  -- Completions
+	-- Completions
 	use({
 		"hrsh7th/nvim-cmp",
 		requires = {
@@ -47,13 +47,9 @@ return require("packer").startup(function(use)
 		},
 	})
 
-  -- Lsp
+	-- Lsp
 	use("neovim/nvim-lspconfig")
 	use("jose-elias-alvarez/null-ls.nvim")
-	use({
-		"SmiteshP/nvim-navic",
-		requires = "neovim/nvim-lspconfig",
-	})
 
 	use({ "~/git/catppuccin.nvim", as = "catppuccin", run = ":CatppuccinCompile" })
 	use({ "kyazdani42/nvim-tree.lua", requires = { "kyazdani42/nvim-web-devicons" }, tag = "nightly" })
@@ -69,11 +65,12 @@ return require("packer").startup(function(use)
 	use("lewis6991/gitsigns.nvim")
 	use("simrat39/rust-tools.nvim")
 
+	use("simrat39/symbols-outline.nvim")
 	use("kyazdani42/nvim-web-devicons")
 	use("famiu/bufdelete.nvim")
 	use("max397574/better-escape.nvim")
 	use("mvllow/modes.nvim")
 	use("ggandor/leap.nvim")
 	use("kylechui/nvim-surround")
-	use("stevearc/aerial.nvim")
+	use("gpanders/editorconfig.nvim")
 end)
