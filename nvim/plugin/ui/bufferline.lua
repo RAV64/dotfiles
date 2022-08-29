@@ -5,6 +5,7 @@ if not status then
 end
 
 require("bufferline.constants").padding = ""
+require("bufferline.constants").ELLIPSIS = "   "
 
 bufferline.setup({
 	options = {
@@ -31,7 +32,7 @@ bufferline.setup({
 		offsets = {
 			{
 				filetype = "NvimTree",
-				text = vim.fn.fnamemodify(vim.fn.getcwd(), ":~") .. "/",
+				text = vim.fn.fnamemodify(vim.fn.getcwd(), ":~") .. "/" .. string.rep(" ", 30),
 				text_align = "left",
 			},
 		},

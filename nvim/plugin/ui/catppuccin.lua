@@ -21,11 +21,10 @@ cp.setup({
 			enabled = true,
 			italics = false,
 		},
-		navic = true,
 		leap = true,
 		dashboard = false,
 		telekasten = false,
-		symbols_outline = false,
+		symbols_outline = true,
 		ts_rainbow = true,
 	},
 	custom_highlights = {

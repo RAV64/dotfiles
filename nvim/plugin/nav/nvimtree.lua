@@ -5,7 +5,7 @@ if not status then
 end
 
 nvimtree.setup({
-	open_on_setup = true,
+	open_on_setup = false,
 	diagnostics = {
 		enable = true,
 		show_on_dirs = true,

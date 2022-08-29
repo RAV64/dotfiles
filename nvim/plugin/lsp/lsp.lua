@@ -14,17 +14,8 @@ local remap = require("rav64.keymaps")
 local nnoremap = remap.nnoremap
 local inoremap = remap.inoremap
 
-local navic_status, navic = pcall(require, "nvim-navic")
-local aerial_status, aerial = pcall(require, "aerial")
 
-local on_attach = function(client, bufnr)
-	if navic_status then
-		navic.attach(client, bufnr)
-	end
-	if aerial_status then
-		aerial.on_attach(client, bufnr)
-	end
-
+local on_attach = function()
 	nnoremap("gd", vim.lsp.buf.definition)
 	nnoremap("K", vim.lsp.buf.hover)
 	nnoremap("gr", vim.lsp.buf.rename)
@@ -44,15 +35,45 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 
 local servers = {
-	pyright = { settings = {} },
-	bashls = { settings = {} },
-	sumneko_lua = { settings = { Lua = { diagnostics = { globals = { "vim" } } } } },
-	tsserver = { settings = {} },
-	jsonls = {
-		settings = { json = { schemas = require("schemastore").json.schemas(), validate = { enable = true } } },
+	pyright = {
+		settings = {},
 	},
-	jdtls = { settings = {}, cmd = { "jdtls" } },
-	rust_analyzer = { settings = {} },
+	bashls = {
+		settings = {},
+	},
+	sumneko_lua = {
+		settings = {
+			Lua = {
+				diagnostics = {
+					globals = {
+						"vim",
+					},
+				},
+			},
+		},
+	},
+	tsserver = {
+		settings = {},
+	},
+	jsonls = {
+		settings = {
+			json = {
+				schemas = require("schemastore").json.schemas(),
+				validate = {
+					enable = true,
+				},
+			},
+		},
+	},
+	jdtls = {
+		settings = {},
+		cmd = {
+			"jdtls",
+		},
+	},
+	rust_analyzer = {
+		settings = {},
+	},
 }
 
 for name, lsp in pairs(servers) do
