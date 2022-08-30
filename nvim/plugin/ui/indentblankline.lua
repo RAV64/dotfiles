@@ -1,4 +1,4 @@
-  local status, ib = pcall(require, "indent_blankline")
+local status, ib = pcall(require, "indent_blankline")
 if not status then
 	print("ERROR indent_blankline")
 	return
