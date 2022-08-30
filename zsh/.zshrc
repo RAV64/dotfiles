@@ -15,6 +15,7 @@ export FZF_DEFAULT_OPTS=" \
 --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
 export NVM_LAZY=1
 export BAT_THEME="Catppuccin-mocha"
+export EDITOR="nvim"
 
 export PATH="bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export PATH="/Library/Apple/usr/bin:$PATH"
