@@ -86,6 +86,11 @@ local nnoremap = require("rav64.keymaps").nnoremap
 nnoremap("<leader>fs", function()
 	require("telescope.builtin").grep_string()
 end)
+
+nnoremap("<leader>fb", function()
+	require("telescope.builtin").buffers()
+end)
+
 nnoremap("<leader>ff", function()
 	require("telescope.builtin").find_files()
 end)

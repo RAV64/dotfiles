@@ -9,16 +9,16 @@ require("bufferline.constants").ELLIPSIS = "   "
 
 bufferline.setup({
 	options = {
+		diagnostics = "nvim_lsp",
+		enforce_regular_tabs = false,
 		indicator = { icon = "" },
-		modified_icon = "●",
 		max_name_length = 30,
 		max_prefix_length = 6,
-		diagnostics = "nvim_lsp",
-		show_buffer_icons = true,
-		show_buffer_close_icons = false,
-		show_close_icon = false,
+		modified_icon = "●",
 		persist_buffer_sort = true,
-		enforce_regular_tabs = false,
+		show_buffer_close_icons = false,
+		show_buffer_icons = true,
+		show_close_icon = false,
 		name_formatter = function(opts)
 			return string.format(" %s ", opts.name)
 		end,
