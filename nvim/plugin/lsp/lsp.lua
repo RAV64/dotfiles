@@ -14,7 +14,6 @@ local remap = require("rav64.keymaps")
 local nnoremap = remap.nnoremap
 local inoremap = remap.inoremap
 
-
 local on_attach = function()
 	nnoremap("gd", vim.lsp.buf.definition)
 	nnoremap("K", vim.lsp.buf.hover)

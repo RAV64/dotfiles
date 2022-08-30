@@ -1,7 +1,7 @@
-local status, gitsigns = pcall(require, 'gitsigns')
+local status, gitsigns = pcall(require, "gitsigns")
 if not status then
-  print('ERROR: gitsigns')
-  return
+	print("ERROR: gitsigns")
+	return
 end
 
 gitsigns.setup({

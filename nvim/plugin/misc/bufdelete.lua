@@ -1,7 +1,7 @@
-local status, _ = pcall(require, 'bufdelete')
+local status, _ = pcall(require, "bufdelete")
 if not status then
-  print('ERROR: bufdelete')
-  return
+	print("ERROR: bufdelete")
+	return
 end
 
 local nnoremap = require("rav64.keymaps").nnoremap

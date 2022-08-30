@@ -103,5 +103,5 @@ nnoremap("<leader>fF", function()
 end)
 
 nnoremap("<leader>fh", function()
-  require('telescope.builtin').help_tags()
+	require("telescope.builtin").help_tags()
 end)

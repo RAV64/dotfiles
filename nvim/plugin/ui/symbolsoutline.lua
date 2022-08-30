@@ -4,10 +4,9 @@ if not status then
 	return
 end
 
-so.setup({
-})
+so.setup({})
 
 local nnoremap = require("rav64.keymaps").nnoremap
 nnoremap("Å", function()
-	require("symbols-outline").toggle_outline()
+	so.toggle_outline()
 end)
