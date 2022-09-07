@@ -16,6 +16,7 @@ export FZF_DEFAULT_OPTS=" \
 export NVM_LAZY=1
 export BAT_THEME="Catppuccin-mocha"
 export EDITOR="nvim"
+export HISTCONTROL=erasedups
 
 export PATH="bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export PATH="/Library/Apple/usr/bin:$PATH"
@@ -25,6 +26,7 @@ export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/opt/python@3.10/bin:$PATH"
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 export PATH="/opt/homebrew/sbin:$PATH"
+export PATH="$PATH:/Users/miki/.dotnet/tools"
 
 bindkey -s '^f' 'cd $(fd --type directory --ignore-file $HOME/dotfiles/zsh/.fdignore --base-directory $HOME/ -a -H | fzf)^M'
 
@@ -55,6 +57,12 @@ alias stop="brew services stop"
 alias bu="brew upgrade"
 alias bi="brew info "
 alias bl="brew list"
+
+alias ga="git add"
+alias gc="git commit -m"
+alias gp="git push"
+
+alias bnpm="/opt/homebrew/bin/npm"
 
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
