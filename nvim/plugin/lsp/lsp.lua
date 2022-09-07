@@ -44,10 +44,16 @@ local servers = {
 	sumneko_lua = {
 		settings = {
 			Lua = {
+				runtime = {
+					version = "LuaJIT",
+				},
 				diagnostics = {
 					globals = {
 						"vim",
 					},
+				},
+				telemetry = {
+					enable = false,
 				},
 			},
 		},
