@@ -32,3 +32,5 @@ Unity
 .nvm
 .cargo
 .local
+.electron
+.node
