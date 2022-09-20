@@ -24,7 +24,7 @@ local function load_settings()
 		backup = false,
 		backupskip = "/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*,*/shm/*,/private/var/*,.vault.vim",
 		clipboard = "unnamedplus",
-		cmdheight = 0,
+		cmdheight = 1,
 		cmdwinheight = 5,
 		completeopt = "menuone,noselect",
 		cursorline = true,

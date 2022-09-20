@@ -39,7 +39,11 @@ local servers = {
 		settings = {},
 	},
 	bashls = {
-		settings = {},
+		settings = {
+      filetypes = {
+        "sh", "zshrc"
+      }
+    },
 	},
 	sumneko_lua = {
 		settings = {
