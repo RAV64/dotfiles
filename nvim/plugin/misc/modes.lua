@@ -13,7 +13,7 @@ end
 modes.setup({
 	colors = {
 		copy = clrs.lavender,
-		delete = "#c75c6a",
+		delete = clrs.red,
 		insert = clrs.green,
 		visual = clrs.flamingo,
 	},
