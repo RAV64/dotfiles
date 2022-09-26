@@ -17,7 +17,7 @@ lualine.setup({
 	sections = {
 		lualine_a = { "mode" },
 		lualine_b = { "branch", "diff", "diagnostics" },
-		lualine_c = {},
+		lualine_c = { "lsp_progress" },
 		lualine_x = {
 			function()
 				local msg = "No Active Lsp"

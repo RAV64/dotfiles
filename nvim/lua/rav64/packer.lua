@@ -73,4 +73,6 @@ return require("packer").startup(function(use)
 	use("ggandor/leap.nvim")
 	use("kylechui/nvim-surround")
 	use("gpanders/editorconfig.nvim")
+
+	use("arkav/lualine-lsp-progress")
 end)
