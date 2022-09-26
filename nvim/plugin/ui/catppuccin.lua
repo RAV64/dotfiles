@@ -33,6 +33,13 @@ cp.setup({
 		BufferLineIndicatorSelected = { fg = "#a6e3a1" },
 		ColorColumn = { bg = "#313244" },
 		LspFloatWinNormal = { bg = "None" },
+		NormalFloat = { bg = "None" },
+		TelescopeNormal = { bg = "None" },
+		TelescopeBorder = { bg = "None" },
+		LineNr = { fg = "#9399b2" },
+		CursorLine = { bg = "#313244" },
+		CursorLineNr = { bg = "#313244" },
+		CursorLineSign = { bg = "#313244" },
 	},
 })
 

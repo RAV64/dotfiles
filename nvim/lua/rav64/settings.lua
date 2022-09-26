@@ -133,5 +133,5 @@ nnoremap("<leader>l", "<C-w>l")
 
 tnoremap("<Esc>", "<C-\\><C-n>")
 
-nnoremap("ö", "{")
-nnoremap("ä", "}")
+nnoremap("ö", "}")
+nnoremap("ä", "{")
