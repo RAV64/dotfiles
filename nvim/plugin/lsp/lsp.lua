@@ -39,11 +39,7 @@ local servers = {
 		settings = {},
 	},
 	bashls = {
-		settings = {
-      filetypes = {
-        "sh", "zshrc"
-      }
-    },
+		settings = {},
 	},
 	sumneko_lua = {
 		settings = {
@@ -80,9 +76,6 @@ local servers = {
 		cmd = {
 			"jdtls",
 		},
-	},
-	rust_analyzer = {
-		settings = {},
 	},
 }
 

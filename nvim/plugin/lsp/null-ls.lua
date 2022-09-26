@@ -11,7 +11,8 @@ null_ls.setup({
 	debug = false,
 	sources = {
 		-- formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
-		formatting.rome.with({extra_args={"--indent-style space"}}),
+		formatting.rome.with({ extra_args = { "--indent-style space" } }),
+		formatting.rustfmt,
 		formatting.black.with({ extra_args = { "--fast" } }),
 		formatting.stylua,
 		diagnostics.flake8.with({ extra_args = { "--ignore=E501,W503" } }),
