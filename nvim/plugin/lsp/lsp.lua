@@ -32,7 +32,7 @@ end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+-- capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 
 local servers = {
 	pyright = {
@@ -77,12 +77,25 @@ local servers = {
 			"jdtls",
 		},
 	},
+	csharp_ls = {
+		settings = {},
+	},
+	-- omnisharp = {
+	-- 	settings = {},
+	-- 	cmd = {
+	-- 		"dotnet",
+	-- 		"~/Downloads/omnisharp-osx-arm64-net6.0/OmniSharp.dll",
+	-- 	},
+	-- },
 }
+
+vim.diagnostic.config({ virtual_text = false })
 
 for name, lsp in pairs(servers) do
 	lspconfig[name].setup({
 		on_attach = on_attach,
 		capabilities = capabilities,
 		settings = lsp.settings,
+		cmd = lsp.cmd,
 	})
 end

@@ -4,6 +4,8 @@ if not status then
 	return
 end
 
+local nnoremap = require("rav64.keymaps").nnoremap
+
 require("bufferline.constants").padding = ""
 require("bufferline.constants").ELLIPSIS = "   "
 
@@ -25,9 +27,13 @@ bufferline.setup({
 		numbers = function(opts)
 			return string.format(" %s ", opts.ordinal)
 		end,
-		diagnostics_indicator = function(count, level)
-			local icon = level:match("error") and "" or ""
-			return icon .. count
+		diagnostics_indicator = function(_, _, diagnostics_dict, _)
+			local s = " "
+			for e, n in pairs(diagnostics_dict) do
+				local sym = e == "error" and " " or (e == "warning" and " " or "")
+				s = s .. n .. sym
+			end
+			return s
 		end,
 		offsets = {
 			{
@@ -39,21 +45,20 @@ bufferline.setup({
 	},
 })
 
-local nnoremap = require("rav64.keymaps").nnoremap
 
 for i = 1, 9 do
 	nnoremap("<leader>" .. i, function()
-		require("bufferline").go_to_buffer(i, true)
+		bufferline.go_to_buffer(i, true)
 	end)
 end
 
 nnoremap("<leader>" .. 0, function()
-	require("bufferline").go_to_buffer(-1, true)
+	bufferline.go_to_buffer(-1, true)
 end)
 
 nnoremap("<Tab>", function()
-	require("bufferline").cycle(1)
+	bufferline.cycle(1)
 end)
 nnoremap("<S-Tab>", function()
-	require("bufferline").cycle(-1)
+	bufferline.cycle(-1)
 end)

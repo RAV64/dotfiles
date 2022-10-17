@@ -19,10 +19,15 @@ nvimtree.setup({
 			enable = true,
 		},
 	},
+	filters = {
+		custom = {
+			".meta$",
+		},
+	},
 })
 
 local nnoremap = require("rav64.keymaps").nnoremap
 
 nnoremap("å", function()
-	require("nvim-tree").toggle()
+	nvimtree.toggle()
 end)
