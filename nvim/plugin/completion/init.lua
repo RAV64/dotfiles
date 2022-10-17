@@ -43,7 +43,7 @@ cmp.setup({
 	},
 	snippet = {
 		expand = function(args)
-			require("luasnip").lsp_expand(args.body)
+			luasnip.lsp_expand(args.body)
 		end,
 	},
 	formatting = {
@@ -89,13 +89,9 @@ cmp.setup({
 		{ name = "nvim_lua" },
 		{ name = "path" },
 	},
-	-- confirm_opts = {
-	-- 	behavior = cmp.ConfirmBehavior.Replace,
-	-- 	select = false,
-	-- },
 
 	experimental = {
 		native_menu = false,
-		ghost_text = true,
+		ghost_text = false,
 	},
 })

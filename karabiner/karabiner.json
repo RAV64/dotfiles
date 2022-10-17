@@ -160,7 +160,7 @@
                                     }
                                 },
                                 "to": {
-                                    "shell_command": "open -a 'safari.app'"
+                                    "shell_command": "open -a 'firefox.app'"
                                 },
                                 "type": "basic"
                             },
