@@ -41,6 +41,13 @@ cp.setup({
 		CursorLineNr = { bg = "#313244" },
 		CursorLineSign = { bg = "#313244" },
 	},
+  -- color_overrides = {
+  --   mocha = {
+  --     text = "#f9ffff",
+  --     green = "#80c71f",
+  --     base = "#61371f",
+  --   }
+  -- }
 })
 
 vim.g.catppuccin_flavour = "mocha"
