@@ -6,10 +6,10 @@ end
 
 tsc.setup({
 	ensure_installed = "all",
-	ignore_install = { "phpdoc" },
 	highlight = {
 		enable = true,
 		use_languagetree = true,
+		additional_vim_regex_highlighting = false,
 	},
 	autopairs = {
 		enable = true,
@@ -43,4 +43,11 @@ tsc.setup({
 			include_surrounding_whitespace = true,
 		},
 	},
+	disable = function(_, buf)
+		local max_filesize = 1000 * 1024 -- 1000 KB
+		local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+		if ok and stats and stats.size > max_filesize then
+			return true
+		end
+	end,
 })
