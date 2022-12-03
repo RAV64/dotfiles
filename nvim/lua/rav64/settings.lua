@@ -19,9 +19,7 @@ end
 
 local function load_settings()
 	local options = {
-		autoindent = true,
 		backspace = "start,eol,indent",
-		backup = false,
 		backupskip = "/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*,*/shm/*,/private/var/*,.vault.vim",
 		clipboard = "unnamedplus",
 		cmdheight = 1,
@@ -49,8 +47,6 @@ local function load_settings()
 		sidescrolloff = 8,
 		smartcase = true,
 		smartindent = true,
-		smarttab = true,
-		syntax = false,
 		termguicolors = true,
 		title = true,
 		viewoptions = "folds,cursor,curdir,slash,unix",
@@ -61,7 +57,6 @@ local function load_settings()
 	local bw_local = {
 		breakindentopt = "shift:2,min:20",
 		colorcolumn = "80",
-		expandtab = true,
 		foldenable = true,
 		foldexpr = "nvim_treesitter#foldexpr()",
 		foldlevelstart = 99,
@@ -74,17 +69,26 @@ local function load_settings()
 		number = true,
 		shiftwidth = 2,
 		signcolumn = "yes",
-		softtabstop = -1,
 		synmaxcol = 2500,
-		tabstop = 2,
 		textwidth = 80,
-		undofile = true,
 	}
 
 	vim.g.python3_host_prog = "/opt/homebrew/opt/python@3.10/bin/python3"
 	vim.opt.shortmess:append("c")
 	vim.opt.isfname:append("@-@")
 	vim.opt.updatetime = 50
+
+	vim.opt.tabstop = 4
+	vim.opt.softtabstop = 4
+	vim.opt.shiftwidth = 4
+	vim.opt.expandtab = true
+
+	vim.opt.swapfile = false
+	vim.opt.backup = false
+
+	vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+	vim.opt.undofile = true
+
 	vim.g.mapleader = " "
 
 	set_settings(options, bw_local)

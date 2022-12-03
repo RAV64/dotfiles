@@ -10,24 +10,8 @@ if not cpm_nvim_lsp_status then
 	return
 end
 
-local remap = require("rav64.keymaps")
-local nnoremap = remap.nnoremap
-local inoremap = remap.inoremap
-
 local on_attach = function()
-	nnoremap("gd", require("telescope.builtin").lsp_definitions)
-	nnoremap("K", vim.lsp.buf.hover)
-	nnoremap("gr", vim.lsp.buf.rename)
-	nnoremap("gu", require("telescope.builtin").lsp_references)
-	nnoremap("gD", vim.lsp.buf.declaration)
-	nnoremap("gk", vim.diagnostic.goto_prev)
-	nnoremap("gj", vim.diagnostic.goto_next)
-	nnoremap("ge", vim.diagnostic.open_float)
-	inoremap("<C-s>", vim.lsp.buf.signature_help)
-	nnoremap("gf", vim.lsp.buf.format)
-	nnoremap("gi", require("telescope.builtin").lsp_implementations)
-	nnoremap("gt", require("telescope.builtin").lsp_type_definitions)
-	nnoremap("ga", vim.lsp.buf.code_action)
+	require("rav64.set_lsp_keybinds")
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -71,12 +55,9 @@ local servers = {
 			},
 		},
 	},
-	jdtls = {
-		settings = {},
-		cmd = {
-			"jdtls",
-		},
-	},
+	-- jdtls = {
+	-- 	settings = {},
+	-- },
 	csharp_ls = {
 		settings = {},
 	},
@@ -87,6 +68,9 @@ local servers = {
 	-- 		"~/Downloads/omnisharp-osx-arm64-net6.0/OmniSharp.dll",
 	-- 	},
 	-- },
+	zls = {
+		settings = {},
+	},
 }
 
 vim.diagnostic.config({ virtual_text = false })
