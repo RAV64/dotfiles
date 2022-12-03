@@ -46,7 +46,7 @@ telescope.setup({
 			"venv",
 			"packer_compiled.lua",
 			"package-lock.json",
-			".git",
+			-- ".git",
 			".cache",
 			".gradle",
 			"flutter",

@@ -10,17 +10,31 @@ if status is-interactive
   set fzf_fd_opts --ignore-file $HOME/dotfiles/zsh/.fdignore -a -H
   set fzf_preview_dir_cmd exa -lag --icons
   set DOTNET_CLI_TELEMETRY_OPTOUT true
+  set ZELLIJ_AUTO_ATTACH true
+  set ZELLIJ_AUTO_EXIT true
 
   alias la "exa -lag --icons"
   alias lt "exa -lag --icons --tree --level=3"
   alias v "nvim"
   alias s "kitty +kitten ssh"
 
-  set PATH $PATH ~/.cargo/bin
   set PATH $PATH ~/.dotnet/tools
+  set PATH $PATH ~/.cargo/bin
+  if not set -q ZELLIJ
+    if test "$ZELLIJ_AUTO_ATTACH" = "true"
+      zellij attach -c
+    else
+      zellij
+    end
+
+    if test "$ZELLIJ_AUTO_EXIT" = "true"
+      kill $fish_pid
+    end
+  end
 end
 
 launchctl remove com.valvesoftware.steam.ipctool
 
 starship init fish | source
 zoxide init fish | source
+
