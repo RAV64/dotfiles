@@ -25,6 +25,15 @@ tsc.setup({
 	-- 	extended_mode = true,
 	-- 	max_file_lines = 2000,
 	-- },
+	incremental_selection = {
+		enable = true,
+		keymaps = {
+			init_selection = "<c-space>",
+			node_incremental = "<c-space>",
+			scope_incremental = "<c-s>",
+			node_decremental = "<c-backspace>",
+		},
+	},
 	textobjects = {
 		select = {
 			enable = true,

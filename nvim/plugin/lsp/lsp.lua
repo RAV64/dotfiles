@@ -15,8 +15,7 @@ local on_attach = function()
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
--- capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
 local servers = {
 	pyright = {
@@ -80,6 +79,5 @@ for name, lsp in pairs(servers) do
 		on_attach = on_attach,
 		capabilities = capabilities,
 		settings = lsp.settings,
-		cmd = lsp.cmd,
 	})
 end

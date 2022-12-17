@@ -24,7 +24,6 @@ local function load_settings()
 		clipboard = "unnamedplus",
 		cmdheight = 1,
 		cmdwinheight = 5,
-		completeopt = "menuone,noselect",
 		cursorline = true,
 		diffopt = "filler,iwhite,internal,algorithm:patience",
 		display = "lastline",
@@ -90,6 +89,7 @@ local function load_settings()
 	vim.opt.undofile = true
 
 	vim.g.mapleader = " "
+	vim.o.completeopt = 'menuone,noselect'
 
 	set_settings(options, bw_local)
 end
