@@ -19,7 +19,7 @@ telescope.setup({
 		file_previewer = require("telescope.previewers").vim_buffer_cat.new,
 		generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
 		grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
-		initial_mode = "insert",
+		initial_mode = "normal",
 		layout_strategy = "horizontal",
 		prompt_prefix = "🔭 ",
 		prompt_position = "top",
