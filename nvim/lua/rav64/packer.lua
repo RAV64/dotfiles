@@ -33,6 +33,7 @@ return require("packer").startup(function(use)
 		},
 	})
 	use("tpope/vim-sleuth")
+	use("tpope/vim-fugitive")
 
 	-- Completions
 	use({
@@ -73,7 +74,7 @@ return require("packer").startup(function(use)
 	-- use("mvllow/modes.nvim")
 	use("ggandor/leap.nvim")
 	use("kylechui/nvim-surround")
-	use("gpanders/editorconfig.nvim")
+	-- use("gpanders/editorconfig.nvim")
 
 	use({
 		"saecki/crates.nvim",
