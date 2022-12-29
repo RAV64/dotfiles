@@ -1,4 +1,6 @@
 if status is-interactive
+  set TERM "xterm-256color"
+
   fzf_configure_bindings --directory=\cf
   export EDITOR="nvim"
   export VISUAL="nvim"
