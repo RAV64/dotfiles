@@ -4,6 +4,12 @@ if not status then
 	return
 end
 
+local cp_status, _ = pcall(require, "catppuccin")
+if not cp_status then
+	print("ERROR: catppuccin in bufferline")
+	return
+end
+
 local nnoremap = require("rav64.keymaps").nnoremap
 
 require("bufferline.constants").padding = ""
@@ -11,10 +17,11 @@ require("bufferline.constants").ELLIPSIS = "   "
 
 bufferline.setup({
 	options = {
+		highlights = require("catppuccin.groups.integrations.bufferline").get(),
 		diagnostics = "nvim_lsp",
 		enforce_regular_tabs = false,
 		indicator = { icon = "" },
-		max_name_length = 30,
+		max_name_length = 50,
 		max_prefix_length = 6,
 		modified_icon = "●",
 		persist_buffer_sort = true,
@@ -44,7 +51,6 @@ bufferline.setup({
 		},
 	},
 })
-
 
 for i = 1, 9 do
 	nnoremap("<leader>" .. i, function()

@@ -1,9 +1,5 @@
-local status, _ = pcall(require, "impatient")
-if not status then
-	print("ERROR: impatient")
-else
-	-- impatient.enable_profile() --:LuaCacheProfile
-end
+pcall(require, 'impatient')
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 require("rav64")
--- require("colorfinder")
