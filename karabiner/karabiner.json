@@ -86,7 +86,7 @@
                                     }
                                 },
                                 "to": {
-                                    "shell_command": "open -a 'firefox Developer Edition.app'"
+                                    "shell_command": "open -a 'firefox.app'"
                                 },
                                 "type": "basic"
                             },

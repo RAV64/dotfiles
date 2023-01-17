@@ -22,7 +22,7 @@ local function load_settings()
 		backspace = "start,eol,indent",
 		backupskip = "/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*,*/shm/*,/private/var/*,.vault.vim",
 		clipboard = "unnamedplus",
-		cmdheight = 1,
+		cmdheight = 0,
 		cmdwinheight = 5,
 		cursorline = true,
 		diffopt = "filler,iwhite,internal,algorithm:patience",
@@ -87,8 +87,7 @@ local function load_settings()
 
 	vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 	vim.opt.undofile = true
-
-	vim.g.mapleader = " "
+	vim.o.breakindent = true
 	vim.o.completeopt = 'menuone,noselect'
 
 	set_settings(options, bw_local)
@@ -102,10 +101,10 @@ local disabled_built_ins = {
 	"getscriptPlugin",
 	"gzip",
 	"logipat",
-	-- "netrw",
-	-- "netrwPlugin",
-	-- "netrwSettings",
-	-- "netrwFileHandlers",
+	"netrw",
+	"netrwPlugin",
+	"netrwSettings",
+	"netrwFileHandlers",
 	"matchit",
 	"tar",
 	"tarPlugin",
