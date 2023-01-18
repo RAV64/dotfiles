@@ -16,13 +16,12 @@ require("lazy").setup({
 		{ import = "plugins" },
 	},
 	defaults = {
-		version = "*", -- try installing the latest stable version for plugins that support semver
+		version = "*",
+		lazy = true,
 	},
 	install = { colorscheme = { "catppuccin" } },
-	checker = { enabled = true }, -- automatically check for plugin updates
 	performance = {
 		rtp = {
-			-- disable some rtp plugins
 			disabled_plugins = {
 				"gzip",
 				"matchit",
