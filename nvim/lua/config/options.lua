@@ -50,8 +50,8 @@ opt.winminwidth = 5 -- minimum window width
 opt.wrap = false -- Disable line wrap
 
 if vim.fn.has("nvim-0.9.0") == 1 then
-  opt.splitkeep = "screen"
-  opt.shortmess = "filnxtToOFWIcC"
+	opt.splitkeep = "screen"
+	opt.shortmess = "filnxtToOFWIcC"
 end
 
 -- fix markdown indentation settings
