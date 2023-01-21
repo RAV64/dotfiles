@@ -19,14 +19,15 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = {
 		"qf",
+		"PlenaryTestPopup",
 		"help",
+		"lspinfo",
 		"man",
 		"notify",
-		"lspinfo",
+		"qf",
 		"spectre_panel",
 		"startuptime",
 		"tsplayground",
-		"PlenaryTestPopup",
 	},
 	callback = function(event)
 		vim.bo[event.buf].buflisted = false

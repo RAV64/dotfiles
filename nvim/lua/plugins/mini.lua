@@ -1,7 +1,7 @@
 return {
 	{
 		"echasnovski/mini.comment",
-		event = "VeryLazy",
+		event = "BufReadPost",
 		dependencies = { { "JoosepAlviste/nvim-ts-context-commentstring" } },
 		opts = {
 			hooks = {

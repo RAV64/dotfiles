@@ -19,6 +19,7 @@ if status is-interactive
   alias lt "exa -lag --icons --tree --level=3"
   alias v "nvim"
   alias s "kitty +kitten ssh"
+  alias btm "btm -b"
 
   set PATH $PATH ~/.dotnet/tools
   set PATH $PATH ~/.cargo/bin

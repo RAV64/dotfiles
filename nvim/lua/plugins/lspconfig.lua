@@ -1,10 +1,12 @@
 return {
 	"neovim/nvim-lspconfig",
 	event = "BufReadPre",
+	version = false,
 	dependencies = {
 		{ "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
 		{ "b0o/schemastore.nvim", version = false },
 		"hrsh7th/cmp-nvim-lsp",
+		"SmiteshP/nvim-navic",
 	},
 	keys = {
 		{ "gf", vim.lsp.buf.format, desc = "Format" },
@@ -67,16 +69,27 @@ return {
 			zls = {
 				settings = {},
 			},
+			sqlls = {
+				settings = {},
+			},
 		},
 	},
 
 	config = function(_, opts)
+		vim.g.navic_silence = true
+		local navic = require("nvim-navic")
+		navic.setup({ highlight = true })
 		local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 		local lspconfig = require("lspconfig")
 		for name, lsp in pairs(opts.servers) do
 			lspconfig[name].setup({
 				capabilities = capabilities,
 				settings = lsp.settings,
+				on_attach = function(client, bufnr)
+					if client.server_capabilities.documentSymbolProvider then
+						navic.attach(client, bufnr)
+					end
+				end,
 			})
 		end
 	end,
