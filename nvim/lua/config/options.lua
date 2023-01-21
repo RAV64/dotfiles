@@ -3,11 +3,11 @@ vim.g.maplocalleader = " "
 
 local opt = vim.opt
 
-opt.autowrite = true -- enable auto write
+-- opt.autowrite = true -- enable auto write
 opt.clipboard = "unnamedplus" -- sync with system clipboard
 opt.cmdheight = 1
 opt.completeopt = "menu,menuone,noselect"
-opt.conceallevel = 3 -- Hide * markup for bold and italic
+-- opt.conceallevel = 3 -- Hide * markup for bold and italic
 opt.confirm = true -- confirm to save changes before exiting modified buffer
 opt.cursorline = true -- Enable highlighting of the current line
 opt.expandtab = true -- Use spaces instead of tabs
@@ -41,6 +41,7 @@ opt.splitbelow = true -- Put new windows below current
 opt.splitright = true -- Put new windows right of current
 opt.tabstop = 2 -- Number of spaces tabs count for
 opt.termguicolors = true -- True color support
+opt.swapfile = false
 -- opt.timeoutlen = 300
 opt.undofile = true
 opt.undolevels = 10000

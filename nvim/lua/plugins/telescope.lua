@@ -2,6 +2,7 @@ return {
 	"nvim-telescope/telescope.nvim",
 	cmd = "Telescope",
 	version = false,
+	event = "VeryLazy",
 	keys = {
 		{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
 		{ "<leader>fl", "<cmd>Telescope live_grep<cr>", desc = "Find Line" },
