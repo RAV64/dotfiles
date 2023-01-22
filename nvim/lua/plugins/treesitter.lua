@@ -11,7 +11,8 @@ return {
 	},
 	version = false, -- last release is way too old and doesn't work on Windows
 	build = ":TSUpdate",
-	event = "BufReadPost",
+	lazy = false,
+	-- event = "BufReadPost",
 
 	config = function()
 		require("nvim-treesitter.configs").setup({
