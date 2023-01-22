@@ -5,6 +5,7 @@ return {
 	dependencies = {
 		{ "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
 		{ "b0o/schemastore.nvim", version = false },
+		{ "simrat39/rust-tools.nvim" },
 		"hrsh7th/cmp-nvim-lsp",
 		"SmiteshP/nvim-navic",
 	},
@@ -12,6 +13,7 @@ return {
 		{ "gf", vim.lsp.buf.format, desc = "Format" },
 		{ "K", vim.lsp.buf.hover, desc = "Hover" },
 		{ "gr", vim.lsp.buf.rename, desc = "Rename" },
+		{ "gd", vim.lsp.buf.definition, desc = "Get definition" },
 		{ "gD", vim.lsp.buf.declaration, desc = "Get Declaration" },
 		{ "gk", vim.diagnostic.goto_prev, desc = "Goto previous diagnostics" },
 		{ "gj", vim.diagnostic.goto_next, desc = "Goto next diagnostics" },
@@ -72,6 +74,33 @@ return {
 			sqlls = {
 				settings = {},
 			},
+			rust_analyzer = function(navic)
+				local opts = {
+
+					server = {
+						settings = {
+							["rust-analyzer"] = {
+								cargo = {
+									features = "all",
+								},
+								check = {
+									command = "clippy",
+									features = "all",
+								},
+								procMacro = {
+									enable = true,
+								},
+							},
+						},
+					},
+					on_attach = function(client, bufnr)
+						if client.server_capabilities.documentSymbolProvider then
+							navic.attach(client, bufnr)
+						end
+					end,
+				}
+				require("rust-tools").setup(opts)
+			end,
 		},
 	},
 
@@ -82,15 +111,19 @@ return {
 		local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 		local lspconfig = require("lspconfig")
 		for name, lsp in pairs(opts.servers) do
-			lspconfig[name].setup({
-				capabilities = capabilities,
-				settings = lsp.settings,
-				on_attach = function(client, bufnr)
-					if client.server_capabilities.documentSymbolProvider then
-						navic.attach(client, bufnr)
-					end
-				end,
-			})
+			if name == "rust_analyzer" then
+				lsp(navic)
+			else
+				lspconfig[name].setup({
+					capabilities = capabilities,
+					settings = lsp.settings,
+					on_attach = function(client, bufnr)
+						if client.server_capabilities.documentSymbolProvider then
+							navic.attach(client, bufnr)
+						end
+					end,
+				})
+			end
 		end
 	end,
 }

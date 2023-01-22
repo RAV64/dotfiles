@@ -7,6 +7,11 @@ return {
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-path",
 		"saadparwaiz1/cmp_luasnip",
+		{
+			"Saecki/crates.nvim",
+			event = { "BufRead Cargo.toml" },
+			config = true,
+		},
 	},
 	opts = function()
 		local cmp = require("cmp")
