@@ -48,11 +48,4 @@ return {
 			ai.setup(opts)
 		end,
 	},
-
-	{
-		"echasnovski/mini.surround",
-		config = function()
-			require("mini.surround").setup({})
-		end,
-	},
 }

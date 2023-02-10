@@ -25,6 +25,7 @@ return {
 	config = function()
 		require("bufferline").setup({
 			options = {
+				always_show_bufferline = false,
 				highlights = require("catppuccin.groups.integrations.bufferline").get(),
 				diagnostics = "nvim_lsp",
 				-- enforce_regular_tabs = false,

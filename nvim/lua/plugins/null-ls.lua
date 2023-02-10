@@ -10,7 +10,7 @@ return {
 				nls.formatting.black.with({ extra_args = { "--fast" } }),
 				nls.formatting.stylua,
 				nls.formatting.csharpier,
-				nls.diagnostics.flake8.with({ extra_args = { "--ignore=E501,W503" } }),
+				-- nls.diagnostics.flake8.with({ extra_args = { "--ignore=E501,W503" } }),
 				nls.diagnostics.tsc,
 				nls.diagnostics.fish,
 				nls.code_actions.gitsigns,

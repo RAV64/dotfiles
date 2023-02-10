@@ -4,6 +4,7 @@ if status is-interactive
   fzf_configure_bindings --directory=\cf
   export EDITOR="nvim"
   export VISUAL="nvim"
+
   set -Ux FZF_DEFAULT_OPTS "\
   --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
   --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
@@ -23,9 +24,8 @@ if status is-interactive
 
   set PATH $PATH ~/.dotnet/tools
   set PATH $PATH ~/.cargo/bin
+
+  launchctl remove com.valvesoftware.steam.ipctool
+
+  starship init fish | source
 end
-
-launchctl remove com.valvesoftware.steam.ipctool
-
-starship init fish | source
-
