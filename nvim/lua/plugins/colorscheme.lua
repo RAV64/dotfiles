@@ -24,8 +24,7 @@ return {
 				symbols_outline = true,
 				navic = { enabled = true, custom_bg = "NONE" },
 
-				dashboard = false,
-				notify = false,
+				notify = true,
 			},
 			-- transparent_background = true,
 			-- custom_highlights = {
