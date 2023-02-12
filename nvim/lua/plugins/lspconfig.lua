@@ -25,19 +25,16 @@ return {
 		{ "gi", "<cmd>Telescope lsp_implementations<cr>", desc = "Get implementations" },
 		{ "gt", "<cmd>Telescope lsp_type_definitions<cr>", desc = "Get type definitions" },
 		{
-			"n",
 			"gwa",
 			vim.lsp.buf.add_workspace_folder,
 			desc = "add_workspace_folder",
 		},
 		{
-			"n",
 			"gwr",
 			vim.lsp.buf.remove_workspace_folder,
 			"remove_workspace_folder",
 		},
 		{
-			"n",
 			"gwl",
 			function()
 				print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
@@ -53,7 +50,7 @@ return {
 			bashls = {
 				settings = {},
 			},
-			sumneko_lua = {
+			lua_ls = {
 				settings = {
 					Lua = {
 						runtime = {
@@ -63,6 +60,9 @@ return {
 							globals = {
 								"vim",
 							},
+						},
+						workspace = {
+							library = vim.api.nvim_get_runtime_file("", true),
 						},
 						telemetry = {
 							enable = false,
