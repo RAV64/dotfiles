@@ -18,6 +18,7 @@ if status is-interactive
 
   alias la "exa -lag --icons"
   alias lt "exa -lag --icons --tree --level=3"
+  alias g "lazygit"
   alias v "nvim"
   alias s "kitty +kitten ssh"
   alias btm "btm -b"
