@@ -5,8 +5,9 @@ return {
 	event = "VeryLazy",
 	keys = {
 		{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
+		{ "<leader>fF", "<cmd>Telescope file_browser<cr>", desc = "File Browser" },
 		{ "<leader>fl", "<cmd>Telescope live_grep<cr>", desc = "Find Line" },
-		{ "<leader>fb", "<cmd>Telescope file_browser<cr>", desc = "File Browser" },
+		{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "File Browser" },
 		{ "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Find Help" },
 	},
 	dependencies = {

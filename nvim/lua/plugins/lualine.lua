@@ -6,14 +6,23 @@ return {
 			theme = "catppuccin",
 			disabled_filetypes = { statusline = { "dashboard", "lazy", "alpha" } },
 			globalstatus = true,
+			component_separators = "",
+			section_separators = { left = "", right = "" },
 		},
 		sections = {
 			lualine_a = { "mode" },
-			lualine_b = { "branch" },
+			lualine_b = {
+				{
+					"filetype",
+					icon_only = true,
+					separator = "",
+					padding = { left = 1, right = 0 },
+				},
+
+				{ "filename", path = 1, symbols = { modified = "", readonly = "", unnamed = "" } },
+				"diagnostics",
+			},
 			lualine_c = {
-				{ "diagnostics" },
-				{ "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-				{ "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
 				{
 					function()
 						return require("nvim-navic").get_location()
@@ -23,31 +32,38 @@ return {
 					end,
 				},
 			},
-			lualine_x = {
-				{
-					function()
-						return require("noice").api.status.command.get()
-					end,
-					cond = function()
-						return package.loaded["noice"] and require("noice").api.status.command.has()
-					end,
-				},
-				-- stylua: ignore
-				{
-					function() return require("noice").api.status.mode.get() end,
-					cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
-				},
-				{ "diff" },
-			},
-			lualine_y = {
+			lualine_x = {},
+			lualine_y = { "searchcount" },
+			lualine_z = {
 				{ "progress", separator = "", padding = { left = 1, right = 0 } },
 				{ "location", padding = { left = 0, right = 1 } },
 			},
-			lualine_z = {
-				function()
-					return os.date("%R")
-				end,
+		},
+		tabline = {
+			lualine_a = { "branch" },
+			lualine_b = { "diff" },
+			lualine_c = {
+				{
+					"buffers",
+					mode = 2,
+					symbols = { alternate_file = "" },
+					max_length = vim.o.columns,
+				},
 			},
+			lualine_x = {},
+			lualine_y = {},
+			lualine_z = {},
 		},
 	},
+	init = function()
+		for i = 1, 9 do
+			vim.keymap.set("n", "<leader>" .. i, function()
+				vim.cmd("LualineBuffersJump! " .. i)
+			end)
+		end
+
+		vim.keymap.set("n", "<leader>" .. 0, function()
+			vim.cmd("LualineBuffersJump! $")
+		end)
+	end,
 }

@@ -34,3 +34,10 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
 	end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "Outline",
+	callback = function()
+		vim.cmd("setlocal signcolumn=no")
+	end,
+})

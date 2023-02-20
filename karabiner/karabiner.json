@@ -30,7 +30,7 @@
                                     }
                                 },
                                 "to": {
-                                    "shell_command": "open -a 'kitty.app'"
+                                    "shell_command": "open -a 'wezterm.app'"
                                 },
                                 "type": "basic"
                             },
@@ -50,6 +50,20 @@
                             },
                             {
                                 "from": {
+                                    "key_code": "i",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_command"
+                                        ]
+                                    }
+                                },
+                                "to": {
+                                    "shell_command": "open -a 'messages.app'"
+                                },
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
                                     "key_code": "m",
                                     "modifiers": {
                                         "mandatory": [
@@ -58,7 +72,7 @@
                                     }
                                 },
                                 "to": {
-                                    "shell_command": "open -a 'Microsoft Outlook.app'"
+                                    "shell_command": "open -a 'mail.app'"
                                 },
                                 "type": "basic"
                             },
