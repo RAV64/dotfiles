@@ -19,6 +19,9 @@ return {
 		return {
 			completion = {
 				completeopt = "menu,menuone,noinsert",
+				winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+				col_offset = -3,
+				side_padding = 0,
 			},
 			snippet = {
 				expand = function(args)
@@ -58,6 +61,7 @@ return {
 				{ name = "path" },
 			}),
 			formatting = {
+				fields = { "kind", "abbr", "menu" },
 				format = function(entry, vim_item)
 					local icons = {
 						Class = "ﴯ",
@@ -86,9 +90,8 @@ return {
 						Value = "",
 						Variable = "",
 					}
-					vim_item.kind = string.format("%s", icons[vim_item.kind])
+					vim_item.kind = string.format("%s", " " .. icons[vim_item.kind] .. " ")
 					vim_item.menu = ({})[entry.source.name]
-
 					return vim_item
 				end,
 			},
