@@ -1,6 +1,7 @@
 return {
 	"nvim-telescope/telescope.nvim",
 	cmd = "Telescope",
+	tag = '0.1.1',
 	version = false,
 	event = "VeryLazy",
 	keys = {
@@ -65,7 +66,6 @@ return {
 					".git/logs",
 					".cache",
 					".gradle",
-					"flutter",
 					"pytorch",
 					"target",
 					"*.gpg",

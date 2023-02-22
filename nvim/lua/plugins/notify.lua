@@ -12,10 +12,15 @@ return {
 	opts = {
 		timeout = 3000,
 		max_height = function()
+			---@diagnostic disable-next-line: undefined-field
 			return math.floor(vim.o.lines * 0.75)
 		end,
 		max_width = function()
+			---@diagnostic disable-next-line: undefined-field
 			return math.floor(vim.o.columns * 0.75)
 		end,
 	},
+	init = function()
+		vim.notify = require("notify")
+	end,
 }
