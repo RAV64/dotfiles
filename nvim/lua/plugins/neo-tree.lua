@@ -10,6 +10,9 @@ return {
 			desc = "Explorer NeoTree (root dir)",
 		},
 	},
+	deactivate = function()
+		vim.cmd([[Neotree close]])
+	end,
 	init = function()
 		vim.g.neo_tree_remove_legacy_commands = 1
 		if vim.fn.argc() == 1 then
@@ -21,7 +24,13 @@ return {
 	end,
 	opts = {
 		filesystem = {
+			bind_to_cwd = false,
 			follow_current_file = true,
+		},
+		window = {
+			mappings = {
+				["<space>"] = "none",
+			},
 		},
 	},
 }

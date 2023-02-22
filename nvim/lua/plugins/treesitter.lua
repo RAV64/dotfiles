@@ -12,7 +12,6 @@ return {
 	version = false,
 	build = ":TSUpdate",
 	event = "BufReadPost",
-
 	config = function()
 		require("nvim-treesitter.configs").setup({
 			ensure_installed = "all",

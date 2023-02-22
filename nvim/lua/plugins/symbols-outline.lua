@@ -4,5 +4,5 @@ return {
 	keys = { { "Å", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
 	opts = {
 		show_guides = false,
-	}
+	},
 }
