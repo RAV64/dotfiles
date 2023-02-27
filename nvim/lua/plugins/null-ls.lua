@@ -6,7 +6,16 @@ return {
 		return {
 			sources = {
 				-- formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
-				nls.formatting.rome,
+				nls.formatting.rome.with({
+					command = { "bun" },
+					args = {
+						"run",
+						"rome",
+						"format",
+						"--write",
+						"$FILENAME",
+					},
+				}),
 				nls.formatting.black.with({ extra_args = { "--fast" } }),
 				nls.formatting.stylua,
 				nls.formatting.csharpier,
