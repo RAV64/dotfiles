@@ -2,7 +2,7 @@ return {
 	{ "nvim-lua/plenary.nvim" },
 	{ "MunifTanjim/nui.nvim" },
 	{ "kyazdani42/nvim-web-devicons" },
-	{ "tpope/vim-sleuth", event = "BufReadPost" },
+	{ "tpope/vim-sleuth",            event = "BufReadPost" },
 
 	{
 		"famiu/bufdelete.nvim",
@@ -17,6 +17,14 @@ return {
 		event = "BufReadPost",
 		config = function()
 			require("leap").set_default_keymaps()
+		end,
+	},
+	{
+		"Wansmer/treesj",
+		keys = { "<space>m", "<space>j", "<space>s" },
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		config = function()
+			require("treesj").setup({ notify = false })
 		end,
 	},
 }
