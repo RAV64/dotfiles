@@ -1,20 +1,19 @@
-
 [user]
-	name = MikiS
-	email = 73443709+RAV64@users.noreply.github.com
+    name = MikiS
+    email = 73443709+RAV64@users.noreply.github.com
 
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
 
 [core]
-  pager = delta
-	autocrlf = input
+    pager = delta
+    autocrlf = input
 
 [init]
-	defaultBranch = main
+    defaultBranch = main
 
 [interactive]
     diffFilter = delta --color-only

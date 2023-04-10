@@ -8,6 +8,9 @@ return {
 					require("nvim-navic").attach(client, bufnr)
 				end,
 			},
+			widget_guides = {
+				enabled = true,
+			},
 		})
 	end,
 }

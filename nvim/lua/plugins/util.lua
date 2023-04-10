@@ -2,7 +2,7 @@ return {
 	{ "nvim-lua/plenary.nvim" },
 	{ "MunifTanjim/nui.nvim" },
 	{ "kyazdani42/nvim-web-devicons" },
-	{ "tpope/vim-sleuth",            event = "BufReadPost" },
+	{ "tpope/vim-sleuth", event = "BufReadPost" },
 
 	{
 		"famiu/bufdelete.nvim",

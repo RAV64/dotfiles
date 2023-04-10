@@ -2,12 +2,12 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	dependencies = {
 		{ "mrjones2014/nvim-ts-rainbow" },
-		{
-			"m-demare/hlargs.nvim",
-			config = function()
-				require("hlargs").setup({ color = "#eba0ac" })
-			end,
-		},
+		-- {
+		-- 	"m-demare/hlargs.nvim",
+		-- 	config = function()
+		-- 		require("hlargs").setup({ color = "#eba0ac" })
+		-- 	end,
+		-- },
 	},
 	version = false,
 	build = ":TSUpdate",
