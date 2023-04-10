@@ -40,8 +40,22 @@ return {
 	},
 	opts = {
 		servers = {
-			pyright = {},
-			bashls = {},
+			pyright = {
+				cmd = {
+					"bun",
+					"run",
+					"pyright-langserver",
+					"--stdio",
+				},
+			},
+			bashls = {
+				cmd = {
+					"bun",
+					"run",
+					"bash-language-server",
+					"start",
+				},
+			},
 			lua_ls = {
 				settings = {
 					Lua = {
