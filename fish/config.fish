@@ -25,10 +25,12 @@ if status is-interactive
 
   set PATH $PATH ~/.dotnet/tools
   set PATH $PATH ~/.cargo/bin
+  set PATH $PATH ~/Developer/flutter/bin
 
   launchctl remove com.valvesoftware.steam.ipctool
 
   starship init fish | source
+  zoxide init fish | source
 end
 
 # bun
