@@ -23,7 +23,6 @@ return {
 				neotree = true,
 				symbols_outline = true,
 				navic = { enabled = true, custom_bg = "NONE" },
-
 				notify = true,
 			},
 			custom_highlights = function(C)
