@@ -25,6 +25,24 @@ return {
 				navic = { enabled = true, custom_bg = "NONE" },
 				notify = true,
 			},
+			color_overrides = {
+				mocha = {
+					base = "#202020",
+					mantle = "#161616",
+					surface0 = "#262626",
+					surface1 = "#393939",
+					surface2 = "#525252",
+					overlay0 = "#ffffff",
+					overlay1 = "#f2f4f8",
+					overlay2 = "#dde1e6",
+					-- mauve = "#be95ff",
+					-- green = "#8fca5c",
+					-- red = "#EA3367",
+					-- lavender = "#82cfff",
+					-- peach = "#FFAB91",
+					-- blue = "#3ddbd9"
+				},
+			},
 			custom_highlights = function(C)
 				local base = C.base
 				return {
@@ -34,6 +52,7 @@ return {
 					-- CmpItemMenu = { fg = base, bg = C.text },
 					-- CmpItemAbbrMatch = { fg = base, bg = C.text, style = { "bold" } },
 					-- CmpItemAbbrMatchFuzzy = { fg = base, bg = C.text, style = { "bold" } },
+					CursorLine = { bg = "#393939" },
 					CmpItemKindSnippet = { fg = base, bg = C.mauve },
 					CmpItemKindKeyword = { fg = base, bg = C.red },
 					CmpItemKindText = { fg = base, bg = C.teal },
