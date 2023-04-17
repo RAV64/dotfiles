@@ -13,7 +13,7 @@
 
 #unified-extensions-button { display: inline !important; }
 #unified-extensions-button .toolbarbutton-icon {
-  list-style-image: url("file:///Users/miki/dotfiles/images/berry-icon-520x520.png") !important;
+  list-style-image: url("https://github.com/RAV64/dotfiles/blob/main/images/berry-icon-520x520.png?raw=true") !important;
   height: 25px !important;   
   width: 25px !important;
   margin-top: 8px !important;
@@ -51,4 +51,8 @@
 
 .tabbrowser-tab:not([pinned]) {
   flex: inherit !important;
+}
+
+.tabbrowser-tab[selected][fadein]:not([pinned]) {
+  max-width: 2000px !important;
 }
