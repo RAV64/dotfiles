@@ -40,14 +40,7 @@ return {
 	},
 	opts = {
 		servers = {
-			pyright = {
-				cmd = {
-					"bun",
-					"run",
-					"pyright-langserver",
-					"--stdio",
-				},
-			},
+			pyright = {},
 			bashls = {
 				cmd = {
 					"bun",
