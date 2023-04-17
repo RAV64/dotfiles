@@ -11,10 +11,40 @@ return {
 		bottom = 0,
 	},
 	enable_tab_bar = true,
-	hide_tab_bar_if_only_one_tab = true,
 	show_tab_index_in_tab_bar = false,
 	window_close_confirmation = "NeverPrompt",
 	color_scheme = "Catppuccin Mocha",
+	colors = {
+		background = "#202020",
+		tab_bar = {
+			background = "#262626",
+			active_tab = {
+				bg_color = "#161616",
+				fg_color = "#ffffff",
+				intensity = "Normal",
+				italic = false,
+				strikethrough = false,
+				underline = "None",
+			},
+			inactive_tab = {
+				bg_color = "#262626",
+				fg_color = "#ffffff",
+				intensity = "Normal",
+				italic = false,
+				strikethrough = false,
+				underline = "None",
+			},
+			new_tab = {
+				bg_color = "#262626",
+				fg_color = "#ffffff",
+				intensity = "Normal",
+				italic = false,
+				strikethrough = false,
+				underline = "None",
+			},
+		},
+	},
+	use_fancy_tab_bar = false,
 	window_decorations = "RESIZE",
-
+	hide_tab_bar_if_only_one_tab = true,
 }
