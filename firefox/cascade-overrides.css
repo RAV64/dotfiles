@@ -4,7 +4,6 @@
   --show-tab-close-button-hover: -moz-inline-block !important;
   --uc-urlbar-min-width: 30vw;
   --uc-urlbar-max-width: 50vw;
-
 }
 
 #tracking-protection-icon-container { display: none !important; }
@@ -16,8 +15,8 @@
   list-style-image: url("https://github.com/RAV64/dotfiles/blob/main/images/berry-icon-520x520.png?raw=true") !important;
   height: 25px !important;   
   width: 25px !important;
-  margin-top: 8px !important;
-  margin-right: 4px !important;
+  margin-top: 6px !important;
+  margin-right: 2px !important;
   padding: 0 !important;
 }
 
