@@ -3,7 +3,7 @@
   --uc-urlbar-position: 3 !important;
   --show-tab-close-button-hover: -moz-inline-block !important;
   --uc-urlbar-min-width: 30vw;
-  --uc-urlbar-max-width: 50vw;
+  --uc-urlbar-max-width: 30vw;
 }
 
 #tracking-protection-icon-container { display: none !important; }
@@ -54,4 +54,8 @@
 
 .tabbrowser-tab[selected][fadein]:not([pinned]) {
   max-width: 2000px !important;
+}
+
+.tab-content[selected="true"] {  
+  background-color: #361F26 !important; 
 }
