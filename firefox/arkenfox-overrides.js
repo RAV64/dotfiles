@@ -28,3 +28,7 @@ user_pref("browser.tabs.firefox-view", false);
 
 user_pref("devtools.chrome.enabled", true);
 user_pref("devtools.debugger.remote-enabled", true);
+
+// caching could be good..
+user_pref("browser.cache.disk.enable", false);
+user_pref("privacy.clearOnShutdown.cache", false);     // [DEFAULT: true]
