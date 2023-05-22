@@ -21,7 +21,6 @@ return {
 				},
 
 				{ "filename", path = 1, symbols = { modified = "", readonly = "", unnamed = "" } },
-				"diagnostics",
 			},
 			lualine_c = {
 				{
@@ -41,19 +40,25 @@ return {
 			},
 		},
 		tabline = {
-			lualine_a = { "branch" },
-			lualine_b = { "diff" },
+			lualine_a = {},
+			lualine_b = {},
 			lualine_c = {
 				{
 					"buffers",
 					mode = 2,
 					symbols = { alternate_file = "" },
-					max_length = vim.o.columns,
+					max_length = function()
+						return vim.o.columns
+					end,
+					buffers_color = {
+						active = "TablineActive", -- Color for active buffer.
+						inactive = "TablineInactive", -- Color for inactive buffer.
+					},
 				},
 			},
-			lualine_x = {},
-			lualine_y = {},
-			lualine_z = {},
+			lualine_x = { "diagnostics" },
+			lualine_y = { "diff" },
+			lualine_z = { "branch" },
 		},
 	},
 	init = function()
