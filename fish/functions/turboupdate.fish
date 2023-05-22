@@ -6,7 +6,8 @@ function turboupdate
     cargo install-update -a
     # fisher update
     brew upgrade --cask wez/wezterm/wezterm-nightly --no-quarantine --greedy-latest
-    brew upgrade neovim --fetch-HEAD
+    brew uninstall neovim
+    brew install neovim --fetch-HEAD
     bun upgrade
     bun-update
     tldr --update
