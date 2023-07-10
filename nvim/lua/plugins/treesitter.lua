@@ -14,7 +14,7 @@ return {
 	event = "BufReadPost",
 	config = function()
 		require("nvim-treesitter.configs").setup({
-			ensure_installed = "all",
+			ensure_installed = { "c", "lua", "vim", "vimdoc", "rust", "toml", "python", "markdown", "json", "fish" },
 			highlight = {
 				enable = true,
 				additional_vim_regex_highlighting = false,
