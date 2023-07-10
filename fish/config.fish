@@ -20,14 +20,20 @@ if status is-interactive
   alias lt "exa -lag --icons --tree --level=3"
   alias g "lazygit"
   alias v "nvim"
-  alias s "kitty +kitten ssh"
+  # alias s "kitty +kitten ssh"
   alias btm "btm -b"
 
   set PATH $PATH ~/.dotnet/tools
   set PATH $PATH ~/.cargo/bin
   set PATH $PATH ~/Developer/flutter/bin
 
-  launchctl remove com.valvesoftware.steam.ipctool
+  if test (uname) = "Linux"
+    set PATH $PATH ~/.local/bin
+  end
+
+  if test (uname) = "Darwin"
+    launchctl remove com.valvesoftware.steam.ipctool
+  end
 
   starship init fish | source
   zoxide init fish | source
