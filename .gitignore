@@ -5,3 +5,4 @@ karabiner/assets
 karabiner/automatic_backups
 nvim/lua/.luarc.json
 nvim/lazy-lock.json
+fonts/JetBrainsMono.zip
