@@ -7,19 +7,19 @@ return {
 		"SmiteshP/nvim-navic",
 	},
 	keys = {
-		{ "gf", vim.lsp.buf.format, desc = "Format" },
-		{ "K", vim.lsp.buf.hover, desc = "Hover" },
-		{ "gr", vim.lsp.buf.rename, desc = "Rename" },
-		{ "gd", "<cmd>Telescope lsp_definitions<cr>", desc = "Goto Definition" },
-		{ "gD", vim.lsp.buf.declaration, desc = "Get Declaration" },
-		{ "gk", vim.diagnostic.goto_prev, desc = "Goto previous diagnostics" },
-		{ "gj", vim.diagnostic.goto_next, desc = "Goto next diagnostics" },
-		{ "ge", vim.diagnostic.open_float, desc = "Open diagnostics" },
-		{ "ga", vim.lsp.buf.code_action, desc = "Get code actions" },
-		{ "<C-s>", vim.lsp.buf.signature_help, desc = "Show signature", mode = "i" },
-		{ "gu", "<cmd>Telescope lsp_references<cr>", desc = "Get Usages" },
-		{ "gi", "<cmd>Telescope lsp_implementations<cr>", desc = "Get implementations" },
-		{ "gt", "<cmd>Telescope lsp_type_definitions<cr>", desc = "Get type definitions" },
+		{ "gf",    vim.lsp.buf.format,                        desc = "Format" },
+		{ "K",     vim.lsp.buf.hover,                         desc = "Hover" },
+		{ "gr",    vim.lsp.buf.rename,                        desc = "Rename" },
+		{ "gd",    "<cmd>Telescope lsp_definitions<cr>",      desc = "Goto Definition" },
+		{ "gD",    vim.lsp.buf.declaration,                   desc = "Get Declaration" },
+		{ "gk",    vim.diagnostic.goto_prev,                  desc = "Goto previous diagnostics" },
+		{ "gj",    vim.diagnostic.goto_next,                  desc = "Goto next diagnostics" },
+		{ "ge",    vim.diagnostic.open_float,                 desc = "Open diagnostics" },
+		{ "ga",    vim.lsp.buf.code_action,                   desc = "Get code actions" },
+		{ "<C-s>", vim.lsp.buf.signature_help,                desc = "Show signature",           mode = "i" },
+		{ "gu",    "<cmd>Telescope lsp_references<cr>",       desc = "Get Usages" },
+		{ "gi",    "<cmd>Telescope lsp_implementations<cr>",  desc = "Get implementations" },
+		{ "gt",    "<cmd>Telescope lsp_type_definitions<cr>", desc = "Get type definitions" },
 		{
 			"gwa",
 			vim.lsp.buf.add_workspace_folder,
@@ -81,6 +81,22 @@ return {
 			prismals = {},
 			tailwindcss = {
 				cmd = { "bun", "run", "tailwindcss-language-server", "--stdio" },
+			},
+			rust_analyzer = {
+				settings = {
+					["rust-analyzer"] = {
+						cargo = {
+							features = "all",
+						},
+						check = {
+							command = "clippy",
+							features = "all",
+						},
+						procMacro = {
+							enable = true,
+						},
+					},
+				},
 			},
 		},
 	},

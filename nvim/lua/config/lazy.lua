@@ -21,6 +21,9 @@ require("lazy").setup({
 	},
 	install = { colorscheme = { "catppuccin" } },
 	performance = {
+		cache = {
+			enabled = true,
+		},
 		rtp = {
 			disabled_plugins = {
 				"gzip",
@@ -40,4 +43,5 @@ require("lazy").setup({
 			},
 		},
 	},
+	debug = false,
 })

@@ -17,7 +17,23 @@ vim.keymap.set("n", "<leader>j", "<C-w>j", { desc = "Go to lower window" })
 vim.keymap.set("n", "<leader>k", "<C-w>k", { desc = "Go to upper window" })
 vim.keymap.set("n", "<leader>l", "<C-w>l", { desc = "Go to right window" })
 
-vim.keymap.set("n", "<Right>", [[<cmd>vertical resize +5<cr>]]) -- make the window biger vertically
-vim.keymap.set("n", "<Left>", [[<cmd>vertical resize -5<cr>]]) -- make the window smaller vertically
-vim.keymap.set("n", "<Down>", [[<cmd>horizontal resize +2<cr>]]) -- make the window bigger horizontally by pressing shift and =
-vim.keymap.set("n", "<Up>", [[<cmd>horizontal resize -2<cr>]]) -- make the window smaller horizontally by pressing shift and -
+-- Resize window using <ctrl> arrow keys
+vim.keymap.set("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
+vim.keymap.set("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
+vim.keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
+vim.keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
+
+-- undo breakpoints in insert mode
+vim.keymap.set("i", ",", ",<c-g>u")
+vim.keymap.set("i", ".", ".<c-g>u")
+vim.keymap.set("i", ";", ";<c-g>u")
+
+vim.keymap.set({ "n", "x" }, "gw", "*N", { desc = "Search word under cursor" })
+
+-- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
+vim.keymap.set("n", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
+vim.keymap.set("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
+vim.keymap.set("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
+vim.keymap.set("n", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
+vim.keymap.set("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
+vim.keymap.set("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
