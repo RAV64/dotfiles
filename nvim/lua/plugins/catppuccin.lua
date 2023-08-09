@@ -37,9 +37,9 @@ return {
 					overlay2 = "#dde1e6",
 					-- mauve = "#be95ff",
 					-- green = "#8fca5c",
-					-- red = "#EA3367",
-					-- lavender = "#82cfff",
-					-- peach = "#FFAB91",
+					maroon = "#ee5396",
+					lavender = "#78a9ff",
+					peach = "#FFAB91",
 					-- blue = "#3ddbd9"
 				},
 			},

@@ -14,6 +14,12 @@ return {
 		},
 	},
 	opts = function()
+		local has_words_before = function()
+			unpack = unpack or table.unpack
+			local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+			return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+		end
+
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
 		return {
@@ -39,6 +45,8 @@ return {
 						cmp.select_next_item()
 					elseif luasnip.expand_or_jumpable() then
 						luasnip.expand_or_jump()
+					elseif has_words_before() then
+						cmp.complete()
 					else
 						fallback()
 					end
@@ -63,31 +71,31 @@ return {
 				fields = { "kind", "abbr", "menu" },
 				format = function(entry, vim_item)
 					local icons = {
-						Class = "ﴯ",
-						Color = "",
-						Constant = "",
-						Constructor = "",
+						Class = "",
+						Color = "",
+						Constant = "",
+						Constructor = "󱌢",
 						Enum = "",
 						EnumMember = "",
-						Event = "",
-						Field = "ﰠ",
-						File = "",
-						Folder = "",
-						Function = "",
-						Interface = "",
-						Keyword = "",
-						Method = "",
-						Module = "",
-						Operator = "",
-						Property = "ﰠ",
-						Reference = "",
+						Event = "",
+						Field = "",
+						File = "",
+						Folder = "",
+						Function = "󰊕",
+						Interface = "",
+						Keyword = "",
+						Method = "",
+						Module = "󰕳",
+						Operator = "",
+						Property = "",
+						Reference = "",
 						Snippet = "",
-						Struct = "פּ",
-						Text = "",
-						TypeParameter = "",
-						Unit = "塞",
+						Struct = "",
+						Text = "",
+						TypeParameter = "",
+						Unit = "",
 						Value = "",
-						Variable = "",
+						Variable = "󰫧",
 					}
 					vim_item.kind = string.format("%s", " " .. icons[vim_item.kind] .. " ")
 					vim_item.menu = ({})[entry.source.name]

@@ -3,7 +3,7 @@ vim.g.maplocalleader = " "
 
 local opt = vim.opt
 
--- opt.autowrite = true -- enable auto write
+opt.autowrite = true -- enable auto write
 opt.clipboard = "unnamedplus" -- sync with system clipboard
 opt.cmdheight = 1
 opt.completeopt = "menu,menuone,noselect"
@@ -14,20 +14,19 @@ opt.expandtab = true -- Use spaces instead of tabs
 opt.formatoptions = "jcroqlnt" -- tcqj
 opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
-opt.guifont = "FiraCode Nerd Font:h11"
 opt.hidden = true -- Enable modified buffers in background
 opt.ignorecase = true -- Ignore case
 opt.inccommand = "nosplit" -- preview incremental substitute
 opt.joinspaces = false -- No double spaces with join after a dot
 opt.laststatus = 0
 opt.list = true -- Show some invisible characters (tabs...
-opt.listchars = "tab:  ,nbsp:+,trail:·,extends:→,precedes:←"
+-- opt.listchars = "tab:  ,nbsp:+,trail:·,extends:→,precedes:←"
 opt.mouse = "a" -- enable mouse mode
 opt.number = true -- Print line number
 opt.pumblend = 10 -- Popup blend
 opt.pumheight = 10 -- Maximum number of entries in a popup
 opt.relativenumber = true -- Relative line numbers
-opt.scrolloff = 4 -- Lines of context
+opt.scrolloff = 16 -- Lines of context
 opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
 opt.shiftround = true -- Round indent
 opt.shiftwidth = 2 -- Size of an indent
@@ -51,7 +50,9 @@ opt.winminwidth = 5 -- minimum window width
 opt.wrap = false -- Disable line wrap
 
 opt.splitkeep = "screen"
-opt.shortmess = "filnxtToOFWIcC"
+
+opt.shortmess:append({ W = true, I = true, c = true })
+opt.shortmess:append({ C = true })
 
 -- fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
