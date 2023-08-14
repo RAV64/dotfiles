@@ -23,9 +23,14 @@ if status is-interactive
   # alias s "kitty +kitten ssh"
   alias btm "btm -b"
 
+  alias cr "cargo run"
+  alias ct "cargo test"
+  alias cw "cargo watch -x"
+
   set PATH $PATH ~/.dotnet/tools
   set PATH $PATH ~/.cargo/bin
   set PATH $PATH ~/Developer/flutter/bin
+  set PATH $PATH ~/dotfiles/scripts/path
 
   if test (uname) = "Linux"
     set PATH $PATH ~/.local/bin
