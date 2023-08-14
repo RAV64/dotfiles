@@ -27,6 +27,7 @@ return {
 			},
 			color_overrides = {
 				mocha = {
+					text = "#dde1e6",
 					base = "#202020",
 					mantle = "#161616",
 					surface0 = "#262626",
@@ -39,7 +40,10 @@ return {
 					-- green = "#8fca5c",
 					maroon = "#ee5396",
 					lavender = "#78a9ff",
-					peach = "#FFAB91",
+					red = "#ea7183",
+					peach = "#f39967",
+					yellow = "#eaca89",
+					green = "#96d382",
 					-- blue = "#3ddbd9"
 				},
 			},

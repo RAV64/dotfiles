@@ -1,34 +1,32 @@
 return {
+	{ "JoosepAlviste/nvim-ts-context-commentstring", lazy = true },
 	{
 		"echasnovski/mini.comment",
-		event = "BufReadPost",
-		dependencies = { { "JoosepAlviste/nvim-ts-context-commentstring" } },
+		event = "VeryLazy",
 		opts = {
-			hooks = {
-				pre = function()
-					require("ts_context_commentstring.internal").update_commentstring({})
+			options = {
+				custom_commentstring = function()
+					return require("ts_context_commentstring.internal").calculate_commentstring()
+						or vim.bo.commentstring
 				end,
 			},
 		},
-		config = function(_, opts)
-			require("mini.comment").setup(opts)
-		end,
+	},
+
+	{
+		"echasnovski/mini.pairs",
+		event = "VeryLazy",
+		opts = {},
 	},
 
 	{
 		"echasnovski/mini.ai",
+		event = "VeryLazy",
 		keys = {
 			{ "a", mode = { "x", "o" } },
 			{ "i", mode = { "x", "o" } },
 		},
-		dependencies = {
-			{
-				"nvim-treesitter/nvim-treesitter-textobjects",
-				init = function()
-					require("lazy.core.loader").disable_rtp_plugin("nvim-treesitter-textobjects")
-				end,
-			},
-		},
+		dependencies = { "nvim-treesitter-textobjects" },
 		opts = function()
 			local ai = require("mini.ai")
 			return {
