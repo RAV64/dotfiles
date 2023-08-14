@@ -2,8 +2,8 @@ return {
 	{ "nvim-lua/plenary.nvim" },
 	{ "MunifTanjim/nui.nvim" },
 	{ "kyazdani42/nvim-web-devicons" },
-	{ "tpope/vim-sleuth",            event = "BufReadPost" },
-	{ "Aasim-A/scrollEOF.nvim",      config = true, event = "VeryLazy" },
+	{ "tpope/vim-sleuth", event = "BufReadPost" },
+	{ "Aasim-A/scrollEOF.nvim", config = true, event = "VeryLazy" },
 
 	{
 		"famiu/bufdelete.nvim",

@@ -19,6 +19,8 @@ return {
 			---@diagnostic disable-next-line: undefined-field
 			return math.floor(vim.o.columns * 0.75)
 		end,
+		render = "compact",
+		stages = "fade",
 	},
 	init = function()
 		vim.notify = require("notify")

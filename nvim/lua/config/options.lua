@@ -20,7 +20,7 @@ opt.inccommand = "nosplit" -- preview incremental substitute
 opt.joinspaces = false -- No double spaces with join after a dot
 opt.laststatus = 0
 opt.list = true -- Show some invisible characters (tabs...
--- opt.listchars = "tab:  ,nbsp:+,trail:·,extends:→,precedes:←"
+opt.listchars = { tab = "  ", nbsp = "+", trail = "·", extends = "→", precedes = "←" }
 opt.mouse = "a" -- enable mouse mode
 opt.number = true -- Print line number
 opt.pumblend = 10 -- Popup blend
@@ -56,3 +56,12 @@ opt.shortmess:append({ C = true })
 
 -- fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
+
+-- make all keymaps silent by default
+local keymap_set = vim.keymap.set
+---@diagnostic disable-next-line: duplicate-set-field
+vim.keymap.set = function(mode, lhs, rhs, opts)
+	opts = opts or {}
+	opts.silent = opts.silent ~= false
+	return keymap_set(mode, lhs, rhs, opts)
+end
