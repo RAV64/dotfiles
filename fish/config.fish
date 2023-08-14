@@ -17,7 +17,7 @@ if status is-interactive
   set ZELLIJ_AUTO_EXIT true
 
   alias la "exa -lag --icons"
-  alias lt "exa -lag --icons --tree --level=3"
+  alias lt "exa -lg --icons --tree --level=3"
   alias g "lazygit"
   alias v "nvim"
   # alias s "kitty +kitten ssh"

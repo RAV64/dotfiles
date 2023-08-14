@@ -18,10 +18,12 @@ return {
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
 		return {
-			completion = {
-				completeopt = "menu,menuone,noinsert",
-				col_offset = -3,
-				side_padding = 0,
+			window = {
+				completion = {
+					col_offset = -3,
+					side_padding = 0,
+					winhighlight = "NormalFloat:TablineActive",
+				},
 			},
 			snippet = {
 				expand = function(args)
@@ -61,8 +63,8 @@ return {
 				{ name = "path" },
 			}),
 			formatting = {
-				fields = { "kind", "abbr", "menu" },
-				format = function(entry, vim_item)
+				fields = { "kind", "abbr" },
+				format = function(_, vim_item)
 					local icons = {
 						Class = "",
 						Color = "",
@@ -91,7 +93,6 @@ return {
 						Variable = "󰫧",
 					}
 					vim_item.kind = string.format("%s", " " .. icons[vim_item.kind] .. " ")
-					vim_item.menu = ({})[entry.source.name]
 					return vim_item
 				end,
 			},
