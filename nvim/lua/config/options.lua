@@ -5,7 +5,7 @@ local opt = vim.opt
 
 opt.autowrite = true -- enable auto write
 opt.clipboard = "unnamedplus" -- sync with system clipboard
-opt.cmdheight = 1
+opt.cmdheight = 0
 opt.completeopt = "menu,menuone,noselect"
 -- opt.conceallevel = 3 -- Hide * markup for bold and italic
 opt.confirm = true -- confirm to save changes before exiting modified buffer

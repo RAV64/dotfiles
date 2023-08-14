@@ -56,10 +56,14 @@ return {
 					-- CmpItemMenu = { fg = base, bg = C.text },
 					-- CmpItemAbbrMatch = { fg = base, bg = C.text, style = { "bold" } },
 					-- CmpItemAbbrMatchFuzzy = { fg = base, bg = C.text, style = { "bold" } },
+
 					CursorLine = { bg = "#393939" },
 
 					TablineActive = { fg = C.overlay1, bg = C.mantle },
 					TablineInactive = { fg = "#90A4AE", bg = C.mantle },
+					NeoTreeDirectoryIcon = { fg = "#be95ff" },
+					-- PmenuSel = { fg = "", bg = "" },
+					redred = { fg = "#ff0000", bg = "#ff0000" },
 
 					CmpItemKindSnippet = { fg = base, bg = C.mauve },
 					CmpItemKindKeyword = { fg = base, bg = C.red },

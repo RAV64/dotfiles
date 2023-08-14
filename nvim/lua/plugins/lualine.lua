@@ -45,7 +45,7 @@ return {
 			lualine_c = {
 				{
 					"buffers",
-					mode = 2,
+					mode = 0,
 					symbols = { alternate_file = "" },
 					max_length = function()
 						return vim.o.columns
