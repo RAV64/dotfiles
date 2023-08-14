@@ -79,7 +79,6 @@ return {
 			ruff_lsp = {},
 			astro = {},
 			prismals = {},
-			textlsp = {},
 			tailwindcss = {
 				cmd = { "bun", "run", "tailwindcss-language-server", "--stdio" },
 			},
