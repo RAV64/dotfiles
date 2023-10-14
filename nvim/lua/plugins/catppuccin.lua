@@ -13,25 +13,12 @@ return {
 				gitsigns = true,
 				indent_blankline = {
 					enabled = true,
-					scope_color = "lavender", -- catppuccin color (eg. `lavender`) Default: text
 					colored_indent_levels = true,
 				},
 				leap = true,
 				noice = true,
 				native_lsp = {
 					enabled = true,
-					virtual_text = {
-						errors = { "italic" },
-						hints = { "italic" },
-						warnings = { "italic" },
-						information = { "italic" },
-					},
-					underlines = {
-						errors = { "underline" },
-						hints = { "underline" },
-						warnings = { "underline" },
-						information = { "underline" },
-					},
 					inlay_hints = {
 						background = true,
 					},
@@ -41,7 +28,6 @@ return {
 				rainbow_delimiters = true,
 				telescope = true,
 				neotree = true,
-				symbols_outline = true,
 				navic = { enabled = true, custom_bg = "NONE" },
 				notify = true,
 			},
@@ -69,6 +55,7 @@ return {
 			},
 			custom_highlights = function(C)
 				local base = C.base
+				local tPreview = "#181818"
 				return {
 					-- CmpItemAbbr = { fg = base, bg = C.overlay2 },
 					-- CmpItemAbbrDeprecated = { fg = base, bg = C.overlay0, style = { "strikethrough" } },
@@ -77,13 +64,21 @@ return {
 					-- CmpItemAbbrMatch = { fg = base, bg = C.text, style = { "bold" } },
 					-- CmpItemAbbrMatchFuzzy = { fg = base, bg = C.text, style = { "bold" } },
 
-					CursorLine = { bg = "#393939" },
+					CursorLine = { bg = C.surface1 },
+					TelescopeNormal = { bg = C.mantle },
+					TelescopeBorder = { bg = C.mantle },
+					TelescopePromptNormal = { bg = C.surface0 },
+					TelescopePromptBorder = { bg = C.surface0 },
+					TelescopePromptTitle = { bg = C.surface0 },
 
+					TelescopePreviewNormal = { bg = tPreview },
+					TelescopePreviewBorder = { bg = tPreview },
+
+					NormalFloat = { bg = "None" },
 					TablineActive = { fg = C.overlay1, bg = C.mantle },
 					TablineInactive = { fg = "#90A4AE", bg = C.mantle },
 					NeoTreeDirectoryIcon = { fg = "#be95ff" },
-					-- PmenuSel = { fg = "", bg = "" },
-					redred = { fg = "#ff0000", bg = "#ff0000" },
+					CmpBackground = { bg = C.mantle },
 
 					CmpItemKindSnippet = { fg = base, bg = C.mauve },
 					CmpItemKindKeyword = { fg = base, bg = C.red },

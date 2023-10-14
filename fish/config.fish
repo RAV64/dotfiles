@@ -1,15 +1,18 @@
 if status is-interactive
-  set TERM "xterm-256color"
+  set -gx TERM "xterm-256color"
+  source $HOME/dotfiles/fish/themes/mocha.theme
+
+  set -g FZF_FD_OPTS --ignore-file $HOME/dotfiles/zsh/.fdignore -a -H
+  set -g FZF_PREVIEW_FILE_CMD "bat --style=numbers --color=always --line-range :500"
+  set -g FZF_PREVIEW_DIR_CMD "eza -lag --icons"
+
+  set -g DOTNET_CLI_TELEMETRY_OPTOUT true
+  set -g ZELLIJ_AUTO_ATTACH true
+  set -g ZELLIJ_AUTO_EXIT true
 
   fzf_configure_bindings --directory=\cf
-  export EDITOR="nvim"
-  export VISUAL="nvim"
-
-  set fzf_fd_opts --ignore-file $HOME/dotfiles/zsh/.fdignore -a -H
-  set fzf_preview_dir_cmd exa -lag --icons
-  set DOTNET_CLI_TELEMETRY_OPTOUT true
-  set ZELLIJ_AUTO_ATTACH true
-  set ZELLIJ_AUTO_EXIT true
+  set -gx EDITOR nvim
+  set -gx VISUAL nvim
 
   source $HOME/dotfiles/work/work.fish
 
@@ -22,11 +25,12 @@ if status is-interactive
   alias ct "cargo test"
   alias cw "cargo watch -x"
 
-  set PATH $PATH ~/.dotnet/tools
-  set PATH $PATH ~/.cargo/bin
-  set PATH $PATH ~/Developer/flutter/bin
-  set PATH $PATH ~/dotfiles/scripts/path
-  set PATH $PATH ~/.local/bin
+  set -gx PATH $PATH /opt/homebrew/bin
+  set -gx PATH $PATH ~/.dotnet/tools
+  set -gx PATH $PATH ~/.cargo/bin
+  set -gx PATH $PATH ~/Developer/flutter/bin
+  set -gx PATH $PATH ~/dotfiles/scripts/bin
+  set -gx PATH $PATH ~/.local/bin
 
   if test (uname) = "Darwin"
     launchctl remove com.valvesoftware.steam.ipctool
@@ -38,5 +42,5 @@ if status is-interactive
 end
 
 # bun
-set --export BUN_INSTALL "$HOME/.bun"
-set --export PATH $BUN_INSTALL/bin $PATH
+set -gx BUN_INSTALL "$HOME/.bun"
+set -gx PATH $BUN_INSTALL/bin $PATH

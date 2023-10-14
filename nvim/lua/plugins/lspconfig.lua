@@ -2,18 +2,37 @@ return {
 	"neovim/nvim-lspconfig",
 	event = "BufReadPre",
 	dependencies = {
-		{ "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
-		"hrsh7th/cmp-nvim-lsp",
-		"SmiteshP/nvim-navic",
-	},
-	keys = {
+		{ "folke/neodev.nvim", opts = {} },
 		{
-			"gf",
-			function()
-				vim.lsp.buf.format({ async = true })
-			end,
-			desc = "Format",
+			"SmiteshP/nvim-navic",
+			opts = {
+				lsp = {
+					auto_attach = true,
+				},
+			},
 		},
+		{
+			"SmiteshP/nvim-navbuddy",
+			dependencies = {
+				"MunifTanjim/nui.nvim",
+			},
+			opts = {
+				lsp = { auto_attach = true },
+				window = {
+					border = "rounded",
+					size = { height = "70%", width = "95%" },
+					sections = {
+						left = { size = "25%", border = nil },
+						mid = { size = "25%", border = nil },
+					},
+				},
+			},
+			keys = { { "Å", "<cmd>Navbuddy<cr>", desc = "Hover" } },
+		},
+	},
+
+	-- stylua: ignore
+	keys = {
 		{ "K", vim.lsp.buf.hover, desc = "Hover" },
 		{ "gr", vim.lsp.buf.rename, desc = "Rename" },
 		{ "gd", "<cmd>Telescope lsp_definitions<cr>", desc = "Goto Definition" },
@@ -26,23 +45,9 @@ return {
 		{ "gu", "<cmd>Telescope lsp_references<cr>", desc = "Get Usages" },
 		{ "gi", "<cmd>Telescope lsp_implementations<cr>", desc = "Get implementations" },
 		{ "gt", "<cmd>Telescope lsp_type_definitions<cr>", desc = "Get type definitions" },
-		{
-			"gwa",
-			vim.lsp.buf.add_workspace_folder,
-			desc = "add_workspace_folder",
-		},
-		{
-			"gwr",
-			vim.lsp.buf.remove_workspace_folder,
-			"remove_workspace_folder",
-		},
-		{
-			"gwl",
-			function()
-				print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-			end,
-			"list_workspace_folders",
-		},
+		{ "gwa", vim.lsp.buf.add_workspace_folder, desc = "add_workspace_folder"},
+		{ "gwr", vim.lsp.buf.remove_workspace_folder, "remove_workspace_folder"},
+		{ "gwl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, "list_workspace_folders"},
 	},
 	opts = {
 		servers = {
@@ -50,12 +55,7 @@ return {
 				cmd = { "bun", "run", "pyright-langserver", "--stdio" },
 			},
 			bashls = {
-				cmd = {
-					"bun",
-					"run",
-					"bash-language-server",
-					"start",
-				},
+				cmd = { "bun", "run", "bash-language-server", "start" },
 			},
 			lua_ls = {
 				settings = {
@@ -131,7 +131,15 @@ return {
 		vim.g.navic_silence = true
 		local navic = require("nvim-navic")
 		navic.setup({ highlight = true })
-		local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+		local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+		local capabilities = vim.tbl_deep_extend(
+			"force",
+			{},
+			vim.lsp.protocol.make_client_capabilities(),
+			has_cmp and cmp_nvim_lsp.default_capabilities() or {}
+		)
+
 		local lspconfig = require("lspconfig")
 
 		local inlay_hint = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
@@ -142,10 +150,6 @@ return {
 				settings = lsp.settings,
 				cmd = lsp.cmd,
 				on_attach = function(client, bufnr)
-					if client.server_capabilities.documentSymbolProvider then
-						navic.attach(client, bufnr)
-					end
-
 					if opts.inlay_hints.enabled and inlay_hint then
 						if client.supports_method("textDocument/inlayHint") then
 							inlay_hint(bufnr, true)

@@ -3,7 +3,7 @@ return {
 	cmd = { "TroubleToggle", "Trouble" },
 	opts = {
 		use_diagnostic_signs = true,
-		position = "right",
+		-- position = "right",
 	},
 	keys = {
 		{ "<leader>tf", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },

@@ -8,40 +8,18 @@ return {
 		{ "<leader>fl", "<cmd>Telescope live_grep<cr>", desc = "Find Line" },
 		{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "File Browser" },
 		{ "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Find Help" },
+		{ "<leader>fs", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Find symbols" },
 	},
 	dependencies = {
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		{ "nvim-telescope/telescope-file-browser.nvim" },
-		{ "nvim-telescope/telescope-ui-select.nvim" },
+		{ "nvim-lua/plenary.nvim" },
 	},
 	config = function()
 		local telescope = require("telescope")
 		telescope.setup({
-			pickers = {
-				find_files = {
-					hidden = true,
-				},
-			},
 			defaults = {
-				border = true,
-				borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-				color_devicons = true,
-				dynamic_preview_title = true,
-				-- file_sorter = require("telescope.sorters").get_fuzzy_file,
-				-- file_previewer = require("telescope.previewers").vim_buffer_cat.new,
-				-- generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
-				-- grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
-				initial_mode = "insert",
-				layout_strategy = "horizontal",
-				prompt_prefix = "🔭 ",
-				prompt_position = "top",
-				path_display = { "truncate" },
-				qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
-				-- results_width = 1,
-				selection_strategy = "reset",
-				selection_caret = " ",
-				set_env = { ["COLORTERM"] = "truecolor" },
-				sorting_strategy = "ascending",
+				borderchars = { "", "", "", "", "", "", "", "" },
 				file_ignore_patterns = {
 					"node_modules",
 					"venv",
@@ -53,29 +31,48 @@ return {
 					"target",
 					"*.gpg",
 				},
+				initial_mode = "insert",
 				layout_config = {
-					horizontal = {
-						prompt_position = "top",
-						preview_width = 0.6,
-						results_width = 0.4,
-					},
-					width = 0.99,
-					height = 0.99,
-					preview_cutoff = 120,
+					horizontal = { prompt_position = "top", preview_width = 0.55, results_width = 0.8 },
+					width = 0.95,
+					height = 0.95,
+					preview_cutoff = 10,
+				},
+				layout_strategy = "horizontal",
+				mappings = { n = { ["q"] = require("telescope.actions").close } },
+				path_display = { "truncate" },
+				prompt_prefix = "  ",
+				selection_caret = " ",
+				selection_strategy = "reset",
+				set_env = { ["COLORTERM"] = "truecolor" },
+				sorting_strategy = "ascending",
+				results_title = false,
+				dynamic_preview_title = true,
+				vimgrep_arguments = {
+					"rg",
+					"-L",
+					"--color=never",
+					"--no-heading",
+					"--with-filename",
+					"--line-number",
+					"--column",
+					"--smart-case",
 				},
 			},
 			extensions = {
 				file_browser = {
 					hidden = true,
 				},
-				["ui-select"] = {
-					require("telescope.themes").get_dropdown({}),
+				fzf = {
+					fuzzy = true,
+					override_generic_sorter = true,
+					override_file_sorter = true,
+					case_mode = "smart_case",
 				},
 			},
 		})
 
 		telescope.load_extension("fzf")
 		telescope.load_extension("file_browser")
-		telescope.load_extension("ui-select")
 	end,
 }

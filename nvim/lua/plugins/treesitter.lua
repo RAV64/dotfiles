@@ -1,39 +1,22 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
 	dependencies = {
-		{ "nvim-treesitter/playground" },
-
-		{
-			"nvim-treesitter/nvim-treesitter-textobjects",
-		},
+		-- { "nvim-treesitter/playground" },
+		{ "nvim-treesitter/nvim-treesitter-textobjects" },
 		{ "nvim-treesitter/nvim-treesitter-context", config = true, event = "VeryLazy" },
 	},
 	version = false,
 	build = ":TSUpdate",
 	cmd = { "TSUpdateSync" },
-	event = { "BufReadPost", "BufNewFile" },
+	event = { "VeryLazy" },
 	keys = {
 		{ "<c-space>", desc = "Increment selection" },
 		{ "<bs>", desc = "Decrement selection", mode = "x" },
 	},
 	opts = {
 		ensure_installed = { "c", "lua", "vim", "vimdoc", "rust", "toml", "python", "markdown", "json", "fish", "sql" },
-		highlight = {
-			enable = true,
-			additional_vim_regex_highlighting = false,
-		},
-		context_commentstring = { enable = true, enable_autocmd = false },
-		indent = {
-			enable = true,
-		},
-		autopairs = {
-			enable = true,
-		},
-		rainbow = {
-			enable = true,
-			extended_mode = true,
-			max_file_lines = 2000,
-		},
+		highlight = { enable = true },
+		indent = { enable = true },
 		incremental_selection = {
 			enable = true,
 			keymaps = {
@@ -83,17 +66,5 @@ return {
 			end, opts.ensure_installed)
 		end
 		require("nvim-treesitter.configs").setup(opts)
-
-		if opts.textobjects then
-			for _, mod in ipairs({ "move", "select", "swap", "lsp_interop" }) do
-				if opts.textobjects[mod] and opts.textobjects[mod].enable then
-					local Loader = require("lazy.core.loader")
-					Loader.disabled_rtp_plugins["nvim-treesitter-textobjects"] = nil
-					local plugin = require("lazy.core.config").plugins["nvim-treesitter-textobjects"]
-					require("lazy.core.loader").source_runtime(plugin.dir, "plugin")
-					break
-				end
-			end
-		end
 	end,
 }

@@ -1,8 +1,11 @@
 .oh-my-zsh
 .DS_Store
 packer_compiled.lua
+
 karabiner/assets
 karabiner/automatic_backups
+
 nvim/lua/.luarc.json
 nvim/lazy-lock.json
-fonts/JetBrainsMono.zip
+
+fish/fish_variables

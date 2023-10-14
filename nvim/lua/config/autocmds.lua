@@ -24,6 +24,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		"man",
 		"notify",
 		"qf",
+		"query",
 		"spectre_panel",
 		"startuptime",
 		"tsplayground",
@@ -52,7 +53,7 @@ local run_formatter = function(text)
 
 	local j = require("plenary.job"):new({
 		command = "bun",
-		args = { "run", "sql-formatter", "-c", "/Users/mikisuominen/dotfiles/tool_configs/sql-formatter.json" },
+		args = { "run", "sql-formatter", "-c", "$HOME/dotfiles/tool_configs/sql-formatter.json" },
 		writer = { result },
 	})
 	return j:sync()
@@ -123,7 +124,6 @@ end
 vim.api.nvim_create_user_command("SqlMagic", function()
 	format_sql()
 end, {})
-
 
 -- local group = vim.api.nvim_create_augroup("rust-sql-magic", { clear = true })
 -- vim.api.nvim_create_autocmd("BufWritePre", {

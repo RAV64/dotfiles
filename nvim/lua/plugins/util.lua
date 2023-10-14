@@ -2,8 +2,8 @@ return {
 	{ "nvim-lua/plenary.nvim" },
 	{ "MunifTanjim/nui.nvim" },
 	{ "kyazdani42/nvim-web-devicons" },
-	{ "tpope/vim-sleuth",                event = "BufReadPost" },
-	{ "Aasim-A/scrollEOF.nvim",          config = true,        event = "VeryLazy" },
+	{ "tpope/vim-sleuth", event = "BufReadPost" },
+	{ "Aasim-A/scrollEOF.nvim", config = true, event = "VeryLazy" },
 	{ "HiPhish/rainbow-delimiters.nvim", event = "VeryLazy" },
 
 	{
@@ -31,8 +31,28 @@ return {
 		end,
 	},
 	{
-		"windwp/nvim-autopairs",
+		"stevearc/dressing.nvim",
+		init = function()
+			---@diagnostic disable-next-line: duplicate-set-field
+			vim.ui.select = function(...)
+				require("lazy").load({ plugins = { "dressing.nvim" } })
+				return vim.ui.select(...)
+			end
+			---@diagnostic disable-next-line: duplicate-set-field
+			vim.ui.input = function(...)
+				require("lazy").load({ plugins = { "dressing.nvim" } })
+				return vim.ui.input(...)
+			end
+		end,
+	},
+	{
+		"windwp/nvim-ts-autotag",
 		event = "InsertEnter",
-		opts = {}, -- this is equalent to setup({}) function
+		opts = {},
+	},
+	{
+		"saecki/crates.nvim",
+		event = { "BufRead Cargo.toml" },
+		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 }
