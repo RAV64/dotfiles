@@ -65,3 +65,7 @@ vim.keymap.set = function(mode, lhs, rhs, opts)
 	opts.silent = opts.silent ~= false
 	return keymap_set(mode, lhs, rhs, opts)
 end
+
+vim.api.nvim_create_user_command("W", function()
+	vim.cmd("update")
+end, {})

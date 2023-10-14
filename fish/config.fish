@@ -5,23 +5,18 @@ if status is-interactive
   export EDITOR="nvim"
   export VISUAL="nvim"
 
-  set -Ux FZF_DEFAULT_OPTS "\
-  --color=bg+:#313244,bg:#202020,spinner:#f5e0dc,hl:#f38ba8 \
-  --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
-  --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
-
   set fzf_fd_opts --ignore-file $HOME/dotfiles/zsh/.fdignore -a -H
   set fzf_preview_dir_cmd exa -lag --icons
   set DOTNET_CLI_TELEMETRY_OPTOUT true
   set ZELLIJ_AUTO_ATTACH true
   set ZELLIJ_AUTO_EXIT true
 
-  alias la "exa -lag --icons"
-  alias lt "exa -lg --icons --tree --level=3"
+  source $HOME/dotfiles/work/work.fish
+
+  alias la "eza -lag --icons"
+  alias lt "eza -lg --icons --tree --level=3"
   alias g "lazygit"
   alias v "nvim"
-  # alias s "kitty +kitten ssh"
-  alias btm "btm -b"
 
   alias cr "cargo run"
   alias ct "cargo test"
@@ -31,13 +26,11 @@ if status is-interactive
   set PATH $PATH ~/.cargo/bin
   set PATH $PATH ~/Developer/flutter/bin
   set PATH $PATH ~/dotfiles/scripts/path
-
-  if test (uname) = "Linux"
-    set PATH $PATH ~/.local/bin
-  end
+  set PATH $PATH ~/.local/bin
 
   if test (uname) = "Darwin"
     launchctl remove com.valvesoftware.steam.ipctool
+    launchctl remove (launchctl list | awk -F" " '{print $3}' | grep com.microsoft.autoupdate) &> /dev/null
   end
 
   starship init fish | source

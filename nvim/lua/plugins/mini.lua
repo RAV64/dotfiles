@@ -7,25 +7,23 @@ return {
 			options = {
 				custom_commentstring = function()
 					return require("ts_context_commentstring.internal").calculate_commentstring()
-						or vim.bo.commentstring
+							or vim.bo.commentstring
 				end,
 			},
 		},
 	},
-
 	{
-		"echasnovski/mini.pairs",
-		event = "VeryLazy",
-		opts = {},
+		"echasnovski/mini.bufremove",
+		-- stylua: ignore
+		keys = {
+			{ "<leader>bd", function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer" },
+			{ "<leader>bD", function() require("mini.bufremove").delete(0, true) end,  desc = "Delete Buffer (Force)" },
+		},
 	},
 
 	{
 		"echasnovski/mini.ai",
 		event = "VeryLazy",
-		keys = {
-			{ "a", mode = { "x", "o" } },
-			{ "i", mode = { "x", "o" } },
-		},
 		dependencies = { "nvim-treesitter-textobjects" },
 		opts = function()
 			local ai = require("mini.ai")
@@ -38,12 +36,9 @@ return {
 					}, {}),
 					f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }, {}),
 					c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }, {}),
+					t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" },
 				},
 			}
-		end,
-		config = function(_, opts)
-			local ai = require("mini.ai")
-			ai.setup(opts)
 		end,
 	},
 }

@@ -2,15 +2,9 @@ return {
 	{ "nvim-lua/plenary.nvim" },
 	{ "MunifTanjim/nui.nvim" },
 	{ "kyazdani42/nvim-web-devicons" },
-	{ "tpope/vim-sleuth", event = "BufReadPost" },
-	{ "Aasim-A/scrollEOF.nvim", config = true, event = "VeryLazy" },
-
-	{
-		"famiu/bufdelete.nvim",
-		keys = {
-			{ "<S-q>", "<cmd>bdelete<cr>", desc = "Delete current buffer" },
-		},
-	},
+	{ "tpope/vim-sleuth",                event = "BufReadPost" },
+	{ "Aasim-A/scrollEOF.nvim",          config = true,        event = "VeryLazy" },
+	{ "HiPhish/rainbow-delimiters.nvim", event = "VeryLazy" },
 
 	{
 		"max397574/better-escape.nvim",
@@ -35,5 +29,10 @@ return {
 		config = function()
 			require("treesj").setup({ notify = false })
 		end,
+	},
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		opts = {}, -- this is equalent to setup({}) function
 	},
 }

@@ -7,7 +7,13 @@ return {
 		"SmiteshP/nvim-navic",
 	},
 	keys = {
-		{ "gf", vim.lsp.buf.format, desc = "Format" },
+		{
+			"gf",
+			function()
+				vim.lsp.buf.format({ async = true })
+			end,
+			desc = "Format",
+		},
 		{ "K", vim.lsp.buf.hover, desc = "Hover" },
 		{ "gr", vim.lsp.buf.rename, desc = "Rename" },
 		{ "gd", "<cmd>Telescope lsp_definitions<cr>", desc = "Goto Definition" },
@@ -40,7 +46,9 @@ return {
 	},
 	opts = {
 		servers = {
-			pyright = {},
+			pyright = {
+				cmd = { "bun", "run", "pyright-langserver", "--stdio" },
+			},
 			bashls = {
 				cmd = {
 					"bun",
@@ -74,19 +82,19 @@ return {
 				cmd = { "bun", "run", "typescript-language-server", "--stdio" },
 			},
 			csharp_ls = {},
+			clojure_lsp = {},
 			zls = {},
 			sqlls = {},
 			ruff_lsp = {},
 			astro = {},
 			prismals = {},
-			tailwindcss = {
-				cmd = { "bun", "run", "tailwindcss-language-server", "--stdio" },
-			},
+			-- tailwindcss = {
+			-- 	cmd = { "bun", "run", "tailwindcss-language-server", "--stdio" },
+			-- },
 			rust_analyzer = {
 				settings = {
 					["rust-analyzer"] = {
 						cargo = {
-							allFeatures = true,
 							loadOutDirsFromCheck = true,
 							runBuildScripts = true,
 						},
