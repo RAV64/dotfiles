@@ -1,5 +1,7 @@
 return {
-	{ "JoosepAlviste/nvim-ts-context-commentstring", lazy = true },
+	{ "JoosepAlviste/nvim-ts-context-commentstring", lazy = true, opts = {
+		enable_autocmd = false,
+	} },
 	{
 		"echasnovski/mini.comment",
 		event = "VeryLazy",
@@ -7,7 +9,7 @@ return {
 			options = {
 				custom_commentstring = function()
 					return require("ts_context_commentstring.internal").calculate_commentstring()
-							or vim.bo.commentstring
+						or vim.bo.commentstring
 				end,
 			},
 		},
@@ -41,4 +43,21 @@ return {
 			}
 		end,
 	},
+	{
+		"echasnovski/mini.surround",
+		event = "VeryLazy",
+		opts = {
+			mappings = {
+				add = "<leader>sa", -- Add surrounding in Normal and Visual modes
+				delete = "<leader>sd", -- Delete surrounding
+				find = "<leader>sf", -- Find surrounding (to the right)
+				find_left = "<leader>sF", -- Find surrounding (to the left)
+				highlight = "<leader>sh", -- Highlight surrounding
+				replace = "<leader>sr", -- Replace surrounding
+				update_n_lines = "<leader>sn", -- Update `n_lines`
+			},
+		},
+	},
+	{ "echasnovski/mini.pairs", event = "VeryLazy", opts = {} },
+	{ "echasnovski/mini.hipatterns", event = "VeryLazy", opts = {} },
 }
