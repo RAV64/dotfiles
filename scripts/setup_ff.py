@@ -52,6 +52,7 @@ except FileNotFoundError:
         f"""❗️ERROR: You're missing cascade-overrides.css file in 
         {USER_DIR}/dotfiles/firefox/"""
     )
+    exit()
 
 
 def get_profile_dir():

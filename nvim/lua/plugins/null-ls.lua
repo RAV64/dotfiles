@@ -1,21 +1,21 @@
 return {
-	"jose-elias-alvarez/null-ls.nvim",
+	"nvimtools/none-ls.nvim",
 	event = "BufReadPre",
 	opts = function()
 		local nls = require("null-ls").builtins
 		return {
 			sources = {
 				-- formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
-				nls.formatting.rome.with({
-					command = { "bun" },
-					args = {
-						"run",
-						"rome",
-						"format",
-						"--write",
-						"$FILENAME",
-					},
-				}),
+				-- nls.formatting.rome.with({
+				-- 	command = { "bun" },
+				-- 	args = {
+				-- 		"run",
+				-- 		"rome",
+				-- 		"format",
+				-- 		"--write",
+				-- 		"$FILENAME",
+				-- 	},
+				-- }),
 				nls.formatting.black.with({ extra_args = { "--fast" } }),
 				nls.formatting.stylua,
 				nls.formatting.csharpier,

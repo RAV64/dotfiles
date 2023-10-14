@@ -7,18 +7,38 @@ return {
 		require("catppuccin").setup({
 			no_italic = true,
 			flavour = "mocha",
+			transparent_background = false,
 			integrations = {
 				cmp = true,
 				gitsigns = true,
-				indent_blankline = { enabled = true, colored_indent_levels = true },
+				indent_blankline = {
+					enabled = true,
+					scope_color = "lavender", -- catppuccin color (eg. `lavender`) Default: text
+					colored_indent_levels = true,
+				},
 				leap = true,
 				noice = true,
 				native_lsp = {
 					enabled = true,
+					virtual_text = {
+						errors = { "italic" },
+						hints = { "italic" },
+						warnings = { "italic" },
+						information = { "italic" },
+					},
+					underlines = {
+						errors = { "underline" },
+						hints = { "underline" },
+						warnings = { "underline" },
+						information = { "underline" },
+					},
+					inlay_hints = {
+						background = true,
+					},
 				},
 				treesitter = true,
 				treesitter_context = true,
-				ts_rainbow = true,
+				rainbow_delimiters = true,
 				telescope = true,
 				neotree = true,
 				symbols_outline = true,
@@ -39,7 +59,7 @@ return {
 					-- mauve = "#be95ff",
 					-- green = "#8fca5c",
 					maroon = "#ee5396",
-					lavender = "#78a9ff",
+					-- lavender = "#78a9ff",
 					red = "#ea7183",
 					peach = "#f39967",
 					yellow = "#eaca89",

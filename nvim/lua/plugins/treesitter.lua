@@ -1,7 +1,6 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
 	dependencies = {
-		{ "mrjones2014/nvim-ts-rainbow" },
 		{ "nvim-treesitter/playground" },
 
 		{
@@ -15,10 +14,10 @@ return {
 	event = { "BufReadPost", "BufNewFile" },
 	keys = {
 		{ "<c-space>", desc = "Increment selection" },
-		{ "<bs>",      desc = "Decrement selection", mode = "x" },
+		{ "<bs>", desc = "Decrement selection", mode = "x" },
 	},
 	opts = {
-		ensure_installed = { "c", "lua", "vim", "vimdoc", "rust", "toml", "python", "markdown", "json", "fish" },
+		ensure_installed = { "c", "lua", "vim", "vimdoc", "rust", "toml", "python", "markdown", "json", "fish", "sql" },
 		highlight = {
 			enable = true,
 			additional_vim_regex_highlighting = false,
