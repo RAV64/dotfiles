@@ -20,7 +20,7 @@ return {
 				completion = {
 					col_offset = -3,
 					side_padding = 0,
-					winhighlight = "NormalFloat:TablineActive",
+					winhighlight = "NormalFloat:CmpBackground",
 				},
 				documentation = {
 					winhighlight = "Normal:CmpBackground",
