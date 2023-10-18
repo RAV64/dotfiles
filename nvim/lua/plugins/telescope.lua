@@ -19,7 +19,7 @@ return {
 		local telescope = require("telescope")
 		telescope.setup({
 			defaults = {
-				borderchars = { "", "", "", "", "", "", "", "" },
+				borderchars = { " ", "", "", "", "", "", "", "" },
 				file_ignore_patterns = {
 					"node_modules",
 					"venv",
@@ -39,7 +39,17 @@ return {
 					preview_cutoff = 10,
 				},
 				layout_strategy = "horizontal",
-				mappings = { n = { ["q"] = require("telescope.actions").close } },
+				mappings = {
+					n = {
+						["q"] = require("telescope.actions").close,
+						["<C-j>"] = require("telescope.actions").move_selection_next,
+						["<C-k>"] = require("telescope.actions").move_selection_previous,
+					},
+					i = {
+						["<C-j>"] = require("telescope.actions").move_selection_next,
+						["<C-k>"] = require("telescope.actions").move_selection_previous,
+					},
+				},
 				path_display = { "truncate" },
 				prompt_prefix = "  ",
 				selection_caret = " ",

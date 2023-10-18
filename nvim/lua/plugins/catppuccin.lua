@@ -74,11 +74,13 @@ return {
 					TelescopePreviewNormal = { bg = tPreview },
 					TelescopePreviewBorder = { bg = tPreview },
 
-					NormalFloat = { bg = "None" },
+					NormalFloat = { bg = C.mantle },
 					TablineActive = { fg = C.overlay1, bg = C.mantle },
 					TablineInactive = { fg = "#90A4AE", bg = C.mantle },
 					NeoTreeDirectoryIcon = { fg = "#be95ff" },
 					CmpBackground = { bg = C.mantle },
+
+					LazyNormal = { bg = C.mantle },
 
 					CmpItemKindSnippet = { fg = base, bg = C.mauve },
 					CmpItemKindKeyword = { fg = base, bg = C.red },
