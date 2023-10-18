@@ -29,6 +29,31 @@ return {
 			},
 			keys = { { "Å", "<cmd>Navbuddy<cr>", desc = "Hover" } },
 		},
+
+		{
+			"aznhe21/actions-preview.nvim",
+			keys = {
+				{
+					"ga",
+					function()
+						require("actions-preview").code_actions()
+					end,
+					desc = "Get code actions",
+				},
+			},
+			opts = {
+				telescope = {
+					layout_strategy = "vertical",
+					layout_config = {
+						vertical = {
+							prompt_position = "top",
+						},
+						width = 90,
+						height = 0.80,
+					},
+				},
+			},
+		},
 	},
 
 	-- stylua: ignore
@@ -40,7 +65,6 @@ return {
 		{ "gk", vim.diagnostic.goto_prev, desc = "Goto previous diagnostics" },
 		{ "gj", vim.diagnostic.goto_next, desc = "Goto next diagnostics" },
 		{ "ge", vim.diagnostic.open_float, desc = "Open diagnostics" },
-		{ "ga", vim.lsp.buf.code_action, desc = "Get code actions" },
 		{ "<C-s>", vim.lsp.buf.signature_help, desc = "Show signature", mode = "i" },
 		{ "gu", "<cmd>Telescope lsp_references<cr>", desc = "Get Usages" },
 		{ "gi", function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end, desc = "Get implementations" },
