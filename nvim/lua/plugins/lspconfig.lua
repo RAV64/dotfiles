@@ -115,6 +115,7 @@ return {
 			ruff_lsp = {},
 			astro = {},
 			prismals = {},
+			biome = {},
 		},
 		diagnostics = {
 			underline = true,

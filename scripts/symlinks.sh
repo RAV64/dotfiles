@@ -5,4 +5,5 @@ ln -fs ~/dotfiles/karabiner ~/.config
 ln -fs ~/dotfiles/fish ~/.config
 ln -fs ~/dotfiles/wezterm ~/.config
 ln -f ~/dotfiles/zsh/.zshrc ~/
+ln -f ~/dotfiles/.ignore ~/
 ln -f ~/dotfiles/.gitconfig ~/
