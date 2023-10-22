@@ -17,7 +17,8 @@ return {
 			javascript = { { "prettierd", "prettier" } },
 		},
 	},
-	init = function()
+	config = function(_, opts)
 		vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+		require("conform").setup(opts)
 	end,
 }

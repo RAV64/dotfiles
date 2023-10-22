@@ -58,7 +58,7 @@ opt.fillchars = {
 	eob = " ",
 }
 
--- fix markdown indentation settings
+vim.g.neo_tree_remove_legacy_commands = 1
 vim.g.markdown_recommended_style = 0
 
 -- make all keymaps silent by default

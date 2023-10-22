@@ -17,10 +17,6 @@ return {
 		},
 	},
 
-	init = function()
-		vim.g.neo_tree_remove_legacy_commands = 1
-	end,
-
 	opts = {
 		sources = { "filesystem", "buffers", "git_status", "document_symbols" },
 		open_files_do_not_replace_types = { "terminal", "Trouble", "qf", "Outline" },

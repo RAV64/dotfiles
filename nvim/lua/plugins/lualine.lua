@@ -61,7 +61,8 @@ return {
 			lualine_z = { "branch" },
 		},
 	},
-	init = function()
+	config = function(_, opts)
+		require("lualine").setup(opts)
 		for i = 1, 9 do
 			vim.keymap.set("n", "<leader>" .. i, function()
 				vim.cmd("LualineBuffersJump! " .. i)
