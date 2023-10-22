@@ -1,9 +1,8 @@
 return {
 	"catppuccin/nvim",
-	lazy = false,
 	name = "catppuccin",
 	priority = 9001,
-	config = function()
+	init = function()
 		require("catppuccin").setup({
 			no_italic = true,
 			flavour = "mocha",

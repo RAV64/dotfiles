@@ -3,76 +3,28 @@ return {
 	event = { "BufReadPost", "BufNewFile", "BufWritePre" },
 	dependencies = {
 		{ "folke/neodev.nvim", opts = {} },
-		{
-			"SmiteshP/nvim-navic",
-			opts = function()
-				vim.g.navic_silence = true
-				return {
-					lsp = { auto_attach = true },
-					highlight = true,
-				}
-			end,
-		},
-		{
-			"SmiteshP/nvim-navbuddy",
-			dependencies = { "MunifTanjim/nui.nvim" },
-			opts = {
-				lsp = { auto_attach = true },
-				window = {
-					border = "rounded",
-					size = { height = "70%", width = "95%" },
-					sections = {
-						left = { size = "25%", border = nil },
-						mid = { size = "25%", border = nil },
-					},
-				},
-			},
-			keys = { { "Å", "<cmd>Navbuddy<cr>", desc = "Hover" } },
-		},
-
-		{
-			"aznhe21/actions-preview.nvim",
-			keys = {
-				{
-					"ga",
-					function()
-						require("actions-preview").code_actions()
-					end,
-					desc = "Get code actions",
-				},
-			},
-			opts = {
-				telescope = {
-					layout_strategy = "vertical",
-					layout_config = {
-						vertical = {
-							prompt_position = "top",
-						},
-						width = 90,
-						height = 0.80,
-					},
-				},
-			},
-		},
 	},
 
-	-- stylua: ignore
-	keys = {
-		{ "K", vim.lsp.buf.hover, desc = "Hover" },
-		{ "gr", vim.lsp.buf.rename, desc = "Rename" },
-		{ "gd", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, desc = "Goto Definition" },
-		{ "gD", vim.lsp.buf.declaration, desc = "Get Declaration" },
-		{ "gk", vim.diagnostic.goto_prev, desc = "Goto previous diagnostics" },
-		{ "gj", vim.diagnostic.goto_next, desc = "Goto next diagnostics" },
-		{ "ge", vim.diagnostic.open_float, desc = "Open diagnostics" },
-		{ "<C-s>", vim.lsp.buf.signature_help, desc = "Show signature", mode = "i" },
-		{ "gu", "<cmd>Telescope lsp_references<cr>", desc = "Get Usages" },
-		{ "gi", function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end, desc = "Get implementations" },
-		{ "gt", function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end, desc = "Get type definitions" },
-		{ "gwa", vim.lsp.buf.add_workspace_folder, desc = "add_workspace_folder"},
-		{ "gwr", vim.lsp.buf.remove_workspace_folder, "remove_workspace_folder"},
-		{ "gwl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, "list_workspace_folders"},
-	},
+	keys = function()
+		local telescope = require("telescope.builtin")
+		-- stylua: ignore
+		return {
+			{ "K", vim.lsp.buf.hover, desc = "Hover" },
+			{ "gr", vim.lsp.buf.rename, desc = "Rename" },
+			{ "gd", function() telescope.lsp_definitions({ reuse_win = true }) end, desc = "Goto Definition" },
+			{ "gD", vim.lsp.buf.declaration, desc = "Get Declaration" },
+			{ "gk", vim.diagnostic.goto_prev, desc = "Goto previous diagnostics" },
+			{ "gj", vim.diagnostic.goto_next, desc = "Goto next diagnostics" },
+			{ "ge", vim.diagnostic.open_float, desc = "Open diagnostics" },
+			{ "<C-s>", vim.lsp.buf.signature_help, desc = "Show signature", mode = "i" },
+			{ "gu", function() telescope.lsp_references() end, desc = "Get Usages" },
+			{ "gi", function() telescope.lsp_implementations({ reuse_win = true }) end, desc = "Get implementations", },
+			{ "gt", function() telescope.lsp_type_definitions({ reuse_win = true }) end, desc = "Get type definitions", },
+			{ "gwa", vim.lsp.buf.add_workspace_folder, desc = "add_workspace_folder" },
+			{ "gwr", vim.lsp.buf.remove_workspace_folder, "remove_workspace_folder" },
+			{ "gwl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, "list_workspace_folders", },
+		}
+	end,
 	opts = {
 		servers = {
 			pyright = { cmd = { "bun", "run", "pyright-langserver", "--stdio" } },
@@ -82,12 +34,7 @@ return {
 			lua_ls = {
 				settings = {
 					Lua = {
-						runtime = { version = "LuaJIT" },
-						diagnostics = { globals = { "vim" } },
-						workspace = {
-							library = vim.api.nvim_get_runtime_file("", true),
-							checkThirdParty = false,
-						},
+						workspace = { checkThirdParty = false },
 						telemetry = { enable = false },
 					},
 				},
