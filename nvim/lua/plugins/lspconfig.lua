@@ -56,6 +56,7 @@ return {
 				},
 			},
 			csharp_ls = {},
+			jsonls = {},
 			clojure_lsp = {},
 			zls = {},
 			sqlls = {},

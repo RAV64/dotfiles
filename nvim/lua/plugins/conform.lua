@@ -1,5 +1,6 @@
 return {
 	"stevearc/conform.nvim",
+	event = "VeryLazy",
 	keys = {
 		{
 			"gf",
@@ -14,7 +15,11 @@ return {
 		formatters_by_ft = {
 			lua = { "stylua" },
 			python = { "ruff_fix", "black" },
-			javascript = { { "prettierd", "prettier" } },
+			rust = { "rustfmt" },
+		},
+		format_on_save = {
+			timeout_ms = 500,
+			lsp_fallback = true,
 		},
 	},
 	config = function(_, opts)

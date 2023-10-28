@@ -5,12 +5,14 @@ if status is-interactive
   set -g FZF_FD_OPTS --ignore-file $HOME/dotfiles/zsh/.fdignore -a -H
   set -g FZF_PREVIEW_FILE_CMD "bat --style=numbers --color=always --line-range :500"
   set -g FZF_PREVIEW_DIR_CMD "eza -lag --icons"
+  fzf_configure_bindings --directory=\cf
+
+  set -g BAT_THEME "Catppuccin-mocha"
 
   set -g DOTNET_CLI_TELEMETRY_OPTOUT true
   set -g ZELLIJ_AUTO_ATTACH true
   set -g ZELLIJ_AUTO_EXIT true
 
-  fzf_configure_bindings --directory=\cf
   set -gx EDITOR nvim
   set -gx VISUAL nvim
 
