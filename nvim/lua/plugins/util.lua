@@ -46,6 +46,7 @@ return {
 			return {
 				lsp = { auto_attach = true },
 				highlight = true,
+				separator = "  ",
 			}
 		end,
 	},
