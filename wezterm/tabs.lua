@@ -5,6 +5,10 @@ M.arrow_solid = ""
 M.arrow_thin = ""
 M.icons = {
 	["v"] = wezterm.nerdfonts.custom_vim,
+	["cargo"] = "",
+	["cr"] = "",
+	["ct"] = "",
+	["cw"] = "",
 }
 
 function M.title(tab, max_width)

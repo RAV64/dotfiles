@@ -18,14 +18,19 @@ if status is-interactive
 
   source $HOME/dotfiles/work/work.fish
 
+  alias v "nvim"
+
   alias la "eza -lag --icons"
   alias lt "eza -lg --icons --tree --level=3"
-  alias g "lazygit"
-  alias v "nvim"
 
   alias cr "cargo run"
   alias ct "cargo test"
   alias cw "cargo watch -x"
+
+  alias g "lazygit"
+  alias ga "git add"
+  alias gc "git commit -a"
+  alias gd "git diff HEAD"
 
   set -gx PATH $PATH /opt/homebrew/bin
   set -gx PATH $PATH ~/.dotnet/tools
