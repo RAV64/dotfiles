@@ -112,7 +112,6 @@ def install_arkenfox():
     print("❗️Running prefsCleaner.sh")
     os.system("bash prefsCleaner.sh")
 
-
     print("\n❗️Arkenfox is now installed\n")
 
 

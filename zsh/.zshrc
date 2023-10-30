@@ -30,13 +30,6 @@ export PATH="$PATH:/Users/miki/.dotnet/tools"
 
 bindkey -s '^f' 'cd $(fd --type directory --ignore-file $HOME/dotfiles/zsh/.fdignore --base-directory $HOME/ -a -H | fzf)^M'
 
-plugins=(git
-nvm
-zsh-syntax-highlighting
-rust
-)
-
-source "$HOME/dotfiles/zsh/.oh-my-zsh/oh-my-zsh.sh"
 
 alias lghub="/Applications/lghub.app/Contents/Frameworks/lghub_updater.app/Contents/MacOS/lghub_updater"
 alias ll="exa -l -g --icons"
