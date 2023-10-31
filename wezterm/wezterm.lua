@@ -9,7 +9,6 @@ config.front_end = "WebGpu"
 config.webgpu_power_preference = "HighPerformance"
 
 require("colorscheme").setup(config)
-require("links").setup(config)
 require("keys").setup(config)
 require("tabs").setup(config)
 
