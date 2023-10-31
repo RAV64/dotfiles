@@ -27,6 +27,8 @@ if status is-interactive
   alias ct "cargo test"
   alias cw "cargo watch -x"
 
+  alias watch "watchexec"
+
   alias g "lazygit"
   alias ga "git add"
   alias gc "git commit -a"
