@@ -25,9 +25,9 @@ return {
 		"Wansmer/treesj",
 		keys = { "<space>m", "<space>j", "<space>s" },
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		config = function()
-			require("treesj").setup({ notify = false })
-		end,
+		opts = {
+			notify = false,
+		},
 	},
 	{
 		"windwp/nvim-ts-autotag",
