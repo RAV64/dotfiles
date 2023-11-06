@@ -12,7 +12,9 @@ local process_icon = {
 	shell = { { Foreground = { Color = "#cdd6f4" } }, { Text = "   " } },
 	runner = { { Foreground = { Color = "#b4befe" } }, { Text = " 󰜎  " } },
 	docs = { { Text = "   " } },
-	puke = { { Foreground = { Color = "#89e051" } }, { Text = " 󰎙  " } },
+	node = { { Foreground = { Color = "#89e051" } }, { Text = " 󰎙  " } },
+	update = { { Text = "   " } },
+	brew = { { Text = " 󱄖  " } },
 }
 
 local icons = {
@@ -29,7 +31,8 @@ local icons = {
 	["mdbook"] = process_icon.docs,
 	["cargo-watch"] = process_icon.runner,
 	["watch"] = process_icon.runner,
-	["node"] = process_icon.puke,
+	["node"] = process_icon.node,
+	["ruby"] = process_icon.brew,
 }
 
 local process_name_cache = {}
@@ -43,7 +46,7 @@ local function cwd_cacher(name)
 end
 
 local function ps_cacher(name)
-	process_name_cache[name] = fmt(icons[name:match("[^/]*$")])
+	process_name_cache[name] = fmt(icons[name:match("[^/]*$")] or { { Text = name:match("[^/]*$") .. " " } })
 	return process_name_cache[name]
 end
 

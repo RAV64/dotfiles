@@ -39,21 +39,16 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "Outline",
-	callback = function()
-		vim.cmd("setlocal signcolumn=no")
-	end,
-})
+local home_dir = os.getenv("HOME")
 
 local run_formatter = function(text)
 	local split = vim.split(text, "\n")
 	local result = table.concat(vim.list_slice(split, 2, #split - 1), "\n")
-	-- local bin = vim.api.nvim_get_runtime_file("bin/format_sql.py", false)[1]
+	print(home_dir)
 
 	local j = require("plenary.job"):new({
 		command = "bun",
-		args = { "run", "sql-formatter", "-c", "$HOME/dotfiles/tool_configs/sql-formatter.json" },
+		args = { "run", "sql-formatter", "-c", home_dir .. "/dotfiles/tool_configs/sql-formatter.json" },
 		writer = { result },
 	})
 	return j:sync()
@@ -81,17 +76,12 @@ end
 local format_sql = function(bufnr)
 	bufnr = bufnr or vim.api.nvim_get_current_buf()
 
-	if vim.bo[bufnr].filetype ~= "rust" then
-		vim.notify("can only be used in rust")
-		return
-	end
-
 	local root = get_root(bufnr)
 
 	local changes = {}
 	for id, node in embedded_sql:iter_captures(root, bufnr, 0, -1) do
 		local name = embedded_sql.captures[id]
-		if name == "sql" then
+		if name == "injected.content" then
 			-- { start row, start col, end row, end col }
 			local range = { node:range() }
 			local indentation = string.rep(" ", range[2])

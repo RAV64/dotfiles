@@ -14,7 +14,20 @@ return {
 		{ "<bs>", desc = "Decrement selection", mode = "x" },
 	},
 	opts = {
-		ensure_installed = { "c", "lua", "vim", "vimdoc", "rust", "toml", "python", "markdown", "json", "fish", "sql" },
+		ensure_installed = {
+			"c",
+			"lua",
+			"vim",
+			"vimdoc",
+			"rust",
+			"toml",
+			"python",
+			"markdown",
+			"json",
+			"fish",
+			"sql",
+			"csv",
+		},
 		highlight = { enable = true },
 		indent = { enable = true },
 		incremental_selection = {
