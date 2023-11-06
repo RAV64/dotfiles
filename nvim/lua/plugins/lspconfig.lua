@@ -1,9 +1,7 @@
 return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPost", "BufNewFile", "BufWritePre" },
-	dependencies = {
-		{ "folke/neodev.nvim", opts = {} },
-	},
+	dependencies = { { "folke/neodev.nvim", config = true } },
 
 	keys = function()
 		local telescope = require("telescope.builtin")
@@ -68,32 +66,22 @@ return {
 		diagnostics = {
 			underline = true,
 			update_in_insert = false,
-			virtual_text = {
-				spacing = 4,
-				source = "if_many",
-				prefix = "●",
-			},
+			virtual_text = { spacing = 4, source = "if_many", prefix = "●" },
 			severity_sort = true,
 		},
-
-		inlay_hints = {
-			enabled = true,
-		},
-
-		format_notify = false,
+		inlay_hints = { enabled = true },
 	},
 	config = function(_, opts)
-		local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-		local capabilities = vim.tbl_deep_extend(
-			"force",
-			{},
-			vim.lsp.protocol.make_client_capabilities(),
-			has_cmp and cmp_nvim_lsp.default_capabilities() or {}
-		)
-
+		local cmp_nvim_lsp = require("cmp_nvim_lsp")
 		local lspconfig = require("lspconfig")
 
 		local inlay_hint = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
+		vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
+		local capabilities = vim.tbl_deep_extend(
+			"force",
+			vim.lsp.protocol.make_client_capabilities(),
+			cmp_nvim_lsp.default_capabilities()
+		)
 
 		for name, lsp in pairs(opts.servers) do
 			lspconfig[name].setup({
@@ -109,7 +97,5 @@ return {
 				end,
 			})
 		end
-
-		vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 	end,
 }

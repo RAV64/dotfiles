@@ -12,9 +12,15 @@ return {
 		},
 	},
 	opts = {
+		formatters = {
+			rustfmt = {
+				command = "rustfmt",
+				args = { "+nightly", "--edition", "2021", "-q", "--emit=stdout" },
+			},
+		},
 		formatters_by_ft = {
 			lua = { "stylua" },
-			python = { "ruff_fix", "black" },
+			python = { "ruff_format", "ruff_fix" },
 			rust = { "rustfmt" },
 		},
 		format_on_save = {
@@ -22,8 +28,7 @@ return {
 			lsp_fallback = true,
 		},
 	},
-	config = function(_, opts)
+	init = function()
 		vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-		require("conform").setup(opts)
 	end,
 }

@@ -4,46 +4,57 @@ local M = {}
 local home_dir = os.getenv("HOME")
 local fmt = wezterm.format
 
+local process_icon = {
+	rust = { { Foreground = { Color = "#f5a97f" } }, { Text = "   " } },
+	vim = { { Foreground = { Color = "#89e051" } }, { Text = "   " } },
+	git = { Foreground = { Color = "#41535b" }, { Text = " 󰊢  " } },
+	python = { { Foreground = { Color = "#F7CE57" } }, { Text = "   " } },
+	shell = { { Foreground = { Color = "#cdd6f4" } }, { Text = "   " } },
+	runner = { { Foreground = { Color = "#b4befe" } }, { Text = " 󰜎  " } },
+	docs = { { Text = "   " } },
+	puke = { { Foreground = { Color = "#89e051" } }, { Text = " 󰎙  " } },
+}
+
 local icons = {
-	["nvim"] = { { Foreground = { Color = "#89e051" } }, { Text = wezterm.nerdfonts.custom_vim } },
-	["git"] = { Foreground = { Color = "#41535b" }, { Text = "󰊢" } },
-	["Python"] = { { Foreground = { Color = "#F7CE57" } }, { Text = "" } },
-	["fish"] = { { Foreground = { Color = "#cdd6f4" } }, { Text = "" } },
-	["zsh"] = { { Foreground = { Color = "#cdd6f4" } }, { Text = "" } },
-	["bash"] = { { Foreground = { Color = "#cdd6f4" } }, { Text = "" } },
-	["cargo-watch"] = { { Foreground = { Color = "#f5a97f" } }, { Text = "" } },
-	["cargo-make"] = { { Foreground = { Color = "#f5a97f" } }, { Text = "" } },
-	["cargo"] = { { Foreground = { Color = "#f5a97f" } }, { Text = "" } },
-	["cr"] = { { Foreground = { Color = "#f5a97f" } }, { Text = "" } },
-	["ct"] = { { Foreground = { Color = "#f5a97f" } }, { Text = "" } },
-	["mdbook"] = { { Text = "" } },
-	["watch"] = { { Text = "󰜎" } },
-	["node"] = { { Foreground = { Color = "#89e051" } }, { Text = "󰎙" } },
+	["nvim"] = process_icon.vim,
+	["git"] = process_icon.git,
+	["Python"] = process_icon.python,
+	["fish"] = process_icon.shell,
+	["zsh"] = process_icon.shell,
+	["bash"] = process_icon.shell,
+	["cargo-make"] = process_icon.rust,
+	["cargo"] = process_icon.rust,
+	["cr"] = process_icon.rust,
+	["ct"] = process_icon.rust,
+	["mdbook"] = process_icon.docs,
+	["cargo-watch"] = process_icon.runner,
+	["watch"] = process_icon.runner,
+	["node"] = process_icon.puke,
 }
 
 local process_name_cache = {}
 local current_dir_cache = {
-	[home_dir] = "~",
+	[home_dir] = "~ ",
 }
 
-local function cwd_b_c(name)
-	current_dir_cache[name] = name:match("[^/]*$")
+local function cwd_cacher(name)
+	current_dir_cache[name] = name:match("[^/]*$") .. " "
 	return current_dir_cache[name]
 end
 
-local function process_b_c(name)
+local function ps_cacher(name)
 	process_name_cache[name] = fmt(icons[name:match("[^/]*$")])
 	return process_name_cache[name]
 end
 
-local function process(tab)
+local function ps(tab)
 	return process_name_cache[tab.active_pane.foreground_process_name]
-		or process_b_c(tab.active_pane.foreground_process_name)
+		or ps_cacher(tab.active_pane.foreground_process_name)
 end
 
 local function cwd(tab)
 	return current_dir_cache[tab.active_pane.current_working_dir.file_path]
-		or cwd_b_c(tab.active_pane.current_working_dir.file_path)
+		or cwd_cacher(tab.active_pane.current_working_dir.file_path)
 end
 
 function M.setup(config)
@@ -55,8 +66,8 @@ function M.setup(config)
 	config.show_tab_index_in_tab_bar = false
 	config.show_new_tab_button_in_tab_bar = false
 
-	local active_bg <const> = config.colors.tab_bar.active_tab.bg_color
-	local inactive_bg <const> = config.colors.tab_bar.inactive_tab.bg_color
+	local active_bg = config.colors.tab_bar.active_tab.bg_color
+	local inactive_bg = config.colors.tab_bar.inactive_tab.bg_color
 
 	---@diagnostic disable-next-line: unused-local
 	wezterm.on("format-tab-title", function(tab, tabs, panes, _config, hover, max_width)
@@ -65,10 +76,7 @@ function M.setup(config)
 				if tab.is_active then
 					return {
 						{ Attribute = { Intensity = "Bold" } },
-						{
-							Text = i < 5 and " " .. process(tab) .. "  " .. cwd(tab) .. " "
-								or i .. " " .. process(tab) .. " ",
-						},
+						{ Text = i < 5 and ps(tab) .. cwd(tab) or i .. ps(tab) },
 						{ Foreground = { Color = active_bg } },
 						{ Background = { Color = inactive_bg } },
 						{ Text = "" },
@@ -76,10 +84,7 @@ function M.setup(config)
 				elseif tabs[i + 1] and tabs[i + 1].is_active then
 					return {
 						{ Attribute = { Intensity = "Normal" } },
-						{
-							Text = i < 5 and " " .. process(tab) .. "  " .. cwd(tab) .. " "
-								or i .. " " .. process(tab) .. " ",
-						},
+						{ Text = i < 5 and ps(tab) .. cwd(tab) or i .. ps(tab) },
 						{ Foreground = { Color = inactive_bg } },
 						{ Background = { Color = active_bg } },
 						{ Text = "" },
@@ -87,10 +92,7 @@ function M.setup(config)
 				else
 					return {
 						{ Attribute = { Intensity = "Normal" } },
-						{
-							Text = i < 5 and " " .. process(tab) .. "  " .. cwd(tab) .. " "
-								or i .. " " .. process(tab) .. " ",
-						},
+						{ Text = i < 5 and ps(tab) .. cwd(tab) or i .. ps(tab) },
 						{ Foreground = { Color = "#313244" } },
 						{ Background = { Color = inactive_bg } },
 						{ Text = "" },
