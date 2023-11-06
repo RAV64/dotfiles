@@ -107,6 +107,7 @@ return {
 					CmpItemKindOperator = { fg = base, bg = C.blue },
 					CmpItemKindTypeParameter = { fg = base, bg = C.blue },
 					CmpItemKindCopilot = { fg = base, bg = C.teal },
+					["@injection.content"] = { bg = C.surface0 },
 				}
 			end,
 		})
