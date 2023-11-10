@@ -6,7 +6,7 @@ return {
 	event = "InsertEnter",
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
-		"hrsh7th/cmp-buffer",
+		-- "hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-path",
 		"saadparwaiz1/cmp_luasnip",
 	},
@@ -58,12 +58,12 @@ return {
 				{ name = "nvim_lsp" },
 				{ name = "luasnip" },
 				{ name = "path" },
-				{ name = "buffer" },
+				-- { name = "buffer" },
 			}),
 			formatting = {
 				fields = { "kind", "abbr" },
 				format = function(_, item)
-					item.kind = string.format("%s", " " .. icons[item.kind] .. " ")
+					item.kind = " " .. icons[item.kind] .. " "
 					item.menu = "" -- Removes empty space from completion menu
 					return item
 				end,

@@ -60,6 +60,7 @@ opt.fillchars = {
 
 vim.g.neo_tree_remove_legacy_commands = 1
 vim.g.markdown_recommended_style = 0
+vim.g.disable_rainbow_hover = 1 -- rainbow csv
 
 -- make all keymaps silent by default
 local keymap_set = vim.keymap.set

@@ -3,5 +3,6 @@
   "tabWidth": 2,
   "keywordCase": "upper",
   "commaPosition": "before",
-  "linesBetweenQueries": 1
+  "linesBetweenQueries": 1,
+  "expressionWidth": 80
 }

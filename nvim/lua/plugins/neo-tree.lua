@@ -1,9 +1,9 @@
 return {
 	"nvim-neo-tree/neo-tree.nvim",
-	branch = "v3.x",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"MunifTanjim/nui.nvim",
+		"nvim-tree/nvim-web-devicons",
 	},
 
 	cmd = "Neotree",
@@ -25,10 +25,12 @@ return {
 				indent_size = 2,
 				padding = 1,
 			},
+			icon = {
+				folder_empty = "",
+			},
 		},
 		close_if_last_window = false,
 		filesystem = {
-			use_libuv_file_watcher = true,
 			bind_to_cwd = false,
 			follow_current_file = {
 				enabled = true,
@@ -43,9 +45,6 @@ return {
 			mappings = {
 				["<space>"] = "none",
 			},
-		},
-		icon = {
-			folder_empty = "",
 		},
 	},
 }
