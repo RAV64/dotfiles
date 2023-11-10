@@ -48,7 +48,7 @@ local run_formatter = function(text)
 
 	local j = require("plenary.job"):new({
 		command = "bun",
-		args = { "run", "sql-formatter", "-c", home_dir .. "/dotfiles/tool_configs/sql-formatter.json" },
+		args = { "run", "sql-formatter", "-c", home_dir .. "/dotfiles/tool-configs/sql-formatter.json" },
 		writer = { result },
 	})
 	return j:sync()
@@ -57,13 +57,17 @@ end
 local embedded_sql = vim.treesitter.query.parse(
 	"rust",
 	[[
-(call_expression
- (field_expression
-  field: (field_identifier) @_field (#eq? @_field "query"))
+((string_literal) @sql
+((#match? @sql "^\"(\n)?(SELECT|DELETE|UPDATE|INSERT INTO|CREATE|ALTER TABLE|DROP)")
+(#offset! @sql 0 1 0 -1)))
 
- (arguments
-  (raw_string_literal) @sql)
-  (#offset! @sql 0 1 0 -1))
+((raw_string_literal) @sql
+((#match? @sql "^r\"(\n)?(SELECT|DELETE|UPDATE|INSERT INTO|CREATE|ALTER TABLE|DROP)")
+(#offset! @sql 0 2 0 -1)))
+
+((raw_string_literal) @sql
+((#match? @sql "^r#\"(\n)?(SELECT|DELETE|UPDATE|INSERT INTO|CREATE|ALTER TABLE|DROP)")
+(#offset! @sql 0 3 0 -2)))
 ]]
 )
 
@@ -81,17 +85,16 @@ local format_sql = function(bufnr)
 	local changes = {}
 	for id, node in embedded_sql:iter_captures(root, bufnr, 0, -1) do
 		local name = embedded_sql.captures[id]
-		if name == "injected.content" then
+		if name == "sql" then
 			-- { start row, start col, end row, end col }
 			local range = { node:range() }
-			local indentation = string.rep(" ", range[2])
 
 			-- Run the formatter, based on the node text
 			local formatted = run_formatter(vim.treesitter.get_node_text(node, bufnr))
 
 			-- Add some indentation (can be anything you like!)
 			for idx, line in ipairs(formatted) do
-				formatted[idx] = indentation .. line
+				formatted[idx] = line
 			end
 
 			-- Keep track of changes

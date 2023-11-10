@@ -24,16 +24,18 @@ return {
 			},
 			lualine_c = {
 				{
-					function()
-						return require("nvim-navic").get_location()
-					end,
-					cond = function()
-						return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
-					end,
+					"navic",
+					navic_opts = nil,
 				},
 			},
 			lualine_x = {},
-			lualine_y = { "searchcount" },
+			lualine_y = {
+				{
+					"searchcount",
+					maxcount = 999,
+					timeout = 500,
+				},
+			},
 			lualine_z = {
 				{ "progress", separator = "", padding = { left = 1, right = 0 } },
 				{ "location", padding = { left = 0, right = 1 } },

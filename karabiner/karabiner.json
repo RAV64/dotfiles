@@ -114,7 +114,7 @@
                   }
                 },
                 "to": {
-                  "shell_command": "open -a 'safari.app'"
+                  "shell_command": "open -a 'orion.app'"
                 },
                 "type": "basic"
               },
