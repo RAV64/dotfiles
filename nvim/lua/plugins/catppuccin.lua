@@ -100,6 +100,7 @@ return {
 					CmpItemKindOperator = { fg = base, bg = C.blue },
 					CmpItemKindTypeParameter = { fg = base, bg = C.blue },
 					CmpItemKindCopilot = { fg = base, bg = C.teal },
+					NeoTreeWinSeparator = { fg = C.mantle, bg = C.mantle },
 					["@codeblock"] = { bg = C.surface0 },
 				}
 			end,
