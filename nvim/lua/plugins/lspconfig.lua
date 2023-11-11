@@ -1,8 +1,7 @@
 return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPost", "BufNewFile", "BufWritePre" },
-	dependencies = { { "folke/neodev.nvim", config = true } },
-
+	-- dependencies = { { "folke/neodev.nvim", config = true } },
 	keys = function()
 		local telescope = require("telescope.builtin")
 		-- stylua: ignore
@@ -34,6 +33,7 @@ return {
 					Lua = {
 						workspace = { checkThirdParty = false },
 						telemetry = { enable = false },
+						diagnostics = { globals = { "vim" } },
 					},
 				},
 			},

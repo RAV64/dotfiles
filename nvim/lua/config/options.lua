@@ -6,7 +6,6 @@ local opt = vim.opt
 opt.autowrite = true -- enable auto write
 opt.clipboard = "unnamedplus" -- sync with system clipboard
 opt.cmdheight = 0
-opt.completeopt = "menu,menuone,noselect"
 opt.confirm = true -- confirm to save changes before exiting modified buffer
 opt.cursorline = true -- Enable highlighting of the current line
 opt.expandtab = true -- Use spaces instead of tabs
@@ -60,7 +59,6 @@ opt.fillchars = {
 
 vim.g.neo_tree_remove_legacy_commands = 1
 vim.g.markdown_recommended_style = 0
-vim.g.disable_rainbow_hover = 1 -- rainbow csv
 
 -- make all keymaps silent by default
 local keymap_set = vim.keymap.set
@@ -70,7 +68,3 @@ vim.keymap.set = function(mode, lhs, rhs, opts)
 	opts.silent = opts.silent ~= false
 	return keymap_set(mode, lhs, rhs, opts)
 end
-
-vim.api.nvim_create_user_command("W", function()
-	vim.cmd("update")
-end, {})

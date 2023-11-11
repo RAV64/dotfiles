@@ -1,33 +1,10 @@
 return {
-	{ "JoosepAlviste/nvim-ts-context-commentstring", lazy = true, opts = {
-		enable_autocmd = false,
-	} },
-	{
-		"echasnovski/mini.comment",
-		event = "VeryLazy",
-		opts = {
-			options = {
-				custom_commentstring = function()
-					return require("ts_context_commentstring.internal").calculate_commentstring()
-						or vim.bo.commentstring
-				end,
-			},
-		},
-	},
-	{
-		"echasnovski/mini.bufremove",
-		-- stylua: ignore
-		keys = {
-			{ "<leader>bd", function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer" },
-			{ "<leader>bD", function() require("mini.bufremove").delete(0, true) end,  desc = "Delete Buffer (Force)" },
-			{ "<S-q>", function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer" },
-		},
-	},
-
+	{ "echasnovski/mini.hipatterns", event = "BufReadPre", config = true },
+	{ "echasnovski/mini.comment", event = "BufReadPost", config = true },
 	{
 		"echasnovski/mini.ai",
-		event = "VeryLazy",
-		dependencies = { "nvim-treesitter-textobjects" },
+		event = "BufReadPost",
+		dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
 		opts = function()
 			local ai = require("mini.ai")
 			return {
@@ -46,7 +23,7 @@ return {
 	},
 	{
 		"echasnovski/mini.surround",
-		event = "VeryLazy",
+		event = "BufReadPost",
 		opts = {
 			mappings = {
 				add = "<leader>sa", -- Add surrounding in Normal and Visual modes
@@ -59,5 +36,16 @@ return {
 			},
 		},
 	},
-	{ "echasnovski/mini.hipatterns", event = "VeryLazy", opts = {} },
+	{
+		"echasnovski/mini.bufremove",
+		keys = function()
+			local delete = require("mini.bufremove").delete
+			-- stylua: ignore
+			return {
+				{ "<leader>bd", function() delete(0, false) end, desc = "Delete Buffer" },
+				{ "<leader>bD", function() delete(0, true) end, desc = "Delete Buffer (Force)" },
+				{ "<S-q>", function() delete(0, false) end, desc = "Delete Buffer" },
+			}
+		end,
+	},
 }

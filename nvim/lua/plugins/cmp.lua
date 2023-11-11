@@ -63,7 +63,7 @@ return {
 			formatting = {
 				fields = { "kind", "abbr" },
 				format = function(_, item)
-					item.kind = " " .. icons[item.kind] .. " "
+					item.kind = " " .. icons[item.kind]
 					item.menu = "" -- Removes empty space from completion menu
 					return item
 				end,
