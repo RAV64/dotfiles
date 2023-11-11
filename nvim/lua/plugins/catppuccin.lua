@@ -8,27 +8,20 @@ return {
 			flavour = "mocha",
 			transparent_background = false,
 			integrations = {
-				cmp = true,
-				gitsigns = true,
-				indent_blankline = {
-					enabled = true,
-					colored_indent_levels = true,
-				},
+				alpha = false,
+				dashboard = false,
+				neogit = false,
+				nvimtree = false,
+				ufo = false,
+				dap = { enabled = false, enable_ui = false },
+
+				indent_blankline = { enabled = true, colored_indent_levels = true },
+
 				leap = true,
-				noice = true,
-				native_lsp = {
-					enabled = true,
-					inlay_hints = {
-						background = true,
-					},
-				},
-				treesitter = true,
-				treesitter_context = true,
-				rainbow_delimiters = true,
-				telescope = true,
 				neotree = true,
-				navic = { enabled = true, custom_bg = "NONE" },
+				noice = true,
 				notify = true,
+				treesitter_context = true,
 			},
 			color_overrides = {
 				mocha = {

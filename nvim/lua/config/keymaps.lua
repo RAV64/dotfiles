@@ -32,8 +32,18 @@ vim.keymap.set("i", "<S-Enter>", "<esc>o")
 
 vim.keymap.set({ "n", "x" }, "gw", "*N", { desc = "Search word under cursor" })
 
-vim.keymap.set({ "n" }, "=", "$", { desc = "Go to end of line" })
+vim.keymap.set("n", "=", "$", { desc = "Go to end of line" })
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 vim.keymap.set({ "n", "x", "o" }, "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
 vim.keymap.set({ "n", "x", "o" }, "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
+
+for i = 1, 9 do
+	vim.keymap.set("n", "<leader>" .. i, function()
+		vim.cmd("LualineBuffersJump! " .. i)
+	end)
+end
+
+vim.keymap.set("n", "<leader>" .. 0, function()
+	vim.cmd("LualineBuffersJump! $")
+end)

@@ -16,6 +16,7 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 require("lazy").setup({
 	spec = {
 		{ import = "plugins" },
+		-- { import = "extras.dart" },
 	},
 	defaults = {
 		version = false,
