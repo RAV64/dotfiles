@@ -74,18 +74,15 @@ return {
 
 	{
 		"aznhe21/actions-preview.nvim",
-		keys = function()
-			local actions = require("actions-preview")
-			return {
-				{
-					"ga",
-					function()
-						actions.code_actions()
-					end,
-					desc = "Get code actions",
-				},
-			}
-		end,
+		keys = {
+			{
+				"ga",
+				function()
+					require("actions-preview").code_actions()
+				end,
+				desc = "Get code actions",
+			},
+		},
 		opts = {
 			telescope = {
 				layout_strategy = "vertical",
