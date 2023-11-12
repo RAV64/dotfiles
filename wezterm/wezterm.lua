@@ -1,28 +1,22 @@
 local wezterm = require("wezterm")
-
-local config = {}
-if wezterm.config_builder then
-	config = wezterm.config_builder()
-end
+local config = wezterm.config_builder()
 
 config.front_end = "WebGpu"
 config.webgpu_power_preference = "HighPerformance"
+config.animation_fps = 30
 
 require("colorscheme").setup(config)
 require("keys").setup(config)
 require("tabs").setup(config)
+require("fonts").setup(config)
 
 config.default_cursor_style = "BlinkingUnderline"
 config.force_reverse_video_cursor = true
 config.cursor_thickness = 2
 
-config.font = wezterm.font({ family = "Firacode Nerd Font" })
-config.font_size = 14
-
 config.send_composed_key_when_left_alt_is_pressed = true
 config.window_close_confirmation = "NeverPrompt"
 config.window_decorations = "RESIZE"
 config.enable_scroll_bar = false
-config.animation_fps = 30
 
 return config
