@@ -102,6 +102,7 @@ return {
 					CmpItemKindCopilot = { fg = base, bg = C.teal },
 					NeoTreeWinSeparator = { fg = C.mantle, bg = C.mantle },
 					["@codeblock"] = { bg = C.surface0 },
+					["@comment"] = { italic = true, fg = C.rosewater },
 				}
 			end,
 		})
