@@ -1,7 +1,5 @@
 return {
 	{ "nvim-treesitter/nvim-treesitter-context", config = true, event = "BufReadPost" },
-	{ "Aasim-A/scrollEOF.nvim", config = true, event = "BufReadPre" },
-
 	{
 		"saecki/crates.nvim",
 		event = { "BufRead Cargo.toml" },

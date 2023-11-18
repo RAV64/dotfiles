@@ -3,19 +3,16 @@ return {
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
 		version = false,
-		keys = function()
-			local telescope = require("telescope.builtin")
 		-- stylua: ignore
-		return {
-			{ "<leader>ff", function() telescope.find_files() end, desc = "Find Files" },
-			{ "<leader>fF", function() telescope.find_files({ hidden = true, no_ignore = true }) end, desc = "Find Files" },
-			{ "<leader>fl", function() telescope.live_grep() end, desc = "Find Line" },
-			{ "<leader>fb", function() telescope.buffers() end, desc = "File Browser" },
-			{ "<leader>fh", function() telescope.help_tags() end, desc = "Find Help" },
-			{ "<leader>fo", function() telescope.oldfiles() end, desc = "Previous files" },
-			{ "<leader>fs", function() telescope.lsp_document_symbols() end, desc = "Find symbols" },
-		}
-		end,
+		keys = {
+			{ "<leader>ff", function() require("telescope.builtin").find_files() end, desc = "Find Files" },
+			{ "<leader>fF", function() require("telescope.builtin").find_files({ hidden = true, no_ignore = true }) end, desc = "Find Files" },
+			{ "<leader>fl", function() require("telescope.builtin").live_grep() end, desc = "Find Line" },
+			{ "<leader>fb", function() require("telescope.builtin").buffers() end, desc = "File Browser" },
+			{ "<leader>fh", function() require("telescope.builtin").help_tags() end, desc = "Find Help" },
+			{ "<leader>fo", function() require("telescope.builtin").oldfiles() end, desc = "Previous files" },
+			{ "<leader>fs", function() require("telescope.builtin").lsp_document_symbols() end, desc = "Find symbols" },
+		},
 		dependencies = {
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 			{ "nvim-lua/plenary.nvim" },
