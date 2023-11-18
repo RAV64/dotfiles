@@ -20,8 +20,6 @@ return {
 				leap = true,
 				neotree = true,
 				noice = true,
-				notify = true,
-				treesitter_context = true,
 			},
 			color_overrides = {
 				mocha = {
@@ -49,13 +47,6 @@ return {
 				local base = C.base
 				local tPreview = "#181818"
 				return {
-					-- CmpItemAbbr = { fg = base, bg = C.overlay2 },
-					-- CmpItemAbbrDeprecated = { fg = base, bg = C.overlay0, style = { "strikethrough" } },
-					-- CmpItemKind = { fg = base, bg = C.blue },
-					-- CmpItemMenu = { fg = base, bg = C.text },
-					-- CmpItemAbbrMatch = { fg = base, bg = C.text, style = { "bold" } },
-					-- CmpItemAbbrMatchFuzzy = { fg = base, bg = C.text, style = { "bold" } },
-
 					CursorLine = { bg = C.surface1 },
 					TelescopeNormal = { bg = C.mantle },
 					TelescopeBorder = { bg = C.mantle },
@@ -73,6 +64,7 @@ return {
 					CmpBackground = { bg = C.mantle },
 
 					LazyNormal = { bg = C.mantle },
+					CmpGhostText = { italic = true },
 
 					CmpItemKindSnippet = { fg = base, bg = C.mauve },
 					CmpItemKindKeyword = { fg = base, bg = C.red },
@@ -101,6 +93,9 @@ return {
 					CmpItemKindTypeParameter = { fg = base, bg = C.blue },
 					CmpItemKindCopilot = { fg = base, bg = C.teal },
 					NeoTreeWinSeparator = { fg = C.mantle, bg = C.mantle },
+					TreeSitterContext = { bg = C.mantle },
+					TreeSitterContextBottom = { underline = true },
+					TreeSitterContextLineNumber = { fg = C.overlay2, bg = C.mantle },
 					["@codeblock"] = { bg = C.surface0 },
 					["@comment"] = { italic = true, fg = C.rosewater },
 				}

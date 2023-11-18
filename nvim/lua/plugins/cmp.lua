@@ -1,4 +1,4 @@
-local icons = require("config.defaults").icons
+local icons = require("config.util").icons
 
 return {
 	"hrsh7th/nvim-cmp",
@@ -11,7 +11,6 @@ return {
 		"saadparwaiz1/cmp_luasnip",
 	},
 	opts = function()
-		vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
 		local default = require("cmp.config.default")()
@@ -63,7 +62,7 @@ return {
 			formatting = {
 				fields = { "kind", "abbr" },
 				format = function(_, item)
-					item.kind = " " .. icons[item.kind]
+					item.kind = " " .. icons[item.kind] .. " "
 					item.menu = "" -- Removes empty space from completion menu
 					return item
 				end,

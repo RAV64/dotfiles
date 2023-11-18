@@ -1,27 +1,24 @@
 return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPost", "BufNewFile", "BufWritePre" },
-	-- dependencies = { { "folke/neodev.nvim", config = true } },
-	keys = function()
-		local telescope = require("telescope.builtin")
-		-- stylua: ignore
-		return {
+  -- dependencies = { { "folke/neodev.nvim", config = true } },
+  -- stylua: ignore
+  keys = {
 			{ "K", vim.lsp.buf.hover, desc = "Hover" },
 			{ "gr", vim.lsp.buf.rename, desc = "Rename" },
-			{ "gd", function() telescope.lsp_definitions({ reuse_win = true }) end, desc = "Goto Definition" },
+			{ "gd", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, desc = "Goto Definition" },
 			{ "gD", vim.lsp.buf.declaration, desc = "Get Declaration" },
 			{ "gk", vim.diagnostic.goto_prev, desc = "Goto previous diagnostics" },
 			{ "gj", vim.diagnostic.goto_next, desc = "Goto next diagnostics" },
 			{ "ge", vim.diagnostic.open_float, desc = "Open diagnostics" },
 			{ "<C-s>", vim.lsp.buf.signature_help, desc = "Show signature", mode = "i" },
-			{ "gu", function() telescope.lsp_references() end, desc = "Get Usages" },
-			{ "gi", function() telescope.lsp_implementations({ reuse_win = true }) end, desc = "Get implementations", },
-			{ "gt", function() telescope.lsp_type_definitions({ reuse_win = true }) end, desc = "Get type definitions", },
+			{ "gu", function() require("telescope.builtin").lsp_references() end, desc = "Get Usages" },
+			{ "gi", function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end, desc = "Get implementations", },
+			{ "gt", function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end, desc = "Get type definitions", },
 			{ "gwa", vim.lsp.buf.add_workspace_folder, desc = "add_workspace_folder" },
 			{ "gwr", vim.lsp.buf.remove_workspace_folder, "remove_workspace_folder" },
 			{ "gwl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, "list_workspace_folders", },
-		}
-	end,
+  },
 	opts = {
 		servers = {
 			pyright = { cmd = { "bun", "run", "pyright-langserver", "--stdio" } },
@@ -41,15 +38,18 @@ return {
 				settings = {
 					["rust-analyzer"] = {
 						cargo = {
+							allFeatures = true,
 							loadOutDirsFromCheck = true,
 							runBuildScripts = true,
 						},
-						check = {
+						checkOnSave = {
+							allFeatures = true,
 							command = "clippy",
-							features = "all",
 							extraArgs = { "--no-deps" },
 						},
-						procMacro = { enable = true },
+						procMacro = {
+							enable = true,
+						},
 					},
 				},
 			},

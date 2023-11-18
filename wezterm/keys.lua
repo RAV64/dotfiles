@@ -12,8 +12,8 @@ function M.setup(config)
 		{ key = "k", mods = "CMD", action = act({ ActivatePaneDirection = "Up" }) },
 		{ key = "j", mods = "CMD", action = act({ ActivatePaneDirection = "Down" }) },
 		{ key = "h", mods = "CMD|SHIFT", action = act({ AdjustPaneSize = { "Left", 2 } }) },
-		{ key = "l", mods = "CMD|SHIFT", action = act({ AdjustPaneSize = { "Right", 2 } }) },
-		{ key = "k", mods = "CMD|SHIFT", action = act({ AdjustPaneSize = { "Up", 2 } }) },
+		{ key = "l", mods = "CMD|SHIFT", action = act({ AdjustPaneSize = { "Right", 3 } }) },
+		{ key = "k", mods = "CMD|SHIFT", action = act({ AdjustPaneSize = { "Up", 3 } }) },
 		{ key = "j", mods = "CMD|SHIFT", action = act({ AdjustPaneSize = { "Down", 2 } }) },
 	}
 end

@@ -1,12 +1,13 @@
 return {
 	"lewis6991/gitsigns.nvim",
 	event = { "BufReadPre", "BufNewFile" },
+  -- stylua: ignore
 	keys = {
-		{ "<leader>vb", "<cmd>lua require'gitsigns'.blame_line{full=true}<cr>", desc = "Line blame" },
-		{ "<leader>vn", "<cmd>Gitsigns next_hunk<cr>", desc = "Next hunk" },
-		{ "<leader>vp", "<cmd>Gitsigns prev_hunk<cr>", desc = "Previous hunk" },
-		{ "<leader>vs", "<cmd>Telescope git_status<cr>", desc = "Git status" },
-		{ "<leader>vh", "<cmd>Gitsigns preview_hunk_inline<cr>", desc = "Git status" },
+		{ "<leader>vb", function() require("gitsigns").blame_line({ full = true }) end, desc = "Line blame" },
+		{ "<leader>vn", function() require("gitsigns").next_hunk() end, desc = "Next hunk" },
+		{ "<leader>vp", function() require("gitsigns").prev_hunk() end, desc = "Previous hunk" },
+		{ "<leader>vs", function() require("telescope.builtin").git_status() end, desc = "Git status" },
+		{ "<leader>vh", function() require("gitsigns").preview_hunk_inline() end, desc = "Preview hunk inline" },
 	},
 	opts = {
 		signs = {
