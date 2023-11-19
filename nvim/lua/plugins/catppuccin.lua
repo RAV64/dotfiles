@@ -15,8 +15,6 @@ return {
 				ufo = false,
 				dap = { enabled = false, enable_ui = false },
 
-				indent_blankline = { enabled = true, colored_indent_levels = true },
-
 				leap = true,
 				neotree = true,
 				noice = true,

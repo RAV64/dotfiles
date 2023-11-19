@@ -1,13 +1,24 @@
 return {
 	{ "echasnovski/mini.hipatterns", event = "BufReadPre", config = true },
-	{ "echasnovski/mini.comment", event = "BufReadPost", config = true },
+	{
+		"echasnovski/mini.comment",
+		event = "BufReadPost",
+		config = function()
+			local hipatterns = require("mini.hipatterns")
+			hipatterns.setup({
+				highlighters = {
+					hex_color = hipatterns.gen_highlighter.hex_color(),
+				},
+			})
+		end,
+	},
 	{
 		"echasnovski/mini.ai",
 		event = "BufReadPost",
 		dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
-		opts = function()
+		config = function()
 			local ai = require("mini.ai")
-			return {
+			ai.setup({
 				n_lines = 500,
 				custom_textobjects = {
 					o = ai.gen_spec.treesitter({
@@ -18,7 +29,7 @@ return {
 					c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }, {}),
 					t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" },
 				},
-			}
+			})
 		end,
 	},
 	{

@@ -43,6 +43,10 @@ vim.api.nvim_create_user_command("W", function()
 	vim.cmd("update")
 end, {})
 
+local update_lead = require("config.util").update_lead()
+update_lead()
+vim.api.nvim_create_autocmd("OptionSet", { pattern = { "listchars", "tabstop", "filetype" }, callback = update_lead })
+
 local home_dir = os.getenv("HOME")
 
 local run_formatter = function(text)

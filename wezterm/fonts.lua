@@ -31,6 +31,16 @@ function M.setup(config)
 				family = font.krypton,
 				weight = "ExtraLight",
 				harfbuzz_features = all_features,
+				italic = false,
+			}),
+		},
+		{
+			intensity = "Bold",
+			italic = true,
+			font = wezterm.font({
+				family = font.xenon,
+				harfbuzz_features = all_features,
+				weight = "Regular",
 			}),
 		},
 	}
