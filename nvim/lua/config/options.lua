@@ -8,24 +8,18 @@ opt.clipboard = "unnamedplus" -- sync with system clipboard
 opt.cmdheight = 0
 opt.confirm = true -- confirm to save changes before exiting modified buffer
 opt.cursorline = true -- Enable highlighting of the current line
-opt.expandtab = true -- Use spaces instead of tabs
 opt.formatoptions = "jcroqlnt" -- tcqj
 opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
 opt.ignorecase = true -- Ignore case
 opt.inccommand = "nosplit" -- preview incremental substitute
-opt.joinspaces = false -- No double spaces with join after a dot
 opt.laststatus = 0
-opt.list = true -- Show some invisible characters (tabs...
-opt.listchars = { tab = "  ", nbsp = "+", trail = "·", extends = "→", precedes = "←" }
 opt.mouse = "a" -- enable mouse mode
 opt.number = true -- Print line number
 opt.pumheight = 10 -- Maximum number of entries in a popup
 opt.relativenumber = true -- Relative line numbers
 opt.scrolloff = 16 -- Lines of context
 opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
-opt.shiftround = true -- Round indent
-opt.shiftwidth = 2 -- Size of an indent
 opt.shortmess:append({ W = true, I = true, c = true, C = true })
 opt.showmode = false -- dont show mode since we have a statusline
 opt.sidescrolloff = 8 -- Columns of context
@@ -36,7 +30,6 @@ opt.spelllang = { "en" }
 opt.splitbelow = true -- Put new windows below current
 opt.splitkeep = "screen"
 opt.splitright = true -- Put new windows right of current
-opt.tabstop = 2 -- Number of spaces tabs count for
 opt.termguicolors = true -- True color support
 -- opt.timeoutlen = 300
 opt.undofile = true
@@ -48,17 +41,22 @@ opt.winminwidth = 5 -- minimum window width
 opt.wrap = false -- Disable line wrap
 -- opt.smoothscroll = true -- TODO 0.10
 
-opt.fillchars = {
-	foldopen = "",
-	foldclose = "",
-	fold = " ",
-	foldsep = " ",
-	diff = "╱",
-	eob = " ",
+opt.expandtab = true
+opt.tabstop = 4
+opt.shiftwidth = 4
+opt.list = true
+opt.listchars = {
+	leadmultispace = "│   ",
+	tab = "│ ",
+	nbsp = "+",
+	trail = "·",
+	extends = "→",
+	precedes = "←",
 }
 
 vim.g.neo_tree_remove_legacy_commands = 1
 vim.g.markdown_recommended_style = 0
+vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
 -- make all keymaps silent by default
 local keymap_set = vim.keymap.set

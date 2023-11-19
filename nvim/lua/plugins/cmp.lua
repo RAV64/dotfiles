@@ -10,11 +10,11 @@ return {
 		"hrsh7th/cmp-path",
 		"saadparwaiz1/cmp_luasnip",
 	},
-	opts = function()
+	config = function()
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
 		local default = require("cmp.config.default")()
-		return {
+		cmp.setup({
 			window = {
 				completion = {
 					col_offset = -3,
@@ -73,6 +73,6 @@ return {
 					hl_group = "CmpGhostText",
 				},
 			},
-		}
+		})
 	end,
 }

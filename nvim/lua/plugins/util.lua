@@ -1,11 +1,6 @@
 return {
 	{ "nvim-treesitter/nvim-treesitter-context", config = true, event = "BufReadPost" },
-	{
-		"saecki/crates.nvim",
-		event = { "BufRead Cargo.toml" },
-		dependencies = { "nvim-lua/plenary.nvim" },
-		config = true,
-	},
+	{ "HiPhish/rainbow-delimiters.nvim", event = "BufReadPre" },
 	{
 		"ggandor/leap.nvim",
 		event = "BufReadPost",
