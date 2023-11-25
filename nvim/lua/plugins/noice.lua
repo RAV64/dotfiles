@@ -14,9 +14,6 @@ return {
 				["vim.lsp.util.stylize_markdown"] = true,
 				["cmp.entry.get_documentation"] = true,
 			},
-			signature = {
-				enabled = false,
-			},
 		},
 		health = { checker = false },
 		smart_move = { enabled = false },

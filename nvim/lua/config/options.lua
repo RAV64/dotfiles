@@ -39,8 +39,12 @@ opt.updatetime = 200 -- save swap file and trigger CursorHold
 opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 5 -- minimum window width
 opt.wrap = false -- Disable line wrap
+opt.ruler = false
 -- opt.smoothscroll = true -- TODO 0.10
 
+opt.shiftround = true
+opt.softtabstop = -1
+opt.virtualedit = "block"
 opt.expandtab = true
 opt.tabstop = 4
 opt.shiftwidth = 4

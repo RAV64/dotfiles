@@ -1,5 +1,3 @@
-local icons = require("config.util").icons
-
 return {
 	"hrsh7th/nvim-cmp",
 	version = false,
@@ -11,6 +9,7 @@ return {
 		"saadparwaiz1/cmp_luasnip",
 	},
 	config = function()
+		local icons = require("config.util").icons
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
 		local default = require("cmp.config.default")()
