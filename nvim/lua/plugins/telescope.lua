@@ -1,3 +1,5 @@
+local builtin
+
 return {
 	{
 		"nvim-telescope/telescope.nvim",
@@ -5,13 +7,19 @@ return {
 		version = false,
 		-- stylua: ignore
 		keys = {
-			{ "<leader>ff", function() require("telescope.builtin").find_files() end, desc = "Find Files" },
-			{ "<leader>fF", function() require("telescope.builtin").find_files({ hidden = true, no_ignore = true }) end, desc = "Find Files" },
-			{ "<leader>fl", function() require("telescope.builtin").live_grep() end, desc = "Find Line" },
-			{ "<leader>fb", function() require("telescope.builtin").buffers() end, desc = "File Browser" },
-			{ "<leader>fh", function() require("telescope.builtin").help_tags() end, desc = "Find Help" },
-			{ "<leader>fo", function() require("telescope.builtin").oldfiles() end, desc = "Previous files" },
-			{ "<leader>fs", function() require("telescope.builtin").lsp_document_symbols() end, desc = "Find symbols" },
+      { "<leader>ff", function() builtin.find_files() end, desc = "Find Files" },
+      { "<leader>fF", function() builtin.find_files({ hidden = true, no_ignore = true }) end, desc = "Find Files" },
+      { "<leader>fl", function() builtin.live_grep() end, desc = "Find Line" },
+      { "<leader>fb", function() builtin.buffers() end, desc = "File Browser" },
+      { "<leader>fh", function() builtin.help_tags() end, desc = "Find Help" },
+      { "<leader>fo", function() builtin.oldfiles() end, desc = "Previous files" },
+      { "<leader>fs", function() builtin.lsp_document_symbols() end, desc = "Find symbols" },
+      { "<leader>vs", function() builtin.git_status() end, desc = "Git status" },
+      { "<leader>fd", function() builtin.diagnostics() end, desc = "LSP diagnostics" },
+      { "gd", function() builtin.lsp_definitions({ reuse_win = true }) end, desc = "Goto Definition" },
+      { "gu", function() builtin.lsp_references() end, desc = "Get Usages" },
+      { "gi", function() builtin.lsp_implementations({ reuse_win = true }) end, desc = "Get implementations", },
+      { "gt", function() builtin.lsp_type_definitions({ reuse_win = true }) end, desc = "Get type definitions", },
 		},
 		dependencies = {
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
@@ -20,6 +28,7 @@ return {
 		config = function()
 			local telescope = require("telescope")
 			local actions = require("telescope.actions")
+			builtin = require("telescope.builtin")
 
 			telescope.setup({
 				defaults = {

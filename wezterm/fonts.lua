@@ -41,6 +41,7 @@ function M.setup(config)
 				family = font.xenon,
 				harfbuzz_features = all_features,
 				weight = "Regular",
+				italic = false,
 			}),
 		},
 	}

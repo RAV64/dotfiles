@@ -1,17 +1,5 @@
 return {
-	{ "echasnovski/mini.hipatterns", event = "BufReadPre", config = true },
-	{
-		"echasnovski/mini.comment",
-		event = "BufReadPost",
-		config = function()
-			local hipatterns = require("mini.hipatterns")
-			hipatterns.setup({
-				highlighters = {
-					hex_color = hipatterns.gen_highlighter.hex_color(),
-				},
-			})
-		end,
-	},
+	{ "echasnovski/mini.comment", event = "BufReadPost", config = true },
 	{
 		"echasnovski/mini.ai",
 		event = "BufReadPost",
