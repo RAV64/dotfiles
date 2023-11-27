@@ -14,7 +14,6 @@ return {
 				ufo = false,
 				dap = { enabled = false, enable_ui = false },
 
-				leap = true,
 				neotree = true,
 				noice = true,
 			},
