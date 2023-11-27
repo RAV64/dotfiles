@@ -19,9 +19,16 @@ opt.mouse = "a" -- enable mouse mode
 opt.number = true -- Print line number
 opt.pumheight = 10 -- Maximum number of entries in a popup
 opt.relativenumber = true -- Relative line numbers
+opt.numberwidth = 1 -- tight linenr
 opt.scrolloff = 16 -- Lines of context
 opt.sessionoptions = { "buffers", "curdir", "winsize" }
-opt.shortmess:append({ W = true, I = true, c = true, C = true })
+opt.shortmess:append({
+	W = true, -- Don't print "written" when editing
+	I = true, -- No splash screen
+	c = true, -- Don't show ins-completion-menu messages (match 1 of 2)
+	C = true, -- Don't show messages while scannign ins-completion items (scanning tags)
+	s = true, -- Don't show "Search hit BOTTOM" message
+})
 opt.showmode = false -- dont show mode since we have a statusline
 opt.sidescrolloff = 8 -- Columns of context
 opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
@@ -60,6 +67,11 @@ opt.listchars = {
 vim.g.neo_tree_remove_legacy_commands = 1
 vim.g.markdown_recommended_style = 0
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_node_provider = 0
+vim.g.loaded_perl_provider = 0
 
 -- make all keymaps silent by default
 local keymap_set = vim.keymap.set

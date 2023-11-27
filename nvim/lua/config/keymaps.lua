@@ -1,49 +1,59 @@
-vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+local set = vim.keymap.set
 
-vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
+local n = "n" -- normal
+local x = "x" -- visual
+local i = "i" -- insert
+local t = "t" -- term
+local o = "o"
+local nx = { n, x }
+local ni = { n, i }
+local nxo = { n, x, o }
 
-vim.keymap.set("v", "<", "<gv")
-vim.keymap.set("v", ">", ">gv")
+set(n, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+set(n, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
-vim.keymap.set("n", "<C-l>", "<cmd>:Lazy<cr>", { desc = "Lazy" })
+set(ni, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
 
-vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
+set(x, "<", "<gv")
+set(x, ">", ">gv")
 
-vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
+set(n, "<C-l>", "<cmd>:Lazy<cr>", { desc = "Lazy" })
 
-vim.keymap.set("n", "<leader>h", "<C-w>h", { desc = "Go to left window" })
-vim.keymap.set("n", "<leader>j", "<C-w>j", { desc = "Go to lower window" })
-vim.keymap.set("n", "<leader>k", "<C-w>k", { desc = "Go to upper window" })
-vim.keymap.set("n", "<leader>l", "<C-w>l", { desc = "Go to right window" })
+set(n, "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
 
--- Resize window using <ctrl> arrow keys
-vim.keymap.set("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
-vim.keymap.set("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
-vim.keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
-vim.keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
+set(t, "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
+
+set(n, "<leader>h", "<C-w>h", { desc = "Go to left window" })
+set(n, "<leader>j", "<C-w>j", { desc = "Go to lower window" })
+set(n, "<leader>k", "<C-w>k", { desc = "Go to upper window" })
+set(n, "<leader>l", "<C-w>l", { desc = "Go to right window" })
+
+set(n, "<Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
+set(n, "<Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
+set(n, "<Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
+set(n, "<Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 
 -- undo breakpoints in insert mode
-vim.keymap.set("i", ",", ",<c-g>u")
-vim.keymap.set("i", ".", ".<c-g>u")
-vim.keymap.set("i", ";", ";<c-g>u")
+set(i, ",", ",<c-g>u")
+set(i, ".", ".<c-g>u")
+set(i, ";", ";<c-g>u")
 
-vim.keymap.set("i", "<S-Enter>", "<esc>o")
+set(i, "<S-Enter>", "<esc>o")
 
-vim.keymap.set({ "n", "x" }, "gw", "*N", { desc = "Search word under cursor" })
+set(nx, "gw", "*N", { desc = "Search word under cursor" })
 
-vim.keymap.set("n", "=", "$", { desc = "Go to end of line" })
+set(n, "=", "$", { desc = "Go to end of line" })
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
-vim.keymap.set({ "n", "x", "o" }, "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
-vim.keymap.set({ "n", "x", "o" }, "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
+set(nxo, "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
+set(nxo, "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 
-for i = 1, 9 do
-	vim.keymap.set("n", "<leader>" .. i, function()
-		vim.cmd("LualineBuffersJump! " .. i)
+for idx = 1, 9 do
+	set(n, "<leader>" .. idx, function()
+		vim.cmd("LualineBuffersJump! " .. idx)
 	end)
 end
 
-vim.keymap.set("n", "<leader>" .. 0, function()
+set(n, "<leader>" .. 0, function()
 	vim.cmd("LualineBuffersJump! $")
 end)

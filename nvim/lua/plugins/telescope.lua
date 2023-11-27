@@ -14,6 +14,7 @@ return {
       { "<leader>fh", function() builtin.help_tags() end, desc = "Find Help" },
       { "<leader>fo", function() builtin.oldfiles() end, desc = "Previous files" },
       { "<leader>fs", function() builtin.lsp_document_symbols() end, desc = "Find symbols" },
+      { "<leader>fws", function() builtin.lsp_workspace_symbols() end, desc = "Find workspace symbols" },
       { "<leader>vs", function() builtin.git_status() end, desc = "Git status" },
       { "<leader>fd", function() builtin.diagnostics() end, desc = "LSP diagnostics" },
       { "gd", function() builtin.lsp_definitions({ reuse_win = true }) end, desc = "Goto Definition" },
@@ -23,7 +24,6 @@ return {
 		},
 		dependencies = {
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-			{ "nvim-lua/plenary.nvim" },
 		},
 		config = function()
 			local telescope = require("telescope")

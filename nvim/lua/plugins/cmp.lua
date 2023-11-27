@@ -4,9 +4,28 @@ return {
 	event = "InsertEnter",
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
-		-- "hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-path",
-		"saadparwaiz1/cmp_luasnip",
+		{
+			"saadparwaiz1/cmp_luasnip",
+			dependencies = {
+				"L3MON4D3/LuaSnip",
+				dependencies = { "rafamadriz/friendly-snippets" },
+				config = function()
+					require("luasnip.loaders.from_vscode").lazy_load()
+					local luasnip = require("luasnip")
+					vim.api.nvim_create_autocmd("InsertLeave", {
+						callback = function()
+							if
+								luasnip.session.current_nodes[vim.api.nvim_get_current_buf()]
+								and not luasnip.session.jump_active
+							then
+								luasnip.unlink_current()
+							end
+						end,
+					})
+				end,
+			},
+		},
 	},
 	config = function()
 		local icons = require("config.util").icons
@@ -67,11 +86,6 @@ return {
 				end,
 			},
 			sorting = default.sorting,
-			experimental = {
-				ghost_text = {
-					hl_group = "CmpGhostText",
-				},
-			},
 		})
 	end,
 }

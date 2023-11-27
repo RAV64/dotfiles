@@ -10,9 +10,9 @@ return {
 		{ "z", vim.diagnostic.goto_next, desc = "Goto next diagnostics" },
 		{ "ge", vim.diagnostic.open_float, desc = "Open diagnostics" },
 		{ "<C-s>", vim.lsp.buf.signature_help, desc = "Show signature", mode = "i" },
-		{ "gwa", vim.lsp.buf.add_workspace_folder, desc = "add_workspace_folder" },
-		{ "gwr", vim.lsp.buf.remove_workspace_folder, "remove_workspace_folder" },
-		{ "gwl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, "list_workspace_folders" },
+		{ "<leader>gwa", vim.lsp.buf.add_workspace_folder, desc = "add_workspace_folder" },
+		{ "<leader>gwr", vim.lsp.buf.remove_workspace_folder, "remove_workspace_folder" },
+		{ "<leader>gwl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, "list_workspace_folders" },
 	},
 	opts = {
 		servers = {
