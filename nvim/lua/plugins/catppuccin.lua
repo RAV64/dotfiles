@@ -1,7 +1,6 @@
 return {
 	"catppuccin/nvim",
 	name = "catppuccin",
-	priority = 9001,
 	init = function()
 		require("catppuccin").setup({
 			no_italic = true,

@@ -1,17 +1,13 @@
 return {
-	{ "nvim-treesitter/nvim-treesitter-context", config = true, event = "BufReadPost" },
-	{ "HiPhish/rainbow-delimiters.nvim", event = "BufReadPre" },
 	{
 		"ggandor/leap.nvim",
-		event = "BufReadPost",
+		keys = {
+			{ "s", mode = { "n", "x", "o" }, desc = "Leap forward to" },
+			{ "S", mode = { "n", "x", "o" }, desc = "Leap backward to" },
+		},
 		config = function()
-			require("leap").set_default_keymaps()
+			require("leap").add_default_mappings(true)
 		end,
 	},
-	{
-		"Wansmer/treesj",
-		keys = { "<space>m", "<space>j", "<space>s" },
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		opts = { notify = false },
-	},
+	{ "boltlessengineer/smart-tab.nvim", keys = { { mode = "i", "<tab>" } }, opts = { skips = {} } },
 }

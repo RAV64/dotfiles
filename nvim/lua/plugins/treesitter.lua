@@ -1,12 +1,17 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-	dependencies = {
-		-- { "nvim-treesitter/playground" },
-	},
 	version = false,
 	build = ":TSUpdate",
 	cmd = { "TSUpdateSync" },
-	event = { "VeryLazy" },
+	event = { "BufReadPost", "BufNewFile" },
+	dependencies = {
+		{ "nvim-treesitter/nvim-treesitter-context" },
+		{ "HiPhish/rainbow-delimiters.nvim" },
+	},
+	init = function(plugin)
+		require("lazy.core.loader").add_to_rtp(plugin)
+		require("nvim-treesitter.query_predicates")
+	end,
 	keys = {
 		{ "<c-space>", desc = "Increment selection" },
 		{ "<bs>", desc = "Decrement selection", mode = "x" },
@@ -58,25 +63,6 @@ return {
 				return true
 			end
 		end,
-		playground = {
-			enable = true,
-			updatetime = 25,
-			persist_queries = true,
-			keybindings = {
-				toggle_query_editor = "o",
-				toggle_hl_groups = "i",
-				toggle_injected_languages = "t",
-
-				-- This shows stuff like literal strings, commas, etc.
-				toggle_anonymous_nodes = "a",
-				toggle_language_display = "I",
-				focus_language = "f",
-				unfocus_language = "F",
-				update = "R",
-				goto_node = "<cr>",
-				show_help = "?",
-			},
-		},
 	},
 	config = function(_, opts)
 		require("nvim-treesitter.configs").setup(opts)

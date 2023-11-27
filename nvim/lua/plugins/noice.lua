@@ -5,6 +5,9 @@ return {
 		{ "<leader>fn", "<cmd>Noice telescope<cr>", desc = "Notification history" },
 	},
 	opts = {
+		notify = { enabled = false },
+		health = { checker = false },
+		smart_move = { enabled = false },
 		presets = {
 			bottom_search = true,
 		},
@@ -15,8 +18,6 @@ return {
 				["cmp.entry.get_documentation"] = true,
 			},
 		},
-		health = { checker = false },
-		smart_move = { enabled = false },
 		routes = {
 			{
 				filter = {
