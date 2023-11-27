@@ -11,6 +11,7 @@ return {
       { "<leader>fF", function() builtin.find_files({ hidden = true, no_ignore = true }) end, desc = "Find Files" },
       { "<leader>fl", function() builtin.live_grep() end, desc = "Find Line" },
       { "<leader>fb", function() builtin.buffers() end, desc = "File Browser" },
+      { "<leader>fm", function() builtin.marks() end, desc = "File Marks" },
       { "<leader>fh", function() builtin.help_tags() end, desc = "Find Help" },
       { "<leader>fo", function() builtin.oldfiles() end, desc = "Previous files" },
       { "<leader>fs", function() builtin.lsp_document_symbols() end, desc = "Find symbols" },
