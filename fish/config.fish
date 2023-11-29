@@ -34,10 +34,10 @@ if status is-interactive
   alias gc "git commit -a"
   alias gd "git diff HEAD"
 
-  set -gx PATH $PATH /opt/homebrew/bin
+  set -gx PATH /opt/homebrew/bin $PATH
+  set -gx PATH /opt/homebrew/sbin $PATH
   set -gx PATH $PATH ~/.dotnet/tools
   set -gx PATH $PATH ~/.cargo/bin
-  set -gx PATH $PATH ~/Developer/flutter/bin
   set -gx PATH $PATH ~/dotfiles/scripts/bin
   set -gx PATH $PATH ~/.local/bin
 

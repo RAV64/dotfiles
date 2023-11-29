@@ -3,6 +3,8 @@ node_modules
 *.gif
 *.gpg
 *.png
+*.json
+*.csv
 *cache
 
 .git

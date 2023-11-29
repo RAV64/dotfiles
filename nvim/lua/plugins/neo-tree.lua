@@ -13,27 +13,25 @@ return {
 	},
 
 	opts = {
-		sources = { "filesystem", "buffers", "git_status", "document_symbols" },
-		open_files_do_not_replace_types = { "terminal", "Trouble", "qf", "Outline" },
+		sources = { "filesystem", "document_symbols" },
+		open_files_do_not_replace_types = { "terminal", "qf" },
 		default_component_configs = {
-			indent = {
-				indent_size = 2,
-				padding = 1,
-			},
-			icon = {
-				folder_empty = "",
-			},
+			file_size = { enabled = false },
+			type = { enabled = false },
+			last_modified = { enabled = false },
+			created = { enabled = false },
 		},
 		close_if_last_window = false,
 		filesystem = {
 			bind_to_cwd = false,
+			use_libuv_file_watcher = true,
 			follow_current_file = {
 				enabled = true,
 				leave_dirs_open = true,
 			},
-
 			filtered_items = {
 				visible = true,
+				never_show = { ".DS_Store" },
 			},
 		},
 		window = {
