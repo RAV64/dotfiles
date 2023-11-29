@@ -43,23 +43,27 @@ vim.api.nvim_create_user_command("W", function()
 	vim.cmd("update")
 end, {})
 
-local update_lead = require("config.util").update_lead()
 local function ft(filetypes, callback)
 	vim.api.nvim_create_autocmd("FileType", {
 		pattern = filetypes,
-		callback = function()
-			callback()
-			update_lead()
-		end,
+		callback = callback,
 	})
 end
+
+local update_lead = require("config.util").update_lead()
 
 ft({ "rust", "python" }, function()
 	vim.opt_local.shiftwidth = 4
 	vim.opt_local.tabstop = 4
+	update_lead()
 end)
 
 ft({ "lua" }, function()
 	vim.opt_local.shiftwidth = 2
 	vim.opt_local.tabstop = 2
+	update_lead()
+end)
+
+ft({ "markdown" }, function()
+	vim.opt_local.wrap = true
 end)
