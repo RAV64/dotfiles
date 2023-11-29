@@ -1,3 +1,5 @@
+local luasnip
+
 return {
 	"hrsh7th/nvim-cmp",
 	version = false,
@@ -12,7 +14,7 @@ return {
 				dependencies = { "rafamadriz/friendly-snippets" },
 				config = function()
 					require("luasnip.loaders.from_vscode").lazy_load()
-					local luasnip = require("luasnip")
+					luasnip = require("luasnip")
 					vim.api.nvim_create_autocmd("InsertLeave", {
 						callback = function()
 							if
@@ -30,7 +32,6 @@ return {
 	config = function()
 		local icons = require("config.util").icons
 		local cmp = require("cmp")
-		local luasnip = require("luasnip")
 		local default = require("cmp.config.default")()
 		cmp.setup({
 			window = {

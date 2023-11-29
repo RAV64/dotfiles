@@ -1,19 +1,42 @@
 return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPost", "BufNewFile", "BufWritePre" },
-    -- stylua: ignore
-	keys = {
-		{ "K", vim.lsp.buf.hover, desc = "Hover" },
-		{ "gr", vim.lsp.buf.rename, desc = "Rename" },
-		{ "gD", vim.lsp.buf.declaration, desc = "Get Declaration" },
-		{ "Z", vim.diagnostic.goto_prev, desc = "Goto previous diagnostics" },
-		{ "z", vim.diagnostic.goto_next, desc = "Goto next diagnostics" },
-		{ "ge", vim.diagnostic.open_float, desc = "Open diagnostics" },
-		{ "<C-s>", vim.lsp.buf.signature_help, desc = "Show signature", mode = "i" },
-		{ "<leader>gwa", vim.lsp.buf.add_workspace_folder, desc = "add_workspace_folder" },
-		{ "<leader>gwr", vim.lsp.buf.remove_workspace_folder, "remove_workspace_folder" },
-		{ "<leader>gwl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, "list_workspace_folders" },
+	dependencies = {
+		{
+			"stevearc/conform.nvim",
+			opts = {
+				formatters = {
+					rustfmt = {
+						command = "rustfmt",
+						args = { "+nightly", "--edition", "2021", "-q", "--emit=stdout" },
+					},
+				},
+				formatters_by_ft = {
+					lua = { "stylua" },
+					python = { "ruff_format", "ruff_fix" },
+					rust = { "rustfmt" },
+				},
+				format_on_save = {
+					timeout_ms = 500,
+					lsp_fallback = true,
+				},
+			},
+		},
 	},
+  -- stylua: ignore
+  keys = {
+    { "K", vim.lsp.buf.hover, desc = "Hover" },
+    { "gr", vim.lsp.buf.rename, desc = "Rename" },
+    { "gD", vim.lsp.buf.declaration, desc = "Get Declaration" },
+    { "Z", vim.diagnostic.goto_prev, desc = "Goto previous diagnostics" },
+    { "z", vim.diagnostic.goto_next, desc = "Goto next diagnostics" },
+    { "ge", vim.diagnostic.open_float, desc = "Open diagnostics" },
+    { "<C-s>", vim.lsp.buf.signature_help, desc = "Show signature", mode = "i" },
+    { "<leader>gwa", vim.lsp.buf.add_workspace_folder, desc = "add_workspace_folder" },
+    { "<leader>gwr", vim.lsp.buf.remove_workspace_folder, "remove_workspace_folder" },
+    { "<leader>gwl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, "list_workspace_folders" },
+    { "gf", function() require("conform").format({ async = true, lsp_fallback = true }) end, desc = "Format buffer", },
+  },
 	opts = {
 		servers = {
 			pyright = { cmd = { "bun", "run", "pyright-langserver", "--stdio" } },

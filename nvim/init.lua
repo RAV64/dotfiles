@@ -16,7 +16,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	spec = {
 		{ "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim" },
-		{ import = "plugins" },
+		{ import = "plugin" },
 	},
 	defaults = { version = false, lazy = true },
 	change_detection = { enabled = false },

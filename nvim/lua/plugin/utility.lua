@@ -3,33 +3,6 @@ return {
 	{ "echasnovski/mini.comment", keys = { "gc", mode = { "n", "x" }, desc = "Comment" }, config = true },
 	{ "echasnovski/mini.pairs", event = "InsertEnter", config = true },
 	{
-		"echasnovski/mini.ai",
-		keys = {
-			{ "a", mode = { "x", "o" } },
-			{ "i", mode = { "x", "o" } },
-		},
-		dependencies = {
-			{
-				"nvim-treesitter/nvim-treesitter-textobjects",
-				init = function()
-					require("lazy.core.loader").disable_rtp_plugin("nvim-treesitter-textobjects")
-				end,
-			},
-		},
-		config = function()
-			local ai = require("mini.ai")
-			local ts_gen = ai.gen_spec.treesitter
-			ai.setup({
-				n_lines = 500,
-				custom_textobjects = {
-					["?"] = false,
-					f = ts_gen({ a = "@function.outer", i = "@function.inner" }),
-					c = ts_gen({ a = "@class.outer", i = "@class.inner" }),
-				},
-			})
-		end,
-	},
-	{
 		"echasnovski/mini.surround",
 		event = "BufReadPost",
 		opts = {
@@ -37,6 +10,12 @@ return {
 				add = "<leader>sa",
 				delete = "<leader>sd",
 				replace = "<leader>sc",
+
+				-- Disable
+				find = "",
+				find_left = "",
+				highlight = "",
+				update_n_lines = "",
 			},
 		},
 	},
@@ -57,8 +36,9 @@ return {
 			{ "S", mode = { "n", "x", "o" }, desc = "Leap backward to" },
 		},
 		config = function()
-			require("leap").add_default_mappings(true)
-			require("leap").opts.safe_labels = {}
+			local leap = require("leap")
+			leap.add_default_mappings(true)
+			leap.opts.safe_labels = {}
 		end,
 	},
 }
