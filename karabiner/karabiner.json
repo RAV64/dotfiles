@@ -114,7 +114,7 @@
                                     }
                                 },
                                 "to": {
-                                    "shell_command": "open -a 'orion.app'"
+                                    "shell_command": "open -a 'firefox nightly.app'"
                                 },
                                 "type": "basic"
                             },

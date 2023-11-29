@@ -11,13 +11,12 @@ if not vim.loop.fs_stat(lazypath) then
 		lazypath,
 	})
 end
-vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
+vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	spec = {
 		{ "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim" },
 		{ import = "plugins" },
-		-- { import = "extras.dart" },
 	},
 	defaults = { version = false, lazy = true },
 	change_detection = { enabled = false },
