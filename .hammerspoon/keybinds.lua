@@ -1,5 +1,5 @@
-Super = { "cmd", "ctrl", "alt" }
-Hyper = { "cmd", "ctrl", "alt", "shift" }
+SUPER = { "cmd", "ctrl", "alt" }
+HYPER = { "cmd", "ctrl", "alt", "shift" }
 
 Launch = hs.application.launchOrFocus
 Bind = hs.hotkey.bind
@@ -8,7 +8,7 @@ Bind = hs.hotkey.bind
 __AppLauncher = function()
 	AppLauncher = function(app_map)
 		for key, app in pairs(app_map) do
-			Bind(Super, key, function()
+			Bind(SUPER, key, function()
 				Launch(app)
 			end)
 		end
@@ -32,7 +32,7 @@ end
 __WindowManager = function(wm)
 	WindowManager = function(move)
 		for key, func in pairs(move) do
-			Bind(Hyper, key, func)
+			Bind(HYPER, key, func)
 		end
 	end
 
@@ -40,10 +40,10 @@ __WindowManager = function(wm)
 		f = wm.maximizeWindow,
 		c = wm.centerOnScreen,
 
-		h = wm.leftHalf,
-		j = wm.bottomHalf,
-		k = wm.topHalf,
-		l = wm.rightHalf,
+		h = wm.toHalf(wm.left_half),
+		j = wm.toHalf(wm.bottom_half),
+		k = wm.toHalf(wm.top_half),
+		l = wm.toHalf(wm.right_half),
 	})
 end
 
