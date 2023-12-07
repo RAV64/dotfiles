@@ -1,20 +1,20 @@
 SUPER = { "cmd", "ctrl", "alt" }
 HYPER = { "cmd", "ctrl", "alt", "shift" }
 
-Launch = hs.application.launchOrFocus
-Bind = hs.hotkey.bind
+local launch = hs.application.launchOrFocus
+local bind = hs.hotkey.bind
 
 -- APP LAUNCHER --------------------------
-__AppLauncher = function()
-	AppLauncher = function(app_map)
+local AppLauncher = function()
+	local __AppLauncher = function(app_map)
 		for key, app in pairs(app_map) do
-			Bind(SUPER, key, function()
-				Launch(app)
+			bind(SUPER, key, function()
+				launch(app)
 			end)
 		end
 	end
 
-	AppLauncher({
+	__AppLauncher({
 		a = "music",
 		s = "bitwarden",
 		b = "firefox nightly",
@@ -29,14 +29,14 @@ __AppLauncher = function()
 end
 
 -- WINDOW MANAGER ------------------------
-__WindowManager = function(wm)
-	WindowManager = function(move)
+local WindowManager = function(wm)
+	local __WindowManager = function(move)
 		for key, func in pairs(move) do
-			Bind(HYPER, key, func)
+			bind(HYPER, key, func)
 		end
 	end
 
-	WindowManager({
+	__WindowManager({
 		f = wm.maximizeWindow,
 		c = wm.centerOnScreen,
 
@@ -48,6 +48,6 @@ __WindowManager = function(wm)
 end
 
 return function(config)
-	__AppLauncher()
-	__WindowManager(config.wm)
+	AppLauncher()
+	WindowManager(config.wm)
 end
