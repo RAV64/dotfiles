@@ -1,9 +1,15 @@
+#! /bin/bash
+
 ln -fs ~/dotfiles/nvim ~/.config
 ln -fs ~/dotfiles/bat ~/.config
-ln -fs ~/dotfiles/karabiner ~/.config
 ln -fs ~/dotfiles/fish ~/.config
 ln -fs ~/dotfiles/wezterm ~/.config
-ln -fs ~/dotfiles/.hammerspoon ~/
+ln -f ~/dotfiles/starship.toml ~/.config/starship.toml
+
 ln -f ~/dotfiles/.ignore ~/
 ln -f ~/dotfiles/.gitconfig ~/
-ln -f ~/dotfiles/starship.toml ~/.config/starship.toml
+
+if [[ $(uname) == 'Darwin' ]]; then
+    ln -fs ~/dotfiles/.hammerspoon ~/
+    ln -fs ~/dotfiles/karabiner ~/.config
+fi
