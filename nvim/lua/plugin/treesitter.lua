@@ -27,6 +27,7 @@ return {
 				"diff",
 				"fish",
 				"html",
+				"htmldjango",
 				"javascript",
 				"jsdoc",
 				"json",

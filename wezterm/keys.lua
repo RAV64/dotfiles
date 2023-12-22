@@ -15,6 +15,8 @@ function M.setup(config)
 		{ key = "l", mods = "CMD|SHIFT", action = act({ AdjustPaneSize = { "Right", 3 } }) },
 		{ key = "k", mods = "CMD|SHIFT", action = act({ AdjustPaneSize = { "Up", 3 } }) },
 		{ key = "j", mods = "CMD|SHIFT", action = act({ AdjustPaneSize = { "Down", 2 } }) },
+		{ key = "ö", mods = "CMD", action = act.ActivateTabRelative(-1) },
+		{ key = "ä", mods = "CMD", action = act.ActivateTabRelative(1) },
 	}
 end
 return M

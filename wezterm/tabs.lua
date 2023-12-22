@@ -41,6 +41,7 @@ local icons = {
 local process_name_cache = {}
 local current_dir_cache = {
 	[home_dir] = "~ ",
+	DEBUG = " ",
 }
 
 local function cwd_cacher(name)
@@ -59,7 +60,8 @@ local function ps(tab)
 end
 
 local function cwd(tab)
-	return current_dir_cache[tab.active_pane.current_working_dir.file_path]
+	local dir = tab.active_pane.current_working_dir
+	return current_dir_cache[dir and dir.file_path or "DEBUG"]
 		or cwd_cacher(tab.active_pane.current_working_dir.file_path)
 end
 
