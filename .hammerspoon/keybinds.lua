@@ -17,7 +17,7 @@ local AppLauncher = function()
 	__AppLauncher({
 		a = "music",
 		s = "bitwarden",
-		b = "firefox nightly",
+		b = "firefox developer edition",
 		c = "calendar",
 		f = "finder",
 		h = "homeassistant",
