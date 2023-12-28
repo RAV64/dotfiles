@@ -43,8 +43,10 @@ vim.api.nvim_create_user_command("W", function()
 	vim.cmd("update")
 end, {})
 
+local filetype_group = vim.api.nvim_create_augroup("my_filetype_group", {})
 local function ft(filetypes, callback)
 	vim.api.nvim_create_autocmd("FileType", {
+		group = filetype_group,
 		pattern = filetypes,
 		callback = callback,
 	})
@@ -67,3 +69,28 @@ end)
 ft({ "markdown" }, function()
 	vim.opt_local.wrap = true
 end)
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+	callback = function(args)
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		if client and client.server_capabilities.inlayHintProvider then
+			vim.lsp.inlay_hint.enable(args.buf, true)
+		end
+	end,
+})
+
+vim.api.nvim_create_augroup("macro_visual_indication", {})
+vim.api.nvim_create_autocmd("RecordingEnter", {
+	group = "macro_visual_indication",
+	callback = function()
+		vim.api.nvim_set_hl(0, "CursorLine", { bg = "#603717" })
+	end,
+})
+
+vim.api.nvim_create_autocmd("RecordingLeave", {
+	group = "macro_visual_indication",
+	callback = function()
+		vim.api.nvim_set_hl(0, "CursorLine", { bg = "#393939" })
+	end,
+})
