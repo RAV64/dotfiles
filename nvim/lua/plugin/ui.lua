@@ -72,18 +72,20 @@ return {
 			{ "<leader>fn", "<cmd>Noice telescope<cr>", desc = "Notification history" },
 		},
 		opts = {
-			notify = { enabled = false },
-			health = { checker = false },
-			smart_move = { enabled = false },
-			presets = {
-				bottom_search = true,
-			},
 			lsp = {
 				override = {
 					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 					["vim.lsp.util.stylize_markdown"] = true,
 					["cmp.entry.get_documentation"] = true,
 				},
+				-- hover = { enabled = false },
+				-- signature = { enabled = false },
+			},
+			notify = { enabled = false },
+			health = { checker = false },
+			smart_move = { enabled = false },
+			presets = {
+				bottom_search = true,
 			},
 			routes = {
 				{
@@ -284,6 +286,7 @@ return {
 					TreeSitterContextLineNumber = { fg = C.overlay2, bg = C.mantle },
 					["@codeblock"] = { bg = C.surface0 },
 					["@comment"] = { italic = true, fg = C.rosewater },
+					LspInlayHint = { fg = "#90A4AE", bg = "None", italic = true },
 				}
 			end,
 		},

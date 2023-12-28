@@ -2,7 +2,6 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPost", "BufNewFile", "BufWritePre" },
-		dependencies = { "stevearc/conform.nvim" },
     -- stylua: ignore
 		keys = {
 			{ "K", vim.lsp.buf.hover, desc = "Hover" },
@@ -15,7 +14,6 @@ return {
 			{ "<leader>gwa", vim.lsp.buf.add_workspace_folder, desc = "add_workspace_folder" },
 			{ "<leader>gwr", vim.lsp.buf.remove_workspace_folder, "remove_workspace_folder" },
 			{ "<leader>gwl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, "list_workspace_folders" },
-			{ "gf", function() require("conform").format({ async = true, lsp_fallback = true }) end, desc = "Format buffer" },
 		},
 		opts = {
 			servers = {
@@ -67,13 +65,11 @@ return {
 				virtual_text = { spacing = 4, source = "if_many", prefix = "●" },
 				severity_sort = true,
 			},
-			inlay_hints = { enabled = true },
 		},
 		config = function(_, opts)
 			local cmp_nvim_lsp = require("cmp_nvim_lsp")
 			local lspconfig = require("lspconfig")
 
-			local inlay_hint = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
 			vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 			local capabilities = vim.tbl_deep_extend(
 				"force",
@@ -86,13 +82,6 @@ return {
 					capabilities = capabilities,
 					settings = lsp.settings,
 					cmd = lsp.cmd,
-					on_attach = function(client, bufnr)
-						if opts.inlay_hints.enabled and inlay_hint then
-							if client.supports_method("textDocument/inlayHint") then
-								inlay_hint(bufnr, true)
-							end
-						end
-					end,
 				})
 			end
 		end,
@@ -100,6 +89,17 @@ return {
 
 	{
 		"stevearc/conform.nvim",
+		event = { "BufWritePre" },
+		cmd = { "ConformInfo" },
+		keys = {
+			{
+				"gf",
+				function()
+					require("conform").format({ async = true, lsp_fallback = true })
+				end,
+				desc = "Format buffer",
+			},
+		},
 		opts = {
 
 			formatters = {
@@ -107,17 +107,24 @@ return {
 					command = "rustfmt",
 					args = { "+nightly", "--edition", "2021", "-q", "--emit=stdout" },
 				},
+				sleek = {
+					command = "sleek",
+				},
 			},
 			formatters_by_ft = {
 				lua = { "stylua" },
 				python = { "ruff_format", "ruff_fix" },
 				html = { "djlint" },
 				rust = { "rustfmt" },
+				sql = { "sleek" },
 			},
 			format_on_save = {
 				timeout_ms = 500,
 				lsp_fallback = true,
 			},
 		},
+		init = function()
+			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+		end,
 	},
 }
