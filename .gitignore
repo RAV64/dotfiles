@@ -8,4 +8,6 @@ karabiner/automatic_backups
 nvim/lua/.luarc.json
 nvim/lazy-lock.json
 
+scripts/bin/nvim-macos
+
 fish/fish_variables
