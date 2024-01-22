@@ -2,11 +2,11 @@ local wezterm = require("wezterm")
 local M = {}
 
 local font = {
-	neon = "Monaspace Neon",
-	argon = "Monaspace Argon",
-	xenon = "Monaspace Xenon",
-	radon = "Monaspace Radon",
-	krypton = "Monaspace Krypton",
+	neon = "MonaspiceNe Nerd Font Mono",
+	argon = "MonaspiceAr Nerd Font Mono",
+	xenon = "MonaspiceXe Nerd Font Mono",
+	radon = "MonaspiceRn Nerd Font Mono",
+	krypton = "MonaspiceKr Nerd Font Mono",
 }
 
 -- stylua: ignore
