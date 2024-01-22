@@ -18,7 +18,9 @@ set -g ZELLIJ_AUTO_EXIT true
 set -gx EDITOR nvim
 set -gx VISUAL nvim
 
-source $HOME/dotfiles/work/work.fish
+if test -d $HOME/dotfiles/work/work.fish
+    source $HOME/dotfiles/work/work.fish
+end
 
 alias v "nvim"
 
