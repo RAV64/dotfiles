@@ -282,7 +282,6 @@ return {
 					NeoTreeWinSeparator = { fg = C.mantle, bg = C.mantle },
 					TreeSitterContext = { bg = C.mantle },
 					TreeSitterContextBottom = { underline = true },
-					LeapLabelPrimary = { bg = C.text, fg = base },
 					TreeSitterContextLineNumber = { fg = C.overlay2, bg = C.mantle },
 					["@codeblock"] = { bg = C.surface0 },
 					["@comment"] = { italic = true, fg = C.rosewater },
