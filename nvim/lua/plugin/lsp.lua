@@ -117,6 +117,7 @@ return {
 				html = { "djlint" },
 				rust = { "rustfmt" },
 				sql = { "sleek" },
+				toml = { "taplo" },
 			},
 			format_on_save = {
 				timeout_ms = 500,
