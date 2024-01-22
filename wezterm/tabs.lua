@@ -5,16 +5,16 @@ local home_dir = os.getenv("HOME")
 local fmt = wezterm.format
 
 local process_icon = {
-	rust = { { Foreground = { Color = "#f5a97f" } }, { Text = "   " } },
-	vim = { { Foreground = { Color = "#89e051" } }, { Text = "   " } },
-	git = { Foreground = { Color = "#41535b" }, { Text = " 󰊢  " } },
-	python = { { Foreground = { Color = "#F7CE57" } }, { Text = "   " } },
-	shell = { { Foreground = { Color = "#cdd6f4" } }, { Text = "   " } },
-	runner = { { Foreground = { Color = "#b4befe" } }, { Text = " 󰜎  " } },
-	docs = { { Text = "   " } },
-	node = { { Foreground = { Color = "#89e051" } }, { Text = " 󰎙  " } },
-	update = { { Text = "   " } },
-	brew = { { Text = " 󱄖  " } },
+	rust = { { Foreground = { Color = "#f5a97f" } }, { Text = "  " } },
+	vim = { { Foreground = { Color = "#89e051" } }, { Text = "  " } },
+	git = { Foreground = { Color = "#41535b" }, { Text = " 󰊢 " } },
+	python = { { Foreground = { Color = "#F7CE57" } }, { Text = "  " } },
+	shell = { { Foreground = { Color = "#cdd6f4" } }, { Text = "  " } },
+	runner = { { Foreground = { Color = "#b4befe" } }, { Text = " 󰜎 " } },
+	docs = { { Text = "  " } },
+	node = { { Foreground = { Color = "#89e051" } }, { Text = " 󰎙 " } },
+	update = { { Text = "  " } },
+	brew = { { Text = " 󱄖 " } },
 }
 
 local icons = {
@@ -45,12 +45,15 @@ local current_dir_cache = {
 }
 
 local function cwd_cacher(name)
-	current_dir_cache[name] = name:match("[^/]*$") .. " "
+	current_dir_cache[name] = " " .. name:match("[^/]*$") .. " "
 	return current_dir_cache[name]
 end
 
 local function ps_cacher(name)
-	process_name_cache[name] = fmt(icons[name:match("[^/]*$")] or { { Text = name:match("[^/]*$") .. " " } })
+	process_name_cache[name] = fmt(icons[name:match("[^/]*$")] or {
+		{ Text = "  " },
+		-- name:match("[^/]*$") .. " "
+	})
 	return process_name_cache[name]
 end
 
@@ -84,7 +87,7 @@ function M.setup(config)
 				if tab.is_active then
 					return {
 						{ Attribute = { Intensity = "Bold" } },
-						{ Text = i < 5 and ps(tab) .. cwd(tab) or i .. ps(tab) },
+						{ Text = i < 5 and ps(tab) .. cwd(tab) or " " .. i .. ps(tab) },
 						{ Foreground = { Color = active_bg } },
 						{ Background = { Color = inactive_bg } },
 						{ Text = "" },
@@ -92,7 +95,7 @@ function M.setup(config)
 				elseif tabs[i + 1] and tabs[i + 1].is_active then
 					return {
 						{ Attribute = { Intensity = "Normal" } },
-						{ Text = i < 5 and ps(tab) .. cwd(tab) or i .. ps(tab) },
+						{ Text = i < 5 and ps(tab) .. cwd(tab) or " " .. i .. ps(tab) },
 						{ Foreground = { Color = inactive_bg } },
 						{ Background = { Color = active_bg } },
 						{ Text = "" },
@@ -100,7 +103,7 @@ function M.setup(config)
 				else
 					return {
 						{ Attribute = { Intensity = "Normal" } },
-						{ Text = i < 5 and ps(tab) .. cwd(tab) or i .. ps(tab) },
+						{ Text = i < 5 and ps(tab) .. cwd(tab) or " " .. i .. ps(tab) },
 						{ Foreground = { Color = "#313244" } },
 						{ Background = { Color = inactive_bg } },
 						{ Text = "" },
