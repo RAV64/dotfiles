@@ -24,7 +24,7 @@ local AppLauncher = function()
 		m = "mail",
 		n = "obsidian",
 		t = "wezterm",
-		w = "microsoft teams (work preview)",
+		w = "microsoft teams (work or school)",
 	})
 end
 
