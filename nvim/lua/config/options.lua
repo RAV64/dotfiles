@@ -14,7 +14,7 @@ opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
 opt.ignorecase = true -- Ignore case
 opt.inccommand = "nosplit" -- preview incremental substitute
-opt.laststatus = 0
+opt.laststatus = 3
 opt.mouse = "a" -- enable mouse mode
 opt.number = true -- Print line number
 opt.pumheight = 10 -- Maximum number of entries in a popup
@@ -62,6 +62,17 @@ opt.listchars = {
 	trail = "·",
 	extends = "→",
 	precedes = "←",
+}
+
+opt.fillchars = {
+	horiz = "━",
+	horizup = "┻",
+	horizdown = "┳",
+	vert = "┃",
+	vertleft = "┫",
+	vertright = "┣",
+	verthoriz = "╋",
+	eob = " ",
 }
 
 vim.g.neo_tree_remove_legacy_commands = 1

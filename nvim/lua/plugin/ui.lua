@@ -1,71 +1,5 @@
 return {
 	{
-		"nvim-lualine/lualine.nvim",
-		event = "VeryLazy",
-		opts = {
-			extensions = { "neo-tree", "lazy" },
-			options = {
-				theme = "catppuccin",
-				globalstatus = true,
-				component_separators = "",
-				section_separators = { left = "", right = "" },
-			},
-			sections = {
-				lualine_a = { "mode" },
-				lualine_b = {
-					{
-						"filetype",
-						icon_only = true,
-						separator = "",
-						padding = { left = 1, right = 0 },
-					},
-
-					{ "filename", path = 1, symbols = { modified = "", readonly = "", unnamed = "" } },
-				},
-				lualine_c = {},
-				lualine_x = {},
-				lualine_y = {
-					{
-						"searchcount",
-						maxcount = 999,
-						timeout = 500,
-					},
-				},
-				lualine_z = {
-					{ "progress", separator = "", padding = { left = 1, right = 0 } },
-					{ "location", padding = { left = 0, right = 1 } },
-				},
-			},
-			tabline = {
-				lualine_a = {},
-				lualine_b = {},
-				lualine_c = {
-					{
-						"buffers",
-						mode = 2,
-						symbols = { alternate_file = "" },
-						max_length = function()
-							return vim.o.columns
-						end,
-						buffers_color = {
-							active = "TablineActive",
-							inactive = "TablineInactive",
-						},
-					},
-				},
-				lualine_x = {
-					{
-						"diagnostics",
-						sources = { "nvim_diagnostic" },
-					},
-				},
-				lualine_y = { "diff" },
-				lualine_z = { "branch" },
-			},
-		},
-	},
-
-	{
 		"folke/noice.nvim",
 		event = "VeryLazy",
 		keys = {
@@ -286,6 +220,19 @@ return {
 					["@codeblock"] = { bg = C.surface0 },
 					["@comment"] = { italic = true, fg = C.rosewater },
 					LspInlayHint = { fg = "#90A4AE", bg = "None", italic = true },
+					Visual = { bg = "#56496b" },
+
+					StatusLineGreen = { fg = C.green, bg = C.mantle },
+					StatusLineYellow = { fg = C.yellow, bg = C.mantle },
+					StatusLineRed = { fg = C.red, bg = C.mantle },
+					StatusLineBlue = { fg = C.blue, bg = C.mantle },
+
+					StatusLineModeNOR = { fg = C.mantle, bg = C.blue },
+					StatusLineModePEN = { fg = C.mantle, bg = C.flamingo },
+					StatusLineModeVIS = { fg = C.mantle, bg = "#56496b" },
+					StatusLineModeINS = { fg = C.mantle, bg = C.green },
+					StatusLineModeCOM = { fg = C.mantle, bg = C.flamingo },
+					StatusLineModeUNK = { fg = C.mantle, bg = C.peach },
 				}
 			end,
 		},

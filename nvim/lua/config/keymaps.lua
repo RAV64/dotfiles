@@ -47,13 +47,3 @@ set(n, "=", "$", { desc = "Go to end of line" })
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 set(nxo, "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
 set(nxo, "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
-
-for idx = 1, 9 do
-	set(n, "<leader>" .. idx, function()
-		vim.cmd("LualineBuffersJump! " .. idx)
-	end)
-end
-
-set(n, "<leader>" .. 0, function()
-	vim.cmd("LualineBuffersJump! $")
-end)
