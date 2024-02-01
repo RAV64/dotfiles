@@ -60,7 +60,7 @@ ft({ "rust", "python" }, function()
 	update_lead()
 end)
 
-ft({ "lua" }, function()
+ft({ "lua", "javascript", "javascriptreact", "typescript", "typescriptreact", "json" }, function()
 	vim.opt_local.shiftwidth = 2
 	vim.opt_local.tabstop = 2
 	update_lead()

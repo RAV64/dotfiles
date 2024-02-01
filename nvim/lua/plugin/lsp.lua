@@ -101,7 +101,6 @@ return {
 			},
 		},
 		opts = {
-
 			formatters = {
 				rustfmt = {
 					command = "rustfmt",
@@ -118,6 +117,10 @@ return {
 				rust = { "rustfmt" },
 				sql = { "sleek" },
 				toml = { "taplo" },
+				javascript = { "biome" },
+				javascriptreact = { "biome" },
+				typescript = { "biome" },
+				typescriptreact = { "biome" },
 			},
 			format_on_save = {
 				timeout_ms = 500,

@@ -11,25 +11,6 @@ return {
 		local cmp = require("cmp")
 		local compare = cmp.config.compare
 
-		-- require("cmp.entry").get_documentation = function(self)
-		-- 	local item = self:get_completion_item()
-		--
-		-- 	if item.documentation then
-		-- 		return vim.lsp.util.convert_input_to_markdown_lines(item.documentation)
-		-- 	end
-		--
-		-- 	if item.detail then
-		-- 		local ft = self.context.filetype
-		-- 		local dot_index = string.find(ft, "%.")
-		-- 		if dot_index ~= nil then
-		-- 			ft = string.sub(ft, 0, dot_index - 1)
-		-- 		end
-		-- 		return (vim.split(("```%s\n%s```"):format(ft, vim.trim(item.detail)), "\n"))
-		-- 	end
-		--
-		-- 	return {}
-		-- end
-
 		cmp.setup({
 			window = {
 				completion = {
