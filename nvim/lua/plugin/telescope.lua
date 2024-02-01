@@ -1,5 +1,14 @@
 local builtin
 
+local ts_symbol_hl = {
+	import = "@module",
+	type = "@type",
+	field = "@field",
+	method = "@method",
+	namespace = "@namespace",
+	["function"] = "@function",
+}
+
 return {
 	{
 		"nvim-telescope/telescope.nvim",
@@ -7,21 +16,25 @@ return {
 		version = false,
 		-- stylua: ignore
 		keys = {
-      { "<leader>ff", function() builtin.find_files() end, desc = "Find Files" },
-      { "<leader>fF", function() builtin.find_files({ hidden = true, no_ignore = true }) end, desc = "Find Files" },
-      { "<leader>fl", function() builtin.live_grep() end, desc = "Find Line" },
-      { "<leader>fb", function() builtin.buffers() end, desc = "File Browser" },
-      { "<leader>fm", function() builtin.marks() end, desc = "File Marks" },
-      { "<leader>fh", function() builtin.help_tags() end, desc = "Find Help" },
-      { "<leader>fo", function() builtin.oldfiles() end, desc = "Previous files" },
-      { "<leader>fs", function() builtin.lsp_document_symbols() end, desc = "Find symbols" },
-      { "<leader>fws", function() builtin.lsp_workspace_symbols() end, desc = "Find workspace symbols" },
-      { "<leader>vs", function() builtin.git_status() end, desc = "Git status" },
-      { "<leader>fd", function() builtin.diagnostics() end, desc = "LSP diagnostics" },
+      { "<leader>f", function() builtin.find_files() end, desc = "Open file picker" },
+      { "<leader>F", function() builtin.find_files({ hidden = true, no_ignore = true }) end, desc = "Open file picker (ALL)" },
+      { "<leader>b", function() builtin.buffers() end, desc = "Open buffer picker" },
+      { "<leader>j", function() builtin.jumplist() end, desc = "Open jumplist picker" },
+      { "<leader>s", function() builtin.treesitter({ignore_symbols = {"var"}, symbol_highlights = ts_symbol_hl, show_line = false}) end, desc = "Open document symbol picker (LSP)" },
+      { "<leader>S", function() builtin.lsp_workspace_symbols() end, desc = "Open workspace symbol picker (LSP)" },
+      { "<leader>d", function() builtin.diagnostics() end, desc = "Open workspace diagnostics picker (LSP)" },
+      { "<leader>l", function() builtin.live_grep() end, desc = "Global search in workspace folder" },
+      { "<leader>m", function() builtin.marks() end, desc = "File Marks" },
+      { "<leader>o", function() builtin.oldfiles() end, desc = "Previous files" },
+      { "<leader>.", function() builtin.resume() end, desc = "Open last builtin picker" },
+
       { "gd", function() builtin.lsp_definitions({ reuse_win = true }) end, desc = "Goto Definition" },
-      { "gu", function() builtin.lsp_references() end, desc = "Get Usages" },
+      { "gr", function() builtin.lsp_references() end, desc = "Get Usages" },
       { "gi", function() builtin.lsp_implementations({ reuse_win = true }) end, desc = "Get implementations", },
       { "gt", function() builtin.lsp_type_definitions({ reuse_win = true }) end, desc = "Get type definitions", },
+
+      { "<leader>vs", function() builtin.git_status() end, desc = "Git status" },
+      { "<leader>gh", function() builtin.help_tags() end, desc = "Find Help" },
 		},
 		dependencies = {
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
@@ -83,7 +96,7 @@ return {
 		"aznhe21/actions-preview.nvim",
 		keys = {
 			{
-				"ga",
+				"<leader>a",
 				function()
 					require("actions-preview").code_actions()
 				end,

@@ -3,7 +3,7 @@ return {
 		"folke/noice.nvim",
 		event = "VeryLazy",
 		keys = {
-			{ "<leader>fn", "<cmd>Noice telescope<cr>", desc = "Notification history" },
+			{ "<leader>n", "<cmd>Noice telescope<cr>", desc = "Notification history" },
 		},
 		opts = {
 			lsp = {
