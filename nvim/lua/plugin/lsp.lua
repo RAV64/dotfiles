@@ -5,7 +5,7 @@ return {
     -- stylua: ignore
 		keys = {
 			{ "K", vim.lsp.buf.hover, desc = "Hover" },
-			{ "gr", vim.lsp.buf.rename, desc = "Rename" },
+			{ "<leader>r", vim.lsp.buf.rename, desc = "Rename" },
 			{ "gD", vim.lsp.buf.declaration, desc = "Get Declaration" },
 			{ "Z", vim.diagnostic.goto_prev, desc = "Goto previous diagnostics" },
 			{ "z", vim.diagnostic.goto_next, desc = "Goto next diagnostics" },

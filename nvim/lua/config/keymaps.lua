@@ -23,10 +23,10 @@ set(n, "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
 
 set(t, "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 
-set(n, "<leader>h", "<C-w>h", { desc = "Go to left window" })
-set(n, "<leader>j", "<C-w>j", { desc = "Go to lower window" })
-set(n, "<leader>k", "<C-w>k", { desc = "Go to upper window" })
-set(n, "<leader>l", "<C-w>l", { desc = "Go to right window" })
+set(n, "<leader>wh", "<C-w>h", { desc = "Go to left window" })
+set(n, "<leader>wj", "<C-w>j", { desc = "Go to lower window" })
+set(n, "<leader>wk", "<C-w>k", { desc = "Go to upper window" })
+set(n, "<leader>wl", "<C-w>l", { desc = "Go to right window" })
 
 set(n, "<Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
 set(n, "<Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
@@ -40,7 +40,7 @@ set(i, ";", ";<c-g>u")
 
 set(i, "<S-Enter>", "<esc>o")
 
-set(nx, "gw", "*N", { desc = "Search word under cursor" })
+set(nx, "<leader>h", "*N", { desc = "Search word under cursor" })
 
 set(n, "=", "$", { desc = "Go to end of line" })
 
