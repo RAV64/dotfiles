@@ -17,16 +17,14 @@ set(ni, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
 set(x, "<", "<gv")
 set(x, ">", ">gv")
 
-set(n, "<C-l>", "<cmd>:Lazy<cr>", { desc = "Lazy" })
-
 set(n, "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
 
 set(t, "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 
-set(n, "<leader>wh", "<C-w>h", { desc = "Go to left window" })
-set(n, "<leader>wj", "<C-w>j", { desc = "Go to lower window" })
-set(n, "<leader>wk", "<C-w>k", { desc = "Go to upper window" })
-set(n, "<leader>wl", "<C-w>l", { desc = "Go to right window" })
+set(n, "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
+set(n, "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
+set(n, "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
+set(n, "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 set(n, "<Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
 set(n, "<Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })

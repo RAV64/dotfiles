@@ -20,6 +20,8 @@ return {
 				pyright = { cmd = { "bun", "run", "pyright-langserver", "--stdio" } },
 				tsserver = { cmd = { "bun", "run", "typescript-language-server", "--stdio" } },
 				bashls = { cmd = { "bun", "run", "bash-language-server", "start" } },
+				cssls = { cmd = { "bun", "run", "vscode-css-language-server", "--stdio" } },
+				html = { cmd = { "bun", "run", "vscode-html-language-server", "--stdio" } },
 				-- tailwindcss = { cmd = { "bun", "run", "tailwindcss-language-server", "--stdio" } },
 				lua_ls = {
 					settings = {
@@ -33,18 +35,13 @@ return {
 				rust_analyzer = {
 					settings = {
 						["rust-analyzer"] = {
-							cargo = {
-								allFeatures = true,
-								loadOutDirsFromCheck = true,
-								runBuildScripts = true,
-							},
-							checkOnSave = {
-								allFeatures = true,
-								command = "clippy",
-								extraArgs = { "--no-deps" },
-							},
-							procMacro = {
+							cargo = { allFeatures = true },
+							procMacro = { enable = true },
+							checkOnSave = true,
+							check = {
 								enable = true,
+								command = "clippy",
+								features = "all",
 							},
 						},
 					},
@@ -102,10 +99,6 @@ return {
 		},
 		opts = {
 			formatters = {
-				rustfmt = {
-					command = "rustfmt",
-					args = { "+nightly", "--edition", "2021", "-q", "--emit=stdout" },
-				},
 				sleek = {
 					command = "sleek",
 				},

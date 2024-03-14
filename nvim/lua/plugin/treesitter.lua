@@ -31,7 +31,7 @@ return {
 			{ "<bs>", desc = "Decrement selection", mode = "x" },
 		},
 		opts = {
-			ensure_installed = ensure_installed,
+			ensure_installed = "all",
 			highlight = { enable = true, additional_vim_regex_highlighting = false },
 			indent = { enable = true },
 			incremental_selection = { enable = false },

@@ -13,8 +13,12 @@ icons.filetype = {
 	javascript = " 󰌞",
 	javascriptreact = " 󰌞",
 	markdown = " 󰍔",
-	TelescopePrompt = " 🔭",
+	TelescopePrompt = " ",
 	lazy = " 💤",
+	toml = " ",
+	["neo-tree"] = " ",
+	css = " ",
+	gitconfig = " 󰊢",
 }
 
 icons.diagnostic = {
@@ -131,6 +135,7 @@ function M.render()
 		"%#StatusLine#",
 		M.split(),
 		M.git_component(),
+		" ",
 	})
 end
 
