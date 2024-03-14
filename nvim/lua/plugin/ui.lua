@@ -117,6 +117,7 @@ return {
 				},
 			},
 			window = {
+				position = "right",
 				mappings = {
 					["<space>"] = "none",
 				},

@@ -1,4 +1,6 @@
 vim.api.nvim_create_autocmd("TextYankPost", {
+	desc = "Highlight when yanking (copying) text",
+	group = vim.api.nvim_create_augroup("user-highlight-yank", { clear = true }),
 	callback = function()
 		vim.highlight.on_yank()
 	end,
@@ -80,16 +82,17 @@ end)
 -- 	end,
 -- })
 
-vim.api.nvim_create_augroup("macro_visual_indication", {})
+local macro_cursorline_group = vim.api.nvim_create_augroup("user-macro-visual-indication", {})
+
 vim.api.nvim_create_autocmd("RecordingEnter", {
-	group = "macro_visual_indication",
+	group = macro_cursorline_group,
 	callback = function()
 		vim.api.nvim_set_hl(0, "CursorLine", { bg = "#603717" })
 	end,
 })
 
 vim.api.nvim_create_autocmd("RecordingLeave", {
-	group = "macro_visual_indication",
+	group = macro_cursorline_group,
 	callback = function()
 		vim.api.nvim_set_hl(0, "CursorLine", { bg = "#393939" })
 	end,

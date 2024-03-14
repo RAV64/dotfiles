@@ -1,6 +1,6 @@
 function turboupdate
     brew upgrade
-    brew upgrade --cask wez/wezterm/wezterm-nightly --no-quarantine --greedy-latest
+    brew upgrade --cask wezterm-nightly --no-quarantine --greedy-latest
     brew tap homebrew/cask-fonts
     brew install --cask font-monaspace-nerd-font
 

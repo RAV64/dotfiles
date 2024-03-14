@@ -13,6 +13,7 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
+		branch = "0.1.x",
 		version = false,
 		-- stylua: ignore
 		keys = {
@@ -20,7 +21,7 @@ return {
       { "<leader>F", function() builtin.find_files({ hidden = true, no_ignore = true }) end, desc = "Open file picker (ALL)" },
       { "<leader>b", function() builtin.buffers() end, desc = "Open buffer picker" },
       { "<leader>j", function() builtin.jumplist() end, desc = "Open jumplist picker" },
-      { "<leader>s", function() builtin.treesitter({ignore_symbols = {"var"}, symbol_highlights = ts_symbol_hl, show_line = false}) end, desc = "Open document symbol picker (LSP)" },
+      { "<leader>s", function() builtin.treesitter({ignore_symbols = {"var", "import"}, symbol_highlights = ts_symbol_hl, show_line = false}) end, desc = "Open document symbol picker (LSP)" },
       { "<leader>S", function() builtin.lsp_workspace_symbols() end, desc = "Open workspace symbol picker (LSP)" },
       { "<leader>d", function() builtin.diagnostics() end, desc = "Open workspace diagnostics picker (LSP)" },
       { "<leader>l", function() builtin.live_grep() end, desc = "Global search in workspace folder" },

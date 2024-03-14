@@ -21,9 +21,22 @@
 [delta]
     navigate = true
     side-by-side = true
+    syntax-theme = Catppuccin-mocha
 
 [merge]
-    conflictstyle = diff3
+    conflictstyle = zdiff3
 
 [diff]
     colorMoved = default
+	algorithm = histogram
+
+[push]
+	autoSetupRemote = true
+
+[branch]
+	sort = -committerdate
+
+[credential "https://github.com"]
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = !/opt/homebrew/bin/gh auth git-credential

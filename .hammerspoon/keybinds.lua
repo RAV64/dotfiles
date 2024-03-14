@@ -17,7 +17,7 @@ local AppLauncher = function()
 	__AppLauncher({
 		a = "music",
 		s = "bitwarden",
-		b = "firefox developer edition",
+		b = "orion",
 		c = "calendar",
 		f = "finder",
 		h = "homeassistant",
@@ -40,14 +40,36 @@ local WindowManager = function(wm)
 		f = wm.maximizeWindow,
 		c = wm.centerOnScreen,
 
-		h = wm.toHalf(wm.left_half),
-		j = wm.toHalf(wm.bottom_half),
-		k = wm.toHalf(wm.top_half),
-		l = wm.toHalf(wm.right_half),
+		m = wm.moveTo(wm.almost_maximize),
+		h = wm.moveTo(wm.left_half),
+		j = wm.moveTo(wm.bottom_half),
+		k = wm.moveTo(wm.top_half),
+		l = wm.moveTo(wm.right_half),
 	})
+end
+
+ColorSnapper = function()
+	local screen = hs.mouse.getCurrentScreen()
+	local mode = hs.screen.mainScreen():currentMode()
+
+	local current = hs.mouse.getAbsolutePosition()
+	current.x = current.x * 2
+	current.y = (mode.h - current.y) * 2
+
+	local image = screen:snapshot()
+	local color = image:colorAt(current)
+	local rgb = hs.drawing.color.asRGB(color)
+
+	local rgb_string = table.concat({ ToRGB(rgb.red), ToRGB(rgb.green), ToRGB(rgb.blue) }, ", ")
+	hs.pasteboard.setContents(rgb_string)
+end
+
+function ToRGB(color)
+	return color * 255
 end
 
 return function(config)
 	AppLauncher()
 	WindowManager(config.wm)
+	bind(HYPER, "1", ColorSnapper)
 end
