@@ -22,6 +22,8 @@ return {
 					winhighlight = "Normal:CmpBackground",
 				},
 			},
+			completion = { completeopt = "menu,menuone,noselect,noinsert" },
+
 			snippet = {
 				expand = function(args)
 					vim.snippet.expand(args.body)

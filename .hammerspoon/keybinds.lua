@@ -1,30 +1,41 @@
 SUPER = { "cmd", "ctrl", "alt" }
 HYPER = { "cmd", "ctrl", "alt", "shift" }
 
-local launch = hs.application.launchOrFocus
+local launch = hs.application.launchOrFocusByBundleID
 local bind = hs.hotkey.bind
+
+function AppID(app)
+	local info = hs.application.infoForBundlePath(app)
+	return info and info["CFBundleIdentifier"] or app
+end
 
 -- APP LAUNCHER --------------------------
 local AppLauncher = function()
 	local __AppLauncher = function(app_map)
 		for key, app in pairs(app_map) do
+			local app_id = AppID(app)
 			bind(SUPER, key, function()
-				launch(app)
+				local status = launch(app_id)
+				if not status then
+					print("ERROR: {" .. app_id .. "} does not exist")
+				end
 			end)
 		end
 	end
 
 	__AppLauncher({
-		a = "music",
-		s = "bitwarden",
-		b = "orion",
-		c = "calendar",
-		f = "finder",
-		h = "homeassistant",
-		m = "mail",
-		n = "obsidian",
-		t = "wezterm",
-		w = "microsoft teams (work or school)",
+		a = "/System/Applications/Music.app",
+		c = "/System/Applications/Calendar.app",
+		f = "/System/Library/CoreServices/Finder.app",
+		m = "/System/Applications/Mail.app/",
+
+		h = "~/Applications/homeassistant.app/",
+
+		b = "/Applications/Orion.app",
+		n = "/Applications/Obsidian.app/",
+		s = "/Applications/Bitwarden.app",
+		t = "/Applications/WezTerm.app",
+		w = "/Applications/Microsoft Teams.app",
 	})
 end
 
