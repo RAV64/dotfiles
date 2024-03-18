@@ -43,6 +43,7 @@ set -gx PATH /opt/homebrew/sbin $PATH
 set -gx PATH $PATH ~/.dotnet/tools
 set -gx PATH $PATH ~/.cargo/bin
 set -gx PATH $PATH ~/dotfiles/scripts/bin/nvim-macos/bin
+set -gx PATH $PATH ~/dotfiles/scripts/bin
 
 if test (uname) = "Darwin"
     launchctl remove com.valvesoftware.steam.ipctool

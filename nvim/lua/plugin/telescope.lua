@@ -1,14 +1,5 @@
 local builtin
 
-local ts_symbol_hl = {
-	import = "@module",
-	type = "@type",
-	field = "@field",
-	method = "@method",
-	namespace = "@namespace",
-	["function"] = "@function",
-}
-
 return {
 	{
 		"nvim-telescope/telescope.nvim",
@@ -21,13 +12,14 @@ return {
       { "<leader>F", function() builtin.find_files({ hidden = true, no_ignore = true }) end, desc = "Open file picker (ALL)" },
       { "<leader>b", function() builtin.buffers() end, desc = "Open buffer picker" },
       { "<leader>j", function() builtin.jumplist() end, desc = "Open jumplist picker" },
-      { "<leader>s", function() builtin.treesitter({ignore_symbols = {"var", "import"}, symbol_highlights = ts_symbol_hl, show_line = false}) end, desc = "Open document symbol picker (LSP)" },
-      { "<leader>S", function() builtin.lsp_workspace_symbols() end, desc = "Open workspace symbol picker (LSP)" },
+      { "<leader>s", function() builtin.lsp_document_symbols() end, desc = "Open document symbol picker (LSP)" },
+      { "<leader>S", function() builtin.lsp_dynamic_workspace_symbols() end, desc = "Open workspace symbol picker (LSP)" },
       { "<leader>d", function() builtin.diagnostics() end, desc = "Open workspace diagnostics picker (LSP)" },
       { "<leader>l", function() builtin.live_grep() end, desc = "Global search in workspace folder" },
       { "<leader>m", function() builtin.marks() end, desc = "File Marks" },
       { "<leader>o", function() builtin.oldfiles() end, desc = "Previous files" },
       { "<leader>.", function() builtin.resume() end, desc = "Open last builtin picker" },
+
 
       { "gd", function() builtin.lsp_definitions({ reuse_win = true }) end, desc = "Goto Definition" },
       { "gr", function() builtin.lsp_references() end, desc = "Get Usages" },

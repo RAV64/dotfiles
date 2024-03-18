@@ -1,6 +1,11 @@
 return {
-	{ "boltlessengineer/smart-tab.nvim", keys = { { mode = "i", "<tab>" } }, opts = { skips = {} } },
-	{ "echasnovski/mini.comment", keys = { "gc", mode = { "n", "x", "o" }, desc = "Comment" }, config = true },
+	{ "boltlessengineer/smart-tab.nvim", keys = { "i", "<tab>", opts = { skips = {} } } },
+	{
+		"echasnovski/mini.comment",
+		event = { "BufReadPost", "BufNewFile" },
+		keys = { { "n", "x", "o" }, "gc", desc = "Comment" },
+		config = true,
+	},
 	{ "echasnovski/mini.pairs", event = "InsertEnter", config = true },
 	{
 		"echasnovski/mini.surround",
