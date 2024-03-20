@@ -234,6 +234,8 @@ return {
 					StatusLineModeINS = { fg = C.mantle, bg = C.green },
 					StatusLineModeCOM = { fg = C.mantle, bg = C.flamingo },
 					StatusLineModeUNK = { fg = C.mantle, bg = C.peach },
+
+					WinSeparator = { fg = C.mantle, bg = C.mantle },
 				}
 			end,
 		},

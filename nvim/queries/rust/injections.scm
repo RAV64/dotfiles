@@ -20,3 +20,9 @@
 ((#match? @injection.content "^r#\"\n[\{\[]")
 (#offset! @injection.content 0 3 0 -2)
 (#set! injection.language "json")))
+
+((raw_string_literal) @injection.content
+((#match? @injection.content "^r#\"\n\<")
+(#offset! @injection.content 0 3 0 -2)
+(#set! injection.language "html")))
+

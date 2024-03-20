@@ -1,41 +1,38 @@
 SUPER = { "cmd", "ctrl", "alt" }
 HYPER = { "cmd", "ctrl", "alt", "shift" }
 
-local launch = hs.application.launchOrFocusByBundleID
-local bind = hs.hotkey.bind
+LOG = hs.logger.new("keybinding", "info")
 
-function AppID(app)
-	local info = hs.application.infoForBundlePath(app)
-	return info and info["CFBundleIdentifier"] or app
-end
+local launch = hs.application.launchOrFocus
+local bind = hs.hotkey.bind
 
 -- APP LAUNCHER --------------------------
 local AppLauncher = function()
 	local __AppLauncher = function(app_map)
 		for key, app in pairs(app_map) do
-			local app_id = AppID(app)
 			bind(SUPER, key, function()
-				local status = launch(app_id)
+				local status = launch(app)
 				if not status then
-					print("ERROR: {" .. app_id .. "} does not exist")
+					LOG.e(app .. " does not exist")
 				end
 			end)
 		end
 	end
 
 	__AppLauncher({
-		a = "/System/Applications/Music.app",
-		c = "/System/Applications/Calendar.app",
-		f = "/System/Library/CoreServices/Finder.app",
-		m = "/System/Applications/Mail.app/",
+		a = "Music",
+		c = "Calendar",
+		f = "Finder",
+		m = "Mail",
 
-		h = "~/Applications/homeassistant.app/",
+		h = "homeassistant",
 
-		b = "/Applications/Orion.app",
-		n = "/Applications/Obsidian.app/",
-		s = "/Applications/Bitwarden.app",
-		t = "/Applications/WezTerm.app",
-		w = "/Applications/Microsoft Teams.app",
+		b = "Orion",
+		n = "Obsidian",
+		s = "Bitwarden",
+		t = "WezTerm",
+		i = "Messages",
+		w = "Microsoft Teams (work or school)",
 	})
 end
 
@@ -76,11 +73,12 @@ ColorSnapper = function()
 end
 
 function ToRGB(color)
-	return color * 255
+	return math.floor(color * 255)
 end
 
 return function(config)
 	AppLauncher()
 	WindowManager(config.wm)
 	bind(HYPER, "1", ColorSnapper)
+	bind("cmd", "space", config.launcher)
 end
