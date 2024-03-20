@@ -1,6 +1,11 @@
+DBG = function(table)
+	print(hs.inspect(table))
+end
+
 require("options")
 STATE = {}
 TASK = require("task")
+
 Bluetooth = require("bluetooth")
 
 TASK.hot_reload:start()
@@ -18,4 +23,6 @@ _ = TASK.on_state_change({
 }):start()
 
 local wm = require("window-manager")
-require("keybinds")({ wm = wm })
+local launcher = require("launcher")
+
+require("keybinds")({ wm = wm, launcher = launcher })
