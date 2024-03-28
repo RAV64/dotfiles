@@ -7,12 +7,17 @@ CHOOSER = hs.chooser.new(function(result)
 	end
 end)
 
-function CallBack(chooser)
-	return function(_, stdOut, _)
-		local function appID(app)
-			return hs.application.infoForBundlePath(app)["CFBundleIdentifier"]
-		end
+local function appID(app)
+	return hs.application.infoForBundlePath(app)["CFBundleIdentifier"]
+end
 
+local function getImage(app)
+	local image_id = appID(app)
+	return image_id and hs.image.imageFromAppBundle(image_id) or image_id
+end
+
+local function CallBack(chooser)
+	return function(_, stdOut, _)
 		local apps = hs.fnutils.split(stdOut, "\n", nil, true)
 		table.remove(apps)
 
@@ -23,10 +28,12 @@ function CallBack(chooser)
 
 			local name_table = hs.fnutils.split(str, "/", nil, true)
 
+			local image = getImage(str)
+
 			return {
 				["text"] = name_table[#name_table],
 				["subText"] = str,
-				["image"] = hs.image.imageFromAppBundle(appID(str)),
+				["image"] = image,
 			}
 		end)
 
