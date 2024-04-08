@@ -1,14 +1,14 @@
-local gitsigns
+local M = {}
 
-return {
+M.plugin = {
 	"lewis6991/gitsigns.nvim",
 	event = { "BufReadPre", "BufNewFile" },
   -- stylua: ignore
 	keys = {
-		{ "<leader>vb", function() gitsigns.blame_line({ full = true }) end, desc = "Line blame" },
-		{ "<leader>vn", function() gitsigns.next_hunk() end, desc = "Next hunk" },
-		{ "<leader>vp", function() gitsigns.prev_hunk() end, desc = "Previous hunk" },
-		{ "<leader>vh", function() gitsigns.preview_hunk_inline() end, desc = "Preview hunk inline" },
+		{ "<leader>vb", function() M.gitsigns.blame_line({ full = true }) end, desc = "Line blame" },
+		{ "<leader>vn", function() M.gitsigns.next_hunk() end, desc = "Next hunk" },
+		{ "<leader>vp", function() M.gitsigns.prev_hunk() end, desc = "Previous hunk" },
+		{ "<leader>vh", function() M.gitsigns.preview_hunk_inline() end, desc = "Preview hunk inline" },
 	},
 	opts = {
 		signs = {
@@ -24,7 +24,9 @@ return {
 	},
 
 	config = function(_, opts)
-		gitsigns = require("gitsigns")
+		M.gitsigns = require("gitsigns")
 		require("gitsigns").setup(opts)
 	end,
 }
+
+return M.plugin

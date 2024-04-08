@@ -1,6 +1,6 @@
-local builtin
+local M = {}
 
-return {
+M.plugin = {
 	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
@@ -8,26 +8,25 @@ return {
 		version = false,
 		-- stylua: ignore
 		keys = {
-      { "<leader>f", function() builtin.find_files() end, desc = "Open file picker" },
-      { "<leader>F", function() builtin.find_files({ hidden = true, no_ignore = true }) end, desc = "Open file picker (ALL)" },
-      { "<leader>b", function() builtin.buffers() end, desc = "Open buffer picker" },
-      { "<leader>j", function() builtin.jumplist() end, desc = "Open jumplist picker" },
-      { "<leader>s", function() builtin.lsp_document_symbols() end, desc = "Open document symbol picker (LSP)" },
-      { "<leader>S", function() builtin.lsp_dynamic_workspace_symbols() end, desc = "Open workspace symbol picker (LSP)" },
-      { "<leader>d", function() builtin.diagnostics() end, desc = "Open workspace diagnostics picker (LSP)" },
-      { "<leader>l", function() builtin.live_grep() end, desc = "Global search in workspace folder" },
-      { "<leader>m", function() builtin.marks() end, desc = "File Marks" },
-      { "<leader>o", function() builtin.oldfiles() end, desc = "Previous files" },
-      { "<leader>.", function() builtin.resume() end, desc = "Open last builtin picker" },
+		    { "<leader>f", function() M.builtin.find_files() end, desc = "Open file picker" },
+		    { "<leader>F", function() M.builtin.find_files({ hidden = true, no_ignore = true }) end, desc = "Open file picker (ALL)" },
+		    { "<leader>b", function() M.builtin.buffers() end, desc = "Open buffer picker" },
+		    { "<leader>j", function() M.builtin.jumplist() end, desc = "Open jumplist picker" },
+		    { "<leader>s", function() M.builtin.lsp_document_symbols() end, desc = "Open document symbol picker (LSP)" },
+		    { "<leader>S", function() M.builtin.lsp_dynamic_workspace_symbols() end, desc = "Open workspace symbol picker (LSP)" },
+		    { "<leader>d", function() M.builtin.diagnostics() end, desc = "Open workspace diagnostics picker (LSP)" },
+		    { "<leader>l", function() M.builtin.live_grep() end, desc = "Global search in workspace folder" },
+		    { "<leader>m", function() M.builtin.marks() end, desc = "File Marks" },
+		    { "<leader>o", function() M.builtin.oldfiles() end, desc = "Previous files" },
+		    { "<leader>.", function() M.builtin.resume() end, desc = "Open last builtin picker" },
 
+		    { "gd", function() M.builtin.lsp_definitions({ reuse_win = true }) end, desc = "Goto Definition" },
+		    { "gr", function() M.builtin.lsp_references() end, desc = "Get Usages" },
+		    { "gi", function() M.builtin.lsp_implementations({ reuse_win = true }) end, desc = "Get implementations", },
+		    { "gt", function() M.builtin.lsp_type_definitions({ reuse_win = true }) end, desc = "Get type definitions", },
 
-      { "gd", function() builtin.lsp_definitions({ reuse_win = true }) end, desc = "Goto Definition" },
-      { "gr", function() builtin.lsp_references() end, desc = "Get Usages" },
-      { "gi", function() builtin.lsp_implementations({ reuse_win = true }) end, desc = "Get implementations", },
-      { "gt", function() builtin.lsp_type_definitions({ reuse_win = true }) end, desc = "Get type definitions", },
-
-      { "<leader>vs", function() builtin.git_status() end, desc = "Git status" },
-      { "<leader>gh", function() builtin.help_tags() end, desc = "Find Help" },
+		    { "<leader>vs", function() M.builtin.git_status() end, desc = "Git status" },
+		    { "<leader>gh", function() M.builtin.help_tags() end, desc = "Find Help" },
 		},
 		dependencies = {
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
@@ -35,7 +34,7 @@ return {
 		config = function()
 			local telescope = require("telescope")
 			local actions = require("telescope.actions")
-			builtin = require("telescope.builtin")
+			M.builtin = require("telescope.builtin")
 
 			telescope.setup({
 				defaults = {
@@ -110,3 +109,5 @@ return {
 		},
 	},
 }
+
+return M.plugin

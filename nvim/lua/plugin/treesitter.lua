@@ -20,10 +20,6 @@ return {
 			{ "nvim-treesitter/nvim-treesitter-context" },
 			{ "HiPhish/rainbow-delimiters.nvim" },
 		},
-		init = function(plugin)
-			require("lazy.core.loader").add_to_rtp(plugin)
-			require("nvim-treesitter.query_predicates")
-		end,
 		keys = {
 			{ "<c-space>", desc = "Increment selection" },
 			{ "<bs>", desc = "Decrement selection", mode = "x" },
