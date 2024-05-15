@@ -35,14 +35,16 @@ alias watch watchexec
 
 alias g lazygit
 alias ga "git add"
-alias gc "git commit -a"
+alias gc "git commit -m"
+alias gst "git status"
+alias gac "git add . && git commit -m"
 alias gd "git diff HEAD"
 
 set -gx PATH /opt/homebrew/bin $PATH
 set -gx PATH /opt/homebrew/sbin $PATH
 set -gx PATH $PATH ~/.dotnet/tools
 set -gx PATH $PATH ~/.cargo/bin
-set -gx PATH $PATH ~/dotfiles/scripts/bin/nvim-macos-arm64/bin
+set -gx PATH $PATH ~/.local/share/bob/nvim-bin
 set -gx PATH $PATH ~/dotfiles/scripts/bin
 
 if test (uname) = Darwin

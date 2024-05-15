@@ -7,6 +7,7 @@ icons.filetype = {
 	json = " ",
 	bash = " ",
 	zsh = " ",
+	sh = " ",
 	fish = " ",
 	typescript = " 󰛦",
 	typescriptreact = " 󰛦",
@@ -19,6 +20,7 @@ icons.filetype = {
 	["neo-tree"] = " ",
 	css = " ",
 	gitconfig = " 󰊢",
+	oil = " 󰏇",
 }
 
 icons.diagnostic = {
@@ -31,7 +33,6 @@ icons.diagnostic = {
 local M = {}
 
 function M.mode_component()
-	-- Note that: \19 = ^S and \22 = ^V.
 	local mode_to_str = {
 		["n"] = "NOR",
 		["no"] = "OP-",

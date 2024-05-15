@@ -1,5 +1,7 @@
+local M = {}
+
 --stylua: ignore
-local ensure_installed = {
+M.ensure_install = {
 	"bash",   "c",        "csv",        "diff",
 	"fish",   "html",     "htmldjango", "javascript",
 	"jsdoc",  "json",     "jsonc",      "lua",
@@ -7,25 +9,25 @@ local ensure_installed = {
 	"python", "query",    "regex",      "rust",
 	"sql",    "toml",     "tsx",        "typescript",
 	"vim",    "vimdoc",   "yaml",
+  "git_config",
+  "git_rebase",
+  "gitattributes",
+  "gitcommit",
+  "gitignore"
 }
 
-return {
+M.plugin = {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		version = false,
+		branch = "main",
 		build = ":TSUpdate",
-		cmd = { "TSUpdateSync" },
-		event = { "BufReadPost", "BufNewFile" },
+		lazy = false,
 		dependencies = {
-			{ "nvim-treesitter/nvim-treesitter-context" },
 			{ "HiPhish/rainbow-delimiters.nvim" },
-		},
-		keys = {
-			{ "<c-space>", desc = "Increment selection" },
-			{ "<bs>", desc = "Decrement selection", mode = "x" },
+			{ "yorickpeterse/nvim-tree-pairs", config = true },
 		},
 		opts = {
-			ensure_installed = ensure_installed,
+			ensure_install = M.ensure_install,
 			auto_install = true,
 			highlight = { enable = true, additional_vim_regex_highlighting = false },
 			indent = { enable = true },
@@ -39,30 +41,18 @@ return {
 			end,
 		},
 		config = function(_, opts)
-			require("nvim-treesitter.configs").setup(opts)
-		end,
-	},
+			require("nvim-treesitter").setup(opts)
 
-	{
-		"echasnovski/mini.ai",
-		keys = {
-			{ "a", mode = { "x", "o" } },
-			{ "i", mode = { "x", "o" } },
-		},
-		dependencies = {
-			{ "nvim-treesitter/nvim-treesitter-textobjects" },
-		},
-		config = function()
-			local ai = require("mini.ai")
-			local ts_gen = ai.gen_spec.treesitter
-			ai.setup({
-				n_lines = 500,
-				custom_textobjects = {
-					["?"] = false,
-					f = ts_gen({ a = "@function.outer", i = "@function.inner" }),
-					c = ts_gen({ a = "@class.outer", i = "@class.inner" }),
-				},
+			local group = vim.api.nvim_create_augroup("custom-treesitter", { clear = true })
+
+			vim.api.nvim_create_autocmd("FileType", {
+				group = group,
+				callback = function()
+					pcall(vim.treesitter.start)
+				end,
 			})
 		end,
 	},
 }
+
+return M.plugin
