@@ -15,6 +15,14 @@ function M.update_lead()
 	end
 end
 
+function M.timer(func, ...)
+	local start_time = os.clock()
+	func(...)
+	local end_time = os.clock()
+	local execution_duration_ms = (end_time - start_time) * 1000
+	print("Execution duration: " .. execution_duration_ms .. " ms")
+end
+
 M.icons = {
 	Array = "󰅪",
 	Boolean = "◩",

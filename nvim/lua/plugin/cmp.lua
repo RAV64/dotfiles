@@ -7,11 +7,14 @@ return {
 		"hrsh7th/cmp-path",
 	},
 	config = function()
+		vim.opt.completeopt = { "menu", "menuone", "noselect" }
+
 		local icons = require("config.util").icons
 		local cmp = require("cmp")
 		local compare = cmp.config.compare
 
 		cmp.setup({
+
 			window = {
 				completion = {
 					col_offset = -3,
@@ -22,41 +25,42 @@ return {
 					winhighlight = "Normal:CmpBackground",
 				},
 			},
-			completion = { completeopt = "menu,menuone,noselect,noinsert" },
 
 			snippet = {
 				expand = function(args)
 					vim.snippet.expand(args.body)
 				end,
 			},
+
 			mapping = cmp.mapping.preset.insert({
 				["<C-u>"] = cmp.mapping.scroll_docs(-4),
 				["<C-d>"] = cmp.mapping.scroll_docs(4),
-				["<C-Space>"] = cmp.mapping.complete(),
-				["<C-e>"] = cmp.mapping.abort(),
+				["<C-h>"] = cmp.mapping.abort(),
 				["<CR>"] = cmp.mapping.confirm({ select = true }),
 				["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
 				["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
 				["<Tab>"] = cmp.mapping(function(fallback)
-					if vim.snippet.jumpable(1) then
+					if vim.snippet.active({ direction = 1 }) then
 						vim.snippet.jump(1)
 					else
 						fallback()
 					end
 				end, { "i", "s" }),
 				["<S-Tab>"] = cmp.mapping(function(fallback)
-					if vim.snippet.jumpable(-1) then
+					if vim.snippet.active({ direction = -1 }) then
 						vim.snippet.jump(-1)
 					else
 						fallback()
 					end
 				end, { "i", "s" }),
 			}),
+
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp", priority = 8 },
 				{ name = "path", priority = 6 },
 				-- { name = "buffer", priority = 5, keyword_length = 3 },
 			}),
+
 			formatting = {
 				fields = { "kind", "abbr" },
 				format = function(_, item)
@@ -65,6 +69,7 @@ return {
 					return item
 				end,
 			},
+
 			sorting = {
 				priority_weight = 1.0,
 				comparators = {

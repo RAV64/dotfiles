@@ -6,6 +6,12 @@ LOG = hs.logger.new("keybinding", "info")
 local launch = hs.application.launchOrFocus
 local bind = hs.hotkey.bind
 
+-- bind(SUPER, "p", function()
+-- 	local app = hs.application.get("wezterm")
+-- 	local x = app:activate()
+-- 	LOG.e(x)
+-- end)
+
 -- APP LAUNCHER --------------------------
 local AppLauncher = function()
 	local __AppLauncher = function(app_map)
@@ -27,7 +33,7 @@ local AppLauncher = function()
 
 		h = "homeassistant",
 
-		b = "Orion",
+		b = "firefox developer edition",
 		n = "Obsidian",
 		s = "Bitwarden",
 		t = "WezTerm",

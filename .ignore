@@ -5,6 +5,7 @@ node_modules
 *.png
 *.json
 *.csv
+*.iml
 *cache
 
 .git

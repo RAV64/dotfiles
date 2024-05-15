@@ -3,6 +3,10 @@ vim.g.maplocalleader = " "
 
 local opt = vim.opt
 
+opt.foldenable = false
+opt.foldmethod = "manual"
+opt.foldlevelstart = 99
+
 opt.autowrite = true -- enable auto write
 opt.clipboard = "unnamedplus" -- sync with system clipboard
 opt.cmdheight = 0
@@ -74,7 +78,6 @@ opt.fillchars = {
 	eob = " ",
 }
 
-vim.g.neo_tree_remove_legacy_commands = 1
 vim.g.markdown_recommended_style = 0
 
 vim.g.loaded_python3_provider = 0

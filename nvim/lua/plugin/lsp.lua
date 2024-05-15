@@ -1,19 +1,17 @@
-return {
+local M = {}
+
+M.plugin = {
 	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPost", "BufNewFile", "BufWritePre" },
-    -- stylua: ignore
-		keys = {
-			{ "K", vim.lsp.buf.hover, desc = "Hover" },
-			{ "<leader>r", vim.lsp.buf.rename, desc = "Rename" },
-			{ "gD", vim.lsp.buf.declaration, desc = "Get Declaration" },
-			{ "Z", vim.diagnostic.goto_prev, desc = "Goto previous diagnostics" },
-			{ "z", vim.diagnostic.goto_next, desc = "Goto next diagnostics" },
-			{ "ge", vim.diagnostic.open_float, desc = "Open diagnostics" },
-			{ "<C-s>", vim.lsp.buf.signature_help, desc = "Show signature", mode = "i" },
-			{ "<leader>gwa", vim.lsp.buf.add_workspace_folder, desc = "add_workspace_folder" },
-			{ "<leader>gwr", vim.lsp.buf.remove_workspace_folder, "remove_workspace_folder" },
-			{ "<leader>gwl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, "list_workspace_folders" },
+		dependencies = {
+			{
+				"j-hui/fidget.nvim",
+				opts = {
+					notification = { window = { winblend = 0 } },
+					progress = { lsp = { progress_ringbuf_size = 500 } },
+				},
+			},
 		},
 		opts = {
 			servers = {
@@ -34,6 +32,31 @@ return {
 					},
 				},
 				rust_analyzer = {
+					capabilities = {
+						experimental = {
+							commands = {
+								"rust-analyzer.runSingle",
+								"rust-analyzer.showReferences",
+								"rust-analyzer.gotoLocation",
+								"editor.action.triggerParameterHints",
+							},
+							hoverActions = true,
+							hoverRange = true,
+							serverStatusNotification = true,
+							snippetTextEdit = false,
+							codeActionGroup = true,
+							ssr = true,
+						},
+						textDocument = {
+							completion = {
+								completionItem = {
+									resolveSupport = {
+										properties = { "documentation", "detail", "additionalTextEdits" },
+									},
+								},
+							},
+						},
+					},
 					settings = {
 						["rust-analyzer"] = {
 							cargo = { allFeatures = true },
@@ -77,52 +100,13 @@ return {
 
 			for name, lsp in pairs(opts.servers) do
 				lspconfig[name].setup({
-					capabilities = capabilities,
+					capabilities = vim.tbl_deep_extend("force", capabilities, lsp.capabilities or {}),
 					settings = lsp.settings,
 					cmd = lsp.cmd,
 				})
 			end
 		end,
 	},
-
-	{
-		"stevearc/conform.nvim",
-		event = { "BufWritePre" },
-		cmd = { "ConformInfo" },
-		keys = {
-			{
-				"gf",
-				function()
-					require("conform").format({ async = true, lsp_fallback = true })
-				end,
-				desc = "Format buffer",
-			},
-		},
-		opts = {
-			formatters = {
-				sleek = {
-					command = "sleek",
-				},
-			},
-			formatters_by_ft = {
-				lua = { "stylua" },
-				python = { "ruff_format", "ruff_fix" },
-				html = { "djlint" },
-				rust = { "rustfmt" },
-				sql = { "sleek" },
-				toml = { "taplo" },
-				javascript = { "biome" },
-				javascriptreact = { "biome" },
-				typescript = { "biome" },
-				typescriptreact = { "biome" },
-			},
-			format_on_save = {
-				timeout_ms = 500,
-				lsp_fallback = true,
-			},
-		},
-		init = function()
-			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-		end,
-	},
 }
+
+return M.plugin

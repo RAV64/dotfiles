@@ -4,7 +4,6 @@ M.plugin = {
 	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
-		branch = "0.1.x",
 		version = false,
 		-- stylua: ignore
 		keys = {
@@ -14,6 +13,7 @@ M.plugin = {
 		    { "<leader>j", function() M.builtin.jumplist() end, desc = "Open jumplist picker" },
 		    { "<leader>s", function() M.builtin.lsp_document_symbols() end, desc = "Open document symbol picker (LSP)" },
 		    { "<leader>S", function() M.builtin.lsp_dynamic_workspace_symbols() end, desc = "Open workspace symbol picker (LSP)" },
+		    { "<leader>e", function() M.builtin.diagnostics({severity = "error"}) end, desc = "Open workspace errors picker (LSP)" },
 		    { "<leader>d", function() M.builtin.diagnostics() end, desc = "Open workspace diagnostics picker (LSP)" },
 		    { "<leader>l", function() M.builtin.live_grep() end, desc = "Global search in workspace folder" },
 		    { "<leader>m", function() M.builtin.marks() end, desc = "File Marks" },
@@ -67,46 +67,10 @@ M.plugin = {
 					results_title = false,
 					dynamic_preview_title = true,
 				},
-				extensions = {
-					file_browser = {
-						hidden = true,
-					},
-					fzf = {
-						fuzzy = true,
-						override_generic_sorter = true,
-						override_file_sorter = true,
-						case_mode = "smart_case",
-					},
-				},
 			})
 
 			telescope.load_extension("fzf")
 		end,
-	},
-
-	{
-		"aznhe21/actions-preview.nvim",
-		keys = {
-			{
-				"<leader>a",
-				function()
-					require("actions-preview").code_actions()
-				end,
-				desc = "Get code actions",
-			},
-		},
-		opts = {
-			telescope = {
-				layout_strategy = "vertical",
-				layout_config = {
-					vertical = {
-						prompt_position = "top",
-					},
-					width = 90,
-					height = 0.80,
-				},
-			},
-		},
 	},
 }
 

@@ -1,10 +1,10 @@
 function turboupdate
     brew upgrade
-    brew upgrade --cask wezterm-nightly --no-quarantine --greedy-latest
-    brew tap homebrew/cask-fonts
+
+    brew upgrade wezterm@nightly
     brew install --cask font-monaspace-nerd-font
 
-    update_neovim_nightly
+    bob use nightly
 
     rustup update
     cargo install-update -a

@@ -1,3 +1,3 @@
 function dots
-cd ~/dotfiles/ && v
+    v ~/dotfiles/
 end
