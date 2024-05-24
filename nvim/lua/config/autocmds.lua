@@ -54,20 +54,53 @@ local function ft(filetypes, callback)
 	})
 end
 
-local get_rust_analyzer_clients = function()
-	return vim.lsp.get_clients({ name = "rust_analyzer" })
+local get_rust_analyzer_client = function()
+	local clients = vim.lsp.get_clients({ name = "rust_analyzer" })
+	return clients and clients[1] or nil
 end
 
 local refresh_cargo_workspace = function()
-	for client in vim.iter(get_rust_analyzer_clients()) do
-		client.request("rust-analyzer/reloadWorkspace", nil, function(err)
-			if err then
-				vim.notify(tostring(err), vim.log.levels.ERROR)
-				return
-			end
-			vim.notify("Cargo workspace reloaded")
-		end)
+	local client = get_rust_analyzer_client()
+
+	if not client then
+		vim.notify("No rust-analyzer clients attached")
+		return
 	end
+
+	client.request("rust-analyzer/reloadWorkspace", nil, function(err)
+		if err then
+			vim.notify(tostring(err), vim.log.levels.ERROR)
+			return
+		end
+		vim.notify("Cargo workspace reloaded")
+	end)
+end
+
+local rust_go_to_parent_module = function()
+	local client = get_rust_analyzer_client()
+
+	if not client then
+		vim.notify("No rust-analyzer clients attached")
+		return
+	end
+
+	client.request("experimental/parentModule", vim.lsp.util.make_position_params(0, nil), function(_, result, _)
+		if result == nil or vim.tbl_isempty(result) then
+			vim.notify("Can't find parent module")
+			return
+		end
+
+		local location = vim.islist(result) and result[1] or result
+
+		local path = vim.uri_to_fname(location.targetUri)
+		local fname = vim.fn.fnamemodify(path, ":t")
+		if fname == "Cargo.toml" then
+			vim.notify("Already at root module")
+			return
+		end
+
+		vim.lsp.util.jump_to_location(location, client.offset_encoding)
+	end)
 end
 
 local reload_rust_analyzer = vim.api.nvim_create_augroup("user-reload-rust-analyzer", { clear = true })
@@ -111,9 +144,14 @@ local function find_config(config)
 	find_config_file(path)
 end
 
+ft({ "rust" }, function()
+	vim.keymap.set("n", "gp", function()
+		rust_go_to_parent_module()
+	end, {})
+end)
+
 ft({ "rust", "toml" }, function()
-	local fname = vim.fn.expand("%:t")
-	if fname == "Cargo.toml" or vim.bo.filetype == "rust" then
+	if vim.bo.filetype == "rust" or vim.fn.expand("%:t") == "Cargo.toml" then
 		vim.keymap.set("n", "<leader>c", function()
 			find_config("Cargo.toml")
 		end)
@@ -161,6 +199,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		set("n", "z", vim.diagnostic.goto_next, { desc = "Goto next diagnostics" })
 		set("n", "ge", vim.diagnostic.open_float, { desc = "Open diagnostics" })
 		set("i", "<C-s>", vim.lsp.buf.signature_help, { desc = "Show signature" })
+
 		set("n", "<leader>gwa", vim.lsp.buf.add_workspace_folder, { desc = "add_workspace_folder" })
 		set("n", "<leader>gwr", vim.lsp.buf.remove_workspace_folder, { desc = "remove_workspace_folder" })
 		set("n", "<leader>gwl", function()

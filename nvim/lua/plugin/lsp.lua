@@ -8,7 +8,7 @@ M.plugin = {
 			{
 				"j-hui/fidget.nvim",
 				opts = {
-					notification = { window = { winblend = 0 } },
+					notification = { window = { winblend = 0 }, override_vim_notify = true },
 					progress = { lsp = { progress_ringbuf_size = 500 } },
 				},
 			},
@@ -88,6 +88,15 @@ M.plugin = {
 			},
 		},
 		config = function(_, opts)
+			vim.lsp.commands["editor.action.triggerParameterHints"] = function()
+				local ok, result = pcall(vim.lsp.buf.signature_help)
+				if ok then
+					return vim.NIL
+				else
+					return vim.lsp.rpc_response_error(vim.lsp.protocol.ErrorCodes.InternalError, result)
+				end
+			end
+
 			local cmp_nvim_lsp = require("cmp_nvim_lsp")
 			local lspconfig = require("lspconfig")
 
