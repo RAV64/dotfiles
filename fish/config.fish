@@ -28,7 +28,7 @@ alias la "eza -lag --icons"
 alias lt "eza -lg --icons --tree --level=3"
 
 alias cr "cargo run"
-alias ct "cargo test"
+alias ct "cargo nextest run"
 alias cw "cargo watch -x"
 
 alias watch watchexec

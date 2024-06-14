@@ -21,6 +21,8 @@ icons.filetype = {
 	css = " ",
 	gitconfig = " 󰊢",
 	oil = " 󰏇",
+	yml = " ",
+	yaml = " ",
 }
 
 icons.diagnostic = {
