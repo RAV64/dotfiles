@@ -2,14 +2,14 @@ local M = {}
 
 M.plugin = {
 	{ "echasnovski/mini.pairs", event = "InsertEnter", config = true },
-	{
-		"echasnovski/mini.ai",
-		keys = {
-			{ "a", mode = { "x", "o" } },
-			{ "i", mode = { "x", "o" } },
-		},
-		config = true,
-	},
+	-- {
+	-- 	"echasnovski/mini.ai",
+	-- 	keys = {
+	-- 		{ "a", mode = { "x", "o" } },
+	-- 		{ "i", mode = { "x", "o" } },
+	-- 	},
+	-- 	config = true,
+	-- },
 	{
 		"echasnovski/mini.surround",
 		event = "BufReadPost",

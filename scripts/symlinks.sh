@@ -5,6 +5,7 @@ ln -fs ~/dotfiles/bat ~/.config
 ln -fs ~/dotfiles/fish ~/.config
 ln -fs ~/dotfiles/wezterm ~/.config
 ln -f ~/dotfiles/starship.toml ~/.config/starship.toml
+ln -fs ~/dotfiles/aerospace ~/.config
 
 ln -fs ~/dotfiles/.ignore ~/.ignore
 ln -fs ~/dotfiles/.gitconfig ~/.gitconfig

@@ -37,6 +37,7 @@ return {
 				["<C-d>"] = cmp.mapping.scroll_docs(4),
 				["<C-h>"] = cmp.mapping.abort(),
 				["<CR>"] = cmp.mapping.confirm({ select = true }),
+				["<C-Space>"] = cmp.mapping.complete(),
 				["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
 				["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
 				["<Tab>"] = cmp.mapping(function(fallback)
