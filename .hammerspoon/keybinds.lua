@@ -30,7 +30,6 @@ local AppLauncher = function()
 		c = "Calendar",
 		f = "Finder",
 		m = "Mail",
-
 		h = "homeassistant",
 
 		b = "firefox developer edition",
@@ -39,26 +38,9 @@ local AppLauncher = function()
 		t = "WezTerm",
 		i = "Messages",
 		w = "Microsoft Teams (work or school)",
-	})
-end
 
--- WINDOW MANAGER ------------------------
-local WindowManager = function(wm)
-	local __WindowManager = function(move)
-		for key, func in pairs(move) do
-			bind(HYPER, key, func)
-		end
-	end
-
-	__WindowManager({
-		f = wm.maximizeWindow,
-		c = wm.centerOnScreen,
-
-		m = wm.moveTo(wm.almost_maximize),
-		h = wm.moveTo(wm.left_half),
-		j = wm.moveTo(wm.bottom_half),
-		k = wm.moveTo(wm.top_half),
-		l = wm.moveTo(wm.right_half),
+		escape = "Activity Monitor",
+		[","] = "System Settings",
 	})
 end
 
@@ -84,7 +66,5 @@ end
 
 return function(config)
 	AppLauncher()
-	WindowManager(config.wm)
-	bind(HYPER, "1", ColorSnapper)
 	bind("cmd", "space", config.launcher)
 end

@@ -38,13 +38,13 @@ M.plugin = {
 								"rust-analyzer.runSingle",
 								"rust-analyzer.showReferences",
 								"rust-analyzer.gotoLocation",
-								"editor.action.triggerParameterHints",
+								-- "editor.action.triggerParameterHints",
 							},
-							hoverActions = true,
-							hoverRange = true,
+							hoverActions = false,
+							hoverRange = false,
+							codeActionGroup = false,
 							serverStatusNotification = true,
 							snippetTextEdit = false,
-							codeActionGroup = true,
 							ssr = true,
 						},
 						textDocument = {
@@ -60,6 +60,7 @@ M.plugin = {
 					settings = {
 						["rust-analyzer"] = {
 							cargo = { allFeatures = true },
+							runBuildScripts = { enable = true },
 							procMacro = { enable = true },
 							checkOnSave = true,
 							check = {
