@@ -6,7 +6,7 @@ M.plugin = {
 		keys = {
 			{ "å", "<CMD>Oil<CR>", desc = "Explorer NeoTree (root dir)" },
 		},
-		config = true,
+		opts = { experimental_watch_for_changes = true },
 	},
 }
 

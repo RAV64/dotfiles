@@ -30,6 +30,8 @@ M.plugin = {
 			javascriptreact = { "biome" },
 			typescript = { "biome" },
 			typescriptreact = { "biome" },
+			-- yml = { "yamlfmt" },
+			-- yaml = { "yamlfmt" },
 		},
 		format_on_save = {
 			timeout_ms = 500,

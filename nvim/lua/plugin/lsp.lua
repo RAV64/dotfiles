@@ -71,6 +71,7 @@ M.plugin = {
 						},
 					},
 				},
+				typos_lsp = {},
 				csharp_ls = {},
 				jsonls = {},
 				clojure_lsp = {},
