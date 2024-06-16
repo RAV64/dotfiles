@@ -37,6 +37,7 @@ local AppLauncher = function()
 		s = "Bitwarden",
 		t = "WezTerm",
 		i = "Messages",
+		y = "youtube",
 		w = "Microsoft Teams (work or school)",
 
 		escape = "Activity Monitor",
