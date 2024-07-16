@@ -68,4 +68,7 @@ end
 return function(config)
 	AppLauncher()
 	bind("cmd", "space", config.launcher)
+	bind(HYPER, "R", function()
+		hs.reload()
+	end)
 end

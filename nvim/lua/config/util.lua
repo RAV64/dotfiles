@@ -23,39 +23,4 @@ function M.timer(func, ...)
 	print("Execution duration: " .. execution_duration_ms .. " ms")
 end
 
-M.icons = {
-	Array = "󰅪",
-	Boolean = "◩",
-	Class = "",
-	Color = "",
-	Constant = "󰏿",
-	Constructor = "󱌢",
-	Enum = "󰕘",
-	EnumMember = "",
-	Event = "",
-	Field = "",
-	File = "󰈙",
-	Folder = "",
-	Function = "󰊕",
-	Interface = "",
-	Keyword = "󰌋",
-	Method = "",
-	Module = "󰕳",
-	Namespace = "󰌗",
-	Null = "󰟢",
-	Number = "󰎠",
-	Operator = "",
-	Object = "󰅩",
-	Package = "",
-	Property = "",
-	Reference = "",
-	Snippet = "",
-	Struct = "",
-	Text = "",
-	TypeParameter = "",
-	Unit = "",
-	Value = "",
-	Variable = "󰫧",
-}
-
 return M
