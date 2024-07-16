@@ -9,8 +9,8 @@ return {
 	config = function()
 		vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
-		local icons = require("config.util").icons
 		local cmp = require("cmp")
+		local icons = require("mini.icons")
 		local compare = cmp.config.compare
 
 		cmp.setup({
@@ -65,7 +65,7 @@ return {
 			formatting = {
 				fields = { "kind", "abbr" },
 				format = function(_, item)
-					item.kind = " " .. icons[item.kind] .. " "
+					item.kind = " " .. icons.get("lsp", item.kind) .. " "
 					item.menu = "" -- Removes empty space from completion menu
 					return item
 				end,

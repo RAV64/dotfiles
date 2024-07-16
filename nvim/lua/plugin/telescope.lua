@@ -32,11 +32,9 @@ M.plugin = {
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		},
 		config = function()
-			local telescope = require("telescope")
 			local actions = require("telescope.actions")
-			M.builtin = require("telescope.builtin")
 
-			telescope.setup({
+			require("telescope").setup({
 				defaults = {
 					borderchars = { " ", "", "", "", "", "", "", "" },
 					initial_mode = "insert",
@@ -69,7 +67,8 @@ M.plugin = {
 				},
 			})
 
-			telescope.load_extension("fzf")
+			require("telescope").load_extension("fzf")
+			M.builtin = require("telescope.builtin")
 		end,
 	},
 }

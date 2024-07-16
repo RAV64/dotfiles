@@ -3,15 +3,8 @@ local M = {}
 M.plugin = {
 	{
 		"boltlessengineer/smart-tab.nvim",
-		keys = {
-			{
-				"<tab>",
-				function()
-					M.smart_tab()
-				end,
-				mode = "i",
-			},
-		},
+
+		event = "InsertEnter",
 		opts = {
 			skips = {},
 			mapping = false,
@@ -19,7 +12,7 @@ M.plugin = {
 		config = function(_, opts)
 			local st = require("smart-tab")
 			st.setup(opts)
-			M.smart_tab = st.smart_tab
+			vim.keymap.set("i", "<tab>", st.smart_tab)
 		end,
 	},
 }

@@ -1,79 +1,45 @@
-local icons = {}
-icons.filetype = {
-	lua = " 󰢱",
-	rust = " 󱘗",
-	csv = " ",
-	html = " 󰌝",
-	json = " ",
-	bash = " ",
-	zsh = " ",
-	sh = " ",
-	fish = " ",
-	typescript = " 󰛦",
-	typescriptreact = " 󰛦",
-	javascript = " 󰌞",
-	javascriptreact = " 󰌞",
-	markdown = " 󰍔",
-	TelescopePrompt = " ",
-	lazy = " 💤",
-	toml = " ",
-	["neo-tree"] = " ",
-	css = " ",
-	gitconfig = " 󰊢",
-	oil = " 󰏇",
-	yml = " ",
-	yaml = " ",
-}
-
-icons.diagnostic = {
-	ERROR = "",
-	WARN = "",
-	HINT = "",
-	INFO = "",
-}
-
 local M = {}
 
-function M.mode_component()
-	local mode_to_str = {
-		["n"] = "NOR",
-		["no"] = "OP-",
-		["nov"] = "OP-",
-		["noV"] = "OP-",
-		["no\22"] = "OP-",
-		["niI"] = "NOR",
-		["niR"] = "NOR",
-		["niV"] = "NOR",
-		["nt"] = "NOR",
-		["ntT"] = "NOR",
-		["v"] = "VIS",
-		["vs"] = "VIS",
-		["V"] = "VIS",
-		["Vs"] = "VIS",
-		["\22"] = "VIS",
-		["\22s"] = "VIS",
-		["s"] = "SEL",
-		["S"] = "SEL",
-		["\19"] = "SEL",
-		["i"] = "INS",
-		["ic"] = "INS",
-		["ix"] = "INS",
-		["R"] = "REP",
-		["Rc"] = "REP",
-		["Rx"] = "REP",
-		["Rv"] = "VIR",
-		["Rvc"] = "VIR",
-		["Rvx"] = "VIR",
-		["c"] = "COM",
-		["cv"] = "VIM",
-		["ce"] = "EX ",
-		["r"] = "PRO",
-		["rm"] = "MOR",
-		["r?"] = "CON",
-		["!"] = "SHE",
-		["t"] = "TER",
-	}
+local mode_to_str = {
+	["n"] = "NOR",
+	["no"] = "OP-",
+	["nov"] = "OP-",
+	["noV"] = "OP-",
+	["no\22"] = "OP-",
+	["niI"] = "NOR",
+	["niR"] = "NOR",
+	["niV"] = "NOR",
+	["nt"] = "NOR",
+	["ntT"] = "NOR",
+	["v"] = "VIS",
+	["vs"] = "VIS",
+	["V"] = "VIS",
+	["Vs"] = "VIS",
+	["\22"] = "VIS",
+	["\22s"] = "VIS",
+	["s"] = "SEL",
+	["S"] = "SEL",
+	["\19"] = "SEL",
+	["i"] = "INS",
+	["ic"] = "INS",
+	["ix"] = "INS",
+	["R"] = "REP",
+	["Rc"] = "REP",
+	["Rx"] = "REP",
+	["Rv"] = "VIR",
+	["Rvc"] = "VIR",
+	["Rvx"] = "VIR",
+	["c"] = "COM",
+	["cv"] = "VIM",
+	["ce"] = "EX ",
+	["r"] = "PRO",
+	["rm"] = "MOR",
+	["r?"] = "CON",
+	["!"] = "SHE",
+	["t"] = "TER",
+}
 
+function M.mode_component()
 	local mode = mode_to_str[vim.api.nvim_get_mode().mode] or "UNK"
 	return string.format("%%#StatuslineMode%s# %s %%#StatusLine#", mode, mode)
 end
@@ -109,7 +75,7 @@ function M.diagnostics_component()
 		return acc
 	end)
 
-	local error = counts.ERROR > 0 and string.format("%%#StatusLineRed#  %s", counts.ERROR) or ""
+	local error = counts.ERROR > 0 and string.format("%%#StatusLineRed# ✖ %s", counts.ERROR) or ""
 	local warn = counts.WARN > 0 and string.format("%%#StatusLineYellow#  %s", counts.WARN) or ""
 	local hint = counts.HINT > 0 and string.format("%%#StatusLineBlue#  %s", counts.HINT) or ""
 	local info = counts.INFO > 0 and string.format("%%#StatusLineBlue#  %s", counts.INFO) or ""
@@ -117,9 +83,24 @@ function M.diagnostics_component()
 	return table.concat({ error, warn, hint, info })
 end
 
+local icons = require("mini.icons")
+local custom_icons = {}
+custom_icons.filetype = {}
+
+local _icon_cache = {}
+
+local _cache_and_return = function(ft)
+	local icon = icons.get("filetype", ft) or custom_icons.filetype[ft] or ft
+	_icon_cache[ft] = icon
+	return _icon_cache[ft]
+end
+
+local cached_icon = function(ft)
+	return _icon_cache[ft] or _cache_and_return(ft)
+end
+
 function M.filetype_icon()
-	local filetype = vim.bo.filetype
-	return icons.filetype[filetype] or filetype
+	return cached_icon(vim.bo.filetype)
 end
 
 function M.split()
@@ -129,6 +110,7 @@ end
 function M.render()
 	return table.concat({
 		M.mode_component(),
+		" ",
 		M.filetype_icon(),
 		" %f", -- Relative path to file from cwd
 		" %3l:%-2c ",
@@ -142,6 +124,6 @@ function M.render()
 	})
 end
 
-vim.o.statusline = "%!v:lua.require'config.statusline'.render()"
+vim.o.statusline = "%!v:lua.require'mod.statusline'.render()"
 
 return M

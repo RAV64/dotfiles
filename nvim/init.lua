@@ -15,8 +15,8 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	spec = {
-		{ "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim" },
 		{ import = "plugin" },
+		{ import = "extra.plugin.leap" },
 	},
 	defaults = { version = false, lazy = true },
 	change_detection = { enabled = false },
@@ -48,6 +48,7 @@ vim.api.nvim_create_autocmd("User", {
 	callback = function()
 		require("config.autocmds")
 		require("config.keymaps")
-		require("config.statusline")
+		require("mod.statusline")
+		require("mod.smart-tab")
 	end,
 })
