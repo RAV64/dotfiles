@@ -124,6 +124,16 @@ function M.render()
 	})
 end
 
-vim.o.statusline = "%!v:lua.require'mod.statusline'.render()"
+function _G.statusline()
+	return M.render()
+end
 
-return M
+vim.api.nvim_create_autocmd("InsertEnter", {
+	group = vim.api.nvim_create_augroup("user-update-statusline", { clear = true }),
+	callback = function()
+		vim.o.statusline = "%{%v:lua._G.statusline()%}"
+	end,
+})
+
+-- vim.o.statusline = "%!v:lua.require'mod.statusline'.render()"
+vim.o.statusline = "%{%v:lua._G.statusline()%}"

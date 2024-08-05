@@ -1,3 +1,18 @@
+local smart_tab = function()
+	local node_ok, node = pcall(vim.treesitter.get_node)
+	if not node_ok then
+		vim.notify("TS not available")
+		return false
+	end
+	-- if not node then
+	-- 	vim.notify("parent not")
+	-- 	return false
+	-- end
+	local row, col = node:end_()
+	local ok = pcall(vim.api.nvim_win_set_cursor, 0, { row + 1, col })
+	return ok
+end
+
 return {
 	"hrsh7th/nvim-cmp",
 	version = false,
@@ -40,11 +55,11 @@ return {
 				["<C-Space>"] = cmp.mapping.complete(),
 				["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
 				["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-				["<Tab>"] = cmp.mapping(function(fallback)
+				["<Tab>"] = cmp.mapping(function()
 					if vim.snippet.active({ direction = 1 }) then
 						vim.snippet.jump(1)
 					else
-						fallback()
+						smart_tab()
 					end
 				end, { "i", "s" }),
 				["<S-Tab>"] = cmp.mapping(function(fallback)

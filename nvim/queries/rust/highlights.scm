@@ -5,5 +5,5 @@
 ))
 
 ((string_content) @codeblock
-((#match? @codeblock "^\n?[\{\[\<]")
+((#match? @codeblock "^\n?[\{\[\<].*[\}\]\>]\n?$")
 ))
