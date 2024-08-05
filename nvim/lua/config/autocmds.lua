@@ -173,6 +173,10 @@ ft({ "markdown" }, function()
 	vim.opt_local.wrap = true
 end)
 
+ft({ "ron" }, function()
+	vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+end)
+
 local macro_cursorline_group = vim.api.nvim_create_augroup("user-macro-visual-indication", { clear = true })
 vim.api.nvim_create_autocmd("RecordingEnter", {
 	group = macro_cursorline_group,
@@ -205,5 +209,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		set("n", "<leader>gwl", function()
 			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 		end, { desc = "list_workspace_folders" })
+	end,
+})
+
+vim.api.nvim_create_autocmd("InsertLeave", {
+	group = vim.api.nvim_create_augroup("user-clear-snippet", { clear = true }),
+	callback = function()
+		if vim.snippet.active() then
+			vim.snippet.stop()
+		end
 	end,
 })

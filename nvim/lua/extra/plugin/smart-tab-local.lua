@@ -12,5 +12,3 @@ local smart_tab = function()
 	local ok = pcall(vim.api.nvim_win_set_cursor, 0, { row + 1, col })
 	return ok
 end
-
-vim.keymap.set("i", "<tab>", smart_tab)

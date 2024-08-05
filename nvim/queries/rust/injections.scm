@@ -5,10 +5,17 @@
 (#set! injection.language "sql")))
 
 ((string_content) @injection.content
-((#match? @injection.content "^\n?[\{\[]")
+((#match? @injection.content "^\n?[\{][\s\S]*}\n?$")
 (#set! injection.language "json")))
 
 ((string_content) @injection.content
-((#match? @injection.content "^\n?[<]")
-(#set! injection.language "html")))
+((#match? @injection.content "^\n?[\[][\s\S]*]\n?$")
+(#set! injection.language "json")))
 
+; ((string_content) @injection.content
+; ((#match? @injection.content "^\n?[\{\[].*[\}\]]\n?$")
+; (#set! injection.language "json")))
+
+((string_content) @injection.content
+((#match? @injection.content "^\n?<[\s\S]*>\n?$")
+(#set! injection.language "html")))

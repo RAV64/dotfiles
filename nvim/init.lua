@@ -16,11 +16,12 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	spec = {
 		{ import = "plugin" },
-		{ import = "extra.plugin.leap" },
+		-- { import = "extra.plugin.markdown" },
 	},
 	defaults = { version = false, lazy = true },
 	change_detection = { enabled = false },
 	checker = { enabled = false },
+	-- rocks = { enabled = false },
 	performance = {
 		rtp = {
 			disabled_plugins = {
@@ -49,6 +50,5 @@ vim.api.nvim_create_autocmd("User", {
 		require("config.autocmds")
 		require("config.keymaps")
 		require("mod.statusline")
-		require("mod.smart-tab")
 	end,
 })
