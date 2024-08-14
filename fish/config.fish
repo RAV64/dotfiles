@@ -21,6 +21,8 @@ if test -d $HOME/dotfiles/work/work.fish
 end
 
 alias v nvim
+alias watch watchexec
+alias g lazygit
 
 alias la "eza -lag --icons"
 alias lt "eza -lg --icons --tree --level=3"
@@ -29,9 +31,6 @@ alias cr "cargo run"
 alias ct "cargo nextest run"
 alias cw "cargo watch -x"
 
-alias watch watchexec
-
-alias g lazygit
 alias ga "git add"
 alias gc "git commit -m"
 alias gst "git status"
@@ -44,14 +43,16 @@ set -gx PATH $PATH ~/.dotnet/tools
 set -gx PATH $PATH ~/.cargo/bin
 set -gx PATH $PATH ~/.local/share/bob/nvim-bin
 set -gx PATH $PATH ~/dotfiles/scripts/bin
+set -gx BUN_INSTALL "$HOME/.bun"
+set -gx PATH $BUN_INSTALL/bin $PATH
 
 if test (uname) = Darwin
     launchctl remove com.valvesoftware.steam.ipctool
     launchctl remove (launchctl list | awk -F" " '{print $3}' | grep com.microsoft.autoupdate) &>/dev/null
 end
 
-starship init fish | source
 zoxide init fish | source
+starship init fish | source
 
 fzf --fish | source
 fzf_configure_bindings --directory=\cf

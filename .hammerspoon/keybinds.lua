@@ -32,6 +32,7 @@ local AppLauncher = function()
 		m = "Mail",
 		h = "homeassistant",
 
+		k = "microsoft word",
 		b = "firefox developer edition",
 		n = "Obsidian",
 		s = "Bitwarden",
