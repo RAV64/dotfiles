@@ -36,24 +36,27 @@ M.plugin = {
 			},
 			color_overrides = {
 				mocha = {
-					text = "#dde1e6",
-					base = "#202020",
-					mantle = "#161616",
-					surface0 = "#262626",
-					surface1 = "#393939",
-					surface2 = "#525252",
+					text = "#FCFCFA",
+
+					mantle = "#1F1D20",
+					base = "#2C2A2E",
+					surface0 = "#3D3A40",
+					surface1 = "#47444B",
+					surface2 = "#524E56",
+
 					overlay0 = "#ffffff",
 					overlay1 = "#f2f4f8",
 					overlay2 = "#dde1e6",
-					-- mauve = "#be95ff",
-					-- green = "#8fca5c",
+					mauve = "#D499FF",
 					maroon = "#ee5396",
-					-- lavender = "#78a9ff",
-					red = "#ea7183",
-					peach = "#f39967",
-					yellow = "#eaca89",
-					green = "#96d382",
-					-- blue = "#3ddbd9"
+					peach = "#FC9867",
+
+					lavender = "#43D5EE",
+
+					red = "#ff6188",
+					yellow = "#ffd966",
+					green = "#a8dc76",
+					blue = "#82A6ED",
 				},
 			},
 			custom_highlights = function(C)
