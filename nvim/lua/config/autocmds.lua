@@ -188,7 +188,7 @@ vim.api.nvim_create_autocmd("RecordingEnter", {
 vim.api.nvim_create_autocmd("RecordingLeave", {
 	group = macro_cursorline_group,
 	callback = function()
-		vim.api.nvim_set_hl(0, "CursorLine", { bg = "#393939" })
+		vim.api.nvim_set_hl(0, "CursorLine", { bg = "#47444B" })
 	end,
 })
 

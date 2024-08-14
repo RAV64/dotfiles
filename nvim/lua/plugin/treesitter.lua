@@ -23,7 +23,6 @@ M.plugin = {
 		build = ":TSUpdate",
 		lazy = false,
 		dependencies = {
-			{ "HiPhish/rainbow-delimiters.nvim" },
 			{ "yorickpeterse/nvim-tree-pairs", config = true },
 		},
 		opts = {
@@ -53,6 +52,8 @@ M.plugin = {
 			})
 		end,
 	},
+
+	{ "HiPhish/rainbow-delimiters.nvim", event = "BufReadPre" },
 }
 
 return M.plugin
