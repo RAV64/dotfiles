@@ -7,9 +7,7 @@ source $HOME/dotfiles/fish/themes/mocha.theme
 
 set -g FZF_PREVIEW_FILE_CMD "bat --style=numbers --color=always --line-range :500"
 set -g FZF_PREVIEW_DIR_CMD "eza -lag --icons"
-fzf_configure_bindings --directory=\cf
-
-set -g BAT_THEME Catppuccin-mocha
+set -g DOCKER_CLI_HINTS false
 
 set -g DOTNET_CLI_TELEMETRY_OPTOUT true
 set -g ZELLIJ_AUTO_ATTACH true
@@ -54,7 +52,9 @@ end
 
 starship init fish | source
 zoxide init fish | source
+
 fzf --fish | source
+fzf_configure_bindings --directory=\cf
 
 set -gx BUN_INSTALL "$HOME/.bun"
 set -gx PATH $BUN_INSTALL/bin $PATH

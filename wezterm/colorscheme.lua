@@ -3,11 +3,11 @@ local M = {}
 function M.setup(config)
 	config.color_scheme = "Catppuccin Mocha"
 	config.colors = {
-		background = "#202020",
+		background = "#2c2a2e",
 		tab_bar = {
 			background = "#161616",
 			active_tab = {
-				bg_color = "#202020",
+				bg_color = "#2c2a2e",
 				fg_color = "#f2f4f8",
 				intensity = "Normal",
 				italic = false,

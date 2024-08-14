@@ -52,3 +52,11 @@ vim.api.nvim_create_autocmd("User", {
 		require("mod.statusline")
 	end,
 })
+
+vim.api.nvim_create_autocmd("UiEnter", {
+	callback = function()
+		if vim.tbl_isempty(vim.fn.argv()) then
+			require("telescope.builtin").find_files()
+		end
+	end,
+})

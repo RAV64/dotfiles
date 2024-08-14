@@ -26,6 +26,9 @@ set(n, "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 set(n, "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 set(n, "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
+set(n, "<Tab>", "<cmd>bnext<cr>", { desc = "Next buffer" })
+set(n, "<S-Tab>", "<cmd>bprev<cr>", { desc = "Prev buffer" })
+
 set(n, "<Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
 set(n, "<Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
 set(n, "<Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })

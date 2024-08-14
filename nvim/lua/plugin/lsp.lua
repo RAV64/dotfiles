@@ -81,6 +81,7 @@ M.plugin = {
 				astro = {},
 				prismals = {},
 				biome = {},
+				nixd = {},
 			},
 			diagnostics = {
 				underline = true,
