@@ -14,10 +14,10 @@ local p = {
 	text = "#FCFCFA",
 
 	purple = "#D499FF",
-	pink = "#f5c2e7",
+	pink = "#F5C2E7",
 
 	teal = "#94e2d5",
-	flamingo = "#f2cdcd",
+	flamingo = "#F2CDCD",
 	maroon = "#ee5396",
 	lavender = "#43D5EE",
 	sapphire = "#74c7ec", -- REMOVE
@@ -25,9 +25,9 @@ local p = {
 	rosewater = "#ff99ff",
 
 	orange = "#FC9867",
-	red = "#ff6188",
+	red = "#FF6188",
 	yellow = "#ffd966",
-	green = "#a8dc76",
+	green = "#A8DC76",
 	blue = "#82A6ED",
 }
 
@@ -92,7 +92,7 @@ hl("PreProc", { fg = p.pink })
 
 hl("Debug", { link = "Special" })
 hl("Delimiter", { fg = p.overlay2 })
-hl("Special", { fg = p.flamingo, bg = p.bg1 })
+hl("Special", { fg = p.flamingo })
 hl("SpecialChar", { link = "Special" })
 hl("StorageClass", { fg = p.yellow })
 hl("Structure", { fg = p.yellow })

@@ -45,6 +45,9 @@ set(nx, "<leader>h", "*N", { desc = "Search word under cursor" })
 
 set(n, "=", "$", { desc = "Go to end of line" })
 
+set(n, "ö", "}")
+set(n, "ä", "{")
+
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 set(nxo, "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
 set(nxo, "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })

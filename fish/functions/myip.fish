@@ -1,3 +1,3 @@
 function myip
-curl icanhazip.com
+curl https://ipv4.icanhazip.com/
 end

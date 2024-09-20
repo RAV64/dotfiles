@@ -15,8 +15,7 @@ M.plugin = {
 		},
 		opts = {
 			servers = {
-				pyright = { cmd = { "bun", "run", "pyright-langserver", "--stdio" } },
-				tsserver = { cmd = { "bun", "run", "typescript-language-server", "--stdio" } },
+				ts_ls = { cmd = { "bun", "run", "typescript-language-server", "--stdio" } },
 				bashls = { cmd = { "bun", "run", "bash-language-server", "start" } },
 				cssls = { cmd = { "bun", "run", "vscode-css-language-server", "--stdio" } },
 				html = { cmd = { "bun", "run", "vscode-html-language-server", "--stdio" } },
@@ -59,14 +58,14 @@ M.plugin = {
 					},
 					settings = {
 						["rust-analyzer"] = {
-							cargo = { allFeatures = true },
+							-- cargo = { allFeatures = true },
 							runBuildScripts = { enable = true },
 							procMacro = { enable = true },
 							checkOnSave = true,
 							check = {
 								enable = true,
 								command = "clippy",
-								features = "all",
+								-- features = "all",
 							},
 						},
 					},
@@ -77,11 +76,15 @@ M.plugin = {
 				clojure_lsp = {},
 				zls = {},
 				sqlls = {},
-				ruff_lsp = {},
+
 				astro = {},
 				prismals = {},
 				biome = {},
 				nixd = {},
+
+				-- Python
+				basedpyright = {},
+				ruff_lsp = {},
 			},
 			diagnostics = {
 				underline = true,

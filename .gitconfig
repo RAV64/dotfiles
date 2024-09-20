@@ -21,7 +21,6 @@
 [delta]
     navigate = true
     side-by-side = true
-    syntax-theme = Catppuccin-mocha
 
 [merge]
     conflictstyle = zdiff3

@@ -8,7 +8,6 @@ opt.foldmethod = "manual"
 opt.foldlevelstart = 99
 
 opt.autowrite = true -- enable auto write
-opt.clipboard = "unnamedplus" -- sync with system clipboard
 opt.cmdheight = 0
 opt.confirm = true -- confirm to save changes before exiting modified buffer
 opt.cursorline = true -- Enable highlighting of the current line

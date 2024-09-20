@@ -20,24 +20,22 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 -- close some filetypes with <q>
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = {
-		"PlenaryTestPopup",
 		"help",
 		"lspinfo",
 		"man",
 		"notify",
 		"qf",
 		"query",
-		"spectre_panel",
 		"startuptime",
 		"tsplayground",
-		"neotest-output",
 		"checkhealth",
-		"neotest-summary",
-		"neotest-output-panel",
+		"grug-far",
 	},
 	callback = function(event)
 		vim.bo[event.buf].buflisted = false
 		vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+		vim.keymap.set("n", "Q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+		vim.keymap.set("n", "<esc>", "<cmd>close<cr>", { buffer = event.buf, silent = true })
 	end,
 })
 
