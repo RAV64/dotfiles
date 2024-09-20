@@ -17,6 +17,9 @@ function M.setup(config)
 		{ key = "j", mods = "CMD|SHIFT", action = act({ AdjustPaneSize = { "Down", 2 } }) },
 		{ key = "ö", mods = "CMD", action = act.ActivateTabRelative(-1) },
 		{ key = "ä", mods = "CMD", action = act.ActivateTabRelative(1) },
+		{ key = "u", mods = "CMD", action = act.ScrollByPage(-0.5) },
+		{ key = "d", mods = "CMD", action = act.ScrollByPage(0.5) },
+		{ key = "x", mods = "CMD", action = act.ActivateCopyMode },
 	}
 end
 return M

@@ -79,6 +79,31 @@ M.plugin = {
 			end
 		end,
 	},
+
+	{
+		"echasnovski/mini.files",
+		keys = {
+			{
+				"å",
+				function()
+					M.files_open(vim.api.nvim_buf_get_name(0), false)
+				end,
+			},
+		},
+		opts = {
+			mappings = {
+				go_in = "",
+				go_in_plus = "l",
+				go_out = "h",
+				go_out_plus = "",
+			},
+		},
+		config = function(_, opts)
+			local files = require("mini.files")
+			files.setup(opts)
+			M.files_open = files.open
+		end,
+	},
 }
 
 return M.plugin

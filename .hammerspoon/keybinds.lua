@@ -39,7 +39,7 @@ local AppLauncher = function()
 		t = "WezTerm",
 		i = "Messages",
 		y = "youtube",
-		w = "Microsoft Teams (work or school)",
+		w = "teams",
 
 		escape = "Activity Monitor",
 		[","] = "System Settings",

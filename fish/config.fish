@@ -3,7 +3,7 @@ if not status is-interactive
 end
 
 set -gx TERM xterm-256color
-source $HOME/dotfiles/fish/themes/mocha.theme
+source $HOME/dotfiles/fish/themes/neocraft.theme
 
 set -g FZF_PREVIEW_FILE_CMD "bat --style=numbers --color=always --line-range :500"
 set -g FZF_PREVIEW_DIR_CMD "eza -lag --icons"
@@ -21,14 +21,13 @@ if test -d $HOME/dotfiles/work/work.fish
 end
 
 alias v nvim
-alias watch watchexec
 alias g lazygit
 
 alias la "eza -lag --icons"
 alias lt "eza -lg --icons --tree --level=3"
 
 alias cr "cargo run"
-alias ct "cargo nextest run"
+alias ct "cargo nextest run --no-fail-fast"
 alias cw "cargo watch -x"
 
 alias ga "git add"
