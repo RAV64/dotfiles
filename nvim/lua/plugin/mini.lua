@@ -86,7 +86,7 @@ M.plugin = {
 			{
 				"å",
 				function()
-					M.files_open(vim.api.nvim_buf_get_name(0), false)
+					M.files.open(vim.api.nvim_buf_get_name(0), false)
 				end,
 			},
 		},
@@ -99,9 +99,8 @@ M.plugin = {
 			},
 		},
 		config = function(_, opts)
-			local files = require("mini.files")
-			files.setup(opts)
-			M.files_open = files.open
+			M.files = require("mini.files")
+			M.files.setup(opts)
 		end,
 	},
 }

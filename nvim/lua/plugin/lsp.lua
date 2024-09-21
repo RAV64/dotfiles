@@ -94,19 +94,11 @@ M.plugin = {
 			},
 		},
 		config = function(_, opts)
-			vim.lsp.commands["editor.action.triggerParameterHints"] = function()
-				local ok, result = pcall(vim.lsp.buf.signature_help)
-				if ok then
-					return vim.NIL
-				else
-					return vim.lsp.rpc_response_error(vim.lsp.protocol.ErrorCodes.InternalError, result)
-				end
-			end
-
 			local cmp_nvim_lsp = require("cmp_nvim_lsp")
 			local lspconfig = require("lspconfig")
 
 			vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
+
 			local capabilities = vim.tbl_deep_extend(
 				"force",
 				vim.lsp.protocol.make_client_capabilities(),

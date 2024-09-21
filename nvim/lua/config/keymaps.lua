@@ -9,8 +9,8 @@ local nx = { n, x }
 local ni = { n, i }
 local nxo = { n, x, o }
 
-set(n, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-set(n, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+set(n, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
+set(n, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 
 set(ni, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
 
