@@ -17,8 +17,8 @@ M.plugin = {
 		},
 	},
 	config = function(_, opts)
-		require("grug-far").setup(opts)
 		M.grug = require("grug-far")
+		M.grug.setup(opts)
 	end,
 }
 

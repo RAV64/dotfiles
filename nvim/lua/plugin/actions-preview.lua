@@ -6,24 +6,26 @@ M.plugin = {
 		{
 			"<leader>a",
 			function()
-				require("actions-preview").code_actions()
+				M.actions.code_actions()
 			end,
 			desc = "Get code actions",
 		},
 	},
-	config = function()
-		require("actions-preview").setup({
-			telescope = {
-				layout_strategy = "vertical",
-				layout_config = {
-					vertical = {
-						prompt_position = "top",
-					},
-					width = 0.95,
-					height = 0.95,
+	opts = {
+		telescope = {
+			layout_strategy = "vertical",
+			layout_config = {
+				vertical = {
+					prompt_position = "top",
 				},
+				width = 0.95,
+				height = 0.95,
 			},
-		})
+		},
+	},
+	config = function(_, opts)
+		M.actions = require("actions-preview")
+		M.actions.setup(opts)
 	end,
 }
 

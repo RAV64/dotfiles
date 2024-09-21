@@ -46,6 +46,7 @@ hl("IncSearch", { bg = p.sapphire, fg = p.bg0 }) -- Highlight on yank
 hl("CurSearch", { bg = p.red, fg = p.text })
 
 hl("CursorLine", { bg = p.surface1 })
+hl("MacroCursorLine", { bg = "#603717" })
 hl("LineNr", { fg = p.surface2 })
 hl("CursorLineNr", { fg = p.flamingo })
 
