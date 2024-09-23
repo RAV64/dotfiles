@@ -16,6 +16,8 @@ set -g ZELLIJ_AUTO_EXIT true
 set -gx EDITOR nvim
 set -gx VISUAL nvim
 
+set -gx BUN_INSTALL "$HOME/.bun"
+
 if test -d $HOME/dotfiles/work/work.fish
     source $HOME/dotfiles/work/work.fish
 end
@@ -36,14 +38,16 @@ alias gst "git status"
 alias gac "git add . && git commit -m"
 alias gd "git diff HEAD"
 
-set -gx PATH /opt/homebrew/bin $PATH
-set -gx PATH /opt/homebrew/sbin $PATH
+set -gx NIX_CONF_DIR $HOME/.config/nix
+
+set -gx PATH $PATH /opt/homebrew/bin
+set -gx PATH $PATH /opt/homebrew/sbin
+set -gx PATH $PATH /run/current-system/sw/bin
 set -gx PATH $PATH ~/.dotnet/tools
 set -gx PATH $PATH ~/.cargo/bin
 set -gx PATH $PATH ~/.local/share/bob/nvim-bin
 set -gx PATH $PATH ~/dotfiles/scripts/bin
-set -gx BUN_INSTALL "$HOME/.bun"
-set -gx PATH $BUN_INSTALL/bin $PATH
+set -gx PATH $PATH $BUN_INSTALL/bin
 
 if test (uname) = Darwin
     launchctl remove com.valvesoftware.steam.ipctool
@@ -55,6 +59,3 @@ starship init fish | source
 
 fzf --fish | source
 fzf_configure_bindings --directory=\cf
-
-set -gx BUN_INSTALL "$HOME/.bun"
-set -gx PATH $BUN_INSTALL/bin $PATH

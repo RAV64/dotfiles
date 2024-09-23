@@ -18,7 +18,7 @@ M.ensure_install = {
 	"luadoc", "luap",     "markdown",   "markdown_inline",
 	"python", "query",    "regex",      "rust",
 	"sql",    "toml",     "tsx",        "typescript",
-	"vim",    "vimdoc",   "yaml",
+	"vim",    "vimdoc",   "yaml", "nix",
   "git_config",
   "git_rebase",
   "gitattributes",

@@ -1,22 +1,42 @@
-SUPER = { "cmd", "ctrl", "alt" }
-HYPER = { "cmd", "ctrl", "alt", "shift" }
-
 LOG = hs.logger.new("keybinding", "info")
 
 local launch = hs.application.launchOrFocus
-local bind = hs.hotkey.bind
+local hsbind = hs.hotkey.bind
+local exec = os.execute
 
--- bind(SUPER, "p", function()
--- 	local app = hs.application.get("wezterm")
--- 	local x = app:activate()
--- 	LOG.e(x)
--- end)
+function EnterMode(mode)
+	return function()
+		mode.triggered = false
+		mode:enter()
+	end
+end
+
+function ExitMode(mode, or_key)
+	return function()
+		mode:exit()
+		if not mode.triggered then
+			hs.eventtap.keyStroke({}, or_key)
+		end
+	end
+end
+
+local bind = function(mode, key, func)
+	mode:bind({}, key, func, function()
+		mode.triggered = true
+	end)
+end
+
+RCMD = hs.hotkey.modal.new({}, "F19")
+FN = hs.hotkey.modal.new({}, "F20")
+
+F18 = hsbind({}, "F18", EnterMode(FN), ExitMode(FN, "fn"))
+F17 = hsbind({}, "F17", EnterMode(RCMD), ExitMode(RCMD, "rightcmd"))
 
 -- APP LAUNCHER --------------------------
 local AppLauncher = function()
 	local __AppLauncher = function(app_map)
 		for key, app in pairs(app_map) do
-			bind(SUPER, key, function()
+			bind(RCMD, key, function()
 				local status = launch(app)
 				if not status then
 					LOG.e(app .. " does not exist")
@@ -66,10 +86,82 @@ function ToRGB(color)
 	return math.floor(color * 255)
 end
 
+ChangeVolume = function(diff)
+	return function()
+		local device = hs.audiodevice.defaultOutputDevice()
+		local current = device:volume()
+		local new = math.min(100, math.max(0, math.floor(current + diff)))
+		if new > 0 then
+			device:setMuted(false)
+		end
+		hs.alert.closeAll(0.0)
+		hs.alert.show("Volume " .. new .. "%", {}, 0.5)
+		device:setVolume(new)
+	end
+end
+
+ChangeBrightness = function(diff)
+	return function()
+		local current = hs.brightness.get()
+		local new = math.min(100, math.max(0, math.floor(current + diff)))
+		hs.alert.closeAll(0.0)
+		hs.alert.show("brightness " .. new .. "%", {}, 0.5)
+		hs.brightness.set(new)
+	end
+end
+
+ToggleMute = function()
+	return function()
+		local device = hs.audiodevice.defaultOutputDevice()
+		if device:muted() then
+			device:setMuted(false)
+			hs.alert.show("Volume unmuted")
+		else
+			device:setMuted(true)
+			hs.alert.show("Volume muted")
+		end
+	end
+end
+
+ToggleMedia = function()
+	return function()
+		hs.eventtap.event.newSystemKeyEvent("PLAY", true):post()
+	end
+end
+
+ReloadHammerspoon = function()
+	return function()
+		hs.reload()
+	end
+end
+
+Aerospace = function(cmd)
+	return function()
+		exec("/opt/homebrew/bin/aerospace " .. cmd)
+	end
+end
+
 return function(config)
 	AppLauncher()
-	bind("cmd", "space", config.launcher)
-	bind(HYPER, "R", function()
-		hs.reload()
-	end)
+	hsbind("cmd", "space", config.launcher)
+	bind(FN, "r", ReloadHammerspoon())
+
+	bind(FN, "a", ChangeVolume(3))
+	bind(FN, "z", ChangeVolume(-3))
+	bind(FN, "m", ToggleMute())
+	bind(FN, "q", ToggleMedia())
+	bind(FN, "s", ChangeBrightness(7))
+	bind(FN, "x", ChangeBrightness(-7))
+
+	bind(FN, "t", Aerospace("layout tiles horizontal vertical"))
+	bind(FN, "f", Aerospace("layout h_accordion"))
+	bind(FN, "p", Aerospace("layout floating tiling"))
+	bind(FN, "h", Aerospace("move left"))
+	bind(FN, "j", Aerospace("move down"))
+	bind(FN, "k", Aerospace("move up"))
+	bind(FN, "l", Aerospace("move right"))
+	for i = 1, 9 do
+		bind(FN, tostring(i), Aerospace("workspace " .. i))
+		bind(RCMD, tostring(i), Aerospace("move-node-to-workspace " .. i))
+	end
 end
