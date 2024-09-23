@@ -2,6 +2,7 @@ LOG = hs.logger.new("keybinding", "info")
 
 local launch = hs.application.launchOrFocus
 local hsbind = hs.hotkey.bind
+local keystroke = hs.eventtap.keyStroke
 local exec = os.execute
 
 function EnterMode(mode)
@@ -15,7 +16,7 @@ function ExitMode(mode, or_key)
 	return function()
 		mode:exit()
 		if not mode.triggered then
-			hs.eventtap.keyStroke({}, or_key)
+			keystroke({}, or_key)
 		end
 	end
 end
@@ -129,6 +130,12 @@ ToggleMedia = function()
 	end
 end
 
+BindToKey = function(key)
+	return function()
+		keystroke({}, key)
+	end
+end
+
 ReloadHammerspoon = function()
 	return function()
 		hs.reload()
@@ -141,9 +148,15 @@ Aerospace = function(cmd)
 	end
 end
 
+Noop = function()
+	return function() end
+end
+
 return function(config)
 	AppLauncher()
 	hsbind("cmd", "space", config.launcher)
+	hsbind("shift", "delete", BindToKey("forwarddelete"))
+	hsbind("cmd", "h", Noop())
 	bind(FN, "r", ReloadHammerspoon())
 
 	bind(FN, "a", ChangeVolume(3))
