@@ -30,6 +30,7 @@ M.plugin = {
 			javascriptreact = { "biome" },
 			typescript = { "biome" },
 			typescriptreact = { "biome" },
+			nix = { "nixfmt" },
 			-- yml = { "yamlfmt" },
 			-- yaml = { "yamlfmt" },
 		},
