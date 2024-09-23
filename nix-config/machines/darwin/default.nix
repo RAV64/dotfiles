@@ -2,6 +2,10 @@
   # https://hidutil-generator.netlify.app/
   launchd.user.agents."key-remap" = {
 
+    # caps-lock - escape
+    # fn - f18
+    # right-cmd - f17
+    # escape - mute
     serviceConfig = {
       ProgramArguments = [
         "/usr/bin/hidutil"

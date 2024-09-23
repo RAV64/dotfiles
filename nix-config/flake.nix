@@ -19,8 +19,9 @@
       configuration =
         { pkgs, ... }:
         {
-          nixpkgs.hostPlatform = "aarch64-darwin";
           nix.settings.experimental-features = "nix-command flakes";
+          programs.fish.enable = true;
+          security.pam.enableSudoTouchIdAuth = true;
 
           environment = {
             # List packages installed in system profile. To search by name, run:
@@ -35,19 +36,10 @@
           services.nix-daemon.enable = true;
           # nix.package = pkgs.nix;
 
-          # Create /etc/zshrc that loads the nix-darwin environment.
-          # programs.zsh.enable = true;  # default shell on catalina
-          programs.fish.enable = true;
-
-          # The platform the configuration will be used on.
-
-          security.pam.enableSudoTouchIdAuth = true;
-
           system = {
             # Set Git commit hash for darwin-version.
             configurationRevision = self.rev or self.dirtyRev or null;
 
-            # Used for backwards compatibility, please read the changelog before changing.
             # $ darwin-rebuild changelog
             stateVersion = 5;
 
@@ -56,14 +48,31 @@
                 autohide = true;
                 mru-spaces = false;
               };
+              trackpad = {
+                Clicking = true;
+                TrackpadThreeFingerDrag = true;
+              };
+              NSGlobalDomain = {
+                "com.apple.sound.beep.volume" = 0.0;
+                InitialKeyRepeat = 13;
+                KeyRepeat = 2;
+              };
+              finder = {
+                AppleShowAllExtensions = true;
+                AppleShowAllFiles = true;
+                CreateDesktop = false;
+                FXDefaultSearchScope = "SCcf";
+                FXEnableExtensionChangeWarning = false;
+                QuitMenuItem = true;
+                ShowStatusBar = true;
+              };
             };
           };
         };
     in
     {
-      # Build darwin flake using:
-      # $ darwin-rebuild build --flake .#Mikis-MacBook-Pro
       darwinConfigurations."Mikis-MacBook-Pro" = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
         modules = [
           configuration
           ./machines/darwin
