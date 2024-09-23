@@ -50,7 +50,7 @@
               };
               trackpad = {
                 Clicking = true;
-                TrackpadThreeFingerDrag = true;
+                TrackpadThreeFingerDrag = false;
               };
               NSGlobalDomain = {
                 "com.apple.sound.beep.volume" = 0.0;
@@ -71,7 +71,7 @@
         };
     in
     {
-      darwinConfigurations."Mikis-MacBook-Pro" = nix-darwin.lib.darwinSystem {
+      darwinConfigurations."mac" = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [
           configuration
@@ -80,6 +80,6 @@
       };
 
       # Expose the package set, including overlays, for convenience.
-      darwinPackages = self.darwinConfigurations."Mikis-MacBook-Pro".pkgs;
+      darwinPackages = self.darwinConfigurations."mac".pkgs;
     };
 }
