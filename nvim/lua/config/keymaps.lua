@@ -12,7 +12,10 @@ local nxo = { n, x, o }
 set(n, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
 set(n, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 
-set(ni, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
+-- vim.keymap.set(ni, "<esc>", function()
+-- 	vim.cmd("nohlsearch")
+-- 	return "<esc>"
+-- end, { desc = "Escape and clear hlsearch" })
 
 set(x, "<", "<gv")
 set(x, ">", ">gv")
@@ -29,10 +32,10 @@ set(n, "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 set(n, "<Tab>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 set(n, "<S-Tab>", "<cmd>bprev<cr>", { desc = "Prev buffer" })
 
-set(n, "<Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
-set(n, "<Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
-set(n, "<Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
-set(n, "<Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
+-- set(n, "<Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
+-- set(n, "<Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
+-- set(n, "<Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
+-- set(n, "<Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 
 -- undo breakpoints in insert mode
 set(i, ",", ",<c-g>u")

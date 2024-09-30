@@ -20,6 +20,13 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 	end,
 })
 
+vim.api.nvim_create_autocmd({ "BufRead" }, {
+	pattern = { "*.log" },
+	callback = function()
+		vim.bo.filetype = "log"
+	end,
+})
+
 vim.api.nvim_create_autocmd("FileType", {
 	desc = "close some filetypes with <q>",
 	group = vim.api.nvim_create_augroup("user-close-misc-buffers", { clear = true }),
@@ -34,6 +41,8 @@ vim.api.nvim_create_autocmd("FileType", {
 		"tsplayground",
 		"checkhealth",
 		"grug-far",
+		"log",
+		"minifiles",
 	},
 	callback = function(event)
 		vim.bo[event.buf].buflisted = false
@@ -50,19 +59,13 @@ end, {})
 vim.api.nvim_create_autocmd("BufWritePost", {
 	group = vim.api.nvim_create_augroup("user-reload-rust-analyzer", { clear = true }),
 	pattern = { "Cargo.toml" },
-	callback = function()
-		util.rust.refresh_cargo_workspace()
-	end,
+	callback = util.rust.refresh_cargo_workspace,
 })
 
-local update_lead = util.update_lead()
-local update_indent_chars = vim.api.nvim_create_augroup("user-update-indentation-chars", { clear = true })
 vim.api.nvim_create_autocmd("OptionSet", {
-	group = update_indent_chars,
+	group = vim.api.nvim_create_augroup("user-update-indentation-chars", { clear = true }),
 	pattern = { "shiftwidth" },
-	callback = function()
-		update_lead()
-	end,
+	callback = util.update_lead(),
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -121,17 +124,15 @@ local function ft(filetypes, callback)
 	})
 end
 
-ft({ "rust" }, function()
-	vim.keymap.set("n", "gp", function()
-		util.rust.go_to_parent_module()
-	end, {})
+ft({ "rust" }, function(event)
+	vim.keymap.set("n", "gp", util.rust.go_to_parent_module, { buffer = event.buf })
 end)
 
-ft({ "rust", "toml" }, function()
+ft({ "rust", "toml" }, function(event)
 	if vim.bo.filetype == "rust" or vim.fn.expand("%:t") == "Cargo.toml" then
 		vim.keymap.set("n", "<leader>c", function()
 			util.find_file("Cargo.toml")
-		end)
+		end, { buffer = event.buf })
 	end
 end)
 

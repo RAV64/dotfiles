@@ -9,6 +9,7 @@ vim.api.nvim_create_autocmd("User", {
 		require("config.keymaps")
 		require("config.autocmds")
 		require("mod.statusline")
+		require("mod.autopair")
 	end,
 })
 

@@ -10,22 +10,6 @@ end
 
 local M = {}
 
---stylua: ignore
-M.ensure_install = {
-	"bash",   "c",        "csv",        "diff",
-	"fish",   "html",     "htmldjango", "javascript",
-	"jsdoc",  "json",     "jsonc",      "lua",
-	"luadoc", "luap",     "markdown",   "markdown_inline",
-	"python", "query",    "regex",      "rust",
-	"sql",    "toml",     "tsx",        "typescript",
-	"vim",    "vimdoc",   "yaml", "nix",
-  "git_config",
-  "git_rebase",
-  "gitattributes",
-  "gitcommit",
-  "gitignore"
-}
-
 M.plugin = {
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -36,18 +20,7 @@ M.plugin = {
 			{ "yorickpeterse/nvim-tree-pairs", config = true },
 		},
 		opts = {
-			ensure_install = M.ensure_install,
-			auto_install = true,
-			highlight = { enable = true, additional_vim_regex_highlighting = false },
-			indent = { enable = true },
-			incremental_selection = { enable = false },
-			disable = function(_, buf)
-				local max_filesize = 200 * 1024 -- 2000 KB
-				local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-				if ok and stats and stats.size > max_filesize then
-					return true
-				end
-			end,
+			ensure_install = "community",
 		},
 		config = function(_, opts)
 			require("nvim-treesitter").setup(opts)
