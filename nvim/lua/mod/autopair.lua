@@ -1,8 +1,14 @@
 local mode = "i"
-local opts = { expr = true, noremap = true }
+local opts = { expr = true, noremap = true, replace_keycodes = false }
+
+local function escape(s)
+	return vim.api.nvim_replace_termcodes(s, true, true, true)
+end
+
+local left = escape("<C-g>U") .. escape("<left>")
 
 local function insert_pair(open, close)
-	local v = open .. close .. "<Left>"
+	local v = open .. close .. left
 	return function()
 		return v
 	end
