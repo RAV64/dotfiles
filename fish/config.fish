@@ -38,8 +38,6 @@ alias gst "git status"
 alias gac "git add . && git commit -m"
 alias gd "git diff HEAD"
 
-set -gx NIX_CONF_DIR $HOME/.config/nix
-
 set -gx PATH $PATH /opt/homebrew/bin
 set -gx PATH $PATH /opt/homebrew/sbin
 set -gx PATH $PATH /run/current-system/sw/bin

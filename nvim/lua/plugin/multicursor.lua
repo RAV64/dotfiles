@@ -10,10 +10,6 @@ M.plugin = {
 			mc.setup()
 
 			local set = vim.keymap.set
-			-- Add a cursor and jump to the next word under cursor.
-			set({ "n" }, "<c-n>", function()
-				mc.addCursor("*")
-			end)
 
 			set({ "n", "v" }, "<c-n>", function()
 				mc.matchAddCursor(1)
@@ -53,14 +49,6 @@ M.plugin = {
 			-- Append/insert for each line of visual selections.
 			set("x", "I", mc.insertVisual)
 			set("x", "A", mc.appendVisual)
-
-			-- Rotate visual selection contents.
-			set("x", "<leader>t", function()
-				mc.transposeCursors(1)
-			end)
-			set("x", "<leader>T", function()
-				mc.transposeCursors(-1)
-			end)
 
 			-- Customize how cursors look.
 			vim.api.nvim_set_hl(0, "MultiCursorCursor", { link = "Cursor" })
