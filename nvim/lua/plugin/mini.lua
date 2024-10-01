@@ -51,7 +51,7 @@ M.plugin = {
 		"echasnovski/mini.files",
 		keys = {
 			{
-				"å",
+				"-",
 				function()
 					M.files.open(vim.api.nvim_buf_get_name(0), false)
 				end,
