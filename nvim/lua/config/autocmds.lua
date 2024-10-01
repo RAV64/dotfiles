@@ -89,15 +89,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
-vim.api.nvim_create_autocmd("InsertLeave", {
-	group = vim.api.nvim_create_augroup("user-clear-snippet", { clear = true }),
-	callback = function()
-		if vim.snippet.active() then
-			vim.snippet.stop()
-		end
-	end,
-})
-
 -- MACRO COLOR -----------------------------------------
 local macro_cursorline_group = vim.api.nvim_create_augroup("user-macro-visual-indication", { clear = true })
 local original_cursorline_hl = vim.api.nvim_get_hl(0, { name = "CursorLine", link = false })

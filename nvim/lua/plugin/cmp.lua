@@ -4,10 +4,6 @@ local smart_tab = function()
 		vim.notify("TS not available")
 		return false
 	end
-	-- if not node then
-	-- 	vim.notify("parent not")
-	-- 	return false
-	-- end
 	local row, col = node:end_()
 	local ok = pcall(vim.api.nvim_win_set_cursor, 0, { row + 1, col })
 	return ok
@@ -74,7 +70,6 @@ return {
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp", priority = 8 },
 				{ name = "path", priority = 6 },
-				-- { name = "buffer", priority = 5, keyword_length = 3 },
 			}),
 
 			formatting = {
