@@ -84,7 +84,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		set("n", "<leader>gwa", vim.lsp.buf.add_workspace_folder, "add_workspace_folder")
 		set("n", "<leader>gwr", vim.lsp.buf.remove_workspace_folder, "remove_workspace_folder")
 		set("n", "<leader>gwl", function()
-			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+			vim.print(vim.lsp.buf.list_workspace_folders())
 		end, "list_workspace_folders")
 	end,
 })

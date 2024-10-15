@@ -1,3 +1,4 @@
+local func = require("config.util").func
 local M = {}
 
 M.plugin = {
@@ -26,14 +27,11 @@ M.plugin = {
 			{
 				"<S-q>",
 				function()
-					M.buf_delete(0, false)
+					func("mini.bufremove", "delete", 0, false)
 				end,
 				desc = "Delete Buffer",
 			},
 		},
-		config = function()
-			M.buf_delete = require("mini.bufremove").delete
-		end,
 	},
 
 	{
@@ -53,7 +51,7 @@ M.plugin = {
 			{
 				"-",
 				function()
-					M.files.open(vim.api.nvim_buf_get_name(0), false)
+					func("mini.files", "open", vim.api.nvim_buf_get_name(0), false)
 				end,
 			},
 		},
@@ -65,10 +63,6 @@ M.plugin = {
 				go_out_plus = "",
 			},
 		},
-		config = function(_, opts)
-			M.files = require("mini.files")
-			M.files.setup(opts)
-		end,
 	},
 }
 

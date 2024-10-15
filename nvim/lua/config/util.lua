@@ -45,8 +45,6 @@ function M.find_file(config)
 	find_config_file(path)
 end
 
-M.rust = {}
-
 local get_lsp_client = function(name)
 	local clients = vim.lsp.get_clients({ name = name })
 	if not clients or #clients == 0 then
@@ -55,38 +53,50 @@ local get_lsp_client = function(name)
 	return clients[1]
 end
 
-function M.rust.refresh_cargo_workspace()
-	local client = get_lsp_client("rust_analyzer")
+M.rust = {
+	refresh_cargo_workspace = function()
+		local client = get_lsp_client("rust_analyzer")
 
-	client.request("rust-analyzer/reloadWorkspace", nil, function(err)
-		if err then
-			vim.notify(tostring(err), vim.log.levels.ERROR)
-			return
-		end
-		vim.notify("Cargo workspace reloaded")
-	end)
+		client.request("rust-analyzer/reloadWorkspace", nil, function(err)
+			if err then
+				vim.notify(tostring(err), vim.log.levels.ERROR)
+				return
+			end
+			vim.notify("Cargo workspace reloaded")
+		end)
+	end,
+
+	go_to_parent_module = function()
+		local client = get_lsp_client("rust_analyzer")
+		client.request("experimental/parentModule", vim.lsp.util.make_position_params(0, nil), function(_, result, _)
+			if result == nil or vim.tbl_isempty(result) then
+				vim.notify("Can't find parent module")
+				return
+			end
+
+			local location = vim.islist(result) and result[1] or result
+
+			local path = vim.uri_to_fname(location.targetUri)
+			local fname = vim.fn.fnamemodify(path, ":t")
+			if fname == "Cargo.toml" then
+				vim.notify("Already at root module")
+				return
+			end
+
+			vim.lsp.util.jump_to_location(location, client.offset_encoding)
+		end)
+	end,
+}
+
+local mod_cache = {}
+
+local function set_and_get(m)
+	mod_cache[m] = require(m)
+	return mod_cache[m]
 end
 
-function M.rust.go_to_parent_module()
-	local client = get_lsp_client("rust_analyzer")
-
-	client.request("experimental/parentModule", vim.lsp.util.make_position_params(0, nil), function(_, result, _)
-		if result == nil or vim.tbl_isempty(result) then
-			vim.notify("Can't find parent module")
-			return
-		end
-
-		local location = vim.islist(result) and result[1] or result
-
-		local path = vim.uri_to_fname(location.targetUri)
-		local fname = vim.fn.fnamemodify(path, ":t")
-		if fname == "Cargo.toml" then
-			vim.notify("Already at root module")
-			return
-		end
-
-		vim.lsp.util.jump_to_location(location, client.offset_encoding)
-	end)
+function M.func(m, f, ...)
+	return (mod_cache[m] or set_and_get(m))[f](...)
 end
 
 return M
