@@ -124,9 +124,10 @@ ToggleMute = function()
 	end
 end
 
-ToggleMedia = function()
+SendEvent = function(key)
+	local event = hs.eventtap.event.newSystemKeyEvent(key, true)
 	return function()
-		hs.eventtap.event.newSystemKeyEvent("PLAY", true):post()
+		event:post()
 	end
 end
 
@@ -152,6 +153,13 @@ Noop = function()
 	return function() end
 end
 
+ClearCopiedTextFormatting = function()
+	return function()
+		local plainText = hs.pasteboard.getContents()
+		hs.pasteboard.setContents(plainText)
+	end
+end
+
 return function(config)
 	AppLauncher()
 	hsbind("cmd", "space", config.launcher)
@@ -162,7 +170,9 @@ return function(config)
 	bind(FN, "a", ChangeVolume(5))
 	bind(FN, "z", ChangeVolume(-5))
 	bind(FN, "m", ToggleMute())
-	bind(FN, "q", ToggleMedia())
+	bind(FN, "q", SendEvent("PLAY"))
+	bind(FN, "w", SendEvent("PREVIOUS"))
+	bind(FN, "e", SendEvent("NEXT"))
 	bind(FN, "s", ChangeBrightness(5))
 	bind(FN, "x", ChangeBrightness(-5))
 
@@ -177,4 +187,6 @@ return function(config)
 		bind(FN, tostring(i), Aerospace("workspace " .. i))
 		bind(RCMD, tostring(i), Aerospace("move-node-to-workspace " .. i))
 	end
+
+	hsbind({ "cmd", "shift" }, "C", ClearCopiedTextFormatting())
 end

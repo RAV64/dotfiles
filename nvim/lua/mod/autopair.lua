@@ -43,10 +43,10 @@ function Autopairs(pairs)
 end
 
 Autopairs({
-	{ char = { open = "(", close = ")" }, check_next = true },
-	{ char = { open = "[", close = "]" }, check_next = true },
-	{ char = { open = "{", close = "}" }, check_next = true },
-	{ char = { open = "<", close = ">" }, check_next = true },
+	{ char = { open = "(", close = ")" }, check_next = false },
+	{ char = { open = "[", close = "]" }, check_next = false },
+	{ char = { open = "{", close = "}" }, check_next = false },
+	{ char = { open = "<", close = ">" }, check_next = false },
 	{ char = { open = '"', close = '"' }, check_next = false },
 	{ char = { open = "`", close = "`" }, check_next = false },
 })

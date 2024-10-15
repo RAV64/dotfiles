@@ -19,7 +19,12 @@
       configuration =
         { pkgs, ... }:
         {
-          nix.settings.experimental-features = "nix-command flakes";
+          nix = {
+            settings = {
+              experimental-features = "nix-command flakes";
+              max-jobs = "auto";
+            };
+          };
           programs.fish.enable = true;
           security.pam.enableSudoTouchIdAuth = true;
 
@@ -32,8 +37,11 @@
             ];
           };
 
-          # Auto upgrade nix package and the daemon service.
-          services.nix-daemon.enable = true;
+          services = {
+            # Auto upgrade nix package and the daemon service.
+            nix-daemon.enable = true;
+            activate-system.enable = true;
+          };
           # nix.package = pkgs.nix;
 
           system = {
@@ -42,6 +50,15 @@
 
             # $ darwin-rebuild changelog
             stateVersion = 5;
+
+            # activationScripts are executed every time you boot the system or run
+            # `nixos-rebuild` / `darwin-rebuild`.
+            activationScripts.postUserActivation.text = ''
+              # activateSettings -u will reload the settings from the database and
+              # apply them to the current session, so we do not need to logout and
+              # login again to make the changes take effect.
+              /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+            '';
 
             defaults = {
               dock = {
@@ -66,12 +83,19 @@
                 QuitMenuItem = true;
                 ShowStatusBar = true;
               };
+              CustomUserPreferences = {
+                "com.apple.desktopservices" = {
+                  # Avoid creating .DS_Store files on network or USB volumes
+                  DSDontWriteNetworkStores = true;
+                  DSDontWriteUSBStores = true;
+                };
+              };
             };
           };
         };
     in
     {
-      darwinConfigurations."mac" = nix-darwin.lib.darwinSystem {
+      darwinConfigurations."darwin" = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [
           configuration
@@ -80,6 +104,6 @@
       };
 
       # Expose the package set, including overlays, for convenience.
-      darwinPackages = self.darwinConfigurations."mac".pkgs;
+      darwinPackages = self.darwinConfigurations."darwin".pkgs;
     };
 }
