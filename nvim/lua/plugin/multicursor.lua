@@ -4,7 +4,6 @@ M.plugin = {
 	{
 		"jake-stewart/multicursor.nvim",
 		event = "VeryLazy",
-		branch = "snippet",
 		config = function()
 			local mc = require("multicursor-nvim")
 
@@ -23,9 +22,6 @@ M.plugin = {
 			end)
 			set({ "n", "v" }, "<c-s>", function()
 				mc.matchSkipCursor(1)
-			end)
-			set({ "n", "v" }, "<c-S>", function()
-				mc.matchSkipCursor(-1)
 			end)
 
 			set({ "n", "x" }, "<up>", mc.prevCursor)

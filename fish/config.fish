@@ -38,14 +38,14 @@ alias gst "git status"
 alias gac "git add . && git commit -m"
 alias gd "git diff HEAD"
 
-set -gx PATH $PATH /opt/homebrew/bin
-set -gx PATH $PATH /opt/homebrew/sbin
-set -gx PATH $PATH /run/current-system/sw/bin
-set -gx PATH $PATH ~/.dotnet/tools
-set -gx PATH $PATH ~/.cargo/bin
-set -gx PATH $PATH ~/.local/share/bob/nvim-bin
-set -gx PATH $PATH ~/dotfiles/scripts/bin
-set -gx PATH $PATH $BUN_INSTALL/bin
+set -gx PATH $BUN_INSTALL/bin $PATH
+set -gx PATH ~/dotfiles/scripts/bin $PATH
+set -gx PATH ~/.local/share/bob/nvim-bin $PATH
+set -gx PATH ~/.cargo/bin $PATH
+set -gx PATH ~/.dotnet/tools $PATH
+set -gx PATH /run/current-system/sw/bin $PATH
+set -gx PATH /opt/homebrew/sbin $PATH
+set -gx PATH /opt/homebrew/bin $PATH
 
 if test (uname) = Darwin
     launchctl remove com.valvesoftware.steam.ipctool

@@ -1,16 +1,15 @@
 local smart_tab = function()
 	local node_ok, node = pcall(vim.treesitter.get_node)
-	if not node_ok then
+	if not node_ok or not node then
 		vim.notify("TS not available")
-		return false
+		return
 	end
 	local row, col = node:end_()
-	local ok = pcall(vim.api.nvim_win_set_cursor, 0, { row + 1, col })
-	return ok
+	vim.api.nvim_win_set_cursor(0, { row + 1, col })
 end
 
 return {
-	"hrsh7th/nvim-cmp",
+	"iguanacucumber/magazine.nvim",
 	version = false,
 	event = "InsertEnter",
 	dependencies = {
