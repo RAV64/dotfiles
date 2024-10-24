@@ -16,12 +16,7 @@ M.plugin = {
 		branch = "main",
 		build = ":TSUpdate",
 		lazy = false,
-		dependencies = {
-			{ "yorickpeterse/nvim-tree-pairs", config = true },
-		},
-		opts = {
-			ensure_install = "community",
-		},
+		opts = { ensure_install = "community" },
 		config = function(_, opts)
 			require("nvim-treesitter").setup(opts)
 
@@ -39,6 +34,7 @@ M.plugin = {
 	},
 
 	{ "HiPhish/rainbow-delimiters.nvim", event = "BufReadPre", branch = "fix-highlighting" },
+	{ "yorickpeterse/nvim-tree-pairs", event = "BufEnter", config = true },
 }
 
 return M.plugin

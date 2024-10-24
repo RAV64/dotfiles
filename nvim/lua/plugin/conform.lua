@@ -1,3 +1,4 @@
+local func = require("config.util").func
 local M = {}
 
 M.plugin = {
@@ -8,7 +9,7 @@ M.plugin = {
 		{
 			"gf",
 			function()
-				require("conform").format({ async = true, lsp_fallback = true })
+				func("conform", "format", { async = true, lsp_fallback = true })
 			end,
 			desc = "Format buffer",
 		},
@@ -31,6 +32,8 @@ M.plugin = {
 			typescript = { "biome" },
 			typescriptreact = { "biome" },
 			nix = { "nixfmt" },
+			json = { "jq" },
+			markdown = { "deno_fmt" },
 			-- yml = { "yamlfmt" },
 			-- yaml = { "yamlfmt" },
 		},

@@ -1,3 +1,4 @@
+local func = require("config.util").func
 local M = {}
 
 M.plugin = {
@@ -11,20 +12,14 @@ M.plugin = {
 	cmd = "GrugFar",
 	keys = {
 		{
-			"<leader>sr",
+			"<leader>R",
 			function()
-				M.grug.grug_far({
-					transient = true,
-				})
+				func("grug-far", "grug_far", { transient = true })
 			end,
 			mode = { "n" },
 			desc = "Search and Replace",
 		},
 	},
-	config = function(_, opts)
-		M.grug = require("grug-far")
-		M.grug.setup(opts)
-	end,
 }
 
 return M.plugin
