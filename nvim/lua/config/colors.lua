@@ -29,6 +29,8 @@ local p = {
 	yellow = "#ffd966",
 	green = "#A8DC76",
 	blue = "#82A6ED",
+
+	-- dirt = "#433021",
 }
 
 local hl = function(group, color)
@@ -98,6 +100,15 @@ hl("SpecialChar", { link = "Special" })
 hl("StorageClass", { fg = p.yellow })
 hl("Structure", { fg = p.yellow })
 hl("Tag", { fg = p.lavender, bold = true })
+
+hl("Struct", { fg = p.yellow })
+hl("Interface", { fg = p.flamingo })
+hl("Enum", { fg = p.yellow })
+hl("EnumMember", { fg = p.orange })
+hl("Module", { fg = p.lavender })
+hl("Class", { fg = p.yellow })
+hl("Variable", { fg = p.text })
+hl("Field", { fg = p.lavender })
 
 -- CMP
 hl("CmpItemKindClass", { fg = p.bg0, bg = p.yellow })
@@ -297,7 +308,7 @@ hl("@lsp.type.enum", { link = "@type" })
 hl("@lsp.type.enumMember", { link = "@constant" })
 hl("@lsp.type.escapeSequence", { link = "@string.escape" })
 hl("@lsp.type.formatSpecifier", { link = "@punctuation.special" })
-hl("@lsp.type.interface", { fg = p.flamingo })
+hl("@lsp.type.interface", { link = "Interface" })
 hl("@lsp.type.keyword", { link = "@keyword" })
 hl("@lsp.type.namespace", { link = "@module" })
 hl("@lsp.type.number", { link = "@number" })

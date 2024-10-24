@@ -2,8 +2,8 @@
 return {
 	"ggandor/leap.nvim",
 	keys = {
-		{ "s", mode = { "n", "x", "o" }, desc = "Leap forward to" },
-		{ "S", mode = { "n", "x", "o" }, desc = "Leap backward to" },
+		{ "t", mode = { "n", "x", "o" }, desc = "Leap forward to" },
+		{ "T", mode = { "n", "x", "o" }, desc = "Leap backward to" },
 	},
 	config = function()
 		local leap = require("leap")
