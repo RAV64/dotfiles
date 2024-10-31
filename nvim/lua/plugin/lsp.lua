@@ -80,7 +80,23 @@ M.plugin = {
 				astro = {},
 				prismals = {},
 				biome = {},
-				nixd = {},
+				nixd = {
+					settings = {
+						nixd = {
+							nixpkgs = {
+								expr = "import <nixpkgs> { }",
+							},
+							options = {
+								home_manager = {
+									expr = '(builtins.getFlake ("git+file://" + toString ./.)).homeConfigurations.earlymoon.options',
+								},
+								nix_darwin = {
+									expr = '(builtins.getFlake ("git+file://" + toString ./.)).darwinConfigurations.earlymoon.options',
+								},
+							},
+						},
+					},
+				},
 
 				-- Python
 				basedpyright = {},
