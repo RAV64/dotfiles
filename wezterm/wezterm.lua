@@ -4,6 +4,7 @@ local config = wezterm.config_builder()
 config.front_end = "WebGpu"
 config.webgpu_power_preference = "HighPerformance"
 config.animation_fps = 30
+config.max_fps = 120
 
 require("colorscheme").setup(config)
 require("keys").setup(config)

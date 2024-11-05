@@ -50,3 +50,6 @@ vim.keymap.set("i", "<esc>", function()
 	end
 	return "<esc>"
 end, { expr = true })
+
+-- https://docs.helix-editor.com/textobjects.html
+-- More helix maps?

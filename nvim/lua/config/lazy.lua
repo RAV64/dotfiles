@@ -14,7 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	spec = {
 		{ import = "plugin" },
-		-- { import = "extra.plugin.markdown" },
+		{ import = "extra.plugin.leap" },
 	},
 	defaults = { version = false, lazy = true },
 	change_detection = { enabled = false },

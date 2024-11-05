@@ -52,6 +52,7 @@ local AppLauncher = function()
 		f = "Finder",
 		m = "Mail",
 		h = "homeassistant",
+		p = "screenshot",
 
 		k = "microsoft word",
 		b = "firefox developer edition",

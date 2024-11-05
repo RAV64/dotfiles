@@ -1,4 +1,3 @@
-local func = require("config.util").func
 local M = {}
 
 M.plugin = {
@@ -9,7 +8,7 @@ M.plugin = {
 		{
 			"gf",
 			function()
-				func("conform", "format", { async = true, lsp_fallback = true })
+				UTIL.func("conform", "format", { async = true, lsp_fallback = true })
 			end,
 			desc = "Format buffer",
 		},

@@ -45,6 +45,16 @@ function M.find_file(config)
 	find_config_file(path)
 end
 
+function M.get_top_level_keys(tbl)
+	local keys = {}
+
+	for key, _ in pairs(tbl) do
+		table.insert(keys, key)
+	end
+
+	return keys
+end
+
 local get_lsp_client = function(name)
 	local clients = vim.lsp.get_clients({ name = name })
 	if not clients or #clients == 0 then

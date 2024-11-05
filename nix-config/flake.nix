@@ -18,7 +18,6 @@
       home-manager,
       nixpkgs,
     }@inputs:
-
     {
       darwinConfigurations."white-gharial" = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";

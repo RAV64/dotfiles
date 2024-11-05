@@ -1,4 +1,3 @@
-local func = require("config.util").func
 local M = {}
 
 M.plugin = {
@@ -7,9 +6,9 @@ M.plugin = {
 		event = "BufReadPost",
 		opts = {
 			mappings = {
-				add = "sa",
-				delete = "sd",
-				replace = "sr",
+				add = "ms",
+				delete = "md",
+				replace = "mr",
 
 				-- Disable
 				find = "",
@@ -27,13 +26,12 @@ M.plugin = {
 			{
 				"<S-q>",
 				function()
-					func("mini.bufremove", "delete", 0, false)
+					UTIL.func("mini.bufremove", "delete", 0, false)
 				end,
 				desc = "Delete Buffer",
 			},
 		},
 	},
-
 	{
 		"echasnovski/mini.icons",
 		config = true,
@@ -44,14 +42,13 @@ M.plugin = {
 			end
 		end,
 	},
-
 	{
 		"echasnovski/mini.files",
 		keys = {
 			{
 				"-",
 				function()
-					func("mini.files", "open", vim.api.nvim_buf_get_name(0), false)
+					UTIL.func("mini.files", "open", vim.api.nvim_buf_get_name(0), false)
 				end,
 			},
 		},

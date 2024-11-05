@@ -1,7 +1,6 @@
-local func = require("config.util").func
 local tb_f = function(f, args)
 	return function()
-		func("telescope.builtin", f, args)
+		UTIL.func("telescope.builtin", f, args)
 	end
 end
 local M = {}
