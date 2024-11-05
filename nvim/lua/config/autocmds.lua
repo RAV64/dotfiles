@@ -1,5 +1,3 @@
-local util = require("config.util")
-
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight when yanking (copying) text",
 	group = vim.api.nvim_create_augroup("user-highlight-yank", { clear = true }),
@@ -59,13 +57,13 @@ end, {})
 vim.api.nvim_create_autocmd("BufWritePost", {
 	group = vim.api.nvim_create_augroup("user-reload-rust-analyzer", { clear = true }),
 	pattern = { "Cargo.toml" },
-	callback = util.rust.refresh_cargo_workspace,
+	callback = UTIL.rust.refresh_cargo_workspace,
 })
 
 vim.api.nvim_create_autocmd("OptionSet", {
 	group = vim.api.nvim_create_augroup("user-update-indentation-chars", { clear = true }),
 	pattern = { "shiftwidth" },
-	callback = util.update_lead(),
+	callback = UTIL.update_lead(),
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -116,13 +114,13 @@ local function ft(filetypes, callback)
 end
 
 ft({ "rust" }, function(event)
-	vim.keymap.set("n", "gp", util.rust.go_to_parent_module, { buffer = event.buf })
+	vim.keymap.set("n", "gp", UTIL.rust.go_to_parent_module, { buffer = event.buf })
 end)
 
 ft({ "rust", "toml" }, function(event)
 	if vim.bo.filetype == "rust" or vim.fn.expand("%:t") == "Cargo.toml" then
 		vim.keymap.set("n", "<leader>c", function()
-			util.find_file("Cargo.toml")
+			UTIL.find_file("Cargo.toml")
 		end, { buffer = event.buf })
 	end
 end)

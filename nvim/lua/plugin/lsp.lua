@@ -26,7 +26,7 @@ M.plugin = {
 							runtime = { version = "LuaJIT" },
 							workspace = { checkThirdParty = false },
 							telemetry = { enable = false },
-							diagnostics = { globals = { "vim", "hs" } },
+							diagnostics = { globals = { "vim", "hs", "UTIL" } },
 						},
 					},
 				},
@@ -88,10 +88,10 @@ M.plugin = {
 							},
 							options = {
 								home_manager = {
-									expr = '(builtins.getFlake ("git+file://" + toString ./.)).homeConfigurations.earlymoon.options',
+									expr = '(builtins.getFlake ("/Users/miki/dotfiles/nix-config")).darwinConfigurations.white-gharial.options.home-manager',
 								},
 								nix_darwin = {
-									expr = '(builtins.getFlake ("git+file://" + toString ./.)).darwinConfigurations.earlymoon.options',
+									expr = '(builtins.getFlake ("/Users/miki/dotfiles/nix-config")).darwinConfigurations.white-gharial.options',
 								},
 							},
 						},

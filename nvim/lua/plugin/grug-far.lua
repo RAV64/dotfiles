@@ -1,4 +1,3 @@
-local func = require("config.util").func
 local M = {}
 
 M.plugin = {
@@ -14,7 +13,7 @@ M.plugin = {
 		{
 			"<leader>R",
 			function()
-				func("grug-far", "grug_far", { transient = true })
+				UTIL.func("grug-far", "grug_far", { transient = true })
 			end,
 			mode = { "n" },
 			desc = "Search and Replace",

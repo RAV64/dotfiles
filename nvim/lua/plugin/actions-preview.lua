@@ -1,4 +1,3 @@
-local func = require("config.util").func
 local M = {}
 
 M.plugin = {
@@ -7,7 +6,7 @@ M.plugin = {
 		{
 			"<leader>a",
 			function()
-				func("actions-preview", "code_actions")
+				UTIL.func("actions-preview", "code_actions")
 			end,
 			desc = "Get code actions",
 		},
