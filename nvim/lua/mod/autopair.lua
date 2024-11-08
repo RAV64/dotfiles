@@ -29,7 +29,7 @@ local function insert_pair_with_check(open, close)
 	end
 end
 
-function Autopairs(pairs)
+local function Autopairs(pairs)
 	for _, pair in ipairs(pairs) do
 		local open_char = pair.char.open
 		local close_char = pair.char.close
