@@ -1,3 +1,5 @@
+_G.UTIL = require("config.util")
+
 require("config.options")
 require("config.lazy")
 
@@ -12,8 +14,6 @@ vim.api.nvim_create_autocmd("User", {
 		require("mod.autopair")
 	end,
 })
-
-_G.UTIL = require("config.util")
 
 vim.api.nvim_create_autocmd("UiEnter", {
 	callback = function()

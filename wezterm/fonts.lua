@@ -44,7 +44,6 @@ function monaspace.setup(config)
 		},
 		{
 			intensity = "Bold",
-			italic = true,
 			font = wezterm.font({
 				family = monaspace.font.xenon,
 				harfbuzz_features = monaspace.all_features,

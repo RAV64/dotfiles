@@ -1,382 +1,363 @@
 local p = {
-	bg0 = "#2C2A2E",
-	bg1 = "#29272B",
-	bg2 = "#1F1D20",
+	background = "#2C2A2E",
+	float_background = "#29272B",
+	results_background = "#1F1D20",
 
 	surface0 = "#3D3A40",
 	surface1 = "#47444B",
 	surface2 = "#524E56",
 
-	overlay0 = "#ffffff",
-	overlay1 = "#f2f4f8",
-	overlay2 = "#dde1e6",
-
-	text = "#FCFCFA",
+	overlay = "#DDE1E6",
 
 	purple = "#D499FF",
-	pink = "#F5C2E7",
-
-	teal = "#94e2d5",
-	flamingo = "#F2CDCD",
-	maroon = "#ee5396",
-	lavender = "#43D5EE",
-	sapphire = "#74c7ec", -- REMOVE
-	sky = "#89dceb",
-	rosewater = "#ff99ff",
-
+	teal = "#94E2D5",
+	beige = "#F2CDCD",
+	maroon = "#EE5396",
+	light_blue = "#43D5EE",
+	sky = "#89DCEB",
 	orange = "#FC9867",
 	red = "#FF6188",
-	yellow = "#ffd966",
+	yellow = "#FFD966",
 	green = "#A8DC76",
 	blue = "#82A6ED",
 
+	static = "#FDAB67",
+	macro = "#603717",
+
+	-- black = "#131418",
+	-- blue = "#333799",
+	-- brown = "#6f4527",
+	-- cyan = "#15868d",
+	-- gray = "#3d4245",
+	-- green = "#51691a",
+	-- light_blue = "#38abd4",
+	-- light_gray = "#8a8a83",
+	-- lime = "#6cb418",
+	magenta = "#B841AE",
+	-- orange = "#eb7111",
+	pink = "#EA89A8",
+	-- purple = "#7527a6",
+	-- red = "#9c2521",
+	white = "#E4E6E7",
+	-- yellow = "#f3c125",
+	--
 	-- dirt = "#433021",
 }
 
 local hl = function(group, color)
 	vim.api.nvim_set_hl(0, group, color)
 end
+local colorize = function(group, color)
+	local opts = type(color) == "table" and color or { fg = color }
+	hl(group, opts)
+	return { group = group, color = color }
+end
+local link = function(color)
+	return { link = color.group }
+end
+local inversed = function(color)
+	return { fg = p.background, bg = color }
+end
 
 -- EDITOR
-hl("Normal", { fg = p.text, bg = p.bg0 })
-hl("NormalFloat", { fg = p.text, bg = p.bg1 })
-hl("Pmenu", { fg = p.overlay2, bg = p.bg1 })
+hl("Normal", { fg = p.white, bg = p.background })
+hl("NormalFloat", { fg = p.white, bg = p.float_background })
 hl("Visual", { bg = p.surface2 })
 
-hl("Search", { bg = p.sapphire, fg = p.bg0 })
-hl("IncSearch", { bg = p.sapphire, fg = p.bg0 }) -- Highlight on yank
-hl("CurSearch", { bg = p.red, fg = p.text })
+hl("Search", { bg = p.light_blue, fg = p.background })
+hl("IncSearch", { bg = p.light_blue, fg = p.background }) -- Highlight on yank
+hl("CurSearch", { bg = p.red, fg = p.white })
 
 hl("CursorLine", { bg = p.surface1 })
-hl("MacroCursorLine", { bg = "#603717" })
+hl("MacroCursorLine", { bg = p.macro })
 hl("LineNr", { fg = p.surface2 })
-hl("CursorLineNr", { fg = p.flamingo })
+hl("CursorLineNr", { fg = p.beige })
 
-hl("LazyNormal", { bg = p.bg1 })
+hl("LazyNormal", { bg = p.float_background })
 hl("CmpGhostText", { italic = true })
-hl("WinSeparator", { fg = p.bg1, bg = p.bg1 })
+hl("WinSeparator", { fg = p.float_background, bg = p.float_background })
 
 -- TELESCOPE
 hl("TelescopePromptNormal", { bg = p.surface0 })
 hl("TelescopePromptBorder", { bg = p.surface0 })
 hl("TelescopePromptTitle", { bg = p.surface0 })
-hl("TelescopeNormal", { bg = p.bg1 })
-hl("TelescopeBorder", { bg = p.bg1 })
-hl("TelescopePreviewNormal", { bg = p.bg2 })
-hl("TelescopePreviewBorder", { bg = p.bg2 })
+hl("TelescopeNormal", { bg = p.float_background })
+hl("TelescopeBorder", { bg = p.float_background })
+hl("TelescopePreviewNormal", { bg = p.results_background })
+hl("TelescopePreviewBorder", { bg = p.results_background })
 hl("TelescopeMatching", { fg = p.blue, italic = true })
 
--- SYNTAX
-hl("Boolean", { fg = p.maroon })
-hl("Number", { fg = p.orange })
-hl("Character", { fg = p.teal })
-hl("Comment", { fg = p.overlay0, italic = true })
-hl("Conditional", { fg = p.purple })
-hl("Constant", { fg = p.orange })
-hl("Exception", { fg = p.purple })
-hl("Float", { link = "Number" })
-hl("Function", { fg = p.blue })
-hl("Identifier", { fg = p.flamingo })
-hl("Keyword", { fg = p.purple })
-hl("Label", { fg = p.sapphire })
-hl("Operator", { fg = p.sky })
-hl("Repeat", { fg = p.purple })
-hl("SpecialComment", { link = "Special" })
-hl("Statement", { fg = p.purple })
-hl("String", { fg = p.green })
-hl("Type", { fg = p.yellow })
-hl("Typedef", { link = "Type" })
+local boolean = colorize("Boolean", p.maroon)
+local character = colorize("Character", p.teal)
+local comment = colorize("Comment", { fg = p.white, italic = true })
+local conditional = colorize("Conditional", p.purple)
+local exception = colorize("Exception", p.magenta)
+local func = colorize("Function", p.blue)
+local keyword = colorize("Keyword", p.purple)
+local label = colorize("Label", p.light_blue)
+local operator = colorize("Operator", p.sky)
+local rep = colorize("Repeat", p.purple) --repeat
+local str = colorize("String", p.green)
+local constant = colorize("Constant", p.orange)
+local static = colorize("Static", p.static)
+local number = colorize("Number", p.orange)
+local float = colorize("Float", p.orange)
+local type = colorize("Type", p.yellow)
+local typedef = colorize("Typedef", p.yellow)
+local class = colorize("Class", p.yellow)
+local struct = colorize("Struct", p.yellow)
+local interface = colorize("Interface", p.beige)
+local constructur = colorize("Constructor", p.blue)
+local enum = colorize("Enum", p.yellow)
+local enumMember = colorize("EnumMember", p.orange)
+local field = colorize("Field", p.light_blue)
+local module = colorize("Module", p.light_blue)
+local event = colorize("Event", p.purple)
+local file = colorize("File", p.blue)
+local folder = colorize("Foleder", p.blue)
+local special = colorize("Special", p.beige)
+local variable = colorize("Variable", p.white)
+local macro = colorize("Macro", p.orange)
+local parameter = colorize("Parameter", p.maroon)
 
-hl("Define", { link = "PreProc" })
-hl("Include", { fg = p.purple })
-hl("Macro", { fg = p.purple })
-hl("PreCondit", { link = "PreProc" })
-hl("PreProc", { fg = p.pink })
+local colors = {
+	["Debug"] = link(special),
+	["Define"] = { link = "PreProc" },
+	["Delimiter"] = { fg = p.white },
+	["Include"] = { fg = p.purple },
+	["PreCondit"] = { link = "PreProc" },
+	["PreProc"] = { fg = p.pink },
+	["SpecialChar"] = link(special),
+	["SpecialComment"] = link(special),
+	["StorageClass"] = link(class),
+	["Structure"] = link(struct),
+	["Tag"] = { fg = p.light_blue, bold = true },
 
-hl("Debug", { link = "Special" })
-hl("Delimiter", { fg = p.overlay2 })
-hl("Special", { fg = p.flamingo })
-hl("SpecialChar", { link = "Special" })
-hl("StorageClass", { fg = p.yellow })
-hl("Structure", { fg = p.yellow })
-hl("Tag", { fg = p.lavender, bold = true })
+	-- CMP
+	["CmpItemKindClass"] = inversed(class.color),
+	["CmpItemKindConstant"] = inversed(constant.color),
+	["CmpItemKindConstructor"] = inversed(constructur.color),
+	["CmpItemKindEnum"] = inversed(enum.color),
+	["CmpItemKindEnumMember"] = inversed(enumMember.color),
+	["CmpItemKindEvent"] = inversed(event.color),
+	["CmpItemKindField"] = inversed(field.color),
+	["CmpItemKindFile"] = inversed(file.color),
+	["CmpItemKindFolder"] = inversed(folder.color),
+	["CmpItemKindFunction"] = inversed(func.color),
+	["CmpItemKindInterface"] = inversed(interface.color),
+	["CmpItemKindKeyword"] = inversed(keyword.color),
+	["CmpItemKindMethod"] = inversed(func.color),
+	["CmpItemKindModule"] = inversed(module.color),
+	["CmpItemKindOperator"] = inversed(operator.color),
+	["CmpItemKindProperty"] = inversed(field.color),
+	["CmpItemKindStruct"] = inversed(struct.color),
+	["CmpItemKindText"] = inversed(str.color),
+	["CmpItemKindTypeParameter"] = inversed(type.color),
+	["CmpItemKindVariable"] = inversed(variable.color),
 
-hl("Struct", { fg = p.yellow })
-hl("Interface", { fg = p.flamingo })
-hl("Enum", { fg = p.yellow })
-hl("EnumMember", { fg = p.orange })
-hl("Module", { fg = p.lavender })
-hl("Class", { fg = p.yellow })
-hl("Variable", { fg = p.text })
-hl("Field", { fg = p.lavender })
+	["CmpItemKindReference"] = inversed(p.red),
+	["CmpItemKindSnippet"] = inversed(p.purple),
+	["CmpItemKindUnit"] = inversed(p.green),
+	["CmpItemKindValue"] = inversed(p.orange),
+	["CmpItemKindColor"] = inversed(p.red),
 
--- CMP
-hl("CmpItemKindClass", { fg = p.bg0, bg = p.yellow })
-hl("CmpItemKindColor", { fg = p.bg0, bg = p.red })
-hl("CmpItemKindConstant", { fg = p.bg0, bg = p.orange })
-hl("CmpItemKindConstructor", { fg = p.bg0, bg = p.blue })
-hl("CmpItemKindEnum", { fg = p.bg0, bg = p.yellow })
-hl("CmpItemKindEnumMember", { fg = p.bg0, bg = p.orange })
-hl("CmpItemKindEvent", { fg = p.bg0, bg = p.purple })
-hl("CmpItemKindField", { fg = p.bg0, bg = p.lavender })
-hl("CmpItemKindFile", { fg = p.bg0, bg = p.blue })
-hl("CmpItemKindFolder", { fg = p.bg0, bg = p.blue })
-hl("CmpItemKindFunction", { fg = p.bg0, bg = p.blue })
-hl("CmpItemKindInterface", { fg = p.bg0, bg = p.flamingo })
-hl("CmpItemKindKeyword", { fg = p.bg0, bg = p.purple })
-hl("CmpItemKindMethod", { fg = p.bg0, bg = p.blue })
-hl("CmpItemKindModule", { fg = p.bg0, bg = p.lavender })
-hl("CmpItemKindOperator", { fg = p.bg0, bg = p.sky })
-hl("CmpItemKindProperty", { fg = p.bg0, bg = p.lavender })
-hl("CmpItemKindReference", { fg = p.bg0, bg = p.red })
-hl("CmpItemKindSnippet", { fg = p.bg0, bg = p.purple })
-hl("CmpItemKindStruct", { fg = p.bg0, bg = p.yellow })
-hl("CmpItemKindText", { fg = p.bg0, bg = p.green })
-hl("CmpItemKindTypeParameter", { fg = p.bg0, bg = p.yellow })
-hl("CmpItemKindUnit", { fg = p.bg0, bg = p.green })
-hl("CmpItemKindValue", { fg = p.bg0, bg = p.orange })
-hl("CmpItemKindVariable", { fg = p.bg0, bg = p.green })
-hl("CmpBackground", { bg = p.bg2 })
+	["CmpBackground"] = { bg = p.float_background },
 
--- TREESITTER
-hl("@variable", { fg = p.text })
-hl("@variable.builtin", { fg = p.red })
-hl("@variable.parameter", { fg = p.maroon })
-hl("@variable.member", { fg = p.lavender })
+	-- TREESITTER
+	["@variable"] = link(variable), -- Any variable name that does not have another highlight.
+	["@variable.parameter"] = link(parameter), -- For parameters of a function.
+	["@variable.member"] = link(field), -- For fields.
 
-hl("@constant", { link = "Constant" })
-hl("@constant.builtin", { fg = p.orange })
-hl("@constant.macro", { link = "Macro" })
+	["@constant"] = link(constant),
+	["@constant.macro"] = link(constant),
 
-hl("@module", { fg = p.lavender })
-hl("@label", { link = "Label" })
+	["@module"] = link(module),
+	["@label"] = link(label),
 
-hl("@string", { link = "String" })
-hl("@string.documentation", { fg = p.teal })
-hl("@string.regexp", { fg = p.orange })
-hl("@string.escape", { fg = p.pink })
-hl("@string.special", { link = "Special" })
-hl("@string.special.path", { link = "Special" })
-hl("@string.special.symbol", { fg = p.flamingo })
-hl("@string.special.url", { fg = p.rosewater })
+	["@string"] = link(str),
 
-hl("@character", { link = "Character" })
-hl("@character.special", { link = "SpecialChar" })
+	["@character"] = link(character),
+	["@character.special"] = { link = "SpecialChar" },
 
-hl("@boolean", { link = "Boolean" })
-hl("@number", { link = "Number" })
-hl("@number.float", { link = "Float" })
+	["@boolean"] = link(boolean),
+	["@number"] = link(number),
+	["@number.float"] = link(float),
 
-hl("@type", { link = "Type" })
-hl("@type.builtin", { fg = p.yellow })
-hl("@type.definition", { link = "Type" })
+	["@type"] = link(type),
+	["@type.builtin"] = link(type),
+	["@type.definition"] = link(type),
 
-hl("@attribute", { link = "Constant" })
-hl("@property", { fg = p.lavender })
+	["@attribute"] = link(constant),
+	["@property"] = link(field),
 
-hl("@function", { link = "Function" })
-hl("@function.builtin", { fg = p.orange })
-hl("@function.call", { link = "Function" })
-hl("@function.macro", { fg = p.teal })
+	["@function"] = link(func),
+	["@function.builtin"] = { bold = true },
+	["@function.call"] = link(func),
+	["@function.macro"] = link(macro),
 
-hl("@function.method", { link = "Function" })
-hl("@function.method.call", { link = "Function" })
+	["@function.method"] = link(func),
+	["@function.method.call"] = link(func),
 
-hl("@constructor", { fg = p.sapphire })
-hl("@operator", { link = "Operator" })
+	["@constructor"] = link(constructur),
+	["@operator"] = link(operator),
 
-hl("@keyword", { link = "Keyword" })
-hl("@keyword.modifier", { link = "Keyword" })
-hl("@keyword.type", { link = "Keyword" })
-hl("@keyword.coroutine", { link = "Keyword" })
-hl("@keyword.function", { fg = p.purple })
-hl("@keyword.operator", { link = "Operator" })
-hl("@keyword.import", { link = "Include" })
-hl("@keyword.repeat", { link = "Repeat" })
-hl("@keyword.return", { fg = p.purple })
-hl("@keyword.debug", { link = "Exception" })
-hl("@keyword.exception", { link = "Exception" })
+	["@keyword"] = link(keyword),
+	["@keyword.modifier"] = link(keyword),
+	["@keyword.type"] = link(keyword),
+	["@keyword.coroutine"] = link(keyword),
+	["@keyword.function"] = link(keyword),
+	["@keyword.operator"] = link(operator),
+	["@keyword.import"] = { link = "Include" },
+	["@keyword.repeat"] = link(rep),
+	["@keyword.return"] = link(keyword),
+	["@keyword.debug"] = link(exception),
+	["@keyword.exception"] = link(exception),
 
-hl("@keyword.conditional", { link = "Conditional" })
-hl("@keyword.conditional.ternary", { link = "Operator" })
+	["@keyword.conditional"] = link(conditional),
+	["@keyword.conditional.ternary"] = link(operator),
 
-hl("@keyword.directive", { link = "PreProc" })
-hl("@keyword.directive.define", { link = "Define" })
+	["@keyword.directive"] = { link = "PreProc" },
+	["@keyword.directive.define"] = { link = "Define" },
 
-hl("@keyword.export", { fg = p.sky })
+	["@keyword.export"] = { fg = p.sky },
 
-hl("@punctuation.delimiter", { link = "Delimiter" })
-hl("@punctuation.bracket", { fg = p.overlay2 })
-hl("@punctuation.special", { link = "Special" })
+	["@punctuation.delimiter"] = { link = "Delimiter" },
+	["@punctuation.bracket"] = { fg = p.white },
+	["@punctuation.special"] = link(special),
 
-hl("@comment", { link = "Comment" })
-hl("@comment.documentation", { link = "Comment" })
+	["@comment"] = link(comment),
+	["@comment.documentation"] = link(comment),
+	["@comment.error"] = { fg = p.background, bg = p.red },
+	["@comment.warning"] = { fg = p.background, bg = p.yellow },
+	["@comment.hint"] = { fg = p.background, bg = p.blue },
+	["@comment.todo"] = { fg = p.background, bg = p.beige },
+	["@comment.note"] = { fg = p.background, bg = p.beige },
 
-hl("@comment.error", { fg = p.bg0, bg = p.red })
-hl("@comment.warning", { fg = p.bg0, bg = p.yellow })
-hl("@comment.hint", { fg = p.bg0, bg = p.blue })
-hl("@comment.todo", { fg = p.bg0, bg = p.flamingo })
-hl("@comment.note", { fg = p.bg0, bg = p.rosewater })
+	["@markup"] = { fg = p.white },
+	["@markup.strong"] = { fg = p.maroon, bold = true },
+	["@markup.italic"] = { fg = p.maroon, italic = true },
+	["@markup.strikethrough"] = { fg = p.white, strikethrough = true },
+	["@markup.underline"] = { underline = true },
+	["@markup.heading"] = { fg = p.blue, bold = true },
+	["@markup.math"] = { fg = p.blue },
+	["@markup.quote"] = { fg = p.maroon, bold = true },
+	["@markup.environment"] = { fg = p.pink },
+	["@markup.environment.name"] = { fg = p.blue },
+	["@markup.link"] = { link = "Tag" },
+	["@markup.link.label"] = link(label),
+	["@markup.link.url"] = { fg = p.beige, italic = true, underline = true },
+	["@markup.raw"] = { fg = p.teal },
+	["@markup.list"] = link(special),
+	["@markup.list.checked"] = { fg = p.green },
+	["@markup.list.unchecked"] = { fg = p.white },
 
-hl("@markup", { fg = p.text })
-hl("@markup.strong", { fg = p.maroon, bold = true })
-hl("@markup.italic", { fg = p.maroon, italic = true })
-hl("@markup.strikethrough", { fg = p.text, strikethrough = true })
-hl("@markup.underline", { underline = true })
+	["@diff.plus"] = { fg = p.green },
+	["@diff.minus"] = { fg = p.red },
+	["@diff.delta"] = { fg = p.yellow },
 
-hl("@markup.heading", { fg = p.blue, bold = true })
+	["@tag"] = { fg = p.purple },
+	["@tag.attribute"] = { fg = p.teal, italic = true },
+	["@tag.delimiter"] = { fg = p.sky },
 
-hl("@markup.math", { fg = p.blue })
-hl("@markup.quote", { fg = p.maroon, bold = true })
-hl("@markup.environment", { fg = p.pink })
-hl("@markup.environment.name", { fg = p.blue })
+	["@error"] = { fg = p.red },
 
-hl("@markup.link", { link = "Tag" })
-hl("@markup.link.label", { link = "Label" })
-hl("@markup.link.url", { fg = p.rosewater, italic = true, underline = true })
+	["@codeblock"] = { bg = p.surface0 },
 
-hl("@markup.raw", { fg = p.teal })
+	-- SEMANTIC TOKENS
+	["@lsp.type.boolean"] = link(boolean),
+	["@lsp.type.comment"] = link(comment),
+	["@lsp.type.enum"] = link(enum),
+	["@lsp.type.enumMember"] = link(enumMember),
+	["@lsp.type.static"] = link(static),
+	["@lsp.type.const"] = link(constant),
+	["@lsp.type.escapeSequence"] = { link = "@string.escape" },
+	["@lsp.type.formatSpecifier"] = { link = "@punctuation.special" },
+	["@lsp.type.interface"] = link(interface),
+	["@lsp.type.keyword"] = link(keyword),
+	["@lsp.type.namespace"] = link(module),
+	["@lsp.type.number"] = link(number),
+	["@lsp.type.operator"] = link(operator),
+	["@lsp.type.parameter"] = link(parameter),
+	["@lsp.type.property"] = link(field),
+	["@lsp.type.selfKeyword"] = { fg = p.pink },
+	["@lsp.type.typeAlias"] = link(typedef),
+	["@lsp.type.unresolvedReference"] = { link = "@error" },
+	["@lsp.type.variable"] = link(variable),
+	["@lsp.typemod.generic"] = link(str),
+	["@lsp.typemod.derive"] = link(interface),
+	["@lsp.typemod.attributeBracket"] = { fg = p.pink },
+	["@lsp.mod.attribute"] = link(constant),
+	-- ["@lsp.mod.controlFlow"] = { fg = p.red },
+	["@lsp.mod.global"] = link(static),
 
-hl("@markup.list", { link = "Special" })
-hl("@markup.list.checked", { fg = p.green })
-hl("@markup.list.unchecked", { fg = p.overlay1 })
+	["@lsp.mod.defaultLibrary"] = { bold = true },
+	["@lsp.type.builtinAttribute"] = { bold = true },
 
-hl("@diff.plus", { fg = p.green })
-hl("@diff.minus", { fg = p.red })
-hl("@diff.delta", { fg = p.yellow })
+	["@lsp.typemod.operator.injected"] = link(operator),
+	["@lsp.typemod.string.injected"] = link(str),
+	["@lsp.typemod.variable.injected"] = link(variable),
 
-hl("@tag", { fg = p.purple })
-hl("@tag.attribute", { fg = p.teal, italic = true })
-hl("@tag.delimiter", { fg = p.sky })
+	["@lsp.typemod.keyword.async"] = { link = "@keyword.coroutine" },
 
-hl("@error", { fg = p.red })
+	["RustSigil"] = { fg = p.sky },
 
-hl("@function.builtin.bash", { fg = p.red, italic = true })
+	-- DIAGNOSTIC
+	["DiagnosticError"] = { bg = p.none, fg = p.red, italic = true },
+	["DiagnosticWarn"] = { bg = p.none, fg = p.yellow, italic = true },
+	["DiagnosticInfo"] = { bg = p.none, fg = p.sky, italic = true },
+	["DiagnosticHint"] = { bg = p.none, fg = p.teal, italic = true },
+	["DiagnosticOk"] = { bg = p.none, fg = p.green, italic = true },
 
-hl("@markup.heading.1.markdown", { link = "rainbow1" })
-hl("@markup.heading.2.markdown", { link = "rainbow2" })
-hl("@markup.heading.3.markdown", { link = "rainbow3" })
-hl("@markup.heading.4.markdown", { link = "rainbow4" })
-hl("@markup.heading.5.markdown", { link = "rainbow5" })
-hl("@markup.heading.6.markdown", { link = "rainbow6" })
+	-- RAINBOW
+	["RainbowDelimiterRed"] = { fg = p.red },
+	["RainbowDelimiterYellow"] = { fg = p.yellow },
+	["RainbowDelimiterBlue"] = { fg = p.blue },
+	["RainbowDelimiterOrange"] = { fg = p.orange },
+	["RainbowDelimiterGreen"] = { fg = p.green },
+	["RainbowDelimiterViolet"] = { fg = p.purple },
+	["RainbowDelimiterCyan"] = { fg = p.teal },
 
-hl("@constant.java", { fg = p.teal })
+	["@markup.heading.1"] = { fg = p.red },
+	["@markup.heading.2"] = { fg = p.yellow },
+	["@markup.heading.3"] = { fg = p.blue },
+	["@markup.heading.4"] = { fg = p.orange },
+	["@markup.heading.5"] = { fg = p.green },
+	["@markup.heading.6"] = { fg = p.purple },
 
-hl("@property.css", { fg = p.lavender })
-hl("@property.id.css", { fg = p.blue })
-hl("@property.class.css", { fg = p.yellow })
-hl("@type.css", { fg = p.lavender })
-hl("@type.tag.css", { fg = p.purple })
-hl("@string.plain.css", { fg = p.orange })
-hl("@number.css", { fg = p.orange })
+	-- MINI
+	["MiniIconsAzure"] = { fg = p.light_blue },
+	["MiniIconsBlue"] = { fg = p.blue },
+	["MiniIconsCyan"] = { fg = p.teal },
+	["MiniIconsGreen"] = { fg = p.green },
+	["MiniIconsGrey"] = { fg = p.white },
+	["MiniIconsOrange"] = { fg = p.orange },
+	["MiniIconsPurple"] = { fg = p.purple },
+	["MiniIconsRed"] = { fg = p.red },
+	["MiniIconsYellow"] = { fg = p.yellow },
 
-hl("@property.toml", { fg = p.blue })
+	-- GITSIGNS
+	["GitSignsAdd"] = { fg = p.green },
+	["GitSignsChange"] = { fg = p.yellow },
+	["GitSignsDelete"] = { fg = p.red },
+	["GitSignsAddPreview"] = { link = "DiffAdd" },
+	["GitSignsDeletePreview"] = { link = "DiffDelete" },
+	["GitSignsCurrentLineBlame"] = { fg = p.surface1 },
 
-hl("@label.json", { fg = p.blue })
+	-- STATUSLINE
+	["StatusLineGreen"] = { fg = p.green, bg = p.results_background },
+	["StatusLineYellow"] = { fg = p.yellow, bg = p.results_background },
+	["StatusLineRed"] = { fg = p.red, bg = p.results_background },
+	["StatusLineBlue"] = { fg = p.blue, bg = p.results_background },
 
-hl("@constructor.lua", { fg = p.flamingo })
+	["StatusLineModeNOR"] = { fg = p.float_background, bg = p.blue },
+	["StatusLineModePEN"] = { fg = p.float_background, bg = p.beige },
+	["StatusLineModeVIS"] = { fg = p.float_background, bg = p.purple },
+	["StatusLineModeINS"] = { fg = p.float_background, bg = p.green },
+	["StatusLineModeCOM"] = { fg = p.float_background, bg = p.beige },
+	["StatusLineModeUNK"] = { fg = p.float_background, bg = p.orange },
+	["StatusLine"] = { bg = p.results_background },
+}
 
-hl("@property.typescript", { fg = p.lavender })
-hl("@constructor.typescript", { fg = p.lavender })
-
-hl("@constructor.tsx", { fg = p.lavender })
-hl("@tag.attribute.tsx", { fg = p.teal, italic = true })
-
-hl("@variable.member.yaml", { fg = p.blue })
-
-hl("@string.special.symbol.ruby", { fg = p.flamingo })
-
-hl("@function.method.php", { link = "Function" })
-hl("@function.method.call.php", { link = "Function" })
-
-hl("@type.builtin.c", { fg = p.yellow })
-hl("@property.cpp", { fg = p.text })
-hl("@type.builtin.cpp", { fg = p.yellow })
-
-hl("@comment.warning.gitcommit", { fg = p.yellow })
-
-hl("@string.special.path.gitignore", { fg = p.text })
-
-hl("@codeblock", { bg = p.surface0 })
-hl("@comment", { italic = true, fg = p.text })
-
--- SEMANTIC TOKENS
-hl("@lsp.type.boolean", { link = "@boolean" })
-hl("@lsp.type.builtinType", { link = "@type.builtin" })
-hl("@lsp.type.comment", { link = "@comment" })
-hl("@lsp.type.enum", { link = "@type" })
-hl("@lsp.type.enumMember", { link = "@constant" })
-hl("@lsp.type.escapeSequence", { link = "@string.escape" })
-hl("@lsp.type.formatSpecifier", { link = "@punctuation.special" })
-hl("@lsp.type.interface", { link = "Interface" })
-hl("@lsp.type.keyword", { link = "@keyword" })
-hl("@lsp.type.namespace", { link = "@module" })
-hl("@lsp.type.number", { link = "@number" })
-hl("@lsp.type.operator", { link = "@operator" })
-hl("@lsp.type.parameter", { link = "@parameter" })
-hl("@lsp.type.property", { link = "@property" })
-hl("@lsp.type.selfKeyword", { link = "@variable.builtin" })
-hl("@lsp.type.typeAlias", { link = "@type.definition" })
-hl("@lsp.type.unresolvedReference", { link = "@error" })
-hl("@lsp.type.variable", {})
-hl("@lsp.typemod.class.defaultLibrary", { link = "@type.builtin" })
-hl("@lsp.typemod.enum.defaultLibrary", { link = "@type.builtin" })
-hl("@lsp.typemod.enumMember.defaultLibrary", { link = "@constant.builtin" })
-hl("@lsp.typemod.function.defaultLibrary", { link = "@function.builtin" })
-hl("@lsp.typemod.keyword.async", { link = "@keyword.coroutine" })
-hl("@lsp.typemod.macro.defaultLibrary", { link = "@function.builtin" })
-hl("@lsp.typemod.method.defaultLibrary", { link = "@function.builtin" })
-hl("@lsp.typemod.operator.injected", { link = "@operator" })
-hl("@lsp.typemod.string.injected", { link = "@string" })
-hl("@lsp.typemod.type.defaultLibrary", { link = "@type.builtin" })
-hl("@lsp.typemod.variable.defaultLibrary", { link = "@variable.builtin" })
-hl("@lsp.typemod.variable.injected", { link = "@variable" })
-
--- DIAGNOSTIC
-hl("DiagnosticError", { bg = p.none, fg = p.red, italic = true })
-hl("DiagnosticWarn", { bg = p.none, fg = p.yellow, italic = true })
-hl("DiagnosticInfo", { bg = p.none, fg = p.sky, italic = true })
-hl("DiagnosticHint", { bg = p.none, fg = p.teal, italic = true })
-hl("DiagnosticOk", { bg = p.none, fg = p.green, italic = true })
-
--- RAINBOW
-hl("RainbowDelimiterRed", { fg = p.red })
-hl("RainbowDelimiterYellow", { fg = p.yellow })
-hl("RainbowDelimiterBlue", { fg = p.blue })
-hl("RainbowDelimiterOrange", { fg = p.orange })
-hl("RainbowDelimiterGreen", { fg = p.green })
-hl("RainbowDelimiterViolet", { fg = p.purple })
-hl("RainbowDelimiterCyan", { fg = p.teal })
-
--- MINI
-hl("MiniIconsAzure", { fg = p.sapphire })
-hl("MiniIconsBlue", { fg = p.blue })
-hl("MiniIconsCyan", { fg = p.teal })
-hl("MiniIconsGreen", { fg = p.green })
-hl("MiniIconsGrey", { fg = p.text })
-hl("MiniIconsOrange", { fg = p.orange })
-hl("MiniIconsPurple", { fg = p.purple })
-hl("MiniIconsRed", { fg = p.red })
-hl("MiniIconsYellow", { fg = p.yellow })
-
--- GITSIGNS
-hl("GitSignsAdd", { fg = p.green })
-hl("GitSignsChange", { fg = p.yellow })
-hl("GitSignsDelete", { fg = p.red })
-hl("GitSignsAddPreview", { link = "DiffAdd" })
-hl("GitSignsDeletePreview", { link = "DiffDelete" })
-hl("GitSignsCurrentLineBlame", { fg = p.surface1 })
-
--- STATUSLINE
-hl("StatusLineGreen", { fg = p.green, bg = p.bg2 })
-hl("StatusLineYellow", { fg = p.yellow, bg = p.bg2 })
-hl("StatusLineRed", { fg = p.red, bg = p.bg2 })
-hl("StatusLineBlue", { fg = p.blue, bg = p.bg2 })
-
-hl("StatusLineModeNOR", { fg = p.bg1, bg = p.blue })
-hl("StatusLineModePEN", { fg = p.bg1, bg = p.flamingo })
-hl("StatusLineModeVIS", { fg = p.bg1, bg = p.purple })
-hl("StatusLineModeINS", { fg = p.bg1, bg = p.green })
-hl("StatusLineModeCOM", { fg = p.bg1, bg = p.flamingo })
-hl("StatusLineModeUNK", { fg = p.bg1, bg = p.orange })
-hl("StatusLine", { bg = p.bg2 })
+for group, opts in pairs(colors) do
+	hl(group, opts)
+end

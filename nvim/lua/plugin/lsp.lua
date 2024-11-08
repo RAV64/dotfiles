@@ -27,6 +27,9 @@ M.plugin = {
 							workspace = { checkThirdParty = false },
 							telemetry = { enable = false },
 							diagnostics = { globals = { "vim", "hs", "UTIL" } },
+							completion = {
+								callSnippet = "Replace",
+							},
 						},
 					},
 				},
@@ -39,9 +42,9 @@ M.plugin = {
 								"rust-analyzer.gotoLocation",
 								-- "editor.action.triggerParameterHints",
 							},
+							codeActionGroup = false,
 							hoverActions = false,
 							hoverRange = false,
-							codeActionGroup = false,
 							serverStatusNotification = true,
 							snippetTextEdit = false,
 							ssr = true,
@@ -100,7 +103,7 @@ M.plugin = {
 
 				-- Python
 				basedpyright = {},
-				ruff_lsp = {},
+				ruff = {},
 			},
 			diagnostics = {
 				underline = true,
@@ -110,20 +113,17 @@ M.plugin = {
 			},
 		},
 		config = function(_, opts)
-			local cmp_nvim_lsp = require("cmp_nvim_lsp")
+			local cmp = require("cmp_nvim_lsp")
 			local lspconfig = require("lspconfig")
 
 			vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
-			local capabilities = vim.tbl_deep_extend(
-				"force",
-				vim.lsp.protocol.make_client_capabilities(),
-				cmp_nvim_lsp.default_capabilities()
-			)
+			local capabilities = cmp.default_capabilities()
 
 			for name, lsp in pairs(opts.servers) do
 				lspconfig[name].setup({
-					capabilities = vim.tbl_deep_extend("force", capabilities, lsp.capabilities or {}),
+					capabilities = lsp.capabilities and vim.tbl_deep_extend("force", capabilities, lsp.capabilities)
+						or capabilities,
 					settings = lsp.settings,
 					cmd = lsp.cmd,
 				})

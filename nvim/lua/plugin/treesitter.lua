@@ -12,28 +12,23 @@ M.plugin = {
 		branch = "main",
 		build = ":TSUpdate",
 		lazy = false,
-		opts = { ensure_install = "community" },
+		opts = { ensure_install = "community", ignore_install = { "unsupported" } },
 		config = function(_, opts)
 			require("nvim-treesitter").setup(opts)
 
-			vim.api.nvim_create_autocmd("User", {
-				pattern = "VeryLazy",
-				callback = function()
-					local group = vim.api.nvim_create_augroup("custom-treesitter", { clear = true })
-					local pattern = UTIL.get_top_level_keys(require("nvim-treesitter.parsers"))
+			local group = vim.api.nvim_create_augroup("custom-treesitter", { clear = true })
+			local pattern = UTIL.get_top_level_keys(require("nvim-treesitter.parsers"))
 
-					vim.api.nvim_create_autocmd("FileType", {
-						pattern = pattern,
-						group = group,
-						callback = function()
-							pcall(vim.treesitter.start)
-						end,
-					})
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = pattern,
+				group = group,
+				callback = function()
+					pcall(vim.treesitter.start)
 				end,
 			})
 		end,
 	},
-	{ "HiPhish/rainbow-delimiters.nvim", event = "BufReadPre", branch = "fix-highlighting" },
+	{ "HiPhish/rainbow-delimiters.nvim", event = "BufReadPre" },
 	{ "yorickpeterse/nvim-tree-pairs", event = "BufEnter", config = true },
 
 	{
