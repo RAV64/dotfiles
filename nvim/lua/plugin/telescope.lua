@@ -51,6 +51,7 @@ M.plugin = {
 			{ "<leader>m", tb_f("marks"), desc = "File Marks" },
 			{ "<leader>o", tb_f("oldfiles"), desc = "Previous files" },
 			{ "<leader>.", tb_f("resume"), desc = "Open last builtin picker" },
+			{ "<leader>t", tb_f("builtin"), desc = "Telescope builtins" },
 
 			{ "gd", tb_f("lsp_definitions"), desc = "Goto Definition" },
 			{ "gr", tb_f("lsp_references"), desc = "Get Usages" },

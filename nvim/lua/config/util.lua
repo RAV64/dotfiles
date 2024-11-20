@@ -20,7 +20,7 @@ function M.timer(func, ...)
 	func(...)
 	local end_time = os.clock()
 	local execution_duration_ms = (end_time - start_time) * 1000
-	print("Execution duration: " .. execution_duration_ms .. " ms")
+	vim.notify("Execution duration: " .. execution_duration_ms .. " ms")
 end
 
 function M.find_file(config)

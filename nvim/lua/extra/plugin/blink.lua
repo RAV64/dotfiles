@@ -1,21 +1,6 @@
-local smart_tab = function()
-	local node_ok, node = pcall(vim.treesitter.get_node)
-	if not node_ok or not node then
-		vim.notify("TS not available")
-		return
-	end
-	local row, col = node:end_()
-	pcall(vim.api.nvim_win_set_cursor, 0, { row + 1, col })
-end
-
-vim.keymap.set("i", "<tab>", function()
-	smart_tab()
-end)
-
 return {
 	"saghen/blink.cmp",
 	version = "*",
-	opts_extend = { "sources.completion.enabled_providers" },
 	event = "InsertEnter",
 
 	opts = {
@@ -55,6 +40,7 @@ return {
 				enabled_providers = { "lsp", "path", "snippets" },
 			},
 		},
+		highlight = { use_nvim_cmp_as_default = true },
 
 		keymap = {
 			["<C-l>"] = { "show", "show_documentation", "hide_documentation" },

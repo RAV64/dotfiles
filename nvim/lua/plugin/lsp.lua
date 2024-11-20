@@ -9,7 +9,6 @@ M.plugin = {
 				"j-hui/fidget.nvim",
 				opts = {
 					notification = { window = { winblend = 0 }, override_vim_notify = true },
-					progress = { lsp = { progress_ringbuf_size = 500 } },
 				},
 			},
 		},
@@ -27,9 +26,6 @@ M.plugin = {
 							workspace = { checkThirdParty = false },
 							telemetry = { enable = false },
 							diagnostics = { globals = { "vim", "hs", "UTIL" } },
-							completion = {
-								callSnippet = "Replace",
-							},
 						},
 					},
 				},
@@ -113,20 +109,18 @@ M.plugin = {
 			},
 		},
 		config = function(_, opts)
-			local cmp = require("cmp_nvim_lsp")
-			local lspconfig = require("lspconfig")
-
 			vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
+			local lspconfig = require("lspconfig")
+
+			local cmp = require("cmp_nvim_lsp")
 			local capabilities = cmp.default_capabilities()
 
-			for name, lsp in pairs(opts.servers) do
-				lspconfig[name].setup({
-					capabilities = lsp.capabilities and vim.tbl_deep_extend("force", capabilities, lsp.capabilities)
-						or capabilities,
-					settings = lsp.settings,
-					cmd = lsp.cmd,
-				})
+			for name, config in pairs(opts.servers) do
+				config.capabilities = config.capabilities
+						and vim.tbl_deep_extend("force", capabilities, config.capabilities)
+					or capabilities
+				lspconfig[name].setup(config)
 			end
 		end,
 	},

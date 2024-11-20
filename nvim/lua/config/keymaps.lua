@@ -1,5 +1,3 @@
-local set = vim.keymap.set
-
 local n = "n" -- normal
 local x = "x" -- visual
 local i = "i" -- insert
@@ -7,6 +5,17 @@ local t = "t" -- term
 local o = "o"
 local nx = { n, x }
 local nxo = { n, x, o }
+
+local del = vim.keymap.del
+
+-- https://neovim.io/doc/user/vim_diff.html#default-mappings
+del(n, "grn")
+del(n, "grr")
+del(nx, "gra")
+del(n, "gri")
+del(n, "gO")
+
+local set = vim.keymap.set
 
 set(n, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
 set(n, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
@@ -53,3 +62,15 @@ end, { expr = true })
 
 -- https://docs.helix-editor.com/textobjects.html
 -- More helix maps?
+
+local jump_out = function()
+	local node_ok, node = pcall(vim.treesitter.get_node)
+	if not node_ok or not node then
+		vim.notify("TS not available")
+		return
+	end
+	local row, col = node:end_()
+	pcall(vim.api.nvim_win_set_cursor, 0, { row + 1, col })
+end
+
+vim.keymap.set({ "s", "i" }, "<Tab>", jump_out, { desc = "Smart tab (jump out)" })
