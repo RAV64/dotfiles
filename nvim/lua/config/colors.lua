@@ -356,6 +356,9 @@ local colors = {
 	["StatusLineModeCOM"] = { fg = p.float_background, bg = p.beige },
 	["StatusLineModeUNK"] = { fg = p.float_background, bg = p.orange },
 	["StatusLine"] = { bg = p.results_background },
+
+	--TSCONTEXT
+	["TreesitterContextLineNumber"] = { bg = p.float_background, fg = p.surface2 },
 }
 
 for group, opts in pairs(colors) do

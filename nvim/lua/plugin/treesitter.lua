@@ -41,6 +41,11 @@ M.plugin = {
 			{ "at", ntts("@class.outer"), mode = { "x", "o" } },
 		},
 	},
+
+	{
+		"nvim-treesitter/nvim-treesitter-context",
+		event = "BufReadPre",
+	},
 }
 
 return M.plugin

@@ -54,7 +54,7 @@ local AppLauncher = function()
 		h = "homeassistant",
 		p = "screenshot",
 
-		k = "microsoft word",
+		k = "anki",
 		b = "firefox developer edition",
 		n = "Obsidian",
 		s = "Bitwarden",
