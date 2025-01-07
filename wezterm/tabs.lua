@@ -64,8 +64,7 @@ end
 
 local function cwd(tab)
 	local dir = tab.active_pane.current_working_dir
-	return current_dir_cache[dir and dir.file_path or "DEBUG"]
-		or cwd_cacher(tab.active_pane.current_working_dir.file_path)
+	return current_dir_cache[dir and dir.file_path or "DEBUG"] or cwd_cacher(dir.file_path)
 end
 
 function M.setup(config)
@@ -80,33 +79,39 @@ function M.setup(config)
 	local active_bg = config.colors.tab_bar.active_tab.bg_color
 	local inactive_bg = config.colors.tab_bar.inactive_tab.bg_color
 
+	BOLD = { Attribute = { Intensity = "Bold" } }
+	NORMAL = { Attribute = { Intensity = "Normal" } }
+	THICK_ARROW = { Text = "" }
+	THIN_ARROW = { Text = "" }
+
 	---@diagnostic disable-next-line: unused-local
 	wezterm.on("format-tab-title", function(tab, tabs, panes, _config, hover, max_width)
-		for i = 1, #tabs do
+		local t = #tabs
+		for i = 1, t do
 			if tabs[i].tab_id == tab.tab_id then
 				if tab.is_active then
 					return {
-						{ Attribute = { Intensity = "Bold" } },
-						{ Text = i < 5 and ps(tab) .. cwd(tab) or " " .. i .. ps(tab) },
+						BOLD,
+						{ Text = t < 5 and ps(tab) .. cwd(tab) or " " .. i .. ps(tab) },
 						{ Foreground = { Color = active_bg } },
 						{ Background = { Color = inactive_bg } },
-						{ Text = "" },
+						THICK_ARROW,
 					}
 				elseif tabs[i + 1] and tabs[i + 1].is_active then
 					return {
-						{ Attribute = { Intensity = "Normal" } },
-						{ Text = i < 5 and ps(tab) .. cwd(tab) or " " .. i .. ps(tab) },
+						NORMAL,
+						{ Text = t < 5 and ps(tab) .. cwd(tab) or " " .. i .. ps(tab) },
 						{ Foreground = { Color = inactive_bg } },
 						{ Background = { Color = active_bg } },
-						{ Text = "" },
+						THICK_ARROW,
 					}
 				else
 					return {
-						{ Attribute = { Intensity = "Normal" } },
-						{ Text = i < 5 and ps(tab) .. cwd(tab) or " " .. i .. ps(tab) },
+						NORMAL,
+						{ Text = t < 5 and ps(tab) .. cwd(tab) or " " .. i .. ps(tab) },
 						{ Foreground = { Color = "#313244" } },
 						{ Background = { Color = inactive_bg } },
-						{ Text = "" },
+						THIN_ARROW,
 					}
 				end
 			end

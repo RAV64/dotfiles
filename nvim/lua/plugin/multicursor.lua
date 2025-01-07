@@ -24,8 +24,15 @@ M.plugin = {
 				mc.matchSkipCursor(1)
 			end)
 
-			set({ "n", "x" }, "<up>", mc.prevCursor)
-			set({ "n", "x" }, "<down>", mc.nextCursor)
+			set({ "n", "v" }, "<up>", function()
+				mc.lineAddCursor(-1)
+			end)
+			set({ "n", "v" }, "<down>", function()
+				mc.lineAddCursor(1)
+			end)
+			set({ "n", "x" }, "<left>", mc.prevCursor)
+			set({ "n", "x" }, "<right>", mc.nextCursor)
+
 			set({ "n" }, "<c-x>", mc.deleteCursor)
 
 			set("n", "<esc>", function()
