@@ -1,8 +1,18 @@
 local wezterm = require("wezterm")
 
 local weight = {
-	regular = "Regular",
+	thin = "Thin",
 	extra_light = "ExtraLight",
+	light = "Light",
+	demi_light = "DemiLight",
+	book = "Book",
+	regular = "Regular",
+	medium = "Medium",
+	demi_bold = "DemiBold",
+	bold = "Bold",
+	extra_bold = "ExtraBold",
+	black = "Black",
+	extra_black = "ExtraBlack",
 }
 
 local monocraft = {
@@ -22,7 +32,8 @@ local monaspace = {
 		"calt", "liga", "dlig",
 		"ss01", "ss02", "ss03",
 		"ss04", "ss05", "ss06",
-		"ss07", "ss08",
+		"ss07", "ss08", "ss09",
+    "ss10",
 	},
 }
 
@@ -37,7 +48,7 @@ function monaspace.setup(config)
 			italic = true,
 			font = wezterm.font({
 				family = monaspace.font.krypton,
-				weight = weight.extra_light,
+				weight = weight.thin,
 				harfbuzz_features = monaspace.all_features,
 				italic = false,
 			}),
@@ -45,9 +56,9 @@ function monaspace.setup(config)
 		{
 			intensity = "Bold",
 			font = wezterm.font({
-				family = monaspace.font.xenon,
+				family = monaspace.font.neon,
 				harfbuzz_features = monaspace.all_features,
-				weight = weight.regular,
+				weight = weight.medium,
 				italic = false,
 			}),
 		},
