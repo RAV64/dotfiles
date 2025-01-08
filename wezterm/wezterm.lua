@@ -17,7 +17,9 @@ config.cursor_thickness = 2
 
 config.send_composed_key_when_left_alt_is_pressed = true
 config.window_close_confirmation = "NeverPrompt"
-config.window_decorations = "RESIZE"
+config.window_decorations = "NONE"
 config.enable_scroll_bar = false
+
+config.default_prog = {'/usr/bin/env', 'fish'}
 
 return config
