@@ -113,13 +113,8 @@ M.plugin = {
 
 			local lspconfig = require("lspconfig")
 
-			local cmp = require("cmp_nvim_lsp")
-			local capabilities = cmp.default_capabilities()
-
 			for name, config in pairs(opts.servers) do
-				config.capabilities = config.capabilities
-						and vim.tbl_deep_extend("force", capabilities, config.capabilities)
-					or capabilities
+				config.capabilities = config.capabilities or {}
 				lspconfig[name].setup(config)
 			end
 		end,
