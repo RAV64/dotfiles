@@ -59,12 +59,22 @@ M.plugin = {
 						["rust-analyzer"] = {
 							-- cargo = { allFeatures = true },
 							runBuildScripts = { enable = true },
-							procMacro = { enable = true },
 							checkOnSave = true,
 							check = {
 								enable = true,
 								command = "clippy",
 								-- features = "all",
+							},
+
+							completion = {
+								fullFunctionSignatures = { enable = true },
+								privateEditable = { enable = true },
+							},
+							procMacro = {
+								ignored = {
+									tokio_macros = { "main", "test" },
+									tracing_attributes = { "instrument" },
+								},
 							},
 						},
 					},
@@ -85,6 +95,7 @@ M.plugin = {
 							nixpkgs = {
 								expr = "import <nixpkgs> { }",
 							},
+							-- TODO
 							options = {
 								home_manager = {
 									expr = '(builtins.getFlake ("/Users/miki/dotfiles/nix-config")).darwinConfigurations.white-gharial.options.home-manager',

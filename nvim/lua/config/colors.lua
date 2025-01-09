@@ -134,6 +134,10 @@ local colors = {
 	["Tag"] = { fg = p.light_blue, bold = true },
 	["PmenuSel"] = { link = "CursorLine" },
 
+	["FlashLabel"] = { fg = p.white, bold = true },
+	["FlashCurrent"] = { fg = p.static },
+	["FlashPrompt"] = { link = "NormalFloat" },
+
 	-- CMP
 	["BlinkCmpKindClass"] = link(class),
 	["BlinkCmpKindConstant"] = link(constant),

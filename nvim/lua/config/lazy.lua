@@ -14,7 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	spec = {
 		{ import = "plugin" },
-		{ import = "extra.plugin.leap" },
+		{ import = "extra.plugin.flash" },
 	},
 	defaults = { version = false, lazy = true },
 	change_detection = { enabled = false },
