@@ -8,12 +8,14 @@ local nxo = { n, x, o }
 
 local del = vim.keymap.del
 
--- https://neovim.io/doc/user/vim_diff.html#default-mappings
-del(n, "grn")
-del(n, "grr")
-del(nx, "gra")
-del(n, "gri")
-del(n, "gO")
+if vim.version().minor == 11 then
+	-- https://neovim.io/doc/user/vim_diff.html#default-mappings
+	del(n, "grn")
+	del(n, "grr")
+	del(nx, "gra")
+	del(n, "gri")
+	del(n, "gO")
+end
 
 local set = vim.keymap.set
 
