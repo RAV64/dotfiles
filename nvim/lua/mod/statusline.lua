@@ -42,6 +42,11 @@ local mode_to_str = {
 	["ce"] = "EX ", ["r"] = "PRO", ["rm"] = "MOR", ["r?"] = "CON", ["!"] = "SHE",
 	["t"] = "TER",
 }
+local _unk = "UNK"
+local unk = function(v)
+	vim.notify("Unknown ft: " .. v)
+	return _unk
+end
 
 -- Filetype Icons (cached)
 local icons = require("mini.icons")
@@ -58,52 +63,30 @@ local function cached_icon(ft)
 end
 
 -- Caches
-local last_mode = empty
-local last_mode_str = nil
+local git_str = empty
+local diag_str = empty
+
 local last_ft = nil
 local last_ft_icon = nil
-local last_diag_str = empty
-local last_git_str = empty
+local last_mode = empty
+local last_mode_str = empty
 local last_prefix = empty
-local last_suffix = empty
 local last_statusline = nil
+local last_suffix = empty
 
 local new_mode = empty
-local new_ft = nil
 local prefix_changed = true
 local suffix_changed = true
 
--------------------------------------------------------
--- The Single Statusline Function
--------------------------------------------------------
 function _G.st()
-	-- STEP 0: Precompute new mode & filetype
-	new_mode = vapi_mode().mode
-	new_ft = vbo.filetype
-
-	------------------------------------------------------------------
-	-- STEP 1: Check if all are the same (fast path).
-	------------------------------------------------------------------
-	if not suffix_changed and (new_mode == last_mode) and (new_ft == last_ft) then
+	if not suffix_changed and not prefix_changed and (vbo.filetype == last_ft) then
 		return last_statusline
 	end
 
-	------------------------------------------------------------------
-	-- STEP 2: We have changes, figure out which parts to rebuild
-	------------------------------------------------------------------
-
-	-- Mode changed?
-	if new_mode ~= last_mode then
-		last_mode = new_mode
-		local short_mode = mode_to_str[new_mode] or "UNK"
-		last_mode_str = sModePrefix .. short_mode .. "# " .. short_mode .. space .. sLine
-		prefix_changed = true
-	end
-
 	-- Filetype changed?
-	if new_ft ~= last_ft then
-		last_ft = new_ft
-		last_ft_icon = cached_icon(new_ft)
+	if vbo.filetype ~= last_ft then
+		last_ft = vbo.filetype
+		last_ft_icon = cached_icon(last_ft)
 		prefix_changed = true
 	end
 
@@ -115,7 +98,7 @@ function _G.st()
 
 	-- Rebuild suffix if needed
 	if suffix_changed then
-		last_suffix = last_diag_str .. sLine .. "%=" .. last_git_str .. space
+		last_suffix = diag_str .. sLine .. "%=" .. git_str .. space
 		suffix_changed = false
 	end
 
@@ -125,51 +108,102 @@ end
 
 vim.o.statusline = "%{%v:lua.st()%}"
 
+local redraw = function()
+	vim.cmd("redrawstatus")
+end
+
 -------------------------------------------------------
 -- Force immediate redraw on relevant events
 -------------------------------------------------------
--- Whenever diagnostics change, or Gitsigns updates, redraw immediately:
-vim.api.nvim_create_autocmd("DiagnosticChanged", {
-	callback = function()
-		------------------------------------------------------------------
-		-- Only check if *not* Insert mode (105 == 'i')
-		------------------------------------------------------------------
-		if new_mode:byte(1) ~= 105 then
-			local dlist = diag_get(0)
-			if #dlist ~= 0 then
-				-- Count severity in one pass
-				local e, w, h, i_ = 0, 0, 0, 0
-				for idx = 1, #dlist do
-					local sev = dlist[idx].severity
-					if sev == 1 then
-						e = e + 1
-					elseif sev == 2 then
-						w = w + 1
-					elseif sev == 3 then
-						i_ = i_ + 1
-					else
-						h = h + 1
-					end
-				end
-				local dp = bor(lshift(e, 24), lshift(w, 16), lshift(h, 8), i_)
-				if dp ~= last_diag_pack then
-					last_diag_pack = dp
-					last_diag_str = ((e > 0) and (dErr .. e) or empty)
-						.. ((w > 0) and (dWarn .. w) or empty)
-						.. ((h > 0) and (dHint .. h) or empty)
-						.. ((i_ > 0) and (dInfo .. i_) or empty)
-					suffix_changed = true
-					vim.cmd("redrawstatus")
-				end
-			else
-				-- If there are no diagnostics, but we had some before, reset
-				if last_diag_pack ~= 0 then
-					last_diag_pack = 0
-					last_diag_str = empty
-					suffix_changed = true
-					vim.cmd("redrawstatus")
+local update_diag = function()
+	------------------------------------------------------------------
+	-- Only check if *not* Insert mode (105 == 'i')
+	------------------------------------------------------------------
+	if new_mode:byte(1) ~= 105 then
+		local dlist = diag_get(0)
+		if #dlist ~= 0 then
+			local d_e, d_w, d_h, d_i = 0, 0, 0, 0
+			for idx = 1, #dlist do
+				local sev = dlist[idx].severity
+				if sev == 1 then
+					d_e = d_e + 1
+				elseif sev == 2 then
+					d_w = d_w + 1
+				elseif sev == 3 then
+					d_i = d_i + 1
+				else
+					d_h = d_h + 1
 				end
 			end
+			local dp = bor(lshift(d_e, 24), lshift(d_w, 16), lshift(d_h, 8), d_i)
+			if dp ~= last_diag_pack then
+				last_diag_pack = dp
+				diag_str = ((d_e > 0) and (dErr .. d_e) or empty)
+					.. ((d_w > 0) and (dWarn .. d_w) or empty)
+					.. ((d_h > 0) and (dHint .. d_h) or empty)
+					.. ((d_i > 0) and (dInfo .. d_i) or empty)
+				suffix_changed = true
+				return true
+			end
+		else
+			-- If there are no diagnostics, but we had some before, reset
+			if last_diag_pack ~= 0 then
+				last_diag_pack = 0
+				diag_str = empty
+				suffix_changed = true
+				return true
+			end
+		end
+	end
+end
+
+local update_git = function()
+	local g = vb.gitsigns_status_dict
+	if g then
+		-- If there's Git info, build/update pack
+		local g_h = g.head or empty
+		local g_a = g.added or 0
+		local g_c = g.changed or 0
+		local g_r = g.removed or 0
+		local gp = bor(lshift(g_a, 16), lshift(g_c, 8), g_r)
+		if (g_h ~= last_git_head) or (gp ~= last_git_pack) then
+			last_git_pack = gp
+			last_git_head = g_h
+			git_str = gitSymbol
+				.. g_h
+				.. ((g_a > 0) and (gGreen .. g_a) or empty)
+				.. ((g_c > 0) and (gYellow .. g_c) or empty)
+				.. ((g_r > 0) and (gRed .. g_r) or empty)
+			suffix_changed = true
+			return true
+		end
+	else
+		if (last_git_pack ~= 0) or (last_git_head ~= nil) or (git_str ~= empty) then
+			last_git_pack = 0
+			last_git_head = nil
+			git_str = empty
+			suffix_changed = true
+			return true
+		end
+	end
+end
+
+local update_mode = function()
+	new_mode = vapi_mode().mode
+	-- Mode changed?
+	if new_mode ~= last_mode then
+		last_mode = new_mode
+		local short_mode = mode_to_str[new_mode] or unk(new_mode)
+		last_mode_str = sModePrefix .. short_mode .. "# " .. short_mode .. space .. sLine
+		update_diag()
+		prefix_changed = true
+	end
+end
+
+vim.api.nvim_create_autocmd("DiagnosticChanged", {
+	callback = function()
+		if update_diag() then
+			redraw()
 		end
 	end,
 })
@@ -177,34 +211,25 @@ vim.api.nvim_create_autocmd("DiagnosticChanged", {
 vim.api.nvim_create_autocmd("User", {
 	pattern = "GitSignsUpdate",
 	callback = function()
-		local g = vb.gitsigns_status_dict
-		if g then
-			-- If there's Git info, build/update pack
-			local g_h = g.head or empty
-			local g_a = g.added or 0
-			local g_c = g.changed or 0
-			local g_r = g.removed or 0
-			local gp = bor(lshift(g_a, 16), lshift(g_c, 8), g_r)
-			if (g_h ~= last_git_head) or (gp ~= last_git_pack) then
-				last_git_pack = gp
-				last_git_head = g_h
-				last_git_str = gitSymbol
-					.. g_h
-					.. ((g_a > 0) and (gGreen .. g_a) or empty)
-					.. ((g_c > 0) and (gYellow .. g_c) or empty)
-					.. ((g_r > 0) and (gRed .. g_r) or empty)
-				suffix_changed = true
-				vim.cmd("redrawstatus")
-			end
-		else
-			-- If we've moved to a buffer with no Git info, but previously had it
-			if (last_git_pack ~= 0) or (last_git_head ~= nil) or (last_git_str ~= empty) then
-				last_git_pack = 0
-				last_git_head = nil
-				last_git_str = empty
-				suffix_changed = true
-				vim.cmd("redrawstatus")
-			end
+		if update_git() then
+			redraw()
 		end
 	end,
 })
+
+vim.api.nvim_create_autocmd("ModeChanged", {
+	callback = update_mode,
+})
+
+local full_update = function()
+	update_diag()
+	update_git()
+	update_mode()
+	redraw()
+end
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	callback = full_update,
+})
+
+full_update()

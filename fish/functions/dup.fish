@@ -8,11 +8,6 @@ function dup
             brew upgrade wezterm@nightly
             brew install --cask font-monaspace-nerd-font
 
-            bob use nightly
-
-            rustup update
-            cargo install-update -a
-
             npm update -g
 
             bun upgrade
@@ -44,5 +39,19 @@ function dup
 
         case '*'
             echo "Unsupported operating system: $os_name. Exiting."
+    end
+
+    if type -q bob
+        bob use nightly
+    end
+
+    if type -q cargo
+        rustup update
+
+        if cargo help install-update > /dev/null 2>&1
+            cargo install-update -a
+        else
+            echo "cargo install-update is not installed. Skipping."
+        end
     end
 end
