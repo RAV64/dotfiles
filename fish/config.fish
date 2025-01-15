@@ -38,6 +38,9 @@ alias gst "git status"
 alias gac "git add . && git commit -m"
 alias gd "git diff HEAD"
 
+# git stash && git pull && git stash pop
+alias gspp "git pull --rebase --autostash" 
+
 set -gx PATH $BUN_INSTALL/bin $PATH
 set -gx PATH ~/dotfiles/scripts/bin $PATH
 set -gx PATH ~/.local/share/bob/nvim-bin $PATH
