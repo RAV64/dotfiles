@@ -1,47 +1,27 @@
 local p = {
-	background = "#2C2A2E",
-	float_background = "#29272B",
-	results_background = "#1F1D20",
+	background0 = "#2C2A2E",
+	background1 = "#2A2828",
+	background2 = "#212020",
 
-	surface0 = "#3D3A40",
-	surface1 = "#47444B",
-	surface2 = "#524E56",
+	surface0 = "#403D3B",
+	surface1 = "#4A4745",
+	surface2 = "#55514F",
 
-	overlay = "#DDE1E6",
+	white = "#E0E2E3",
 
-	purple = "#D499FF",
-	teal = "#94E2D5",
-	beige = "#F2CDCD",
-	maroon = "#EE5396",
-	light_blue = "#43D5EE",
-	sky = "#89DCEB",
-	orange = "#FC9867",
-	red = "#FF6188",
-	yellow = "#FFD966",
-	green = "#A8DC76",
-	blue = "#82A6ED",
+	gold = "#FFC764",
+	orange = "#FF8C5C",
+	pink = "#F07692",
+	red = "#FF6A6A",
+	emerald = "#4EDC88",
+	green = "#A8E176",
+	diamond = "#52E4FF",
+	blue = "#99BBFF",
+	soft_pink = "#F4D2D5",
+	purple = "#D1A7FF",
 
 	static = "#FDAB67",
-	macro = "#603717",
-
-	-- black = "#131418",
-	-- blue = "#333799",
-	-- brown = "#6f4527",
-	-- cyan = "#15868d",
-	-- gray = "#3d4245",
-	-- green = "#51691a",
-	-- light_blue = "#38abd4",
-	-- light_gray = "#8a8a83",
-	-- lime = "#6cb418",
-	magenta = "#B841AE",
-	-- orange = "#eb7111",
-	pink = "#EA89A8",
-	-- purple = "#7527a6",
-	-- red = "#9c2521",
-	white = "#E4E6E7",
-	-- yellow = "#f3c125",
-	--
-	-- dirt = "#433021",
+	lowlight = "#603717",
 }
 
 local hl = function(group, color)
@@ -55,88 +35,95 @@ end
 local link = function(color)
 	return { link = color.group }
 end
-local inversed = function(color)
-	return { fg = p.background, bg = color }
-end
 
--- EDITOR
-hl("Normal", { fg = p.white, bg = p.background })
-hl("NormalFloat", { fg = p.white, bg = p.float_background })
-hl("Visual", { bg = p.surface2 })
+local class = colorize("Class", p.gold)
+local enum = colorize("Enum", p.gold)
+local type = colorize("Type", p.gold)
+local struct = colorize("Struct", p.gold)
+local typedef = colorize("Typedef", p.gold)
 
-hl("Search", { bg = p.light_blue, fg = p.background })
-hl("IncSearch", { bg = p.light_blue, fg = p.background }) -- Highlight on yank
-hl("CurSearch", { bg = p.red, fg = p.white })
-
-hl("CursorLine", { bg = p.surface1 })
-hl("MacroCursorLine", { bg = p.macro })
-hl("LineNr", { fg = p.surface2 })
-hl("CursorLineNr", { fg = p.beige })
-
-hl("LazyNormal", { bg = p.float_background })
-hl("CmpGhostText", { italic = true })
-hl("WinSeparator", { fg = p.float_background, bg = p.float_background })
-
--- TELESCOPE
-hl("TelescopePromptNormal", { bg = p.surface0 })
-hl("TelescopePromptBorder", { bg = p.surface0 })
-hl("TelescopePromptTitle", { bg = p.surface0 })
-hl("TelescopeNormal", { bg = p.float_background })
-hl("TelescopeBorder", { bg = p.float_background })
-hl("TelescopePreviewNormal", { bg = p.results_background })
-hl("TelescopePreviewBorder", { bg = p.results_background })
-hl("TelescopeMatching", { fg = p.blue, italic = true })
-
-local boolean = colorize("Boolean", p.maroon)
-local character = colorize("Character", p.teal)
-local comment = colorize("Comment", { fg = p.white, italic = true })
-local conditional = colorize("Conditional", p.purple)
-local exception = colorize("Exception", p.magenta)
-local func = colorize("Function", p.blue)
-local keyword = colorize("Keyword", p.purple)
-local label = colorize("Label", p.light_blue)
-local operator = colorize("Operator", p.sky)
-local rep = colorize("Repeat", p.purple) --repeat
-local str = colorize("String", p.green)
+local boolean = colorize("Boolean", p.orange)
 local constant = colorize("Constant", p.orange)
-local static = colorize("Static", p.static)
-local number = colorize("Number", p.orange)
-local float = colorize("Float", p.orange)
-local type = colorize("Type", p.yellow)
-local typedef = colorize("Typedef", p.yellow)
-local class = colorize("Class", p.yellow)
-local struct = colorize("Struct", p.yellow)
-local interface = colorize("Interface", p.beige)
-local constructur = colorize("Constructor", p.blue)
-local enum = colorize("Enum", p.yellow)
 local enumMember = colorize("EnumMember", p.orange)
-local field = colorize("Field", p.light_blue)
-local module = colorize("Module", p.light_blue)
-local event = colorize("Event", p.purple)
-local file = colorize("File", p.blue)
-local folder = colorize("Foleder", p.blue)
-local special = colorize("Special", p.beige)
-local variable = colorize("Variable", p.white)
+local float = colorize("Float", p.orange)
 local macro = colorize("Macro", p.orange)
-local parameter = colorize("Parameter", p.maroon)
+local number = colorize("Number", p.orange)
+
+local character = colorize("Character", p.emerald)
+local operator = colorize("Operator", p.emerald)
+
+local str = colorize("String", p.green)
+
+local conditional = colorize("Conditional", p.purple)
+local event = colorize("Event", p.purple)
+local keyword = colorize("Keyword", p.purple)
+local rep = colorize("Repeat", p.purple)
+
+local field = colorize("Field", p.diamond)
+local label = colorize("Label", p.diamond)
+
+local constructur = colorize("Constructor", p.blue)
+local folder = colorize("Folder", p.blue)
+local file = colorize("File", p.blue)
+local func = colorize("Function", p.blue)
+
+local exception = colorize("Exception", p.pink)
+local parameter = colorize("Parameter", p.pink)
+
+local interface = colorize("Interface", p.soft_pink)
+local special = colorize("Special", p.soft_pink)
+
+local comment = colorize("Comment", { fg = p.white, italic = true })
+local variable = colorize("Variable", p.white)
+
+local module = colorize("Module", p.static)
+local static = colorize("Static", p.static)
 
 local colors = {
+	-- EDITOR
+	["Normal"] = { fg = p.white, bg = p.background0 },
+	["NormalFloat"] = { fg = p.white, bg = p.background1 },
+	["Visual"] = { bg = p.surface2 },
+
+	["Search"] = { bg = p.soft_pink, fg = p.background0 },
+	["IncSearch"] = { bg = p.diamond, fg = p.background0 }, -- Highlight on yank
+	["CurSearch"] = { bg = p.red, fg = p.white },
+
+	["CursorLine"] = { bg = p.surface1 },
+	["MacroCursorLine"] = { bg = p.lowlight },
+	["LineNr"] = { fg = p.surface2 },
+	["CursorLineNr"] = { fg = p.soft_pink },
+
+	["LazyNormal"] = { bg = p.background1 },
+	["CmpGhostText"] = { italic = true },
+	["WinSeparator"] = { fg = p.background1, bg = p.background1 },
+
 	["Debug"] = link(special),
-	["Define"] = { link = "PreProc" },
 	["Delimiter"] = { fg = p.white },
 	["Include"] = { fg = p.purple },
-	["PreCondit"] = { link = "PreProc" },
 	["PreProc"] = { fg = p.pink },
+	["PreCondit"] = { link = "PreProc" },
+	["Define"] = { link = "PreProc" },
 	["SpecialChar"] = link(special),
 	["SpecialComment"] = link(special),
 	["StorageClass"] = link(class),
 	["Structure"] = link(struct),
-	["Tag"] = { fg = p.light_blue, bold = true },
+	["Tag"] = { fg = p.diamond, bold = true },
 	["PmenuSel"] = { link = "CursorLine" },
 
 	["FlashLabel"] = { fg = p.white, bold = true },
 	["FlashCurrent"] = { fg = p.static },
 	["FlashPrompt"] = { link = "NormalFloat" },
+
+	-- TELESCOPE
+	["TelescopePromptNormal"] = { bg = p.surface0 },
+	["TelescopePromptBorder"] = { bg = p.surface0 },
+	["TelescopePromptTitle"] = { bg = p.surface0 },
+	["TelescopeNormal"] = { bg = p.background1 },
+	["TelescopeBorder"] = { bg = p.background1 },
+	["TelescopePreviewNormal"] = { bg = p.background2 },
+	["TelescopePreviewBorder"] = { bg = p.background2 },
+	["TelescopeMatching"] = { fg = p.blue, italic = true },
 
 	-- CMP
 	["BlinkCmpKindClass"] = link(class),
@@ -164,7 +151,7 @@ local colors = {
 	["BlinkCmpKindUnit"] = { fg = p.green },
 	["BlinkCmpKindValue"] = { fg = p.orange },
 	["BlinkCmpKindColor"] = { fg = p.red },
-	["BlinkCmpMenu"] = { bg = p.float_background },
+	["BlinkCmpMenu"] = { bg = p.background1 },
 
 	-- TREESITTER
 	["@variable"] = link(variable), -- Any variable name that does not have another highlight.
@@ -194,7 +181,9 @@ local colors = {
 	["@property"] = link(field),
 
 	["@function"] = link(func),
-	["@function.builtin"] = { bold = true },
+	-- ["@function.builtin"] = { bold = true },
+	-- ["@lsp.mod.defaultLibrary"] = { bold = true },
+	-- ["@lsp.type.builtinAttribute"] = { bold = true },
 	["@function.call"] = link(func),
 	["@function.macro"] = link(macro),
 
@@ -222,7 +211,7 @@ local colors = {
 	["@keyword.directive"] = { link = "PreProc" },
 	["@keyword.directive.define"] = { link = "Define" },
 
-	["@keyword.export"] = { fg = p.sky },
+	["@keyword.export"] = { fg = p.emerald },
 
 	["@punctuation.delimiter"] = { link = "Delimiter" },
 	["@punctuation.bracket"] = { fg = p.white },
@@ -230,37 +219,37 @@ local colors = {
 
 	["@comment"] = link(comment),
 	["@comment.documentation"] = link(comment),
-	["@comment.error"] = { fg = p.background, bg = p.red },
-	["@comment.warning"] = { fg = p.background, bg = p.yellow },
-	["@comment.hint"] = { fg = p.background, bg = p.blue },
-	["@comment.todo"] = { fg = p.background, bg = p.beige },
-	["@comment.note"] = { fg = p.background, bg = p.beige },
+	["@comment.error"] = { fg = p.background0, bg = p.red },
+	["@comment.warning"] = { fg = p.background0, bg = p.gold },
+	["@comment.hint"] = { fg = p.background0, bg = p.emerald },
+	["@comment.todo"] = { fg = p.background0, bg = p.soft_pink },
+	["@comment.note"] = { fg = p.background0, bg = p.soft_pink },
 
 	["@markup"] = { fg = p.white },
-	["@markup.strong"] = { fg = p.maroon, bold = true },
-	["@markup.italic"] = { fg = p.maroon, italic = true },
+	["@markup.strong"] = { fg = p.pink, bold = true },
+	["@markup.italic"] = { fg = p.pink, italic = true },
 	["@markup.strikethrough"] = { fg = p.white, strikethrough = true },
 	["@markup.underline"] = { underline = true },
 	["@markup.heading"] = { fg = p.blue, bold = true },
 	["@markup.math"] = { fg = p.blue },
-	["@markup.quote"] = { fg = p.maroon, bold = true },
+	["@markup.quote"] = { fg = p.pink, bold = true },
 	["@markup.environment"] = { fg = p.pink },
 	["@markup.environment.name"] = { fg = p.blue },
 	["@markup.link"] = { link = "Tag" },
 	["@markup.link.label"] = link(label),
-	["@markup.link.url"] = { fg = p.beige, italic = true, underline = true },
-	["@markup.raw"] = { fg = p.teal },
+	["@markup.link.url"] = { fg = p.soft_pink, italic = true, underline = true },
+	["@markup.raw"] = { fg = p.emerald },
 	["@markup.list"] = link(special),
 	["@markup.list.checked"] = { fg = p.green },
 	["@markup.list.unchecked"] = { fg = p.white },
 
 	["@diff.plus"] = { fg = p.green },
 	["@diff.minus"] = { fg = p.red },
-	["@diff.delta"] = { fg = p.yellow },
+	["@diff.delta"] = { fg = p.gold },
 
 	["@tag"] = { fg = p.purple },
-	["@tag.attribute"] = { fg = p.teal, italic = true },
-	["@tag.delimiter"] = { fg = p.sky },
+	["@tag.attribute"] = { fg = p.emerald, italic = true },
+	["@tag.delimiter"] = { fg = p.emerald },
 
 	["@error"] = { fg = p.red },
 
@@ -293,75 +282,69 @@ local colors = {
 	-- ["@lsp.mod.controlFlow"] = { fg = p.red },
 	["@lsp.mod.global"] = link(static),
 
-	["@lsp.mod.defaultLibrary"] = { bold = true },
-	["@lsp.type.builtinAttribute"] = { bold = true },
-
 	["@lsp.typemod.operator.injected"] = link(operator),
 	["@lsp.typemod.string.injected"] = link(str),
 	["@lsp.typemod.variable.injected"] = link(variable),
 
 	["@lsp.typemod.keyword.async"] = { link = "@keyword.coroutine" },
 
-	["RustSigil"] = { fg = p.sky },
+	["RustSigil"] = { fg = p.emerald },
 
 	-- DIAGNOSTIC
-	["DiagnosticError"] = { bg = p.none, fg = p.red, italic = true },
-	["DiagnosticWarn"] = { bg = p.none, fg = p.yellow, italic = true },
-	["DiagnosticInfo"] = { bg = p.none, fg = p.sky, italic = true },
-	["DiagnosticHint"] = { bg = p.none, fg = p.teal, italic = true },
-	["DiagnosticOk"] = { bg = p.none, fg = p.green, italic = true },
+	["DiagnosticError"] = { fg = p.red, italic = true },
+	["DiagnosticWarn"] = { fg = p.gold, italic = true },
+	["DiagnosticInfo"] = { fg = p.diamond, italic = true },
+	["DiagnosticHint"] = { fg = p.emerald, italic = true },
+	["DiagnosticOk"] = { fg = p.green, italic = true },
 
 	-- RAINBOW
-	["RainbowDelimiterRed"] = { fg = p.red },
-	["RainbowDelimiterYellow"] = { fg = p.yellow },
+	["RainbowDelimiterRed"] = { fg = p.pink },
+	["RainbowDelimiterYellow"] = { fg = p.gold },
 	["RainbowDelimiterBlue"] = { fg = p.blue },
 	["RainbowDelimiterOrange"] = { fg = p.orange },
 	["RainbowDelimiterGreen"] = { fg = p.green },
 	["RainbowDelimiterViolet"] = { fg = p.purple },
-	["RainbowDelimiterCyan"] = { fg = p.teal },
+	["RainbowDelimiterCyan"] = { fg = p.emerald },
 
 	["@markup.heading.1"] = { fg = p.red },
-	["@markup.heading.2"] = { fg = p.yellow },
+	["@markup.heading.2"] = { fg = p.gold },
 	["@markup.heading.3"] = { fg = p.blue },
 	["@markup.heading.4"] = { fg = p.orange },
 	["@markup.heading.5"] = { fg = p.green },
 	["@markup.heading.6"] = { fg = p.purple },
 
 	-- MINI
-	["MiniIconsAzure"] = { fg = p.light_blue },
+	["MiniIconsAzure"] = { fg = p.diamond },
 	["MiniIconsBlue"] = { fg = p.blue },
-	["MiniIconsCyan"] = { fg = p.teal },
+	["MiniIconsCyan"] = { fg = p.emerald },
 	["MiniIconsGreen"] = { fg = p.green },
 	["MiniIconsGrey"] = { fg = p.white },
 	["MiniIconsOrange"] = { fg = p.orange },
 	["MiniIconsPurple"] = { fg = p.purple },
 	["MiniIconsRed"] = { fg = p.red },
-	["MiniIconsYellow"] = { fg = p.yellow },
+	["MiniIconsYellow"] = { fg = p.gold },
 
 	-- GITSIGNS
 	["GitSignsAdd"] = { fg = p.green },
-	["GitSignsChange"] = { fg = p.yellow },
+	["GitSignsChange"] = { fg = p.gold },
 	["GitSignsDelete"] = { fg = p.red },
 	["GitSignsAddPreview"] = { link = "DiffAdd" },
 	["GitSignsDeletePreview"] = { link = "DiffDelete" },
 	["GitSignsCurrentLineBlame"] = { fg = p.surface1 },
 
 	-- STATUSLINE
-	["StatusLineGreen"] = { fg = p.green, bg = p.results_background },
-	["StatusLineYellow"] = { fg = p.yellow, bg = p.results_background },
-	["StatusLineRed"] = { fg = p.red, bg = p.results_background },
-	["StatusLineBlue"] = { fg = p.blue, bg = p.results_background },
+	["StatusLineGreen"] = { fg = p.green, bg = p.background2 },
+	["StatusLineYellow"] = { fg = p.gold, bg = p.background2 },
+	["StatusLineRed"] = { fg = p.red, bg = p.background2 },
+	["StatusLineBlue"] = { fg = p.blue, bg = p.background2 },
 
-	["StatusLineModeNOR"] = { fg = p.float_background, bg = p.blue },
-	["StatusLineModePEN"] = { fg = p.float_background, bg = p.beige },
-	["StatusLineModeVIS"] = { fg = p.float_background, bg = p.purple },
-	["StatusLineModeINS"] = { fg = p.float_background, bg = p.green },
-	["StatusLineModeCOM"] = { fg = p.float_background, bg = p.beige },
-	["StatusLineModeUNK"] = { fg = p.float_background, bg = p.orange },
-	["StatusLine"] = { bg = p.results_background },
-
-	--TSCONTEXT
-	["TreesitterContextLineNumber"] = { bg = p.float_background, fg = p.surface2 },
+	["StatusLineModeNOR"] = { fg = p.background1, bg = p.blue },
+	["StatusLineModePEN"] = { fg = p.background1, bg = p.soft_pink },
+	["StatusLineModeVIS"] = { fg = p.background1, bg = p.purple },
+	["StatusLineModeINS"] = { fg = p.background1, bg = p.green },
+	["StatusLineModeCOM"] = { fg = p.background1, bg = p.soft_pink },
+	["StatusLineModeUNK"] = { fg = p.background1, bg = p.orange },
+	["StatusLine"] = { bg = p.background2 },
 }
 
 for group, opts in pairs(colors) do

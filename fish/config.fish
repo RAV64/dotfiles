@@ -45,14 +45,12 @@ set -gx PATH $BUN_INSTALL/bin $PATH
 set -gx PATH ~/dotfiles/scripts/bin $PATH
 set -gx PATH ~/.local/share/bob/nvim-bin $PATH
 set -gx PATH ~/.cargo/bin $PATH
-set -gx PATH ~/.dotnet/tools $PATH
 set -gx PATH /run/current-system/sw/bin $PATH
 set -gx PATH /opt/homebrew/sbin $PATH
 set -gx PATH /opt/homebrew/bin $PATH
 
 if test (uname) = Darwin
     launchctl remove com.valvesoftware.steam.ipctool
-    launchctl remove (launchctl list | awk -F" " '{print $3}' | grep com.microsoft.autoupdate) &>/dev/null
 end
 
 zoxide init fish | source

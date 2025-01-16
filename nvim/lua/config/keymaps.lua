@@ -27,6 +27,8 @@ set(x, ">", ">gv")
 
 set(n, "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
 
+set(n, "<leader><leader>x", "<cmd>%source<cr>")
+
 set(t, "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 
 set(n, "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
