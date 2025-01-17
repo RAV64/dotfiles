@@ -333,7 +333,7 @@ local colors = {
 	["GitSignsCurrentLineBlame"] = { fg = p.surface1 },
 
 	-- STATUSLINE
-	["StatusLineGreen"] = { fg = p.green, bg = p.background2 },
+	["StatusLineGreen"] = { fg = p.emerald, bg = p.background2 },
 	["StatusLineYellow"] = { fg = p.gold, bg = p.background2 },
 	["StatusLineRed"] = { fg = p.red, bg = p.background2 },
 	["StatusLineBlue"] = { fg = p.blue, bg = p.background2 },

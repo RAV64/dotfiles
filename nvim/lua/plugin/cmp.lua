@@ -38,7 +38,6 @@ M.plugin = {
 	{
 		"saghen/blink.cmp",
 		dependencies = { "xzbdmw/colorful-menu.nvim", "echasnovski/mini.icons" },
-
 		event = "InsertEnter",
 		version = "*",
 		enabled = function()
@@ -66,12 +65,12 @@ M.plugin = {
 					nerd_font_variant = "mono",
 				},
 
-				sources = { default = { "lsp", "path", "snippets" } },
+				sources = {
+					default = { "lsp", "path", "snippets" },
+					cmdline = {},
+				},
 				completion = {
 					menu = {
-						auto_show = function(ctx)
-							return ctx.mode ~= "cmdline"
-						end,
 						draw = {
 							columns = { { "kind_icon" }, { "label", gap = 1 } },
 							components = {
