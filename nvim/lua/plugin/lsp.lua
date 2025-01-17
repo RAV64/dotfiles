@@ -8,8 +8,24 @@ M.plugin = {
 			{
 				"j-hui/fidget.nvim",
 				opts = {
-					notification = { window = { winblend = 0 }, override_vim_notify = true },
+					notification = {
+						window = { winblend = 0 },
+						override_vim_notify = true,
+					},
 				},
+				-- init = function()
+				-- 	vim.api.nvim_create_autocmd("LspProgress", {
+				-- 		pattern = "end",
+				-- 		callback = function(ev)
+				-- 			local token = ev.data.params.token
+				-- 			local client_id = ev.data.client_id
+				-- 			local client = client_id and vim.lsp.get_client_by_id(client_id)
+				-- 			if client and token then
+				-- 				require("fidget").notification.remove(client.name, token)
+				-- 			end
+				-- 		end,
+				-- 	})
+				-- end,
 			},
 		},
 		opts = {
