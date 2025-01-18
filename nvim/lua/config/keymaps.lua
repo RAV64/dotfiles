@@ -19,6 +19,11 @@ end
 
 local set = vim.keymap.set
 
+set("n", "<esc>", function()
+	vim.cmd("nohlsearch")
+	return "<esc>"
+end)
+
 set(n, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
 set(n, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 

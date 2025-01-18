@@ -23,6 +23,7 @@ function dup
                     case "opensuse-tumbleweed"
                         sudo zypper ref
                         sudo zypper dup --allow-vendor-change
+                        sudo flatpak update
 
                     case "debian" "ubuntu"
                         sudo apt update

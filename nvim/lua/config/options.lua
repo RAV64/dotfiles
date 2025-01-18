@@ -26,7 +26,7 @@ opt.scrolloff = 16 -- Lines of context
 opt.sessionoptions = { "buffers", "curdir", "winsize" }
 opt.shortmess:append({
 	W = true, -- Don't print "written" when editing
-	I = true, -- No splash screen
+	-- I = true, -- No splash screen
 	c = true, -- Don't show ins-completion-menu messages (match 1 of 2)
 	C = true, -- Don't show messages while scannign ins-completion items (scanning tags)
 	s = true, -- Don't show "Search hit BOTTOM" message

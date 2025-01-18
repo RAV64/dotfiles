@@ -15,10 +15,11 @@ vim.api.nvim_create_autocmd("User", {
 	end,
 })
 
-vim.api.nvim_create_autocmd("UiEnter", {
-	callback = function()
-		if vim.tbl_isempty(vim.fn.argv()) then
-			UTIL.func("telescope.builtin", "find_files")
-		end
-	end,
-})
+-- -- Often not the behavior I would like
+-- vim.api.nvim_create_autocmd("UiEnter", {
+-- 	callback = function()
+-- 		if vim.tbl_isempty(vim.fn.argv()) then
+-- 			UTIL.func("telescope.builtin", "find_files")
+-- 		end
+-- 	end,
+-- })
