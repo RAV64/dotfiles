@@ -1,59 +1,103 @@
+local mc = function(f, args)
+	return function()
+		UTIL.func("multicursor-nvim", f, args)
+	end
+end
+
+local opt = vim.opt
+local set = vim.keymap.set
+
 local M = {}
 
 M.plugin = {
 	{
 		"jake-stewart/multicursor.nvim",
-		event = "VeryLazy",
-		config = function()
-			local mc = require("multicursor-nvim")
-
-			mc.setup({ signs = {} })
-
-			local opt = vim.opt
-			local set = vim.keymap.set
-
-			set({ "n", "v" }, "<c-n>", function()
-				opt.ignorecase = false
-				mc.matchAddCursor(1)
-			end)
-			set({ "n", "v" }, "<c-p>", function()
-				opt.ignorecase = false
-				mc.matchAddCursor(-1)
-			end)
-			set({ "n", "v" }, "<c-s>", function()
-				mc.matchSkipCursor(1)
-			end)
-
-			set({ "n", "v" }, "<up>", function()
-				mc.lineAddCursor(-1)
-			end)
-			set({ "n", "v" }, "<down>", function()
-				mc.lineAddCursor(1)
-			end)
-			set({ "n", "x" }, "<left>", mc.prevCursor)
-			set({ "n", "x" }, "<right>", mc.nextCursor)
-
-			set({ "n" }, "<c-x>", mc.deleteCursor)
+		keys = {
+			{
+				"<c-n>",
+				function()
+					opt.ignorecase = false
+					UTIL.func("multicursor-nvim", "matchAddCursor", 1)
+				end,
+				mode = { "n", "v" },
+			},
+			{
+				"<c-p>",
+				function()
+					opt.ignorecase = false
+					UTIL.func("multicursor-nvim", "matchAddCursor", -1)
+				end,
+				mode = { "n", "v" },
+			},
+			{
+				"<c-x>",
+				mc("deleteCursor"),
+				mode = { "n" },
+			},
+			{
+				"<c-s>",
+				mc("matchSkipCursor", 1),
+				mode = { "n", "v" },
+			},
+			{
+				"<up>",
+				mc("lineAddCursor", -1),
+				mode = { "n", "v" },
+			},
+			{
+				"<down>",
+				mc("lineAddCursor", 1),
+				mode = { "n", "v" },
+			},
+			{
+				"<left>",
+				mc("prevCursor"),
+				mode = { "n", "x" },
+			},
+			{
+				"<right>",
+				mc("nextCursor"),
+				mode = { "n", "x" },
+			},
+			{
+				"<c-a>",
+				mc("alignCursors"),
+				mode = { "n" },
+			},
+			{
+				"m",
+				mc("splitCursors"),
+				mode = { "x" },
+			},
+			{
+				"S",
+				mc("matchCursors"),
+				mode = { "x" },
+			},
+			{
+				"I",
+				mc("insertVisual"),
+				mode = { "x" },
+			},
+			{
+				"A",
+				mc("appendVisual"),
+				mode = { "x" },
+			},
+		},
+		opts = { { signs = {} } },
+		config = function(_, opts)
+			local m = require("multicursor-nvim")
+			m.setup(opts)
 
 			set("n", "<esc>", function()
-				if mc.hasCursors() then
-					mc.clearCursors()
+				if m.hasCursors() then
+					m.clearCursors()
 				end
 				opt.ignorecase = true
 				vim.cmd("nohlsearch")
 				return "<esc>"
 			end)
-
-			-- Align cursor columns.
-			set("n", "<c-a>", mc.alignCursors)
-
-			-- Split visual selections by regex.
-			set("x", "m", mc.splitCursors)
-			set("x", "S", mc.matchCursors)
-
-			-- Append/insert for each line of visual selections.
-			set("x", "I", mc.insertVisual)
-			set("x", "A", mc.appendVisual)
 		end,
 	},
 }
