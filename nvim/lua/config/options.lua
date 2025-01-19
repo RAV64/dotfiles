@@ -31,7 +31,7 @@ opt.shortmess:append({
 	C = true, -- Don't show messages while scannign ins-completion items (scanning tags)
 	s = true, -- Don't show "Search hit BOTTOM" message
 })
-opt.messagesopt = "wait:500,history:500"
+-- opt.messagesopt = "wait:500,history:500"
 opt.showmode = false -- dont show mode since we have a statusline
 opt.sidescrolloff = 0 -- Columns of context
 opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
