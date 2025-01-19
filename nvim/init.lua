@@ -23,3 +23,6 @@ vim.api.nvim_create_autocmd("User", {
 -- 		end
 -- 	end,
 -- })
+
+vim.opt.rtp:prepend("~/Developer/neovim-rust")
+require("config_rust")
