@@ -40,10 +40,6 @@ M.plugin = {
 		dependencies = { "xzbdmw/colorful-menu.nvim", "echasnovski/mini.icons" },
 		event = "InsertEnter",
 		version = "*",
-		enabled = function()
-			return not vim.bo.buftype ~= "prompt" and vim.b.completion ~= false
-		end,
-
 		config = function()
 			local cm = require("colorful-menu")
 			local icons = require("mini.icons")
