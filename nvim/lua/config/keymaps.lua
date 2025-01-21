@@ -30,11 +30,23 @@ set(n, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 set(x, "<", "<gv")
 set(x, ">", ">gv")
 
-set(n, "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
+local function open_or_split_terminal()
+	vim.cmd("split")
+	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+		if vim.api.nvim_buf_get_option(buf, "buftype") == "terminal" then
+			vim.cmd("buffer " .. buf)
+			vim.cmd("startinsert")
+			return
+		end
+	end
+	vim.cmd("terminal fish")
+	vim.cmd("startinsert")
+end
 
+set(n, "<leader><leader>t", open_or_split_terminal, { noremap = true, silent = true })
+set(n, "<leader><leader>q", "<cmd>qa<cr>", { desc = "Quit all" })
 set(n, "<leader><leader>x", "<cmd>%source<cr>")
-
-set(t, "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
+set(t, "<esc>", "<c-\\><c-n><cmd>close<cr>", { desc = "Exit terminal" })
 
 set(n, "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
 set(n, "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
