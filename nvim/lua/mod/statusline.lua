@@ -11,7 +11,10 @@ local lshift = gbit.lshift
 local bor = gbit.bor
 
 -- Commonly used string constants
+local space = " "
+local empty = ""
 local sLine = "%#StatusLine#"
+local spacedSLine = space .. sLine .. space
 local sModePrefix = "%#StatuslineMode"
 local dErr = "%#StatusLineRed# ✖ "
 local dWarn = "%#StatusLineYellow#  "
@@ -20,9 +23,8 @@ local dInfo = "%#StatusLineBlue#  "
 local gYellow = "%#StatusLineYellow# ~"
 local gGreen = "%#StatusLineGreen# +"
 local gRed = "%#StatusLineRed# -"
-local gitSymbol = "  "
-local space = " "
-local empty = ""
+local gitDelimiter = sLine .. "%="
+local gitSymbol = gitDelimiter .. "  "
 local filePH = " %f %3l:%-2c %r%m"
 
 -- Diagnostic + Git bitpack caches
@@ -63,11 +65,11 @@ local function cached_icon(ft)
 end
 
 -- Caches
-local git_str = empty
+local git_str = gitDelimiter
 local diag_str = empty
 
 local last_ft = nil
-local last_ft_icon = nil
+local last_ft_icon = empty
 local last_mode = empty
 local last_mode_str = empty
 local last_prefix = empty
@@ -75,34 +77,8 @@ local last_statusline = nil
 local last_suffix = empty
 
 local new_mode = empty
-local prefix_changed = true
-local suffix_changed = true
 
 function _G.st()
-	if not suffix_changed and not prefix_changed and (vbo.filetype == last_ft) then
-		return last_statusline
-	end
-
-	-- Filetype changed?
-	if vbo.filetype ~= last_ft then
-		last_ft = vbo.filetype
-		last_ft_icon = cached_icon(last_ft)
-		prefix_changed = true
-	end
-
-	-- Rebuild prefix if needed
-	if prefix_changed then
-		last_prefix = last_mode_str .. space .. last_ft_icon .. filePH
-		prefix_changed = false
-	end
-
-	-- Rebuild suffix if needed
-	if suffix_changed then
-		last_suffix = diag_str .. sLine .. "%=" .. git_str .. space
-		suffix_changed = false
-	end
-
-	last_statusline = last_prefix .. last_suffix
 	return last_statusline
 end
 
@@ -110,6 +86,21 @@ vim.o.statusline = "%{%v:lua.st()%}"
 
 local redraw = function()
 	vim.cmd("redrawstatus")
+end
+
+local update_status = function()
+	last_statusline = last_prefix .. last_suffix
+	redraw()
+end
+
+local update_prefix = function()
+	last_prefix = last_mode_str .. space .. last_ft_icon .. filePH
+	update_status()
+end
+
+local update_suffix = function()
+	last_suffix = diag_str .. git_str
+	update_status()
 end
 
 -------------------------------------------------------
@@ -142,16 +133,14 @@ local update_diag = function()
 					.. ((d_w > 0) and (dWarn .. d_w) or empty)
 					.. ((d_h > 0) and (dHint .. d_h) or empty)
 					.. ((d_i > 0) and (dInfo .. d_i) or empty)
-				suffix_changed = true
-				return true
+				update_suffix()
 			end
 		else
 			-- If there are no diagnostics, but we had some before, reset
 			if last_diag_pack ~= 0 then
 				last_diag_pack = 0
 				diag_str = empty
-				suffix_changed = true
-				return true
+				update_suffix()
 			end
 		end
 	end
@@ -174,16 +163,15 @@ local update_git = function()
 				.. ((g_a > 0) and (gGreen .. g_a) or empty)
 				.. ((g_c > 0) and (gYellow .. g_c) or empty)
 				.. ((g_r > 0) and (gRed .. g_r) or empty)
-			suffix_changed = true
-			return true
+				.. space
+			update_suffix()
 		end
 	else
 		if (last_git_pack ~= 0) or (last_git_head ~= nil) or (git_str ~= empty) then
 			last_git_pack = 0
 			last_git_head = nil
-			git_str = empty
-			suffix_changed = true
-			return true
+			git_str = gitDelimiter .. space
+			update_suffix()
 		end
 	end
 end
@@ -194,39 +182,39 @@ local update_mode = function()
 	if new_mode ~= last_mode then
 		last_mode = new_mode
 		local short_mode = mode_to_str[new_mode] or unk(new_mode)
-		last_mode_str = sModePrefix .. short_mode .. "# " .. short_mode .. space .. sLine
+		last_mode_str = sModePrefix .. short_mode .. "# " .. short_mode .. spacedSLine
 		update_diag()
-		prefix_changed = true
+		update_prefix()
 	end
 end
 
+local update_filetype = function()
+	if vbo.filetype ~= last_ft then
+		last_ft = vbo.filetype
+		last_ft_icon = cached_icon(last_ft)
+		update_prefix()
+	end
+end
+
+local full_update = function()
+	update_mode()
+	update_filetype()
+	update_diag()
+	update_git()
+end
+
 vim.api.nvim_create_autocmd("DiagnosticChanged", {
-	callback = function()
-		if update_diag() then
-			redraw()
-		end
-	end,
+	callback = update_diag,
 })
 
 vim.api.nvim_create_autocmd("User", {
 	pattern = "GitSignsUpdate",
-	callback = function()
-		if update_git() then
-			redraw()
-		end
-	end,
+	callback = update_git,
 })
 
 vim.api.nvim_create_autocmd("ModeChanged", {
 	callback = update_mode,
 })
-
-local full_update = function()
-	update_diag()
-	update_git()
-	update_mode()
-	redraw()
-end
 
 vim.api.nvim_create_autocmd("BufEnter", {
 	callback = full_update,

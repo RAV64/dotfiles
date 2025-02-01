@@ -77,8 +77,17 @@ M.plugin = {
 							runBuildScripts = { enable = true },
 							procMacro = { enable = true },
 							checkOnSave = true,
+							imports = {
+								granularity = {
+									enforce = true,
+									group = "module",
+								},
+								merge = {
+									glob = false,
+								},
+								preferNoStd = true,
+							},
 							check = {
-								enable = true,
 								command = "clippy",
 								-- features = "all",
 							},
@@ -127,10 +136,9 @@ M.plugin = {
 			vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
 			local lspconfig = require("lspconfig")
-
-			for name, config in pairs(opts.servers) do
+			for server, config in pairs(opts.servers) do
 				config.capabilities = config.capabilities or {}
-				lspconfig[name].setup(config)
+				lspconfig[server].setup(config)
 			end
 		end,
 	},

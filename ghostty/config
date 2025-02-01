@@ -23,7 +23,7 @@ adjust-underline-thickness = 2
 background = #2C2A2E
 foreground = #E4E6E7
 
-command = fish
+command = /opt/homebrew/bin/fish
 
 auto-update = off
 quit-after-last-window-closed=true
