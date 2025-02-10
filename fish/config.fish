@@ -51,6 +51,7 @@ set -gx PATH /opt/homebrew/bin $PATH
 
 if test (uname) = Darwin
     launchctl remove com.valvesoftware.steam.ipctool
+    ps aux | grep -i 'siri' | grep -v 'grep' | awk '{print $2}' | xargs -r kill -9
 end
 
 zoxide init fish | source
