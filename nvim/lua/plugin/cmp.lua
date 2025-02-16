@@ -47,9 +47,10 @@ M.plugin = {
 					nerd_font_variant = "mono",
 				},
 
+				cmdline = { enabled = false },
+
 				sources = {
 					default = { "lsp", "path", "snippets" },
-					cmdline = {},
 				},
 				completion = {
 					menu = {

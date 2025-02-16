@@ -12,7 +12,7 @@ M.plugin = {
 		branch = "main",
 		build = ":TSUpdate",
 		lazy = false,
-		opts = { ensure_install = { "community" }, ignore_install = { "unsupported" } },
+		opts = { ensure_install = { "unstable" }, ignore_install = { "unsupported" } },
 		config = function(_, opts)
 			require("nvim-treesitter").setup(opts)
 
