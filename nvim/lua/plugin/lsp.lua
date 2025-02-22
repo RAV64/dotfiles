@@ -94,32 +94,6 @@ M.plugin = {
 						},
 					},
 				},
-				csharp_ls = {},
-				jsonls = {},
-				clojure_lsp = {},
-				zls = {},
-				sqlls = {},
-
-				astro = {},
-				prismals = {},
-				biome = {},
-				nixd = {
-					settings = {
-						nixd = {
-							nixpkgs = {
-								expr = "import <nixpkgs> { }",
-							},
-							options = {
-								home_manager = {
-									expr = '(builtins.getFlake ("/Users/miki/dotfiles/nix-config")).darwinConfigurations.white-gharial.options.home-manager',
-								},
-								nix_darwin = {
-									expr = '(builtins.getFlake ("/Users/miki/dotfiles/nix-config")).darwinConfigurations.white-gharial.options',
-								},
-							},
-						},
-					},
-				},
 
 				-- Python
 				basedpyright = {},

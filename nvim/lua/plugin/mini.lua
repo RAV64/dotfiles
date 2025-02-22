@@ -2,38 +2,7 @@ local M = {}
 
 M.plugin = {
 	{
-		"echasnovski/mini.surround",
-		event = "BufReadPost",
-		opts = {
-			mappings = {
-				add = "ms",
-				delete = "md",
-				replace = "mr",
-
-				-- Disable
-				find = "",
-				find_left = "",
-				highlight = "",
-				update_n_lines = "",
-				suffix_last = "", -- Suffix to search with "prev" method
-				suffix_next = "", -- Suffix to search with "next" method
-			},
-		},
-	},
-	{
-		"echasnovski/mini.bufremove",
-		keys = {
-			{
-				"<S-q>",
-				function()
-					UTIL.func("mini.bufremove", "delete", 0, false)
-				end,
-				desc = "Delete Buffer",
-			},
-		},
-	},
-	{
-		"echasnovski/mini.icons",
+		"RAV64/mini.icons",
 		config = true,
 		init = function()
 			package.preload["nvim-web-devicons"] = function()
@@ -43,7 +12,7 @@ M.plugin = {
 		end,
 	},
 	{
-		"echasnovski/mini.files",
+		"RAV64/mini.files",
 		keys = {
 			{
 				"-",

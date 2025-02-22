@@ -12,5 +12,9 @@ vim.api.nvim_create_autocmd("User", {
 		require("config.autocmds")
 		require("mod.statusline")
 		require("mod.autopair")
+		require("mod.puff-buff")
+		require("mod.surround")
+
+		-- require("mod.treesitter-diagnostics")
 	end,
 })
