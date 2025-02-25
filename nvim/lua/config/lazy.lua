@@ -12,14 +12,11 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	spec = {
-		{ import = "plugin" },
-		{ import = "extra.plugin.flash" },
-	},
+	spec = { { import = "plugin" } },
 	defaults = { version = false, lazy = true },
 	change_detection = { enabled = false },
 	checker = { enabled = false },
-	-- rocks = { enabled = false },
+	rocks = { enabled = false },
 	performance = {
 		rtp = {
 			disabled_plugins = {
