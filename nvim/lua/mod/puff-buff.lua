@@ -44,8 +44,6 @@ local function puff_buff()
 
 	-- Check for unsaved changes. If present, confirm with the user.
 	if vim.bo[buf_id].modified then
-		print(vim.inspect(vim.bo[buf_id].modified))
-
 		local choice = vim.fn.confirm(
 			string.format("Buffer %d has unsaved changes. Delete anyway?", buf_id),
 			"&No\n&Yes",
@@ -53,7 +51,6 @@ local function puff_buff()
 			"Question"
 		)
 		if choice ~= 2 then
-			-- User chose 'No'
 			return false
 		end
 	end

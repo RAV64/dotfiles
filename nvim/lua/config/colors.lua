@@ -115,15 +115,38 @@ local colors = {
 	["FlashCurrent"] = { fg = p.static },
 	["FlashPrompt"] = { link = "NormalFloat" },
 
-	-- TELESCOPE
-	["TelescopePromptNormal"] = { bg = p.surface0 },
-	["TelescopePromptBorder"] = { bg = p.surface0 },
-	["TelescopePromptTitle"] = { bg = p.surface0 },
-	["TelescopeNormal"] = { bg = p.background1 },
-	["TelescopeBorder"] = { bg = p.background1 },
-	["TelescopePreviewNormal"] = { bg = p.background2 },
-	["TelescopePreviewBorder"] = { bg = p.background2 },
-	["TelescopeMatching"] = { fg = p.blue, italic = true },
+	--- FZF-LUA ---
+	["FzfLuaNormal"] = { bg = p.background1 },
+	["FzfLuaPreviewNormal"] = { bg = p.background2 },
+	["FzfLuaFzfQuery"] = { bg = p.red },
+	["FzfLuaFzfPrompt"] = { bg = p.red },
+	["FzfLuaBackdrop"] = { link = "Normal" },
+
+	["FzfLuaBorder"] = { fg = p.background1, bg = p.background1 },
+	["FzfLuaPreviewBorder"] = { fg = p.background2, bg = p.background2 },
+
+	["FzfLuaHeaderBind"] = { fg = p.gold },
+	["FzfLuaBufNr"] = { fg = p.gold },
+	["FzfLuaTabMarker"] = { fg = p.gold },
+
+	-- 2) Replacements for "*Brown1"
+	["FzfLuaHeaderText"] = { fg = p.orange },
+	["FzfLuaBufFlagCur"] = { fg = p.orange },
+
+	-- 3) Replacements for "*CadetBlue1"
+	["FzfLuaPathColNr"] = { fg = p.blue },
+	["FzfLuaBufFlagAlt"] = { fg = p.blue },
+
+	-- 4) Replacement for "*LightGreen"
+	["FzfLuaPathLineNr"] = { fg = p.emerald },
+
+	-- 5) Replacement for "*LightSkyBlue1"
+	["FzfLuaTabTitle"] = { fg = p.blue },
+
+	-- 6) Replacements for "*PaleVioletRed1"
+	["FzfLuaLivePrompt"] = { fg = p.pink },
+	["FzfLuaLiveSym"] = { fg = p.pink },
+	--- /FZF-LUA ---
 
 	-- CMP
 	["BlinkCmpKindClass"] = link(class),
