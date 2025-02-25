@@ -74,7 +74,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 
 		set("n", "<leader>r", vim.lsp.buf.rename, "Rename")
-		set("n", "gD", vim.lsp.buf.declaration, "Get Declaration")
 		set("n", "Z", vim.diagnostic.goto_prev, "Goto previous diagnostics")
 		set("n", "z", vim.diagnostic.goto_next, "Goto next diagnostics")
 		set("n", "ge", vim.diagnostic.open_float, "Open diagnostics")

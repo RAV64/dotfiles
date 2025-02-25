@@ -29,7 +29,6 @@ M.plugin = {
 		end,
 	},
 	{ "HiPhish/rainbow-delimiters.nvim", event = "BufReadPre" },
-	{ "yorickpeterse/nvim-tree-pairs", event = "BufReadPre", config = true },
 
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
