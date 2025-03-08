@@ -55,7 +55,7 @@ local AppLauncher = function()
 		p = "screenshot",
 
 		k = "anki",
-		b = "firefox developer edition",
+		b = "librewolf",
 		n = "Obsidian",
 		s = "Bitwarden",
 		t = "Ghostty",
