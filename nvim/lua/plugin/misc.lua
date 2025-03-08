@@ -32,6 +32,16 @@ M.plugin = {
 	},
 	{
 		"folke/flash.nvim",
+		keys = {
+			{
+				"s",
+				mode = { "n", "x", "o" },
+				function()
+					UTIL.func("flash", "jump")
+				end,
+				desc = "Flash",
+			},
+		},
 		opts = {
 			highlight = {
 				backdrop = false,
@@ -42,14 +52,15 @@ M.plugin = {
 				prompt = { enabled = false },
 			},
 		},
-		keys = {
-			{
-				"s",
-				mode = { "n", "x", "o" },
-				function()
-					UTIL.func("flash", "jump")
-				end,
-				desc = "Flash",
+	},
+
+	{
+		"j-hui/fidget.nvim",
+		event = "VeryLazy",
+		opts = {
+			notification = {
+				window = { winblend = 0 },
+				override_vim_notify = true,
 			},
 		},
 	},
