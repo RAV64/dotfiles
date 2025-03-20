@@ -23,7 +23,7 @@ M.plugin = {
 	},
 	{
 		"saghen/blink.cmp",
-		dependencies = { "xzbdmw/colorful-menu.nvim", "echasnovski/mini.icons" },
+		dependencies = { "xzbdmw/colorful-menu.nvim" },
 		event = "InsertEnter",
 		version = "*",
 		config = function()
