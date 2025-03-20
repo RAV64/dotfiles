@@ -3,6 +3,7 @@ local M = {}
 M.plugin = {
 	{
 		"RAV64/mini.icons",
+		lazy = false,
 		config = true,
 		init = function()
 			package.preload["nvim-web-devicons"] = function()
