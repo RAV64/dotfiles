@@ -28,7 +28,6 @@ M.plugin = {
 			})
 		end,
 	},
-	{ "HiPhish/rainbow-delimiters.nvim", event = "BufReadPre" },
 
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
