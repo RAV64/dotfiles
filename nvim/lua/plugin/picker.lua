@@ -61,6 +61,8 @@ M.plugin = {
 		{ "gr", f("lsp_references"), desc = "Get Usages/References" },
 		{ "gi", f("lsp_implementations"), desc = "Get implementations" },
 		{ "gt", f("lsp_typedefs"), desc = "Get type definitions" },
+		{ "gI", f("lsp_incoming_calls"), desc = "Get incoming calls" },
+		{ "gO", f("lsp_outgoing_calls"), desc = "Get outgoing calls" },
 		{ "<leader>vs", f("git_status"), desc = "Git status" },
 		{ "<leader>gh", f("helptags"), desc = "Find help" },
 	},
