@@ -15,6 +15,7 @@ vim.api.nvim_create_autocmd("User", {
 		require("mod.puff-buff")
 		require("mod.surround")
 		require("mod.treesitter-matchit")
+		require("mod.lsp")
 
 		-- require("mod.treesitter-diagnostics")
 	end,

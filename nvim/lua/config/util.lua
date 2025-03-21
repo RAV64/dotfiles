@@ -1,4 +1,5 @@
 local M = {}
+local lsp = vim.lsp
 
 function M.update_lead()
 	local lead_chr = string.gsub(vim.opt_local.listchars:get().leadmultispace, "%s+", "")
@@ -56,16 +57,16 @@ function M.get_top_level_keys(tbl)
 end
 
 local get_lsp_client = function(name)
-	local clients = vim.lsp.get_clients({ name = name })
+	local clients = lsp.get_clients({ name = name })
 	if not clients or #clients == 0 then
 		error("No " .. name .. " clients attached")
 	end
-	return clients[1]
+	return clients[#clients]
 end
 
 M.rust = {
 	refresh_cargo_workspace = function()
-		local client = get_lsp_client("rust_analyzer")
+		local client = get_lsp_client("rust-analyzer")
 
 		client.request("rust-analyzer/reloadWorkspace", nil, function(err)
 			if err then
@@ -77,7 +78,7 @@ M.rust = {
 	end,
 
 	go_to_parent_module = function()
-		local client = get_lsp_client("rust_analyzer")
+		local client = get_lsp_client("rust-analyzer")
 		client.request("experimental/parentModule", vim.lsp.util.make_position_params(0, nil), function(_, result, _)
 			if result == nil or vim.tbl_isempty(result) then
 				vim.notify("Can't find parent module")
@@ -97,6 +98,15 @@ M.rust = {
 		end)
 	end,
 }
+
+M.capabilities = function(opt)
+	local capabilities = vim.lsp.protocol.make_client_capabilities()
+	if opt then
+		capabilities = vim.tbl_deep_extend("force", capabilities, opt)
+	end
+
+	return require("blink.cmp").get_lsp_capabilities(capabilities)
+end
 
 local mod_cache = {}
 
