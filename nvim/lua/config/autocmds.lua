@@ -66,26 +66,6 @@ vim.api.nvim_create_autocmd("OptionSet", {
 	callback = UTIL.update_lead(),
 })
 
-vim.api.nvim_create_autocmd("LspAttach", {
-	group = vim.api.nvim_create_augroup("user-lsp-attach", { clear = true }),
-	callback = function(event)
-		local set = function(mode, keys, func, desc)
-			vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = desc })
-		end
-
-		set("n", "<leader>r", vim.lsp.buf.rename, "Rename")
-		set("n", "Z", vim.diagnostic.goto_prev, "Goto previous diagnostics")
-		set("n", "z", vim.diagnostic.goto_next, "Goto next diagnostics")
-		set("n", "ge", vim.diagnostic.open_float, "Open diagnostics")
-		set("i", "<C-s>", vim.lsp.buf.signature_help, "Show signature")
-		set("n", "<leader>gwa", vim.lsp.buf.add_workspace_folder, "add_workspace_folder")
-		set("n", "<leader>gwr", vim.lsp.buf.remove_workspace_folder, "remove_workspace_folder")
-		set("n", "<leader>gwl", function()
-			vim.print(vim.lsp.buf.list_workspace_folders())
-		end, "list_workspace_folders")
-	end,
-})
-
 -- MACRO COLOR -----------------------------------------
 local macro_cursorline_group = vim.api.nvim_create_augroup("user-macro-visual-indication", { clear = true })
 local original_cursorline_hl = vim.api.nvim_get_hl(0, { name = "CursorLine", link = false })
