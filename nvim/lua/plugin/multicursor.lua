@@ -12,6 +12,7 @@ local M = {}
 M.plugin = {
 	{
 		"jake-stewart/multicursor.nvim",
+    -- stylua: ignore
 		keys = {
 			{
 				"<c-n>",
@@ -29,61 +30,17 @@ M.plugin = {
 				end,
 				mode = { "n", "v" },
 			},
-			{
-				"<c-x>",
-				mc("deleteCursor"),
-				mode = { "n" },
-			},
-			{
-				"<c-s>",
-				mc("matchSkipCursor", 1),
-				mode = { "n", "v" },
-			},
-			{
-				"<up>",
-				mc("lineAddCursor", -1),
-				mode = { "n", "v" },
-			},
-			{
-				"<down>",
-				mc("lineAddCursor", 1),
-				mode = { "n", "v" },
-			},
-			{
-				"<left>",
-				mc("prevCursor"),
-				mode = { "n", "x" },
-			},
-			{
-				"<right>",
-				mc("nextCursor"),
-				mode = { "n", "x" },
-			},
-			{
-				"<c-a>",
-				mc("alignCursors"),
-				mode = { "n" },
-			},
-			{
-				"m",
-				mc("splitCursors"),
-				mode = { "x" },
-			},
-			{
-				"S",
-				mc("matchCursors"),
-				mode = { "x" },
-			},
-			{
-				"I",
-				mc("insertVisual"),
-				mode = { "x" },
-			},
-			{
-				"A",
-				mc("appendVisual"),
-				mode = { "x" },
-			},
+			{ "<c-x>", mc("deleteCursor"), mode = { "n" }, },
+			{ "<c-s>", mc("matchSkipCursor", 1), mode = { "n", "v" }, },
+			{ "<up>", mc("lineAddCursor", -1), mode = { "n", "v" }, },
+			{ "<down>", mc("lineAddCursor", 1), mode = { "n", "v" }, },
+			{ "<left>", mc("prevCursor"), mode = { "n", "x" }, },
+			{ "<right>", mc("nextCursor"), mode = { "n", "x" }, },
+			{ "<c-a>", mc("alignCursors"), mode = { "n" }, },
+			{ "m", mc("splitCursors"), mode = { "x" }, },
+			{ "S", mc("matchCursors"), mode = { "x" }, },
+			{ "I", mc("insertVisual"), mode = { "x" }, },
+			{ "A", mc("appendVisual"), mode = { "x" }, },
 		},
 		opts = { { signs = {} } },
 		config = function(_, opts)
