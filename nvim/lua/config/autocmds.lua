@@ -18,6 +18,24 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 	end,
 })
 
+-- Create an autocommand on BufLeave for all buffers
+local augroup = vim.api.nvim_create_augroup("user-auto-remove-empty-buffers", { clear = true })
+vim.api.nvim_create_autocmd("BufWinLeave", {
+	group = augroup,
+	pattern = "*",
+	callback = function()
+		local bufnr = vim.api.nvim_get_current_buf()
+		local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+		if #lines == 1 and lines[1] == "" then
+			vim.schedule(function()
+				if vim.api.nvim_buf_is_valid(bufnr) then
+					vim.api.nvim_buf_delete(bufnr, { force = true })
+				end
+			end)
+		end
+	end,
+})
+
 vim.api.nvim_create_autocmd({ "BufRead" }, {
 	pattern = { "*.log" },
 	callback = function()
@@ -34,7 +52,6 @@ vim.api.nvim_create_autocmd("FileType", {
 		"man",
 		"notify",
 		"qf",
-		"query",
 		"startuptime",
 		"tsplayground",
 		"checkhealth",
@@ -83,6 +100,7 @@ vim.api.nvim_create_autocmd("RecordingLeave", {
 		vim.api.nvim_set_hl(0, "CursorLine", original_cursorline_hl)
 	end,
 })
+
 -- /MACRO COLOR ----------------------------------------
 -- FT --------------------------------------------------
 local function ft(filetypes, callback)
@@ -117,9 +135,5 @@ end)
 ft({ "markdown" }, function()
 	vim.opt_local.linebreak = true
 	vim.opt_local.wrap = true
-end)
-
-ft({ "ron" }, function()
-	vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 end)
 -- /FT -------------------------------------------------

@@ -10,10 +10,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		set("n", "<leader>r", lsp.buf.rename, "Rename")
 		set("n", "Z", function()
-			diag.jump({ count = -1 })
+			diag.jump({ count = -1, float = true })
 		end, "Goto previous diagnostics")
 		set("n", "z", function()
-			diag.jump({ count = 1 })
+			diag.jump({ count = 1, float = true })
 		end, "Goto next diagnostics")
 		set("n", "ge", diag.open_float, "Open diagnostics")
 		set("i", "<C-s>", lsp.buf.signature_help, "Show signature")
