@@ -8,14 +8,12 @@ local nxo = { n, x, o }
 
 local del = vim.keymap.del
 
-if vim.version().minor == 11 then
-	-- https://neovim.io/doc/user/vim_diff.html#default-mappings
-	del(n, "grn")
-	del(n, "grr")
-	del(nx, "gra")
-	del(n, "gri")
-	del(n, "gO")
-end
+-- https://neovim.io/doc/user/vim_diff.html#default-mappings
+del(n, "grn")
+del(n, "grr")
+del(nx, "gra")
+del(n, "gri")
+del(n, "gO")
 
 local set = vim.keymap.set
 
@@ -53,8 +51,21 @@ set(n, "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 set(n, "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 set(n, "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
-set(n, "<Tab>", "<cmd>bnext<cr>", { desc = "Next buffer" })
-set(n, "<S-Tab>", "<cmd>bprev<cr>", { desc = "Prev buffer" })
+local function safe_cycle_buffer(delta)
+	return function()
+		local buffers = vim.fn.getbufinfo({ buflisted = 1 })
+		if #buffers > 1 then
+			if delta > 0 then
+				vim.cmd("bnext")
+			else
+				vim.cmd("bprev")
+			end
+		end
+	end
+end
+
+set("n", "<Tab>", safe_cycle_buffer(1), { desc = "Next buffer" })
+set("n", "<S-Tab>", safe_cycle_buffer(-1), { desc = "Prev buffer" })
 
 -- undo breakpoints in insert mode
 -- set(i, ",", ",<c-g>u")
@@ -63,12 +74,7 @@ set(n, "<S-Tab>", "<cmd>bprev<cr>", { desc = "Prev buffer" })
 
 set(i, "<S-Enter>", "<esc>o")
 
-set(nx, "<leader>h", "*N", { desc = "Search word under cursor" })
-
-set(n, "=", "$", { desc = "Go to end of line" })
-
-set(n, "ö", "}")
-set(n, "ä", "{")
+vim.keymap.set("n", "*", "*N", { noremap = true, silent = true })
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 set(nxo, "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })

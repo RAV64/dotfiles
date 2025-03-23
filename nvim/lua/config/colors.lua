@@ -353,6 +353,9 @@ local colors = {
 	["MiniIconsRed"] = { fg = p.red },
 	["MiniIconsYellow"] = { fg = p.gold },
 
+	["DiffAdd"] = { fg = nil, bg = "#41493a" },
+	["DiffDelete"] = { fg = nil, bg = "#4f3538" },
+
 	-- GITSIGNS
 	["GitSignsAdd"] = { fg = p.green },
 	["GitSignsChange"] = { fg = p.gold },
@@ -360,6 +363,7 @@ local colors = {
 	["GitSignsAddPreview"] = { link = "DiffAdd" },
 	["GitSignsDeletePreview"] = { link = "DiffDelete" },
 	["GitSignsCurrentLineBlame"] = { fg = p.surface1 },
+	["GitSignsDeleteInline"] = { bg = p.red, fg = p.background0 },
 
 	-- STATUSLINE
 	["StatusLineGreen"] = { fg = p.emerald, bg = p.background2 },
