@@ -5,10 +5,10 @@ M.plugin = {
 	event = { "BufReadPre", "BufNewFile" },
   -- stylua: ignore
 	keys = {
-		{ "<leader>vb", function() M.gitsigns.blame_line({ full = true }) end, desc = "Line blame" },
-		{ "<leader>vn", function() M.gitsigns.next_hunk() end, desc = "Next hunk" },
-		{ "<leader>vp", function() M.gitsigns.prev_hunk() end, desc = "Previous hunk" },
-		{ "<leader>vh", function() M.gitsigns.preview_hunk_inline() end, desc = "Preview hunk inline" },
+		{ "<leader>gb", function() M.gitsigns.blame() end, desc = "Line blame" },
+		{ "<leader>gn", function() M.gitsigns.next_hunk() end, desc = "Next hunk" },
+		{ "<leader>gp", function() M.gitsigns.prev_hunk() end, desc = "Previous hunk" },
+		{ "<leader>gh", function() M.gitsigns.preview_hunk_inline() end, desc = "Preview hunk inline" },
 	},
 	opts = {
 		signs = {

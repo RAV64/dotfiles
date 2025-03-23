@@ -63,8 +63,12 @@ M.plugin = {
 		{ "gt", f("lsp_typedefs"), desc = "Get type definitions" },
 		{ "gI", f("lsp_incoming_calls"), desc = "Get incoming calls" },
 		{ "gO", f("lsp_outgoing_calls"), desc = "Get outgoing calls" },
-		{ "<leader>vs", f("git_status"), desc = "Git status" },
-		{ "<leader>gh", f("helptags"), desc = "Find help" },
+		{ "<leader><leader>h", f("helptags"), desc = "Find help" },
+
+		{ "<leader>gs", f("git_status"), desc = "Git status" },
+		{ "<leader>ggb", f("git_branches"), desc = "Git branches" },
+		{ "<leader>ggc", f("git_commits"), desc = "Git commits" },
+		{ "<leader>ggC", f("git_bcommits"), desc = "Git buffer commits" },
 	},
 	opts = {
 		winopts = {
@@ -73,7 +77,9 @@ M.plugin = {
 			preview = {
 				layout = "horizontal",
 				flip_columns = 120,
+				border = "noborder",
 			},
+			border = "none",
 		},
 
 		fzf_opts = {
