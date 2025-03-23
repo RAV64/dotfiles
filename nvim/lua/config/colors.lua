@@ -36,6 +36,10 @@ local link = function(color)
 	return { link = color.group }
 end
 
+local disabled = function()
+	return { fg = nil, bg = nil }
+end
+
 local class = colorize("Class", p.gold)
 local enum = colorize("Enum", p.gold)
 local type = colorize("Type", p.gold)
@@ -310,6 +314,8 @@ local colors = {
 	["@lsp.typemod.variable.injected"] = link(variable),
 
 	["@lsp.typemod.keyword.async"] = { link = "@keyword.coroutine" },
+	["@lsp.type.string"] = disabled(),
+	["@lsp.type.macro"] = disabled(),
 
 	["RustSigil"] = { fg = p.emerald },
 
