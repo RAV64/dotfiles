@@ -364,6 +364,7 @@ local colors = {
 	["GitSignsDeletePreview"] = { link = "DiffDelete" },
 	["GitSignsCurrentLineBlame"] = { fg = p.surface1 },
 	["GitSignsDeleteInline"] = { bg = p.red, fg = p.background0 },
+	["GitSignsChangeInline"] = { bg = p.green, fg = p.background0 },
 
 	-- STATUSLINE
 	["StatusLineGreen"] = { fg = p.emerald, bg = p.background2 },
