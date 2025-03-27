@@ -55,7 +55,7 @@ M.plugin = {
 		{ "<leader>o", f("oldfiles"), desc = "Previous files" },
 		{ "<leader>.", f("resume"), desc = "Open last picker (resume)" },
 		{ "<leader>t", f("builtin"), desc = "Fzf-lua builtins" },
-		{ "<leader>a", f("lsp_code_actions"), desc = "Fzf-lua builtins" },
+		{ "<leader>a", f("lsp_code_actions"), desc = "Fzf-lua builtins", mode = { "n", "x" } },
 		{ "gd", f("lsp_definitions"), desc = "Goto Definition" },
 		{ "gD", f("lsp_declarations"), desc = "Goto Declaration" },
 		{ "gr", f("lsp_references"), desc = "Get Usages/References" },

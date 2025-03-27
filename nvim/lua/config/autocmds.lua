@@ -27,6 +27,11 @@ vim.api.nvim_create_autocmd("BufWinLeave", {
 		local bufnr = vim.api.nvim_get_current_buf()
 		local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
 		if #lines == 1 and lines[1] == "" then
+			local filename = vim.api.nvim_buf_get_name(bufnr)
+			-- If the buffer represents an existing file, do not delete it.
+			if filename ~= "" and vim.fn.filereadable(filename) == 1 then
+				return
+			end
 			vim.schedule(function()
 				if vim.api.nvim_buf_is_valid(bufnr) then
 					vim.api.nvim_buf_delete(bufnr, { force = true })
@@ -43,6 +48,14 @@ vim.api.nvim_create_autocmd({ "BufRead" }, {
 	end,
 })
 
+local function smart_close()
+	if #vim.api.nvim_list_wins() > 1 then
+		vim.cmd("close")
+	else
+		vim.cmd("bd")
+	end
+end
+
 vim.api.nvim_create_autocmd("FileType", {
 	desc = "close some filetypes with <q>",
 	group = vim.api.nvim_create_augroup("user-close-misc-buffers", { clear = true }),
@@ -53,18 +66,18 @@ vim.api.nvim_create_autocmd("FileType", {
 		"notify",
 		"qf",
 		"startuptime",
-		"tsplayground",
 		"checkhealth",
 		"grug-far",
+		"query",
 		"log",
 		"minifiles",
 		"gitsigns-blame",
 	},
 	callback = function(event)
 		vim.bo[event.buf].buflisted = false
-		vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf })
-		vim.keymap.set("n", "Q", "<cmd>close<cr>", { buffer = event.buf })
-		vim.keymap.set("n", "<esc>", "<cmd>close<cr>", { buffer = event.buf })
+		vim.keymap.set("n", "q", smart_close, { buffer = event.buf })
+		vim.keymap.set("n", "Q", smart_close, { buffer = event.buf })
+		vim.keymap.set("n", "<esc>", smart_close, { buffer = event.buf })
 	end,
 })
 

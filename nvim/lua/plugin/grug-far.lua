@@ -13,7 +13,7 @@ M.plugin = {
 		{
 			"<leader>R",
 			function()
-				UTIL.func("grug-far", "grug_far", { transient = true })
+				UTIL.func("grug-far", "open", { transient = true })
 			end,
 			mode = { "n" },
 			desc = "Search and Replace",

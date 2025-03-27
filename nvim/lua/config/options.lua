@@ -78,7 +78,7 @@ opt.fillchars = {
 	eob = " ",
 }
 
-vim.o.winborder = "solid"
+vim.o.winborder = "none"
 
 vim.g.markdown_recommended_style = 0
 
