@@ -58,4 +58,4 @@ zoxide init fish | source
 starship init fish | source
 
 fzf --fish | source
-fzf_configure_bindings --directory=\cf
+bind \cf fzf-file-widget
