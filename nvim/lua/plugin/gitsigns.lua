@@ -2,6 +2,7 @@ local M = {}
 
 M.plugin = {
 	"lewis6991/gitsigns.nvim",
+	commit = "fcfa7a989cd6fed10abf02d9880dc76d7a38167d",
 	event = { "BufReadPre", "BufNewFile" },
   -- stylua: ignore
 	keys = {

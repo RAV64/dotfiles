@@ -2,6 +2,7 @@ local M = {}
 
 M.plugin = {
 	"MagicDuck/grug-far.nvim",
+	commit = "3bc6997724c6b9c10bc4bac86821c9061694ded3",
 	opts = {
 		headerMaxWidth = 80,
 		folding = {
@@ -13,7 +14,7 @@ M.plugin = {
 		{
 			"<leader>R",
 			function()
-				UTIL.func("grug-far", "open", { transient = true })
+				require("grug-far").open({ transient = true })
 			end,
 			mode = { "n" },
 			desc = "Search and Replace",

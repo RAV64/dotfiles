@@ -9,6 +9,7 @@ end
 M.plugin = {
 	{
 		"nvim-treesitter/nvim-treesitter",
+		commit = "ae32ed8bda5e78d00aaa99300cf2f1c45ce1884c",
 		branch = "main",
 		build = ":TSUpdate",
 		lazy = false,
@@ -31,6 +32,7 @@ M.plugin = {
 
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
+		commit = "fa32a45fdbab9c9c3bda9ecec9b12dddb221b927",
 		branch = "main",
 		keys = {
 			{ "if", ntts("@function.inner"), mode = { "x", "o" } },

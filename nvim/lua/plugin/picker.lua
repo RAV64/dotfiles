@@ -40,6 +40,7 @@ end
 
 M.plugin = {
 	"ibhagwan/fzf-lua",
+	commit = "970fc983b887cead7d630e062fed01337e41b25d",
 	cmd = "FzfLua",
 	keys = {
 		{ "<leader>f", f("files"), desc = "Open file picker" },
@@ -61,6 +62,7 @@ M.plugin = {
 		{ "gr", f("lsp_references"), desc = "Get Usages/References" },
 		{ "gi", f("lsp_implementations"), desc = "Get implementations" },
 		{ "gt", f("lsp_typedefs"), desc = "Get type definitions" },
+		{ "gu", f("lsp_finder"), desc = "Get usage" },
 		{ "gI", f("lsp_incoming_calls"), desc = "Get incoming calls" },
 		{ "gO", f("lsp_outgoing_calls"), desc = "Get outgoing calls" },
 		{ "<leader><leader>h", f("helptags"), desc = "Find help" },
