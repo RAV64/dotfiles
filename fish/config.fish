@@ -37,6 +37,7 @@ alias gc "git commit -m"
 alias gst "git status"
 alias gac "git add . && git commit -m"
 alias gd "git diff HEAD"
+alias gl "git log --oneline --graph --decorate"
 
 # git stash && git pull && git stash pop
 alias gspp "git pull --rebase --autostash" 
@@ -46,10 +47,10 @@ set -gx PATH ~/dotfiles/scripts/bin $PATH
 set -gx PATH ~/.local/share/bob/nvim-bin $PATH
 set -gx PATH ~/.cargo/bin $PATH
 set -gx PATH /run/current-system/sw/bin $PATH
-set -gx PATH /opt/homebrew/sbin $PATH
-set -gx PATH /opt/homebrew/bin $PATH
 
 if test (uname) = Darwin
+    set -gx PATH /opt/homebrew/sbin $PATH
+    set -gx PATH /opt/homebrew/bin $PATH
     launchctl remove com.valvesoftware.steam.ipctool
     ps aux | grep -i 'siri' | grep -v 'grep' | awk '{print $2}' | xargs -r kill -9
 end
