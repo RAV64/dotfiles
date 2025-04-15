@@ -2,6 +2,7 @@ local M = {}
 
 M.plugin = {
 	"stevearc/conform.nvim",
+	commit = "eebc724d12c5579d733d1f801386e0ceb909d001",
 	event = { "BufWritePre" },
 	cmd = { "ConformInfo" },
 	keys = {

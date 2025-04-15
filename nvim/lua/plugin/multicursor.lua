@@ -12,6 +12,7 @@ local M = {}
 M.plugin = {
 	{
 		"jake-stewart/multicursor.nvim",
+		commit = "f3a4899e5cdc93e6f8cd06bbc3b3631a2e85a315",
     -- stylua: ignore
 		keys = {
 			{

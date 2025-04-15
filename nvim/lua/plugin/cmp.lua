@@ -19,10 +19,12 @@ local commands = {
 M.plugin = {
 	{
 		"xzbdmw/colorful-menu.nvim",
+		commit = "f80feb8a6706f965321aff24d0ed3849f02a7f77",
 		config = true,
 	},
 	{
 		"saghen/blink.cmp",
+		commit = "cb5e346d9e0efa7a3eee7fd4da0b690c48d2a98e",
 		dependencies = { "xzbdmw/colorful-menu.nvim" },
 		event = "InsertEnter",
 		version = "*",
