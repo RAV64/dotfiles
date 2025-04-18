@@ -1,18 +1,44 @@
 #!/bin/bash
-mkdir -p "$HOME/.config"
+set -euo pipefail
 
-ln -fs ~/dotfiles/nvim ~/.config
-ln -fs ~/dotfiles/helix ~/.config
-ln -fs ~/dotfiles/wezterm ~/.config
-ln -fs ~/dotfiles/ghostty ~/.config
-ln -fs ~/dotfiles/fish ~/.config
-ln -fs ~/dotfiles/bat ~/.config
-ln -fs ~/dotfiles/aerospace ~/.config
+DOTFILES="$HOME/dotfiles"
+CONFIG="$HOME/.config"
 
-ln -fs ~/dotfiles/starship.toml ~/.config
-ln -fs ~/dotfiles/.ignore ~/.ignore
-ln -fs ~/dotfiles/.gitconfig ~/.gitconfig
+safe_link() {
+    local src="$1"
+    local dest="$2"
 
-if [[ $(uname) == 'Darwin' ]]; then
-    ln -fs ~/dotfiles/.hammerspoon ~/
+    if [ -L "$dest" ] && [ "$(readlink "$dest")" = "$src" ]; then
+        echo "✔ Skipping: $dest already → $src"
+        return
+    fi
+
+    if [ -e "$dest" ] || [ -L "$dest" ]; then
+        mv "$dest" "${dest}-bak"
+        echo "📦 Backed up $dest → ${dest}-bak"
+    fi
+
+    mkdir -p "$(dirname "$dest")"
+
+    ln -s "$src" "$dest"
+    echo "🔗 Linked $src → $dest"
+}
+
+# Extra
+# safe_link "$DOTFILES/extra/wezterm" "$CONFIG/wezterm"
+# safe_link "$DOTFILES/extra/helix"   "$CONFIG/helix"
+
+# Core
+safe_link "$DOTFILES/nvim"          "$CONFIG/nvim"
+safe_link "$DOTFILES/ghostty"       "$CONFIG/ghostty"
+safe_link "$DOTFILES/fish"          "$CONFIG/fish"
+
+safe_link "$DOTFILES/starship.toml" "$CONFIG/starship.toml"
+safe_link "$DOTFILES/.ignore"       "$HOME/.ignore"
+safe_link "$DOTFILES/.gitconfig"    "$HOME/.gitconfig"
+
+# Macos
+if [[ "$(uname)" == "Darwin" ]]; then
+    safe_link "$DOTFILES/macos/hammerspoon" "$HOME/.hammerspoon"
+    safe_link "$DOTFILES/macos/aerospace"   "$CONFIG/aerospace"
 fi
