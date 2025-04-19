@@ -11,14 +11,16 @@ local p = {
 
 	gold = "#FFC764",
 	orange = "#FF8C5C",
-	pink = "#F07692",
+	pink = "#ff74b8",
 	red = "#FF6A6A",
 	emerald = "#4EDC88",
 	green = "#A8E176",
-	diamond = "#52E4FF",
+	diamond = "#6bede4",
 	blue = "#99BBFF",
 	soft_pink = "#F4D2D5",
-	purple = "#D1A7FF",
+	purple = "#BE95FF",
+
+	deep_purple = "#673AB7",
 
 	static = "#FDAB67",
 	lowlight = "#603717",
@@ -241,7 +243,7 @@ local colors = {
 	["@keyword.export"] = { fg = p.emerald },
 
 	["@punctuation.delimiter"] = { link = "Delimiter" },
-	["@punctuation.bracket"] = { fg = p.white },
+	["@punctuation.bracket"] = { fg = p.purple },
 	["@punctuation.special"] = link(special),
 
 	["@comment"] = link(comment),
