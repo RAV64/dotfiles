@@ -23,7 +23,7 @@ local dInfo = "%#StatusLineBlue#  "
 local gYellow = "%#StatusLineYellow# ~"
 local gGreen = "%#StatusLineGreen# +"
 local gRed = "%#StatusLineRed# -"
-local gitDelimiter = sLine .. "%="
+local gitDelimiter = sLine .. "%=" .. "%{SearchStatus()}"
 local gitSymbol = gitDelimiter .. "  "
 local filePH = " %f %3l:%-2c %r%m"
 
@@ -81,6 +81,23 @@ local new_mode = empty
 function _G.st()
 	return last_statusline
 end
+
+-- local gitDelimiter = sLine .. "%=" .. "%{v:hlsearch ? v:lua.SearchStatus() : ''}"
+-- _G.SearchStatus = function()
+-- 	local sc = vim.fn.searchcount({ recompute = 1, maxcount = 0 })
+-- 	return string.format("[%d/%d]", sc.current, sc.total)
+-- end
+
+vim.cmd([[
+function! SearchStatus() abort
+  if !v:hlsearch
+    return ''
+  endif
+
+  let sc = searchcount({'recompute': 1, 'maxcount': 0})
+  return printf('[%d/%d]', sc.current, sc.total)
+endfunction
+]])
 
 vim.o.statusline = "%{%v:lua.st()%}"
 
