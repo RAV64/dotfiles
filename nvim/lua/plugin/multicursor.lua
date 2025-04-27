@@ -5,31 +5,47 @@ local mc = function(f, args)
 end
 
 local opt = vim.opt
+local v = vim.v
 local nx = { "n", "x" }
 
 local M = {}
 
+M.match = function(direction)
+	return function()
+		if v.hlsearch == 0 then
+			opt.ignorecase = false
+			M.mc.matchAddCursor(direction)
+		else
+			M.mc.searchAddCursor(direction)
+		end
+	end
+end
+
+M.matchAll = function()
+	if v.hlsearch == 0 then
+		M.mc.matchAllAddCursors()
+	else
+		M.mc.searchAllAddCursors()
+	end
+end
+
+M.skip = function(direction)
+	return function()
+		if v.hlsearch == 0 then
+			M.mc.matchSkipCursor(direction)
+		else
+			M.mc.searchSkipCursor(direction)
+		end
+	end
+end
+
 M.plugin = {
 	{
-		"jake-stewart/multicursor.nvim",
-		commit = "f3a4899e5cdc93e6f8cd06bbc3b3631a2e85a315",
+		"rav64/multicursor.nvim",
+		-- upstream commit = "f3a4899e5cdc93e6f8cd06bbc3b3631a2e85a315",
 		keys = {
-			{
-				"<c-n>",
-				function()
-					opt.ignorecase = false
-					M.mc.matchAddCursor(1)
-				end,
-				mode = nx,
-			},
-			{
-				"<c-p>",
-				function()
-					opt.ignorecase = false
-					M.mc.matchAddCursor(-1)
-				end,
-				mode = nx,
-			},
+			{ "<c-n>", M.match(1), mode = nx },
+			{ "<c-p>", M.match(-1), mode = nx },
 			{ "<up>", mc("lineAddCursor", -1), mode = nx },
 			{ "<down>", mc("lineAddCursor", 1), mode = nx },
 
@@ -38,7 +54,7 @@ M.plugin = {
 			{ "I", mc("insertVisual"), mode = { "x" } },
 			{ "A", mc("appendVisual"), mode = { "x" } },
 
-			{ "<c-a>", mc("matchAllAddCursors"), mode = nx },
+			{ "<c-a>", M.matchAll, mode = nx },
 		},
 		opts = { { signs = {} } },
 		config = function(_, opts)
@@ -58,9 +74,7 @@ M.plugin = {
 
 				layer(nx, "<c-x>", M.mc.deleteCursor)
 
-				layer(nx, "<c-s>", function()
-					M.mc.matchSkipCursor(1)
-				end)
+				layer(nx, "<c-s>", M.skip(1))
 				layer(nx, "<c-a>", M.mc.alignCursors)
 
 				layer("x", "t", function()
