@@ -57,18 +57,6 @@ M.plugin = {
 			},
 		},
 	},
-
-	{
-		"j-hui/fidget.nvim",
-		event = "VeryLazy",
-		commit = "d9ba6b7bfe29b3119a610892af67602641da778e",
-		opts = {
-			notification = {
-				window = { winblend = 0 },
-				override_vim_notify = true,
-			},
-		},
-	},
 }
 
 return M.plugin

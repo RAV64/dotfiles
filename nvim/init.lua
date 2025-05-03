@@ -2,6 +2,7 @@ _G.UTIL = require("config.util")
 
 require("config.options")
 require("config.lazy")
+require("vim._extui").enable({})
 
 vim.api.nvim_create_autocmd("User", {
 	pattern = "VeryLazy",
@@ -16,6 +17,7 @@ vim.api.nvim_create_autocmd("User", {
 		require("mod.surround")
 		require("mod.treesitter-matchit")
 		require("mod.lsp")
+		require("mod.quick-term")
 
 		-- require("mod.treesitter-diagnostics")
 	end,
