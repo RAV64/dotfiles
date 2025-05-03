@@ -310,6 +310,7 @@ local colors = {
 	["@lsp.mod.attribute"] = link(constant),
 	-- ["@lsp.mod.controlFlow"] = { fg = p.red },
 	["@lsp.mod.global"] = link(static),
+	["@lsp.mod.crateRoot"] = link(module),
 
 	["@lsp.typemod.operator.injected"] = link(operator),
 	["@lsp.typemod.string.injected"] = link(str),
