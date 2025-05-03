@@ -2,7 +2,7 @@ local M = {}
 
 local ntts = function(tx)
 	return function()
-		UTIL.func("nvim-treesitter-textobjects.select", "select_textobject", tx, "textobjects")
+		require("nvim-treesitter-textobjects.select").select_textobject(tx, "textobjects")
 	end
 end
 
