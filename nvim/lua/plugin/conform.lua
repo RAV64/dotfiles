@@ -9,7 +9,7 @@ M.plugin = {
 		{
 			"gf",
 			function()
-				UTIL.func("conform", "format", { async = true, lsp_fallback = true })
+				require("conform").format({ async = true, lsp_fallback = true })
 			end,
 			desc = "Format buffer",
 		},

@@ -27,9 +27,10 @@ M.plugin = {
 		opts = {
 			mappings = {
 				go_in = "",
-				go_in_plus = "l",
-				go_out = "h",
+				go_in_plus = "<CR>",
+				go_out = "<BS>",
 				go_out_plus = "",
+				reset = "",
 			},
 		},
 	},

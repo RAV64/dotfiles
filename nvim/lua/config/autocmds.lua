@@ -85,12 +85,6 @@ vim.api.nvim_create_user_command("W", function()
 	vim.cmd("update")
 end, {})
 
-vim.api.nvim_create_autocmd("BufWritePost", {
-	group = vim.api.nvim_create_augroup("user-reload-rust-analyzer", { clear = true }),
-	pattern = { "Cargo.toml" },
-	callback = UTIL.rust.refresh_cargo_workspace,
-})
-
 vim.api.nvim_create_autocmd("OptionSet", {
 	group = vim.api.nvim_create_augroup("user-update-indentation-chars", { clear = true }),
 	pattern = { "shiftwidth" },
@@ -111,6 +105,7 @@ vim.api.nvim_create_autocmd("RecordingEnter", {
 vim.api.nvim_create_autocmd("RecordingLeave", {
 	group = macro_cursorline_group,
 	callback = function()
+		---@diagnostic disable-next-line: param-type-mismatch
 		vim.api.nvim_set_hl(0, "CursorLine", original_cursorline_hl)
 	end,
 })
@@ -123,10 +118,6 @@ local function ft(filetypes, callback)
 		callback = callback,
 	})
 end
-
-ft({ "rust" }, function(event)
-	vim.keymap.set("n", "gp", UTIL.rust.go_to_parent_module, { buffer = event.buf })
-end)
 
 ft({ "rust", "toml" }, function(event)
 	if vim.bo.filetype == "rust" or vim.fn.expand("%:t") == "Cargo.toml" then
