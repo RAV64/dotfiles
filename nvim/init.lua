@@ -18,6 +18,7 @@ vim.api.nvim_create_autocmd("User", {
 		require("mod.treesitter-matchit")
 		require("mod.lsp")
 		require("mod.quick-term")
+		require("mod.smart-tab")
 
 		-- require("mod.treesitter-diagnostics")
 	end,
