@@ -46,4 +46,4 @@ diag.config({
 	severity_sort = true,
 })
 
-lsp.enable({ "rust-analyzer", "lua-ls" })
+lsp.enable({ "rust-analyzer", "lua-ls", "jdtls" })
