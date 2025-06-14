@@ -75,8 +75,6 @@ local function on_language_status(_, result)
 	command("echohl None")
 end
 
-vim.notify("HeLLo!")
-
 return {
 	cmd = {
 		"jdtls",
