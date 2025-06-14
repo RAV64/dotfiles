@@ -1,7 +1,4 @@
-local api = vim.api
-local fn = vim.fn
-local set = vim.keymap.set
-
+local api, fn, go, set = vim.api, vim.fn, vim.go, vim.keymap.set
 local pairs = { ["("] = ")", ["["] = "]", ["{"] = "}", ["<"] = ">" }
 
 local function esc(s)
@@ -92,7 +89,7 @@ function M.setup()
 	set("n", "md", M.delete, { desc = "Delete surrounding" })
 	set("n", "mr", M.replace, { desc = "Replace surrounding" })
 	set("n", "ms", function()
-		vim.go.operatorfunc = "v:lua.Surround.add"
+		go.operatorfunc = "v:lua.Surround.add"
 		return "g@"
 	end, { expr = true, desc = "Add surrounding (operator)" })
 end
