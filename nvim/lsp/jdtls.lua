@@ -1,3 +1,11 @@
+local java11 = "/opt/homebrew/opt/openjdk@11"
+local java21 = "/opt/homebrew/opt/openjdk@24"
+
+local runtimes = {
+	{ name = "JavaSE-11", path = java11, default = true },
+	{ name = "JavaSE-21", path = java21 },
+}
+
 local handlers = require("vim.lsp.handlers")
 
 local env = {
@@ -83,6 +91,13 @@ return {
 		"-data",
 		get_jdtls_workspace_dir(),
 		get_jdtls_jvm_args(),
+	},
+	cmd_env = {
+		JAVA_HOME = java21,
+		PATH = java21 .. "/bin:" .. os.getenv("PATH"),
+	},
+	settings = {
+		java = { configuration = { runtimes = runtimes } },
 	},
 	filetypes = { "java" },
 	root_markers = {
