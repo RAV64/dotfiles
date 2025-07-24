@@ -1,7 +1,7 @@
 local treesitter = require("nvim-treesitter")
 local set = vim.keymap.set
 
-treesitter.setup({ ensure_install = { "unstable" }, ignore_install = { "unsupported" } })
+treesitter.setup({ ensure_install = { "community" }, ignore_install = { "unsupported" } })
 
 local group = vim.api.nvim_create_augroup("custom-treesitter", { clear = true })
 local pattern = UTIL.get_top_level_keys(require("nvim-treesitter.parsers"))

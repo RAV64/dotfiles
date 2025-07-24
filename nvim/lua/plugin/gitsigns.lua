@@ -1,21 +1,5 @@
 local gitsigns = require("gitsigns")
 
-vim.keymap.set("n", "<leader>gb", function()
-	gitsigns.blame()
-end, { desc = "Line blame" })
-
-vim.keymap.set("n", "<leader>gn", function()
-	gitsigns.next_hunk()
-end, { desc = "Next hunk" })
-
-vim.keymap.set("n", "<leader>gp", function()
-	gitsigns.prev_hunk()
-end, { desc = "Previous hunk" })
-
-vim.keymap.set("n", "<leader>gh", function()
-	gitsigns.preview_hunk_inline()
-end, { desc = "Preview hunk inline" })
-
 gitsigns.setup({
 	signs = {
 		add = { text = "▎" },
@@ -28,3 +12,10 @@ gitsigns.setup({
 	numhl = true,
 	linehl = false,
 })
+
+local set = vim.keymap.set
+
+set("n", "<leader>gb", gitsigns.blame, { desc = "Line blame" })
+set("n", "<leader>gn", gitsigns.next_hunk, { desc = "Next hunk" })
+set("n", "<leader>gp", gitsigns.prev_hunk, { desc = "Previous hunk" })
+set("n", "<leader>gh", gitsigns.preview_hunk_inline, { desc = "Preview hunk inline" })

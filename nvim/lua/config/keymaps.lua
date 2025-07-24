@@ -58,13 +58,13 @@ set("n", "<S-Tab>", safe_cycle_buffer(-1), { desc = "Prev buffer" })
 
 set(i, "<S-Enter>", "<esc>o")
 
-vim.keymap.set("n", "*", "*N", { noremap = true, silent = true })
+set("n", "*", "*N", { noremap = true, silent = true })
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 set(nxo, "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
 set(nxo, "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 
-vim.keymap.set("i", "<esc>", function()
+set("i", "<esc>", function()
 	if vim.snippet.active() then
 		vim.snippet.stop()
 	end

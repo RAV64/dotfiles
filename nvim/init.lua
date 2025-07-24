@@ -9,14 +9,15 @@ require("config.colors")
 require("config.keymaps")
 require("config.autocmds")
 
+require("plugin.misc")
+require("plugin.treesitter")
+
 require("plugin.cmp")
 require("plugin.conform")
 require("plugin.gitsigns")
 require("plugin.grug-far")
-require("plugin.misc")
 require("plugin.multicursor")
 require("plugin.picker")
-require("plugin.treesitter")
 
 require("mod.statusline")
 require("mod.autopair")
