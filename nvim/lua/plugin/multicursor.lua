@@ -60,30 +60,21 @@ mc.addKeymapLayer(function(layer)
 	end)
 end)
 
-vim.keymap.set(nx, "<c-n>", match(1))
-vim.keymap.set(nx, "<c-p>", match(-1))
-vim.keymap.set(nx, "<c-a>", matchAll)
+local set = vim.keymap.set
 
-vim.keymap.set(nx, "<up>", function()
+set(nx, "<c-n>", match(1))
+set(nx, "<c-p>", match(-1))
+set(nx, "<c-a>", matchAll)
+
+set(nx, "<up>", function()
 	mc.lineAddCursor(-1)
 end)
 
-vim.keymap.set(nx, "<down>", function()
+set(nx, "<down>", function()
 	mc.lineAddCursor(1)
 end)
 
-vim.keymap.set("x", "S", function()
-	mc.splitCursors()
-end)
-
-vim.keymap.set("x", "m", function()
-	mc.matchCursors()
-end)
-
-vim.keymap.set("x", "I", function()
-	mc.insertVisual()
-end)
-
-vim.keymap.set("x", "A", function()
-	mc.appendVisual()
-end)
+set("x", "S", mc.splitCursors)
+set("x", "m", mc.matchCursors)
+set("x", "I", mc.insertVisual)
+set("x", "A", mc.appendVisual)
