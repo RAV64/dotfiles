@@ -1,91 +1,89 @@
-local mc = function(f, args)
-	return function()
-		UTIL.func("multicursor-nvim", f, args)
-	end
-end
+local mc = require("multicursor-nvim")
 
 local opt = vim.opt
 local v = vim.v
 local nx = { "n", "x" }
 
-local M = {}
-
-M.match = function(direction)
+local match = function(direction)
 	return function()
 		if v.hlsearch == 0 then
 			opt.ignorecase = false
-			M.mc.matchAddCursor(direction)
+			mc.matchAddCursor(direction)
 		else
-			M.mc.searchAddCursor(direction)
+			mc.searchAddCursor(direction)
 		end
 	end
 end
 
-M.matchAll = function()
+local matchAll = function()
 	if v.hlsearch == 0 then
-		M.mc.matchAllAddCursors()
+		mc.matchAllAddCursors()
 	else
-		M.mc.searchAllAddCursors()
+		mc.searchAllAddCursors()
 	end
 end
 
-M.skip = function(direction)
+local skip = function(direction)
 	return function()
 		if v.hlsearch == 0 then
-			M.mc.matchSkipCursor(direction)
+			mc.matchSkipCursor(direction)
 		else
-			M.mc.searchSkipCursor(direction)
+			mc.searchSkipCursor(direction)
 		end
 	end
 end
 
-M.plugin = {
-	{
-		"rav64/multicursor.nvim",
-		-- upstream commit = "f3a4899e5cdc93e6f8cd06bbc3b3631a2e85a315",
-		keys = {
-			{ "<c-n>", M.match(1), mode = nx },
-			{ "<c-p>", M.match(-1), mode = nx },
-			{ "<up>", mc("lineAddCursor", -1), mode = nx },
-			{ "<down>", mc("lineAddCursor", 1), mode = nx },
+mc.setup({ { signs = {} } })
 
-			{ "S", mc("splitCursors"), mode = { "x" } },
-			{ "m", mc("matchCursors"), mode = { "x" } },
-			{ "I", mc("insertVisual"), mode = { "x" } },
-			{ "A", mc("appendVisual"), mode = { "x" } },
+local default_ignorecase = opt.ignorecase
 
-			{ "<c-a>", M.matchAll, mode = nx },
-		},
-		opts = { { signs = {} } },
-		config = function(_, opts)
-			M.mc = require("multicursor-nvim")
-			M.mc.setup(opts)
-			local default_ignorecase = opt.ignorecase
+mc.addKeymapLayer(function(layer)
+	layer({ "n" }, "<esc>", function()
+		mc.clearCursors()
+		opt.ignorecase = default_ignorecase
+	end)
 
-			M.mc.addKeymapLayer(function(layer)
-				layer({ "n" }, "<esc>", function()
-					M.mc.clearCursors()
-					opt.ignorecase = default_ignorecase
-				end)
+	-- Select a different cursor as the main one.
+	layer(nx, "n", mc.nextCursor)
+	layer(nx, "N", mc.prevCursor)
 
-				-- Select a different cursor as the main one.
-				layer(nx, "n", M.mc.nextCursor)
-				layer(nx, "N", M.mc.prevCursor)
+	layer(nx, "<c-x>", mc.deleteCursor)
 
-				layer(nx, "<c-x>", M.mc.deleteCursor)
+	layer(nx, "<c-s>", skip(1))
+	layer(nx, "<c-a>", mc.alignCursors)
 
-				layer(nx, "<c-s>", M.skip(1))
-				layer(nx, "<c-a>", M.mc.alignCursors)
+	layer("x", "t", function()
+		mc.transposeCursors(1)
+	end)
+	layer("x", "T", function()
+		mc.transposeCursors(-1)
+	end)
+end)
 
-				layer("x", "t", function()
-					M.mc.transposeCursors(1)
-				end)
-				layer("x", "T", function()
-					M.mc.transposeCursors(-1)
-				end)
-			end)
-		end,
-	},
-}
+vim.keymap.set(nx, "<c-n>", match(1))
+vim.keymap.set(nx, "<c-p>", match(-1))
+vim.keymap.set(nx, "<c-a>", matchAll)
 
-return M.plugin
+vim.keymap.set(nx, "<up>", function()
+	mc.lineAddCursor(-1)
+end)
+
+vim.keymap.set(nx, "<down>", function()
+	mc.lineAddCursor(1)
+end)
+
+vim.keymap.set("x", "S", function()
+	mc.splitCursors()
+end)
+
+vim.keymap.set("x", "m", function()
+	mc.matchCursors()
+end)
+
+vim.keymap.set("x", "I", function()
+	mc.insertVisual()
+end)
+
+vim.keymap.set("x", "A", function()
+	mc.appendVisual()
+end)

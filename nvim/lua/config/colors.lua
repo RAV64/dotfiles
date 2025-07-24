@@ -100,7 +100,6 @@ local colors = {
 	["LineNr"] = { fg = p.surface2 },
 	["CursorLineNr"] = { fg = p.soft_pink },
 
-	["LazyNormal"] = { bg = p.background1 },
 	["CmpGhostText"] = { italic = true },
 	["WinSeparator"] = { fg = p.background1, bg = p.background1 },
 
