@@ -3,7 +3,7 @@ return {
 	cmd = { "rust-analyzer" },
 	filetypes = { "rust" },
 	single_file_support = true,
-	root_dir = vim.fs.root(0, { ".git", "Cargo.toml" }),
+	root_dir = vim.fs.root(0, { "Cargo.toml", ".git" }),
 	capabilities = UTIL.capabilities({
 		{
 			experimental = {

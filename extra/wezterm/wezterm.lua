@@ -7,7 +7,7 @@ config.animation_fps = 30
 config.max_fps = 120
 
 require("colorscheme").setup(config)
-require("keys").setup(config)
+require("keys").setup()
 require("tabs").setup(config)
 require("fonts").setup(config)
 
@@ -20,6 +20,6 @@ config.window_close_confirmation = "NeverPrompt"
 config.window_decorations = "NONE"
 config.enable_scroll_bar = false
 
-config.default_prog = {'/usr/bin/env', 'fish'}
+config.default_prog = { "/usr/bin/env", "fish" }
 
 return config

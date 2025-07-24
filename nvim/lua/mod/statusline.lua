@@ -1,6 +1,3 @@
--------------------------------------------------------
--- Local References
--------------------------------------------------------
 local vapi = vim.api
 local vapi_mode = vapi.nvim_get_mode
 local vbo = vim.bo
@@ -10,7 +7,6 @@ local gbit = bit
 local lshift = gbit.lshift
 local bor = gbit.bor
 
--- Commonly used string constants
 local space = " "
 local empty = ""
 local sLine = "%#StatusLine#"
@@ -27,12 +23,10 @@ local gitDelimiter = sLine .. "%=" .. "%{SearchStatus()}"
 local gitSymbol = gitDelimiter .. "  "
 local filePH = " %f %3l:%-2c %r%m"
 
--- Diagnostic + Git bitpack caches
 local last_diag_pack = 0
 local last_git_pack = 0
 local last_git_head = nil
 
--- Mode lookup table
 -- stylua: ignore
 local mode_to_str = {
 	["n"] = "NOR", ["no"] = "OP-", ["nov"] = "OP-", ["noV"] = "OP-", ["no\22"] = "OP-",
@@ -44,13 +38,13 @@ local mode_to_str = {
 	["ce"] = "EX ", ["r"] = "PRO", ["rm"] = "MOR", ["r?"] = "CON", ["!"] = "SHE",
 	["t"] = "TER",
 }
+
 local _unk = "UNK"
 local unk = function(v)
 	vim.notify("Unknown ft: " .. v)
 	return _unk
 end
 
--- Filetype Icons (cached)
 local icons = require("mini.icons")
 local custom_icons = { filetype = {} }
 local _icon_cache = {}
@@ -64,7 +58,6 @@ local function cached_icon(ft)
 	return i
 end
 
--- Caches
 local git_str = gitDelimiter
 local diag_str = empty
 
@@ -93,9 +86,12 @@ function! SearchStatus() abort
   if !v:hlsearch
     return ''
   endif
-
   let sc = searchcount({'recompute': 1, 'maxcount': 0})
-  return printf('[%d/%d]', sc.current, sc.total)
+  return printf(
+        \ '[%d/%d]',
+        \ get(sc, 'current', 0),
+        \ get(sc, 'total',   0)
+        \ )
 endfunction
 ]])
 
@@ -120,13 +116,7 @@ local update_suffix = function()
 	update_status()
 end
 
--------------------------------------------------------
--- Force immediate redraw on relevant events
--------------------------------------------------------
 local update_diag = function()
-	------------------------------------------------------------------
-	-- Only check if *not* Insert mode (105 == 'i')
-	------------------------------------------------------------------
 	if new_mode:byte(1) ~= 105 then
 		local dlist = diag_get(0)
 		if #dlist ~= 0 then
@@ -195,7 +185,6 @@ end
 
 local update_mode = function()
 	new_mode = vapi_mode().mode
-	-- Mode changed?
 	if new_mode ~= last_mode then
 		last_mode = new_mode
 		local short_mode = mode_to_str[new_mode] or unk(new_mode)
