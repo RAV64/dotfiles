@@ -3,60 +3,30 @@ vim.g.maplocalleader = " "
 
 local opt = vim.opt
 
-opt.foldenable = false
-opt.foldmethod = "manual"
-opt.foldlevelstart = 99
-
+-- GENERAL
 opt.autowrite = true -- enable auto write
-opt.cmdheight = 0
+opt.backup = false
+opt.completeopt = "menuone,noselect,fuzzy,nosort"
 opt.confirm = true -- confirm to save changes before exiting modified buffer
-opt.cursorline = true -- Enable highlighting of the current line
-opt.formatoptions = "jcroqlnt" -- tcqj
 opt.grepformat = "%f:%l:%c:%m"
-opt.grepprg = "rg --vimgrep"
-opt.ignorecase = true -- Ignore case
+opt.grepprg = "rg --vimgrep -uu"
 opt.inccommand = "nosplit" -- preview incremental substitute
-opt.laststatus = 3
 opt.mouse = "a" -- enable mouse mode
-opt.number = true -- Print line number
-opt.pumheight = 10 -- Maximum number of entries in a popup
-opt.relativenumber = true -- Relative line numbers
-opt.numberwidth = 1 -- tight linenr
 opt.scrolloff = 16 -- Lines of context
-opt.sessionoptions = { "buffers", "curdir", "winsize" }
-opt.shortmess:append({
-	W = true, -- Don't print "written" when editing
-	-- I = true, -- No splash screen
-	c = true, -- Don't show ins-completion-menu messages (match 1 of 2)
-	C = true, -- Don't show messages while scannign ins-completion items (scanning tags)
-	s = true, -- Don't show "Search hit BOTTOM" message
-})
--- opt.messagesopt = "wait:500,history:500"
-opt.showmode = false -- dont show mode since we have a statusline
+opt.shada = "'100,<50,s10,:1000,/100,@100,h"
 opt.sidescrolloff = 0 -- Columns of context
-opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
-opt.smartcase = true -- Don't ignore case with capitals
-opt.smartindent = true -- Insert indents automatically
-opt.splitbelow = true -- Put new windows below current
-opt.splitkeep = "screen"
-opt.splitright = true -- Put new windows right of current
-opt.termguicolors = true -- True color support
-opt.undofile = true
+opt.smoothscroll = true
 opt.swapfile = false
+opt.undofile = true
 opt.undolevels = 10000
 opt.updatetime = 200 -- save swap file and trigger CursorHold
-opt.wildmode = "longest:full,full" -- Command-line completion mode
-opt.winminwidth = 5 -- minimum window width
-opt.wrap = false -- Disable line wrap
-opt.ruler = false
-opt.smoothscroll = true
+opt.writebackup = false
 
-opt.shiftround = true
-opt.softtabstop = -1
-opt.virtualedit = "block"
-opt.expandtab = true
-opt.tabstop = 4
-opt.shiftwidth = 4
+-- UI
+opt.breakindent = true -- Indent wrapped lines to match line start
+opt.cmdheight = 0
+opt.cursorline = true -- Enable highlighting of the current line
+opt.linebreak = true -- Wrap long lines at 'breakat' (if 'wrap' is set)
 opt.list = true
 opt.listchars = {
 	leadmultispace = "│   ",
@@ -66,22 +36,42 @@ opt.listchars = {
 	extends = "→",
 	precedes = "←",
 }
+opt.laststatus = 3
+opt.number = true -- Print line number
+opt.numberwidth = 1 -- tight linenr
+opt.pumheight = 10 -- Maximum number of entries in a popup
+opt.relativenumber = true -- Relative line numbers
+opt.ruler = false
+opt.shortmess = "CFOSWaco" -- Disable certain messages from |ins-completion-menu|
+opt.showmode = false -- dont show mode since we have a statusline
+opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
+opt.splitbelow = true -- Put new windows below current
+opt.splitkeep = "screen"
+opt.splitright = true -- Put new windows right of current
+opt.winborder = "rounded"
+opt.winminwidth = 5 -- minimum window width
+opt.wrap = false -- Disable line wrap
 
-opt.fillchars = {
-	horiz = "━",
-	horizup = "┻",
-	horizdown = "┳",
-	vert = "┃",
-	vertleft = "┫",
-	vertright = "┣",
-	verthoriz = "╋",
-	eob = " ",
-}
+-- EDITING
+opt.expandtab = true -- Spaces instead of tabs
+opt.formatoptions = "rqnl1j" -- tcqj
+opt.ignorecase = true -- Ignore case
+opt.incsearch = true -- Show search results while typing
+opt.infercase = true -- Infer letter cases for a richer built-in keyword completion
+opt.shiftround = true -- Round indent to multiple of 'shiftwidth'.  Applies to > and <
+opt.shiftwidth = 4 -- Spaces for autoindent
+opt.smartcase = true -- Don't ignore case with capitals
+opt.smartindent = true -- Insert indents automatically
+opt.softtabstop = -1
+opt.tabstop = 4 -- Spaces per tab
+opt.virtualedit = "block"
 
-vim.o.winborder = "none"
+-- FOLD
+opt.foldenable = false
+opt.foldmethod = "manual"
+opt.foldlevelstart = 99
 
 vim.g.markdown_recommended_style = 0
-
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
