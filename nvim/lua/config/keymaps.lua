@@ -11,6 +11,7 @@ local del = vim.keymap.del
 del(n, "grn")
 del(n, "grr")
 del(nx, "gra")
+del(n, "grt")
 del(n, "gri")
 del(n, "gO")
 
