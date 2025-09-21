@@ -117,38 +117,39 @@ local update_suffix = function()
 end
 
 local update_diag = function()
-	if new_mode:byte(1) ~= 105 then
-		local dlist = diag_get(0)
-		if #dlist ~= 0 then
-			local d_e, d_w, d_h, d_i = 0, 0, 0, 0
-			for idx = 1, #dlist do
-				local sev = dlist[idx].severity
-				if sev == 1 then
-					d_e = d_e + 1
-				elseif sev == 2 then
-					d_w = d_w + 1
-				elseif sev == 3 then
-					d_i = d_i + 1
-				else
-					d_h = d_h + 1
-				end
+	if new_mode:byte(1) == 105 then
+		return
+	end
+
+	local dlist = diag_get(0)
+	if #dlist ~= 0 then
+		local d_e, d_w, d_h, d_i = 0, 0, 0, 0
+		for idx = 1, #dlist do
+			local sev = dlist[idx].severity
+			if sev == 1 then
+				d_e = d_e + 1
+			elseif sev == 2 then
+				d_w = d_w + 1
+			elseif sev == 3 then
+				d_i = d_i + 1
+			else
+				d_h = d_h + 1
 			end
-			local dp = bor(lshift(d_e, 24), lshift(d_w, 16), lshift(d_h, 8), d_i)
-			if dp ~= last_diag_pack then
-				last_diag_pack = dp
-				diag_str = ((d_e > 0) and (dErr .. d_e) or empty)
-					.. ((d_w > 0) and (dWarn .. d_w) or empty)
-					.. ((d_h > 0) and (dHint .. d_h) or empty)
-					.. ((d_i > 0) and (dInfo .. d_i) or empty)
-				update_suffix()
-			end
-		else
-			-- If there are no diagnostics, but we had some before, reset
-			if last_diag_pack ~= 0 then
-				last_diag_pack = 0
-				diag_str = empty
-				update_suffix()
-			end
+		end
+		local dp = bor(lshift(d_e, 24), lshift(d_w, 16), lshift(d_h, 8), d_i)
+		if dp ~= last_diag_pack then
+			last_diag_pack = dp
+			diag_str = ((d_e > 0) and (dErr .. d_e) or empty)
+				.. ((d_w > 0) and (dWarn .. d_w) or empty)
+				.. ((d_h > 0) and (dHint .. d_h) or empty)
+				.. ((d_i > 0) and (dInfo .. d_i) or empty)
+			update_suffix()
+		end
+	else
+		if last_diag_pack ~= 0 then
+			last_diag_pack = 0
+			diag_str = empty
+			update_suffix()
 		end
 	end
 end
