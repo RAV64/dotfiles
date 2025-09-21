@@ -37,7 +37,8 @@ fzf.setup({
 		height = 0.95,
 		width = 0.95,
 		preview = {
-			layout = "horizontal",
+			layout = "vertical",
+			vertical = "down:75%",
 			flip_columns = 120,
 			border = "noborder",
 		},
@@ -78,7 +79,7 @@ set("n", "<leader>e", function()
 	fzf.diagnostics_workspace({ severity_only = "Error" })
 end, { desc = "Open errors picker (LSP)" })
 
-set("n", "<leader>l", fzf.live_grep, { desc = "Global search in workspace folder" })
+set("n", "<leader>l", fzf.live_grep_native, { desc = "Global search in workspace folder" })
 set("n", "<leader>m", fzf.marks, { desc = "File Marks" })
 set("n", "<leader>o", fzf.oldfiles, { desc = "Previous files" })
 set("n", "<leader>.", fzf.resume, { desc = "Open last picker (resume)" })

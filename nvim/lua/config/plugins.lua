@@ -1,58 +1,58 @@
 vim.pack.add({
 	{
 		src = "https://github.com/xzbdmw/colorful-menu.nvim",
-		version = "f80feb8a6706f965321aff24d0ed3849f02a7f77",
+		version = "bc3e82609f2fcf7dad7ca87c20e65e51d5d9d87c",
 	},
 	{
 		src = "https://github.com/saghen/blink.cmp",
-		version = "cb5e346d9e0efa7a3eee7fd4da0b690c48d2a98e",
+		version = "327fff91fe6af358e990be7be1ec8b78037d2138",
 	},
 	{
 		src = "https://github.com/stevearc/conform.nvim",
-		version = "eebc724d12c5579d733d1f801386e0ceb909d001",
+		version = "b4aab989db276993ea5dcb78872be494ce546521",
 	},
 	{
 		src = "https://github.com/lewis6991/gitsigns.nvim",
-		version = "fcfa7a989cd6fed10abf02d9880dc76d7a38167d",
+		version = "f780609807eca1f783a36a8a31c30a48fbe150c5",
 	},
 
 	{
 		src = "https://github.com/MagicDuck/grug-far.nvim",
-		version = "3bc6997724c6b9c10bc4bac86821c9061694ded3",
+		version = "50d9ee2b5a19634670441948e7e4afaa042f1059",
 	},
 
 	{
-		src = "https://github.com/echasnovski/mini.icons",
-		version = "397ed3807e96b59709ef3292f0a3e253d5c1dc0a",
+		src = "https://github.com/nvim-mini/mini.icons",
+		version = "f9a177c11daa7829389b7b6eaaec8b8a5c47052d",
 	},
 
 	{
-		src = "https://github.com/echasnovski/mini.files",
-		version = "432142ada983ec5863ba480f0e4891b7d64ce3f6",
+		src = "https://github.com/nvim-mini/mini.files",
+		version = "2db6db37c37ee5955fe72907e33fa31cd2dd0fd4",
 	},
 
 	{
 		src = "https://github.com/folke/flash.nvim",
-		version = "3c942666f115e2811e959eabbdd361a025db8b63",
+		version = "b68bda044d68e4026c4e1ec6df3c5afd7eb8e341",
 	},
 
 	{
-		src = "https://github.com/rav64/multicursor.nvim",
-		-- version = "f3a4899e5cdc93e6f8cd06bbc3b3631a2e85a315",
+		src = "https://github.com/jake-stewart/multicursor.nvim",
+		version = "ffe2e402e85150516d096842f7be99fd1321a72b",
 	},
 
 	{
 		src = "https://github.com/ibhagwan/fzf-lua",
-		version = "970fc983b887cead7d630e062fed01337e41b25d",
+		version = "7b730b69985e33c14bff3bdafd1a2c82fdfa1376",
 	},
 
 	{
 		src = "https://github.com/nvim-treesitter/nvim-treesitter",
-		version = "ae32ed8bda5e78d00aaa99300cf2f1c45ce1884c",
+		version = "bd99d6bd2bdd346c5da090db5e3956de0e0a2f3f",
 	},
 
 	{
 		src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
-		version = "fa32a45fdbab9c9c3bda9ecec9b12dddb221b927",
+		version = "1b2d85d3de6114c4bcea89ffb2cd1ce9e3a19931",
 	},
 })
