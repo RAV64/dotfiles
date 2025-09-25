@@ -36,11 +36,11 @@ set(n, "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 set(n, "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 set(n, "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
-local function safe_cycle_buffer(delta)
+local function safe_cycle_buffer(direction)
 	return function()
 		local buffers = vim.fn.getbufinfo({ buflisted = 1 })
 		if #buffers > 1 then
-			if delta > 0 then
+			if direction > 0 then
 				vim.cmd("bnext")
 			else
 				vim.cmd("bprev")
