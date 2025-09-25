@@ -1,4 +1,5 @@
 local fzf = require("fzf-lua")
+fzf.register_ui_select()
 
 local symbol_highlights = {
 	Class = "Class",
@@ -100,6 +101,6 @@ set("n", "gO", fzf.lsp_outgoing_calls, { desc = "Get outgoing calls" })
 set("n", "<leader><leader>h", fzf.helptags, { desc = "Find help" })
 
 set("n", "<leader>gs", fzf.git_status, { desc = "Git status" })
-set("n", "<leader>ggb", fzf.git_branches, { desc = "Git branches" })
-set("n", "<leader>ggc", fzf.git_commits, { desc = "Git commits" })
-set("n", "<leader>ggC", fzf.git_bcommits, { desc = "Git buffer commits" })
+set("n", "<leader>gB", fzf.git_branches, { desc = "Git branches" })
+set("n", "<leader>gc", fzf.git_commits, { desc = "Git commits" })
+set("n", "<leader>gC", fzf.git_bcommits, { desc = "Git buffer commits" })
