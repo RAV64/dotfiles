@@ -38,7 +38,7 @@ mc.setup({ { signs = {} } })
 local default_ignorecase = opt.ignorecase
 
 mc.addKeymapLayer(function(layer)
-	layer({ "n" }, "<esc>", function()
+	layer("n", "<esc>", function()
 		mc.clearCursors()
 		opt.ignorecase = default_ignorecase
 	end)

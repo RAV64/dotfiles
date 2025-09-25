@@ -50,6 +50,7 @@ local function safe_cycle_buffer(delta)
 end
 
 set("n", "<Tab>", safe_cycle_buffer(1), { desc = "Next buffer" })
+set("n", "<c-i>", "<c-i>", { noremap = true })
 set("n", "<S-Tab>", safe_cycle_buffer(-1), { desc = "Prev buffer" })
 
 -- undo breakpoints in insert mode
