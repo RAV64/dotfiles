@@ -4,15 +4,19 @@ local n = "n"
 local t = "t"
 
 local function is_term(buf)
-	return api.nvim_buf_is_valid(buf) and api.nvim_get_option_value("buftype", { buf = buf }) == "terminal"
+	return api.nvim_buf_is_valid(buf)
+		and api.nvim_get_option_value("buftype", { buf = buf }) == "terminal"
+		and vim.b[buf].quick_term == true
 end
 
 local function setup_term_buf(buf)
+	vim.b[buf].quick_term = true
 	api.nvim_set_option_value("buflisted", false, { buf = buf })
 	set(n, "<esc>", "<cmd>close<cr>", {
 		buffer = buf,
 		desc = "Exit terminal",
 	})
+	set(t, "<esc>", "<c-\\><c-n><cmd>close<cr>", { buffer = buf, desc = "Exit terminal" })
 end
 
 local function open_or_split_terminal()
@@ -43,5 +47,3 @@ end
 set(n, "<leader><leader>t", open_or_split_terminal, {
 	desc = "Open or focus terminal",
 })
-
-set(t, "<esc>", "<c-\\><c-n><cmd>close<cr>", { desc = "Exit terminal" })
