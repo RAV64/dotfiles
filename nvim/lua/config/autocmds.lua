@@ -68,7 +68,6 @@ vim.api.nvim_create_autocmd("FileType", {
 		"startuptime",
 		"checkhealth",
 		"grug-far",
-		"query",
 		"log",
 		"minifiles",
 		"gitsigns-blame",

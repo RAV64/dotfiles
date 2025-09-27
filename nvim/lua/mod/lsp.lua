@@ -1,25 +1,26 @@
 local lsp = vim.lsp
 local diag = vim.diagnostic
 
-local keybinds = function(buf)
-	local set = function(mode, keys, func, desc)
-		vim.keymap.set(mode, keys, func, { buffer = buf, desc = desc })
-	end
+local set = function(mode, keys, func, args)
+	vim.keymap.set(mode, keys, func, args)
+end
 
-	set("n", "<leader>r", lsp.buf.rename, "Rename")
-	set("n", "Z", function()
-		diag.jump({ count = -1, float = true })
-	end, "Goto previous diagnostics")
-	set("n", "z", function()
-		diag.jump({ count = 1, float = true })
-	end, "Goto next diagnostics")
-	set("n", "ge", diag.open_float, "Open diagnostics")
-	set("i", "<C-s>", lsp.buf.signature_help, "Show signature")
-	set("n", "<leader>gwa", lsp.buf.add_workspace_folder, "add_workspace_folder")
-	set("n", "<leader>gwr", lsp.buf.remove_workspace_folder, "remove_workspace_folder")
+set("n", "Z", function()
+	diag.jump({ count = -1, float = true })
+end, { desc = "Goto previous diagnostics" })
+set("n", "z", function()
+	diag.jump({ count = 1, float = true })
+end, { desc = "Goto next diagnostics" })
+set("n", "ge", diag.open_float, { desc = "Open diagnostics" })
+
+local keybinds = function(buf)
+	set("n", "<leader>r", lsp.buf.rename, { desc = "Rename", buffer = buf })
+	set("i", "<C-s>", lsp.buf.signature_help, { desc = "Show signature", buffer = buf })
+	set("n", "<leader>gwa", lsp.buf.add_workspace_folder, { desc = "add_workspace_folder", buffer = buf })
+	set("n", "<leader>gwr", lsp.buf.remove_workspace_folder, { desc = "remove_workspace_folder", buffer = buf })
 	set("n", "<leader>gwl", function()
 		vim.print(lsp.buf.list_workspace_folders())
-	end, "list_workspace_folders")
+	end, { desc = "list_workspace_folders", buffer = buf })
 end
 
 local document_color = function(client, buf)
