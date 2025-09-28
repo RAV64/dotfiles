@@ -12,6 +12,7 @@ end
 local function setup_term_buf(buf)
 	vim.b[buf].quick_term = true
 	api.nvim_set_option_value("buflisted", false, { buf = buf })
+	api.nvim_set_option_value("winfixbuf", true, { win = 0 })
 	set(n, "<esc>", "<cmd>close<cr>", {
 		buffer = buf,
 		desc = "Exit terminal",
