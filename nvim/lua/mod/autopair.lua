@@ -7,8 +7,8 @@ for ob, cb in pairs(bmap) do
 	local pair = open .. close .. "<C-g>U<Left>"
 	set("i", open, function()
 		local col, txt = cursor(0)[2] + 1, line()
-		local char = txt:byte(col)
-		if (char and char ~= 32) or (col > 1 and txt:byte(col - 1) == 92) then
+		local prev_char = txt:byte(col - 1)
+		if col > 1 and prev_char == 92 then
 			return open
 		end
 		return pair
