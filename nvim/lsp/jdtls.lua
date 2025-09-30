@@ -10,23 +10,18 @@ local runtimes = {
 	{ name = "JavaSE-21", path = java21 },
 }
 
-local env = {
-	HOME = vim.uv.os_homedir(),
-	XDG_CACHE_HOME = os.getenv("XDG_CACHE_HOME"),
-	JDTLS_JVM_ARGS = os.getenv("JDTLS_JVM_ARGS"),
-}
-
-local function get_cache_dir()
-	return env.XDG_CACHE_HOME and env.XDG_CACHE_HOME or env.HOME .. "/.cache"
+local function get_jdtls_cache_dir()
+	return vim.fn.stdpath("cache") .. "/jdtls"
 end
 
-local function get_jdtls_cache_dir()
-	return get_cache_dir() .. "/jdtls"
+local function get_jdtls_workspace_dir()
+	return get_jdtls_cache_dir() .. "/workspace"
 end
 
 local function get_jdtls_jvm_args()
+	local env = os.getenv("JDTLS_JVM_ARGS")
 	local args = {}
-	for a in string.gmatch((env.JDTLS_JVM_ARGS or ""), "%S+") do
+	for a in string.gmatch((env or ""), "%S+") do
 		local arg = string.format("--jvm-arg=%s", a)
 		table.insert(args, arg)
 	end
@@ -34,45 +29,35 @@ local function get_jdtls_jvm_args()
 end
 
 local root_markers = {
-	-- Multi-module projects
 	".git",
 	"build.gradle",
-	"build.gradle.kts",
-	-- Single-module projects
 	"build.xml", -- Ant
 	"pom.xml", -- Maven
 	"settings.gradle", -- Gradle
-	"settings.gradle.kts",
 }
 
-local function find_root()
-	local path = vim.fs.find(root_markers, { upward = true })[1]
-	return path and vim.fs.dirname(path) or vim.uv.cwd()
-end
-
--- Per-project workspace: <cache>/jdtls/workspace/<repo-name>-<short-hash>
-local function project_workspace_dir(root_dir)
-	local base = vim.fn.fnamemodify(root_dir, ":t")
-	local abs = vim.fn.fnamemodify(root_dir, ":p")
-	local hash = vim.fn.sha256(abs):sub(1, 8)
-	return table.concat({ get_jdtls_cache_dir() .. "/workspace", base .. "-" .. hash }, "/")
-end
-
-local function ensure_dir(p)
-	vim.fn.mkdir(p, "p")
-	return p
-end
-
-local workspace_dir = ensure_dir(project_workspace_dir(find_root()))
-
 return {
-  -- stylua: ignore
-	cmd = {
-		"jdtls",
-		"-configuration", get_jdtls_cache_dir() .. "/config",
-		"-data", workspace_dir,
-		get_jdtls_jvm_args(),
-	},
+	cmd = function(dispatchers, config)
+		local data_dir = get_jdtls_workspace_dir()
+
+		local root_dir = vim.fs.root(0, root_markers)
+		if root_dir then
+			data_dir = data_dir .. "/" .. vim.fn.fnamemodify(root_dir, ":p:h:t")
+		end
+
+		local config_cmd = {
+			"jdtls",
+			"-data",
+			data_dir,
+			get_jdtls_jvm_args(),
+		}
+
+		return vim.lsp.rpc.start(config_cmd, dispatchers, {
+			cwd = config.cmd_cwd,
+			env = config.cmd_env,
+			detached = config.detached,
+		})
+	end,
 	cmd_env = {
 		JAVA_HOME = java21,
 		PATH = java21 .. "/bin:" .. os.getenv("PATH"),
@@ -81,7 +66,10 @@ return {
 		java = {
 			-- eclipse = { downloadSources = true },
 			-- maven = { downloadSources = true },
-			configuration = { runtimes = runtimes },
+			configuration = {
+				runtimes = runtimes,
+				updateBuildConfiguration = "automatic",
+			},
 			compile = {
 				nullAnalysis = {
 					mode = "automatic",
@@ -95,13 +83,15 @@ return {
 					},
 				},
 			},
+			sources = {
+				organizeImports = {
+					starThreshold = 9999,
+					staticStarThreshold = 9999,
+				},
+			},
 		},
 	},
 	filetypes = { "java" },
 	root_markers = root_markers,
-	init_options = {
-		workspace = workspace_dir,
-		jvm_args = {},
-		os_config = nil,
-	},
+	init_options = {},
 }
