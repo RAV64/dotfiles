@@ -1,42 +1,66 @@
 local api, ts, diag = vim.api, vim.treesitter, vim.diagnostic
-local root_group = api.nvim_create_augroup("editor.treesitter.core", { clear = true })
-local group = api.nvim_create_augroup("editor.treesitter.buf", { clear = true })
-local error_q = ts.query.parse("query", "[(ERROR)(MISSING)] @a")
-local ns = api.nvim_create_namespace("treesitter.diagnostics")
-local SEV = diag.severity.ERROR
 
-local function same_range(a_sl, a_sc, a_el, a_ec, b_sl, b_sc, b_el, b_ec)
-	return a_sl == b_sl and a_sc == b_sc and a_el == b_el and a_ec == b_ec
+local ns = api.nvim_create_namespace("treesitter-diagnostics")
+local root_group = api.nvim_create_augroup("treesitter-diagnostics", { clear = true })
+local group = api.nvim_create_augroup("treesitter-diagnostics-buf", { clear = true })
+local max_errors = 10
+
+local error_query = (function()
+	local ok, q = pcall(ts.query.parse, "query", "[(ERROR) (MISSING)] @n")
+	return ok and q or nil
+end)()
+
+local function eligible(bufnr)
+	local bo = vim.bo[bufnr]
+	return bo.buftype == "" and bo.buflisted and bo.modifiable
 end
 
-local function clamp_multiline(ln, col, eln, ecol)
-	if eln > ln then
-		return ln, col, ln + 1, 0
-	end
-	return ln, col, eln, ecol
+local function lsp_attached(bufnr)
+	return #vim.lsp.get_clients({ bufnr = bufnr }) > 0
 end
 
-local function should_skip(parent_type, nls, ncs, nle, nce, pls, pcs, ple, pce)
-	if not parent_type or parent_type ~= "ERROR" then
+local function range_key(n)
+	local srow, scol, erow, ecol = n:range()
+	return table.concat({ srow, scol, erow, ecol }, ":")
+end
+
+local function same_range(a, b)
+	if not (a and b) then
 		return false
 	end
-	return same_range(nls, ncs, nle, nce, pls, pcs, ple, pce)
+	local asr, asc, aer, aec = a:range()
+	local bsr, bsc, ber, bec = b:range()
+	return asr == bsr and asc == bsc and aer == ber and aec == bec
 end
 
-local function build_message(node, parent)
-	local msg = node:missing() and string.format("missing `%s`", node:type()) or "error"
+local function build_message(buf, node)
+	local missing = node:missing()
+	local msg
 
-	local prev = node:prev_sibling()
-	local prev_type = prev and prev:type()
-	local parent_type = parent and parent:type()
-
-	if prev and prev_type ~= "ERROR" then
-		local after = prev:named() and prev_type or string.format("`%s`", prev_type)
-		msg = msg .. " after " .. after
+	if missing then
+		msg = ("missing `%s`"):format(node:type())
+	else
+		msg = "syntax error"
+		local nsl, nsc, nel, nec = node:range()
+		local ok, text = pcall(api.nvim_buf_get_text, buf, nsl, nsc, nel, nec, {})
+		local tok = (ok and text and text[1]) and text[1] or nil
+		if tok and #tok > 0 then
+			if #tok > 20 then
+				tok = tok:sub(1, 17) .. "..."
+			end
+			msg = msg .. (": unexpected '%s'"):format(tok)
+		end
 	end
 
-	if parent and parent_type ~= "ERROR" and (not prev or prev_type ~= parent_type) then
-		msg = msg .. " in " .. parent_type
+	local prev = node:prev_sibling()
+	if prev and prev:type() ~= "ERROR" then
+		local label = prev:named() and prev:type() or ("`" .. prev:type() .. "`")
+		msg = msg .. " after " .. label
+	end
+
+	local parent = node:parent()
+	if parent and parent:type() ~= "ERROR" then
+		msg = msg .. " in " .. parent:type()
 	end
 
 	return msg
@@ -44,59 +68,55 @@ end
 
 local function collect_tree_diags(tree, lang, buf)
 	local root = tree:root()
-	if not root or not root:has_error() then
+	if not root or not root:has_error() or not error_query then
 		return {}
 	end
-	local out = {}
-	for _, node in error_q:iter_captures(root, buf) do
+
+	local out, seen = {}, {}
+	local start_row = select(1, root:start())
+	local end_row = select(1, root:end_())
+
+	for _, node in error_query:iter_captures(root, buf, start_row, end_row) do
 		local parent = node:parent()
+		local skip_same_range_child = parent and parent:type() == "ERROR" and same_range(node, parent)
 
-		local nls, ncs, nle, nce = node:range()
-		local ptype, pls, pcs, ple, pce
-		if parent then
-			ptype = parent:type()
-			pls, pcs, ple, pce = parent:range()
-		end
+		if not skip_same_range_child then
+			local key = range_key(node)
+			if not seen[key] then
+				seen[key] = true
+				local srow, scol, erow, ecol = node:range()
+				out[#out + 1] = {
+					lnum = srow,
+					col = scol,
+					end_lnum = erow,
+					end_col = ecol,
+					severity = diag.severity.ERROR,
+					source = "treesitter-diagnostics",
+					code = lang .. ".ts",
+					message = build_message(buf, node),
+				}
 
-		if not should_skip(ptype, nls, ncs, nle, nce, pls, pcs, ple, pce) then
-			local ln, col, eln, ecol = clamp_multiline(nls, ncs, nle, nce)
-			out[#out + 1] = {
-				lnum = ln,
-				col = col,
-				end_lnum = eln,
-				end_col = ecol,
-				severity = SEV,
-				source = "treesitter-diagnostics",
-				code = (lang .. "-treesitter"),
-				message = build_message(node, parent),
-			}
+				if #out >= max_errors then
+					return out
+				end
+			end
 		end
 	end
+
 	return out
-end
-
-local function eligible(buf)
-	if vim.bo[buf].buftype ~= "" then
-		return false
-	end
-	if not vim.bo[buf].buflisted then
-		return false
-	end
-	if not vim.bo[buf].modifiable then
-		return false
-	end
-	return true
 end
 
 local function diagnose(buf)
 	if not diag.is_enabled({ bufnr = buf }) then
 		return
 	end
+
 	local parser = ts.get_parser(buf, nil, { error = false })
 	if not parser then
 		return
 	end
 	parser:parse()
+
 	local all = {}
 	parser:for_each_tree(function(tree, langtree)
 		local diags = collect_tree_diags(tree, langtree:lang(), buf)
@@ -104,11 +124,8 @@ local function diagnose(buf)
 			vim.list_extend(all, diags)
 		end
 	end)
-	diag.set(ns, buf, all)
-end
 
-local function lsp_attached(buf)
-	return #vim.lsp.get_clients({ bufnr = buf }) > 0
+	diag.set(ns, buf, all)
 end
 
 local function enable(buf)
@@ -133,12 +150,12 @@ end
 
 api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
 	group = root_group,
-	desc = "conditionally enable treesitter diagnostics (no LSP)",
+	desc = "enable treesitter diagnostics (no LSP)",
 	callback = function(ev)
-		if not lsp_attached(ev.buf) then
-			enable(ev.buf)
-		else
+		if lsp_attached(ev.buf) then
 			disable(ev.buf)
+		else
+			enable(ev.buf)
 		end
 	end,
 })
@@ -153,7 +170,7 @@ api.nvim_create_autocmd("LspAttach", {
 
 api.nvim_create_autocmd("LspDetach", {
 	group = root_group,
-	desc = "enable treesitter diagnostics when LSP detaches (and no others remain)",
+	desc = "enable treesitter diagnostics when last LSP detaches",
 	callback = function(ev)
 		if not lsp_attached(ev.buf) then
 			enable(ev.buf)
