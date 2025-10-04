@@ -47,7 +47,6 @@ fzf.setup({
 	},
 
 	fzf_opts = {
-		["--layout"] = "reverse",
 		["--prompt"] = "  ",
 	},
 
@@ -68,10 +67,6 @@ fzf.setup({
 local set = vim.keymap.set
 
 set("n", "<leader>f", fzf.files, { desc = "Open file picker" })
-set("n", "<leader>F", function()
-	fzf.files({ hidden = true, no_ignore = true })
-end, { desc = "Open file picker (ALL)" })
-
 set("n", "<leader>b", fzf.buffers, { desc = "Open buffer picker" })
 set("n", "<leader>j", fzf.jumps, { desc = "Open jumplist picker" })
 
@@ -86,8 +81,8 @@ set("n", "<leader>o", fzf.oldfiles, { desc = "Previous files" })
 set("n", "<leader>.", fzf.resume, { desc = "Open last picker (resume)" })
 set("n", "<leader>t", fzf.builtin, { desc = "Fzf-lua builtins" })
 
-set("n", "<leader>s", fzf.lsp_live_workspace_symbols, { desc = "Open workspace symbol picker (LSP)" })
-set("n", "<leader>S", fzf.lsp_document_symbols, { desc = "Open document symbol picker (LSP)" })
+set("n", "<leader>s", fzf.treesitter, { desc = "Open document symbol picker (treesitter)" })
+set("n", "<leader>S", fzf.lsp_live_workspace_symbols, { desc = "Open workspace symbol picker (LSP)" })
 set({ "n", "x" }, "<leader>a", fzf.lsp_code_actions, { desc = "Fzf-lua builtins" })
 set("n", "gd", fzf.lsp_definitions, { desc = "Goto Definition" })
 set("n", "gD", fzf.lsp_declarations, { desc = "Goto Declaration" })
