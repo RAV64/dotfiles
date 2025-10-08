@@ -400,3 +400,5 @@ attach_to_session true
 // Default: true (if the host terminal supports it)
 // 
 // support_kitty_keyboard_protocol false
+
+show_startup_tips false
