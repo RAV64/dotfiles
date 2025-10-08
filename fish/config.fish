@@ -2,6 +2,14 @@ if not status is-interactive
     return 0
 end
 
+if command -q zellij;
+    function __zellij_tab --on-variable PWD
+        set title (test (pwd) = $HOME; and echo "~"; or basename (pwd))
+        zellij action rename-tab -- $title
+    end
+    __zellij_tab
+end
+
 set -gx TERM xterm-256color
 source $HOME/dotfiles/fish/themes/neocraft.theme
 

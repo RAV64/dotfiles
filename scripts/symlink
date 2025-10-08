@@ -32,6 +32,7 @@ safe_link() {
 safe_link "$DOTFILES/nvim"          "$CONFIG/nvim"
 safe_link "$DOTFILES/ghostty"       "$CONFIG/ghostty"
 safe_link "$DOTFILES/fish"          "$CONFIG/fish"
+safe_link "$DOTFILES/zellij"        "$CONFIG/zellij"
 
 safe_link "$DOTFILES/starship.toml" "$CONFIG/starship.toml"
 safe_link "$DOTFILES/.ignore"       "$HOME/.ignore"
