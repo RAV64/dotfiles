@@ -1,8 +1,0 @@
-theme = "neocraft"
-
-[editor]
-color-modes = true
-
-[editor.cursor-shape]
-insert = "bar"
-normal = "block"
