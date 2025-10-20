@@ -1,54 +1,54 @@
 vim.pack.add({
 	{
 		src = "https://github.com/xzbdmw/colorful-menu.nvim",
-		version = "bc3e82609f2fcf7dad7ca87c20e65e51d5d9d87c",
+		version = "d5b97d247528be308b6b69d96b5950a30e470f3d",
 	},
 	{
 		src = "https://github.com/saghen/blink.cmp",
-		version = "327fff91fe6af358e990be7be1ec8b78037d2138",
+		version = "2cb0a71c886d81d7f89a5feb3a10bd9f2f25c736",
 	},
 	{
 		src = "https://github.com/stevearc/conform.nvim",
-		version = "b4aab989db276993ea5dcb78872be494ce546521",
+		version = "fbcb4fa7f34bfea9be702ffff481a8e336ebf6ed",
 	},
 	{
 		src = "https://github.com/lewis6991/gitsigns.nvim",
-		version = "f780609807eca1f783a36a8a31c30a48fbe150c5",
+		version = "20ad4419564d6e22b189f6738116b38871082332",
 	},
 
 	{
 		src = "https://github.com/MagicDuck/grug-far.nvim",
-		version = "50d9ee2b5a19634670441948e7e4afaa042f1059",
+		version = "3e72397465f774b01aa38e4fe8e6eecf23d766d9",
 	},
 
 	{
 		src = "https://github.com/nvim-mini/mini.icons",
-		version = "f9a177c11daa7829389b7b6eaaec8b8a5c47052d",
+		version = "284798619aed9f4c1ac1b9417b9a5e3b4b85ef3a",
 	},
 
 	{
 		src = "https://github.com/nvim-mini/mini.files",
-		version = "2db6db37c37ee5955fe72907e33fa31cd2dd0fd4",
+		version = "51db5ded1b7ac4dd8ca4c22c66f156dac5309304",
 	},
 
 	{
 		src = "https://github.com/folke/flash.nvim",
-		version = "b68bda044d68e4026c4e1ec6df3c5afd7eb8e341",
+		version = "2febce67ff9cf7638d2569d17c41af02c38401eb",
 	},
 
 	{
 		src = "https://github.com/jake-stewart/multicursor.nvim",
-		version = "ffe2e402e85150516d096842f7be99fd1321a72b",
+		version = "0c6ceae228bf209e8b8717df9de500770c4e7022",
 	},
 
 	{
 		src = "https://github.com/ibhagwan/fzf-lua",
-		version = "7b730b69985e33c14bff3bdafd1a2c82fdfa1376",
+		version = "c102a4eeb10a04ed7e69ce80918923c4175c19d8",
 	},
 
 	{
 		src = "https://github.com/nvim-treesitter/nvim-treesitter",
-		version = "bd99d6bd2bdd346c5da090db5e3956de0e0a2f3f",
+		version = "71bf1665f804d46f7e4b24ad7ffc11f6ea5b271a",
 	},
 
 	{
