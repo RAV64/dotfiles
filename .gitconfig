@@ -9,20 +9,10 @@
     required = true
 
 [core]
-    pager = delta
     autocrlf = input
 
 [init]
     defaultBranch = main
-
-[interactive]
-    diffFilter = delta --color-only
-
-[delta]
-    side-by-side = true
-    line-numbers-right-format = "{np}┊"
-    line-numbers-left-format = "{nm}┊"
-    navigate = true
 
 [merge]
     conflictstyle = zdiff3
@@ -30,9 +20,11 @@
 [diff]
     colorMoved = default
 	algorithm = histogram
+    external = difft
 
 [alias]
 	fresh = !git reset --hard HEAD && git clean -fd
+    dshow = -c diff.external=difft show --ext-diff
 
 [push]
 	autoSetupRemote = true
