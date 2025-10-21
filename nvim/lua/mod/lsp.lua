@@ -1,17 +1,17 @@
 local lsp = vim.lsp
-local diag = vim.diagnostic
+local diagnostic = vim.diagnostic
 
 local set = function(mode, keys, func, args)
 	vim.keymap.set(mode, keys, func, args)
 end
 
 set("n", "Z", function()
-	diag.jump({ count = -1, float = true })
+	diagnostic.jump({ count = -1, float = true })
 end, { desc = "Goto previous diagnostics" })
 set("n", "z", function()
-	diag.jump({ count = 1, float = true })
+	diagnostic.jump({ count = 1, float = true })
 end, { desc = "Goto next diagnostics" })
-set("n", "ge", diag.open_float, { desc = "Open diagnostics" })
+set("n", "ge", diagnostic.open_float, { desc = "Open diagnostics" })
 
 local keybinds = function(buf)
 	set("n", "<leader>r", lsp.buf.rename, { desc = "Rename", buffer = buf })
@@ -58,10 +58,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
-diag.config({
+diagnostic.config({
 	underline = true,
 	update_in_insert = false,
-	virtual_text = { spacing = 4, source = "if_many", prefix = "●" },
 	severity_sort = true,
 })
 

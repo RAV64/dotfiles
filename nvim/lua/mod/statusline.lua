@@ -1,8 +1,9 @@
 local vapi = vim.api
+local diagnostic = vim.diagnostic
+local sev = diagnostic.severity
 local vapi_mode = vapi.nvim_get_mode
 local vbo = vim.bo
 local vb = vim.b
-local diag_get = vim.diagnostic.get
 local gbit = bit
 local lshift = gbit.lshift
 local bor = gbit.bor
@@ -21,41 +22,31 @@ local gGreen = "%#StatusLineGreen# +"
 local gRed = "%#StatusLineRed# -"
 local gitDelimiter = sLine .. "%=" .. "%{SearchStatus()}"
 local gitSymbol = gitDelimiter .. "  "
-local filePH = " %f %3l:%-2c %r%m"
+local filePH = "%f %3l:%-2c %r%m"
 
 local last_diag_pack = 0
 local last_git_pack = 0
 local last_git_head = nil
 
--- stylua: ignore
 local mode_to_str = {
-	["n"] = "NOR", ["no"] = "OP-", ["nov"] = "OP-", ["noV"] = "OP-", ["no\22"] = "OP-",
-	["niI"] = "NOR", ["niR"] = "NOR", ["niV"] = "NOR", ["nt"] = "NOR", ["ntT"] = "NOR",
-	["v"] = "VIS", ["vs"] = "VIS", ["V"] = "VIS", ["Vs"] = "VIS", ["\22"] = "VIS",
-	["\22s"] = "VIS", ["s"] = "SEL", ["S"] = "SEL", ["\19"] = "SEL", ["i"] = "INS",
-	["ic"] = "INS", ["ix"] = "INS", ["R"] = "REP", ["Rc"] = "REP", ["Rx"] = "REP",
-	["Rv"] = "VIR", ["Rvc"] = "VIR", ["Rvx"] = "VIR", ["c"] = "COM", ["cv"] = "VIM",
-	["ce"] = "EX ", ["r"] = "PRO", ["rm"] = "MOR", ["r?"] = "CON", ["!"] = "SHE",
-	["t"] = "TER",
+	["n"] = "NOR",
+	["niI"] = "NOR",
+	["niR"] = "NOR",
+	["niV"] = "NOR",
+	["nt"] = "NOR",
+	["v"] = "VIS",
+	["V"] = "VIS",
+	["\22"] = "VIS",
+	["i"] = "INS",
+	["ic"] = "INS",
+	["ix"] = "INS",
+	["c"] = "COM",
+	["t"] = "COM",
 }
 
-local _unk = "UNK"
-local unk = function(v)
-	vim.notify("Unknown ft: " .. v)
-	return _unk
-end
-
 local icons = require("mini.icons")
-local custom_icons = { filetype = {} }
-local _icon_cache = {}
-local function cached_icon(ft)
-	local c = _icon_cache[ft]
-	if c then
-		return c
-	end
-	local i = icons.get("filetype", ft) or custom_icons.filetype[ft] or ft
-	_icon_cache[ft] = i
-	return i
+local function ft_icon(ft)
+	return icons.get("filetype", ft)
 end
 
 local git_str = gitDelimiter
@@ -107,7 +98,7 @@ local update_status = function()
 end
 
 local update_prefix = function()
-	last_prefix = last_mode_str .. space .. last_ft_icon .. filePH
+	last_prefix = last_mode_str .. filePH
 	update_status()
 end
 
@@ -117,41 +108,34 @@ local update_suffix = function()
 end
 
 local update_diag = function()
-	if new_mode:byte(1) == 105 then
+	if new_mode:byte(1) == 105 then -- 'i'
 		return
 	end
 
-	local dlist = diag_get(0)
-	if #dlist ~= 0 then
-		local d_e, d_w, d_h, d_i = 0, 0, 0, 0
-		for idx = 1, #dlist do
-			local sev = dlist[idx].severity
-			if sev == 1 then
-				d_e = d_e + 1
-			elseif sev == 2 then
-				d_w = d_w + 1
-			elseif sev == 3 then
-				d_i = d_i + 1
-			else
-				d_h = d_h + 1
-			end
-		end
-		local dp = bor(lshift(d_e, 24), lshift(d_w, 16), lshift(d_h, 8), d_i)
-		if dp ~= last_diag_pack then
-			last_diag_pack = dp
-			diag_str = ((d_e > 0) and (dErr .. d_e) or empty)
-				.. ((d_w > 0) and (dWarn .. d_w) or empty)
-				.. ((d_h > 0) and (dHint .. d_h) or empty)
-				.. ((d_i > 0) and (dInfo .. d_i) or empty)
-			update_suffix()
-		end
-	else
-		if last_diag_pack ~= 0 then
-			last_diag_pack = 0
-			diag_str = empty
-			update_suffix()
-		end
+	local counts = diagnostic.count(0)
+	if not counts then
+		return
 	end
+	local d_e = counts[sev.ERROR] or 0
+	local d_w = counts[sev.WARN] or 0
+	local d_h = counts[sev.HINT] or 0
+	local d_i = counts[sev.INFO] or 0
+
+	local dp = bor(lshift(d_e, 24), lshift(d_w, 16), lshift(d_h, 8), d_i)
+	if dp == last_diag_pack then
+		return
+	end
+	last_diag_pack = dp
+
+	if dp == 0 then
+		diag_str = empty
+	else
+		diag_str = ((d_e > 0) and (dErr .. d_e) or empty)
+			.. ((d_w > 0) and (dWarn .. d_w) or empty)
+			.. ((d_h > 0) and (dHint .. d_h) or empty)
+			.. ((d_i > 0) and (dInfo .. d_i) or empty)
+	end
+	update_suffix()
 end
 
 local update_git = function()
@@ -184,13 +168,12 @@ local update_git = function()
 	end
 end
 
-local update_mode = function()
+local update_mode = function(force)
 	new_mode = vapi_mode().mode
-	if new_mode ~= last_mode then
+	if force or new_mode ~= last_mode then
 		last_mode = new_mode
-		local short_mode = mode_to_str[new_mode] or unk(new_mode)
-		last_mode_str = sModePrefix .. short_mode .. "# " .. short_mode .. spacedSLine
-		update_diag()
+		local short_mode = mode_to_str[new_mode] or "UNK"
+		last_mode_str = sModePrefix .. short_mode .. "# " .. last_ft_icon .. spacedSLine
 		update_prefix()
 	end
 end
@@ -198,19 +181,23 @@ end
 local update_filetype = function()
 	if vbo.filetype ~= last_ft then
 		last_ft = vbo.filetype
-		last_ft_icon = cached_icon(last_ft)
+		last_ft_icon = ft_icon(last_ft)
 		update_prefix()
 	end
 end
 
 local full_update = function()
-	update_mode()
 	update_filetype()
+	update_mode(true)
 	update_diag()
 	update_git()
 end
 
 vim.api.nvim_create_autocmd("DiagnosticChanged", {
+	callback = update_diag,
+})
+
+vim.api.nvim_create_autocmd("InsertLeave", {
 	callback = update_diag,
 })
 
@@ -226,5 +213,3 @@ vim.api.nvim_create_autocmd("ModeChanged", {
 vim.api.nvim_create_autocmd("BufEnter", {
 	callback = full_update,
 })
-
-full_update()
