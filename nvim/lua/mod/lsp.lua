@@ -21,6 +21,24 @@ local keybinds = function(buf)
 	set("n", "<leader>gwl", function()
 		vim.print(lsp.buf.list_workspace_folders())
 	end, { desc = "list_workspace_folders", buffer = buf })
+	set({ "n", "x" }, "<C-Space><C-i>", function()
+		lsp.buf.code_action({
+			apply = true,
+			context = {
+				only = { "refactor.inline" },
+				diagnostics = {},
+			},
+		})
+	end, { desc = "LSP: Inline variable" })
+	set({ "n", "x" }, "<C-Space><C-e>", function()
+		lsp.buf.code_action({
+			apply = true,
+			context = {
+				only = { "refactor.extract" },
+				diagnostics = {},
+			},
+		})
+	end, { desc = "LSP: Extract" })
 end
 
 local document_color = function(client, buf)

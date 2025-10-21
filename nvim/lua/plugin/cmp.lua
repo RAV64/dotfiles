@@ -29,6 +29,7 @@ require("blink.cmp").setup({
 		["<down>"] = { commands.select_next, commands.fallback },
 		["<left>"] = { commands.hide_documentation, commands.hide, commands.cancel },
 		["<right>"] = { commands.show_documentation, commands.show },
+		["<C-space>"] = { commands.show_documentation, commands.show },
 		["<C-u>"] = { commands.scroll_documentation_up, commands.fallback },
 		["<C-d>"] = { commands.scroll_documentation_down, commands.fallback },
 		["<Tab>"] = { commands.snippet_forward, commands.fallback },

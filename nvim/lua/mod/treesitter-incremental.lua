@@ -1,3 +1,4 @@
+local api, cmd, treesitter, set, fn = vim.api, vim.cmd, vim.treesitter, vim.keymap.set, vim.fn
 local node_lifo = {}
 local node_index = 0
 
@@ -5,7 +6,7 @@ local function node_range(n)
 	local sr, sc, er, ec = n:range()
 	if ec == 0 and er > sr then
 		local prev = er - 1
-		local len = #vim.fn.getline(prev + 1)
+		local len = #fn.getline(prev + 1)
 		return sr, sc, prev, math.max(0, len - 1)
 	else
 		return sr, sc, er, math.max(0, ec - 1)
@@ -19,15 +20,15 @@ local function same_range(a, b)
 end
 
 local function select_range_from_normal(sr, sc, er, ec)
-	vim.api.nvim_win_set_cursor(0, { sr + 1, sc })
-	vim.cmd("normal! v")
-	vim.api.nvim_win_set_cursor(0, { er + 1, ec })
+	api.nvim_win_set_cursor(0, { sr + 1, sc })
+	cmd("normal! v")
+	api.nvim_win_set_cursor(0, { er + 1, ec })
 end
 
 local function select_range_in_visual(sr, sc, er, ec)
-	vim.api.nvim_win_set_cursor(0, { sr + 1, sc })
-	vim.api.nvim_feedkeys("o", "x", false)
-	vim.api.nvim_win_set_cursor(0, { er + 1, ec })
+	api.nvim_win_set_cursor(0, { sr + 1, sc })
+	api.nvim_feedkeys("o", "x", false)
+	api.nvim_win_set_cursor(0, { er + 1, ec })
 end
 
 local function push_node(n)
@@ -49,7 +50,7 @@ end
 
 local function select_node_at_cursor()
 	node_index = 0
-	local ok, node = pcall(vim.treesitter.get_node)
+	local ok, node = pcall(treesitter.get_node)
 	if ok and node then
 		local sr, sc, er, ec = node_range(node)
 		select_range_from_normal(sr, sc, er, ec)
@@ -74,13 +75,16 @@ local function select_parent_node()
 	end
 end
 
-vim.api.nvim_create_autocmd("ModeChanged", {
+api.nvim_create_autocmd("ModeChanged", {
 	pattern = "v:*",
 	callback = function()
 		node_index = 0
 	end,
 })
 
-vim.keymap.set("n", "<C-Space>", select_node_at_cursor, { silent = true, desc = "TS: select node" })
-vim.keymap.set("v", "<C-Space>", select_parent_node, { silent = true, desc = "TS: parent" })
-vim.keymap.set("v", "<BS>", pop_node, { silent = true, desc = "TS: back to child" })
+local SHIFT_SPACE = "✏"
+
+set("i", SHIFT_SPACE, " ")
+set("n", SHIFT_SPACE, select_node_at_cursor, { silent = true, desc = "TS: select node" })
+set("v", SHIFT_SPACE, select_parent_node, { silent = true, desc = "TS: parent" })
+set("v", "<BS>", pop_node, { silent = true, desc = "TS: back to child" })
