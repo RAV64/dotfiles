@@ -121,3 +121,7 @@ run = 'layout floating'
 [[on-window-detected]]
 if.app-id = 'net.ankiweb.dtop'
 run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'net.runelite.launcher'
+run = 'layout floating'

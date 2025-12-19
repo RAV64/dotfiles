@@ -10,6 +10,7 @@ keybinds clear-defaults=true {
         bind "k" { MoveFocus "up"; }
         bind "l" { MoveFocus "right"; }
         bind "p" { SwitchFocus; }
+        bind "x" { CloseFocus; SwitchToMode "normal"; }
         bind "w" { ToggleFloatingPanes; SwitchToMode "normal"; }
         bind "z" { TogglePaneFrames; SwitchToMode "normal"; }
     }

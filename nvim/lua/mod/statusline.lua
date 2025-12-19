@@ -150,6 +150,15 @@ local update_git = function()
 		if (g_h ~= last_git_head) or (gp ~= last_git_pack) then
 			last_git_pack = gp
 			last_git_head = g_h
+
+			local dash = g_h:find("-", 1, true)
+			if dash and dash > 1 then
+				local prefix = g_h:sub(1, dash - 1)
+				if tonumber(prefix) ~= nil then
+					g_h = prefix
+				end
+			end
+
 			git_str = gitSymbol
 				.. g_h
 				.. ((g_a > 0) and (gGreen .. g_a) or empty)

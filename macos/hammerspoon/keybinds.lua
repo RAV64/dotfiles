@@ -53,6 +53,7 @@ local AppLauncher = function()
 		m = "Mail",
 		h = "homeassistant",
 		p = "screenshot",
+		r = "runelite",
 
 		k = "anki",
 		b = "librewolf",

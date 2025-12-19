@@ -1,58 +1,58 @@
 vim.pack.add({
 	{
 		src = "https://github.com/xzbdmw/colorful-menu.nvim",
-		version = "d5b97d247528be308b6b69d96b5950a30e470f3d",
+		version = "b51a659459df8d078201aefc995db8175ed55e84",
 	},
 	{
 		src = "https://github.com/saghen/blink.cmp",
-		version = "2cb0a71c886d81d7f89a5feb3a10bd9f2f25c736",
+		version = "37ce860d8eeeee92d60b9a72db21e369d97e6a75",
 	},
 	{
 		src = "https://github.com/stevearc/conform.nvim",
-		version = "fbcb4fa7f34bfea9be702ffff481a8e336ebf6ed",
+		version = "41715945edf518ca73a9bd63ab6cdc23dd5c7b33",
 	},
 	{
 		src = "https://github.com/lewis6991/gitsigns.nvim",
-		version = "20ad4419564d6e22b189f6738116b38871082332",
+		version = "5813e4878748805f1518cee7abb50fd7205a3a48",
 	},
 
 	{
 		src = "https://github.com/MagicDuck/grug-far.nvim",
-		version = "3e72397465f774b01aa38e4fe8e6eecf23d766d9",
+		version = "bc589a1ba340a00ae40bf1436401eac5b1454687",
 	},
 
 	{
 		src = "https://github.com/nvim-mini/mini.icons",
-		version = "284798619aed9f4c1ac1b9417b9a5e3b4b85ef3a",
+		version = "ff2e4f1d29f659cc2bad0f9256f2f6195c6b2428",
 	},
 
 	{
 		src = "https://github.com/nvim-mini/mini.files",
-		version = "51db5ded1b7ac4dd8ca4c22c66f156dac5309304",
+		version = "22c64f010eef047ed270e29e7cc266cd4740787e",
 	},
 
 	{
 		src = "https://github.com/folke/flash.nvim",
-		version = "2febce67ff9cf7638d2569d17c41af02c38401eb",
+		version = "fcea7ff883235d9024dc41e638f164a450c14ca2",
 	},
 
 	{
 		src = "https://github.com/jake-stewart/multicursor.nvim",
-		version = "0c6ceae228bf209e8b8717df9de500770c4e7022",
+		version = "a0ea3303a6c4b233cf3272fb1e358d4c842e5260",
 	},
 
 	{
 		src = "https://github.com/ibhagwan/fzf-lua",
-		version = "c102a4eeb10a04ed7e69ce80918923c4175c19d8",
+		version = "9d579feab4d3035627150e5e9b6e8fbf5e814ef6",
 	},
 
 	{
 		src = "https://github.com/nvim-treesitter/nvim-treesitter",
-		version = "71bf1665f804d46f7e4b24ad7ffc11f6ea5b271a",
+		version = "4fc09bee78e91bf4ba471cdab4bf9dfa37fde51c",
 	},
 
 	{
 		src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
-		version = "1b2d85d3de6114c4bcea89ffb2cd1ce9e3a19931",
+		version = "0d7c800fadcfe2d33089f5726cb8907fc846eece",
 	},
 })
