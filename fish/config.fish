@@ -10,6 +10,7 @@ if command -q zellij;
     __zellij_tab
 end
 
+set -gx TERM xterm-256color
 source $HOME/dotfiles/fish/themes/neocraft.theme
 
 set -g FZF_PREVIEW_FILE_CMD "bat --style=numbers --color=always --line-range :500"
